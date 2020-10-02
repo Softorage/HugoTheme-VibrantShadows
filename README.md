@@ -64,10 +64,10 @@ cd yourSiteName # move in to the Hugo website's directory
 2. Extract the zip file and rename the folder from `HugoTheme-VibrantShadows-master` to `HugoTheme-VibrantShadows`.
 3. Copy this folder and paste it into you Hugo Website directory.
 4. Simply add the repo to your theme option in `config.yaml`:
-
-```yaml
-theme: "HugoTheme-VibrantShadows"
-```
+    
+    ```yaml
+    theme: "HugoTheme-VibrantShadows"
+    ```
 
 #### 2. As Git Submodule
 
@@ -182,7 +182,7 @@ These options set global values that some pages or all pages in the site use by 
     Example:
     ```yaml
     taxonomies:
-      tag: "tags" # when defining custom taxonomies, we need to redefine even the default taxonomies if we wish to keep them, hence we have redefined 'tags'. see here: 
+      tag: "tags" # when defining custom taxonomies, we need to redefine even the default taxonomies if we wish to keep them, hence we have redefined 'tags'. see here: https://gohugo.io/content-management/taxonomies#example-adding-a-custom-taxonomy-named-series
       category: "categories" # redefined 'categories'
       series: "series" # defined a custom taxonomy, 'series'
     ```
@@ -340,7 +340,7 @@ Let's see them one by one.
         Example:
         ```yaml
         contentLicense: "All rights reserved." # Another example: 'CC-BY-SA-3.0'
-      ```
+        ```
     6.  **Title Separator** *(Type: String | Accepts value: Text | Optional | Default: " | ")*
         
         It is used in website/blog title, to separate (say) page title from website/blog title.
