@@ -2,6 +2,7 @@
 title: "Additional information about the theme"
 author: "Sanmay Joshi"
 description: "Additional info about the theme, like 'Built with', 'Contributing', and 'License'."
+tags: ["learn more", "license"]
 date: "2020-09-30"
 ---
 We share some additional information about this theme, that may be relevant.
@@ -16,7 +17,7 @@ We share some additional information about this theme, that may be relevant.
 
 ## Contributing
 
-If you have a tip, feedback or issues, please [open an issue here].If you think 'Vibrant Shadows' theme could benefit from some features, or there is something that needs to be fixed, please open an issue at least 2-3 days prior to [opening a PR]. If you think there is something that needs to be fixed and which isn't of much significance (say a typo), you may open a PR directly.
+If you have a tip, feedback or issues, please [open an issue here](https://github.com/Softorage/HugoTheme-VibrantShadows/issues).If you think 'Vibrant Shadows' theme could benefit from some features, or there is something that needs to be fixed, please open an issue at least 2-3 days prior to [opening a PR](https://github.com/Softorage/HugoTheme-VibrantShadows/pulls). If you think there is something that needs to be fixed and which isn't of much significance (say a typo), you may open a PR directly.
 
 Anyone contributing, benefits equally from others' contributions.
 
@@ -45,4 +46,4 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
-License can be viewed [here].
+License can be viewed [here](https://github.com/Softorage/HugoTheme-VibrantShadows/blob/master/LICENSE).

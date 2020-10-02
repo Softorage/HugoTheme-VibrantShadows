@@ -2,6 +2,7 @@
 title: "Configuration options in the theme"
 author: "Sanmay Joshi"
 description: "Get to know all the awesome configurations Vibrant Shadows Hugo theme has to offer."
+tags: ["configuration", "customize", "settings"]
 date: "2020-09-30"
 ---
 Here, we will mainly see settings that are unique to this theme. If something is not covered here (or elsewhere in this file), there's a good chance it is covered in [this Hugo docs page](https://gohugo.io/getting-started/configuration/#configuration-file).
@@ -63,7 +64,7 @@ These options set global values that some pages or all pages in the site use by 
     
     Example:
     ```yaml
-    theme: "vibrant-shadows"
+    theme: "HugoTheme-VibrantShadows"
     ```
 7.  **Google Analytics** *(Type: String | Accepts value: Alphanumeric | Optional | No default)*
     
@@ -110,7 +111,16 @@ These options set global values that some pages or all pages in the site use by 
           parent: "about"
           weight: 1
     ```
-11. **Privacy** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
+11. **Build Stats** *(Type: Map/Dict/Object | Accepts value: - | Required)*
+    
+    With this, Hugo notes some stats about website, which are then used by CSS processors.
+    
+    Example:
+    ```yaml
+    build:
+      writeStats: true
+    ```
+12. **Privacy** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
     
     This feature allows to maintain optimal privacy settings for the website/blog. You can see full list of privacy settings [here](https://gohugo.io/about/hugo-and-gdpr/#all-privacy-settings), and their explanation [here](https://gohugo.io/about/hugo-and-gdpr/#the-privacy-settings-explained).
     
@@ -118,12 +128,12 @@ These options set global values that some pages or all pages in the site use by 
     ```yaml
     privacy:
       disqus:
-        disable: "false"
+        disable: "false" # | default: false
       googleAnalytics:
-        anonymizeIP: "false" # 'true' makes it so the users' IP addresses are anonymized within Google Analytics
-        disable: "false"
-        respectDoNotTrack: "false" # 'true' makes the GA templates respect the “Do Not Track” HTTP header
-        useSessionStorage: "false" # 'true' disables the use of Cookies and use Session Storage to Store the GA Client ID
+        anonymizeIP: "true" # 'true' makes it so the users' IP addresses are anonymized within Google Analytics | default: false
+        disable: "false" # | default: false
+        respectDoNotTrack: "false" # 'true' makes the GA templates respect the “Do Not Track” HTTP header | default: false
+        useSessionStorage: "false" # 'true' disables the use of Cookies and use Session Storage to Store the GA Client ID | default: false
     ```
 
 ### Vibrant Shadow's custom parameters
@@ -245,6 +255,14 @@ Let's see them one by one.
         Example:
         ```yaml
         titleSeparator: " | "
+        ```
+    7. **Attribution** *(Type: String | Accepts value: enable/disable | Optional | Default: "enable")*
+        
+        Allows to attribute Hugo team for awesome software and Softorage for great theme.
+        
+        Example:
+        ```yaml
+        attribution: "enable"
         ```
 3.  **Brand** *(Type: Map/Dict/Object | Accepts value: - | Highly Recommended)*
     
@@ -443,7 +461,76 @@ Let's see them one by one.
         appID: "170405085280305" # it is just for illustration purpose
       jsonLD: "enable"
     ```
-10. **User Experience** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
+10. **Cookie Consent** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
+    
+    It allows you to present a 'Cookie Consent' dialog to your users, to help them decide their privacy settings, when they browse your website. It contains:
+    1.  **Switch** *(Type: String | Accepts value: on/off | Optional | Default: "off")*
+      
+        It lets you choose whether you want to show a Cookie Consent dialog to your users.
+    2.  **Type** *(Type: String | Accepts value: opt-in/opt-out/none | Required | No default)*
+        
+        In 'opt-in', website doesn't employ cookies to user's computer unless user gives cosent to opt in. In 'opt-out', cookies are employed on user's computer and the user is given the choice to opt out of cookies. In 'none', cookies are employed on the user's computer and user is not given a choice in that regard. We recommend to refrain from using none, unless you have **zero** customers from EU or similar countries with privacy protecting laws.
+    3.  **Revokable** *(Type: Boolean | Accepts value: true/false | Optional | Default: true)*
+        
+        When set to `true`, a button to revoke cookie consent appears when the user hover in bottom area of the screen, regardless whether user's country requires revertable cookie consent.
+    4.  **Colors** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
+        
+        It lets you customize the colors for Cookie Consent dialog. It contains:
+        1.  **Banner** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
+            
+            It lets you customize colors of banner for Cookie Consent. It contains: **background** and **text**.
+        2.  **Button** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
+            
+            It lets you customize colors of button for Cookie Consent. It contains: **background** and **text**.
+    5.  **Content** *(Type: Map/Dict/Object | Accepts value: - | Required)*
+        
+        It lets you customize the content you wish to show on Cookie Consent dialog. It contains:
+        1.  **Message** *(Type: String | Accepts value: Text | Required | No default)*
+            
+            It lets you customize the message to be shown in Cookie Consent. You can even use `<a>`-anchor tags to hyperlink words.
+        2.  **Dismiss** *(Type: String | Accepts value: Text | Optional | Default: "Close")*
+
+            It's the text on the button that dismisses the popup/banner.
+        3.  **Link Text** *(Type: String | Accepts value: Text | Optional | Default: "Learn more")*
+            
+            This text appears after the `message` and is hyperlinked to `linkURL`.
+        4.  **Link URL** *(Type: String | Accepts value: Text | Required | No default)*
+            
+            It's the url of location where user should be directed when they click "Learn more".
+        5.  **Allow** *(Type: String | Accepts value: Text | Optional |Default: "Allow")*
+            
+            It is the text on the button that allows cookies.
+        6.  **Deny** *(Type: String | Accepts value: Text | Optional | Default: "Decline")*
+            
+            It is the text on the button that denies cookies.
+        7.  **Policy** *(Type: String | Accepts value: Text | Optional | Default: "Cookie Consent")*
+            
+            It is the text that appears on the button, when user's country requires revokable cookie consent.
+            
+    Example:
+    ```yaml
+    cookieConsent: # we use OSANO Cookie Consent solution
+      switch: "on"
+      type: "opt-in"
+      revokable: true
+      colors:
+        banner:
+          background: "#ffffff"
+          text: "#000000"
+        button:
+          background: "#6d19fc"
+          text: "#ffffff"
+      content: # change the links below to appropriate url addresses
+        message: |
+          By continuing to use this website, you agree to our <a href='/legal/privacy-policy/'>Privacy Policy</a>, <a href='/legal/cookie-policy/'>Cookie Policy</a> and our <a href='/legal/terms-and-conditions/'>Terms and Conditions</a> for your use of this website.
+        dismiss: "Close"
+        linkText: "Learn more"
+        linkURL: "/legal/privacy-policy/"
+        allow: "Allow"
+        deny: "Decline"
+        policy: "Cookie Consent"
+    ```
+11. **User Experience** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
     
     It contains settings that let's you customize your user's website/blog experience.
     1.  **Google Analytics Loading** *(Type: String | Accepts value: sync/async | Optional | Default: "sync")*
@@ -455,7 +542,7 @@ Let's see them one by one.
     userExperience:
       googleAnalyticsLoading: "sync"
     ```
-11. **Main Sections** *(Type: Array | Accepts value: Section names | Highly Recommended)*
+12. **Main Sections** *(Type: Array | Accepts value: Section names | Highly Recommended)*
     
     This is Hugo's native feature that let's you specify which sections are to be treated as *Main Sections*. A very general and common example of *Main Section* is `post` or `posts` section (hence they are often called Blog Directories). If nothing is specified, the section with the highest number of content files is treated as a *Main Section*. For more info, see the [Hugo docs](https://gohugo.io/functions/where/#mainsections).
     

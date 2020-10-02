@@ -1,6 +1,6 @@
 # Vibrant Shadows
 
-An insanely customizable, extremely lightweight and ridiculously fast 'Blog Theme' for Hugo, with mobile support and a lot more..<!--, with mobile support, built-in PWA support, contact page and a lot more.-->
+An insanely customizable, extremely lightweight and ridiculously fast 'Blog Theme' for Hugo, with mobile support and a lot more.<!--built-in PWA support, contact page and a lot more.-->
 
 ## Preview
 
@@ -30,7 +30,7 @@ An insanely customizable, extremely lightweight and ridiculously fast 'Blog Them
 
 * Blog with custom Taxonomy options, including tagging and category options
 * Deeplinks
-* Insanely customizable (see config)
+* Insanely customizable (see [config](#configuration))
 * Dedicated 'Table of Contents'
 * Logo alignment
 * Sane defaults
@@ -60,11 +60,13 @@ cd yourSiteName # move in to the Hugo website's directory
 
 #### 1. As a Hugo Module (recommended)
 
-Simply add the repo to your theme option in `config.yaml`:
+1. Download the repo on your machine
+2. Extract the zip file and rename the folder from `HugoTheme-VibrantShadows-master` to `HugoTheme-VibrantShadows`.
+3. Copy this folder and paste it into you Hugo Website directory.
+4. Simply add the repo to your theme option in `config.yaml`:
 
 ```yaml
-theme:
-  - github.com/Softorage/HugoTheme-VibrantShadows
+theme: "HugoTheme-VibrantShadows"
 ```
 
 #### 2. As Git Submodule
@@ -73,8 +75,8 @@ Inside the folder of your Hugo site run:
 
 ```bash
 git init # to initiate git if it isn't already
-git submodule add https://github.com/Softorage/HugoTheme-VibrantShadows.git themes/vibrant-shadows # add theme as a git submodule
-cp -a themes/vibrant-shadows/exampleSite/* . # 
+git submodule add https://github.com/Softorage/HugoTheme-VibrantShadows.git themes/HugoTheme-VibrantShadows # add theme as a git submodule
+cp -a themes/HugoTheme-VibrantShadows/exampleSite/* . # start with the boilerplate by copying it into current directory
 ```
 
 Then run
@@ -155,7 +157,7 @@ These options set global values that some pages or all pages in the site use by 
     
     Example:
     ```yaml
-    theme: "vibrant-shadows"
+    theme: "HugoTheme-VibrantShadows"
     ```
 7.  **Google Analytics** *(Type: String | Accepts value: Alphanumeric | Optional | No default)*
     
@@ -339,7 +341,7 @@ Let's see them one by one.
         ```yaml
         contentLicense: "All rights reserved." # Another example: 'CC-BY-SA-3.0'
       ```
-    6. **Title Separator** *(Type: String | Accepts value: Text | Optional | Default: " | ")*
+    6.  **Title Separator** *(Type: String | Accepts value: Text | Optional | Default: " | ")*
         
         It is used in website/blog title, to separate (say) page title from website/blog title.
         
@@ -347,7 +349,7 @@ Let's see them one by one.
         ```yaml
         titleSeparator: " | "
         ```
-    7. **Attribution** *(Type: String | Accepts value: enable/disable | Optional | Default: "enable")*
+    7.  **Attribution** *(Type: String | Accepts value: enable/disable | Optional | Default: "enable")*
         
         Allows to attribute Hugo team for awesome software and Softorage for great theme.
         
@@ -753,7 +755,7 @@ Let's see them one by one.
 
 ## Contributing
 
-If you have a tip, feedback or issues, please [open an issue here].If you think 'Vibrant Shadows' theme could benefit from some features, or there is something that needs to be fixed, please open an issue at least 2-3 days prior to [opening a PR]. If you think there is something that needs to be fixed and which isn't of much significance (say a typo), you may open a PR directly.
+If you have a tip, feedback or issues, please [open an issue here](https://github.com/Softorage/HugoTheme-VibrantShadows/issues).If you think 'Vibrant Shadows' theme could benefit from some features, or there is something that needs to be fixed, please open an issue at least 2-3 days prior to [opening a PR](https://github.com/Softorage/HugoTheme-VibrantShadows/pulls). If you think there is something that needs to be fixed and which isn't of much significance (say a typo), you may open a PR directly.
 
 Anyone contributing, benefits equally from others' contributions.
 
@@ -782,4 +784,4 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
-License can be viewed [here].
+License can be viewed [here](https://github.com/Softorage/HugoTheme-VibrantShadows/blob/master/LICENSE).
