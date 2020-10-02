@@ -1,0 +1,95 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top flex-column">
+    <div class="container-fluid">
+      
+      <a class="navbar-brand{{ if ne site.Params.theme.borders "square" }} rounded{{ end }} px-3" href="{{ site.BaseURL }}"><span class="text-nav"><span class="brand">
+      {{- $navbar_brand_style := site.Params.brand.navbar | default (slice "logo" "name") }}
+      {{- if and (in $navbar_brand_style "logo") (site.Params.brand.logo) -}}
+        <img src="{{ site.Params.brand.logo }}" alt="{{ site.Params.brand.name }} logo"></img>
+      {{- end }}
+      {{- if (in $navbar_brand_style "name") }}&nbsp;&nbsp;{{ default site.Title site.Params.brand.name }}
+      {{- end -}}
+      </span></span></a>
+      
+      {{ if or site.Menus.main (and site.Params.social.profiles (eq site.Params.position.social.profiles "navbar")) }}
+        <a class="navbar-toggler border-0 bg-nav p-2" role="button" href="#" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="text-clr2">&#9776;</span>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav
+            {{- if or (and site.Params.social.profiles (eq site.Params.position.social.profiles "navbar")) (eq site.Params.position.navbarMenu "left") }} mr-md-auto
+            {{- else }} ml-md-auto
+            {{- end }}">
+            {{ $currentPage := . }} <!-- since we are in a partial $ sign isn't global context. -->
+            {{ range site.Menus.main.ByWeight }}
+              {{ if .HasChildren }}
+                <li class="nav-item dropdown mx-1 my-2{{ if $currentPage.HasMenuCurrent "main" . }} active{{ end }}">
+                  <a class="nav-link dropdown-toggle btn bg-nav text-clr1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ if .Pre }}{{ .Pre }} {{ end }}<span>{{ .Name }}</span></a>
+                  <div class="dropdown-menu border-0 shadow-sm" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item font-weight-bold {{ if $currentPage.IsMenuCurrent "main" . }} active{{ end }}" href="{{ .URL }}">{{ if .Pre }}{{ .Pre }} {{ end }}{{ .Name }}</a>
+                    <div class="dropdown-divider"></div>
+                    {{ range .Children }}
+                      <a class="dropdown-item {{ if $currentPage.IsMenuCurrent "main" . }} active{{ end }}" href="{{ .URL }}">{{ if .Pre }}{{ .Pre }} {{ end }}{{ .Name }}</a>
+                    {{ end }}
+                  </div>
+                </li>
+              {{ else }}
+                <li class="nav-item mx-1 my-2">
+                  <a class="btn bg-nav text-clr1" href="{{ .URL }}">{{ if .Pre }}{{ .Pre }} {{ end }}{{ .Name }}</a>
+                </li>
+              {{ end }}
+            {{ end }}
+          </ul>
+          {{ if site.Params.social.profiles }}
+            {{ if eq site.Params.position.social.profiles "navbar" }}
+              <div class="navbar-navalign-items-center ml-md-auto my-2 bg-nav{{ if ne site.Params.theme.borders "square" }} rounded{{ end }} p-1 pr-2">
+                {{ range $key, $url := site.Params.social.profiles }}
+                  {{ if eq $key "facebook"}}
+                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-facebook" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                  {{ else if eq $key "twitter" }}
+                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-twitter" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                  {{ else if eq $key "github" }}
+                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-github" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                  {{ else if eq $key "gitlab" }}
+                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-gitlab" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                  {{ else if eq $key "steam" }}
+                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-steam" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                  {{ else if eq $key "instagram" }}
+                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-instagram" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                  {{ else if eq $key "youtube" }}
+                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-youtube" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                  {{ else if eq $key "pinterest" }}
+                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-pinterest" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                  {{ else if eq $key "linkedin" }}
+                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-linkedin" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                  {{ else if eq $key "reddit" }}
+                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-reddit" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                  {{ else if eq $key "flickr" }}
+                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-flickr" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                  {{ else if eq $key "deviantart" }}
+                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-deviantart" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                  {{ else if eq $key "vk" }}
+                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-vk" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                  {{ else if eq $key "mastodon" }}
+                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-mastodon" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                  {{ else if eq $key "bandcamp" }}
+                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-bandcamp" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                  {{ else if eq $key "tumblr" }}
+                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-tumblr" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                  {{ else if eq $key "medium" }}
+                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-medium" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                  {{ else if eq $key "wikipedia" }}
+                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-wikipedia-w" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                  {{ else if eq $key "telegram" }}
+                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-telegram" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                  {{ end }}
+                {{ end }}
+              </div>
+            {{ end }}
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+    
+  </nav>
+</header>

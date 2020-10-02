@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html{{ if site.LanguageCode }} lang="{{ site.LanguageCode }}"{{ end }}>
+  {{- partial "head.html" . -}}
+  <body>
+    {{- partial "header.html" . -}}
+    <div id="content">
+    {{- block "main" . }}{{- end }}
+    </div>
+    {{- partial "footer.html" . -}}
+    
+    {{ if eq site.Params.cookieConsent.switch "on" }}
+    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+    {{ end }}
+    
+    {{ $js_twbs := slice (resources.Get "js/bootstrap/util.js") (resources.Get "js/bootstrap/collapse.js") (resources.Get "js/bootstrap/dropdown.js") (resources.Get "js/bootstrap/index.js") | resources.Concat "js/bootstrap.slim.js" }}
+    {{- $js_jquery := resources.Get "js/jquery.slim.js" }}
+    {{- $js_popperjs := resources.Get "js/popper.min.js" }}
+    {{- $js := slice $js_jquery $js_popperjs $js_twbs | resources.Concat "/assets/js/main.js" | minify | fingerprint }}
+    
+    <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
+    
+    {{- $js_custom := resources.Get "js/custom.js" | resources.ExecuteAsTemplate "/assets/js/custom.js" . | minify | fingerprint }}
+    <script src="{{ $js_custom.RelPermalink }}" integrity="{{ $js_custom.Data.Integrity }}" crossorigin="anonymous"></script>
+    <!-- Request Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Lato&display=swap" rel="stylesheet">
+    
+    <!-- All CDN links for fonts specified in config file -->
+    {{ with site.Params.font }}
+      {{ range . }}
+        {{ with .cdnLink }}
+          {{ . }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  </body>
+</html>

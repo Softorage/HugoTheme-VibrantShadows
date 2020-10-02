@@ -1,0 +1,194 @@
+{{ $range_counter := 1 }}
+
+{{ $socialProfiles_len := 0 }}
+{{ if site.Params.social.profiles }}
+{{ $socialProfiles_len = len site.Params.social.profiles }}
+{{ end }}
+
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- SEO template changes; source: https://digitalonlinetactics.com/post/blogging/hugo-seo-tips/ -->
+<title>
+  {{- .Title | default site.Title }} {{- default " | " site.Params.meta.titleSeparator -}} {{ if not .IsHome }}{{ site.Title }}{{ else }}{{ site.Params.meta.tagline }}{{ end -}}
+</title>
+<meta name="title" content="{{- .Title | default site.Title }} {{- default " | " site.Params.meta.titleSeparator -}} {{ if not .IsHome }}{{ site.Title }}{{ else }}{{ site.Params.meta.tagline }}{{ end -}}" />
+<meta name="description" content="
+  {{- with .Description }}
+  {{- . | safeHTML }}
+  {{- else }}
+  {{- if .IsPage }}
+  {{- .Summary | safeHTML }}
+  {{- else }}
+  {{- with site.Params.meta.description }}
+  {{- . | safeHTML }}
+  {{- end }}
+  {{- end }}
+  {{- end -}}
+"> <!-- 150 chars max -->
+
+<!-- SEO tags for Hugo; source: https://jeremyjaymes.com/hugo-seo-markup-template/ -->
+<link rel="canonical" href="{{ .Permalink }}" />
+
+{{ if ne site.Params.seo.twitter.card "disable" }}
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:description" content="{{ if .IsHome }}{{ site.Params.meta.description | safeHTML }}{{ else }}{{ .Description | safeHTML }}{{ end }}" /> <!-- page description, length < 200 chars -->
+  <meta name="twitter:title" content="
+    {{- .Title | default site.Title }} {{- default " | " site.Params.meta.titleSeparator -}} {{ if not .IsHome }}{{ site.Title }}{{ else }}{{ site.Params.meta.tagline }}{{ end -}}
+  " />
+  <meta name="twitter:url" content="{{ .Permalink }}" />
+  {{ if site.Params.seo.twitter.handle -}}
+    <meta name="twitter:site" content="@{{ site.Params.seo.twitter.handle }}" /> <!-- @publisher_handle -->
+  {{- end }}
+  {{ if or site.Params.seo.twitter.handle .Params.author_twitter -}}
+    <meta name="twitter:creator" content="{{ if .Params.author_twitter }}@{{ .Params.author_twitter }}{{ else }}@{{ site.Params.seo.twitter.handle }}{{ end }}" /> <!-- @author_handle -->
+  {{- end }}
+  {{ if or site.Params.brand.logo .Params.image -}}
+    <meta name="twitter:image" content="{{ if not .IsHome }}{{ .Params.image }}{{ else }}{{ site.Params.brand.logo }}{{ end }}" />
+  {{- end }} <!-- min 120px x 120px -->
+{{ end }}
+
+{{ if ne site.Params.seo.facebook.openGraph "disable" }}
+  <!-- OG data -->
+  <meta property="og:title" content="
+    {{- .Title | default site.Title }} {{- default " | " site.Params.meta.titleSeparator -}} {{ if not .IsHome }}{{ site.Title }}{{ else }}{{ site.Params.meta.tagline }}{{ end -}}
+  " />
+  <meta property="og:description" content="{{ if .IsHome }}{{ site.Params.meta.description | safeHTML }}{{ else }}{{ .Description | safeHTML }}{{ end }}" /> <!-- 300 chars max -->
+  <meta property="og:site_name" content="{{ site.Title }}" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
+  <meta property="og:url" content="{{ .Permalink }}" />
+  {{ if site.Params.facebook.appID }}
+  <meta property="fb:app_id" content="{{ site.Params.facebook.appID }}" />
+  {{ end }}
+  {{ if or site.Params.brand.logo .Params.image -}}
+    <meta property="og:image" content="{{ if not .IsHome }}{{ .Params.image }}{{ else }}{{ site.Params.brand.logo }}{{ end }}" />
+  {{- end }} <!-- reso 200px x 200px to 1200px x 1200px -->
+{{ end }}
+
+{{ if .Params.categories -}}
+  {{ if reflect.IsSlice .Params.categories -}}
+    {{ range .Params.categories -}}
+      <meta property="article:section" content="{{ . }}" />
+    {{ end }}
+  {{- else -}}
+    <meta property="article:section" content="{{ .Params.categories }}" />
+  {{- end }}
+{{- end }}
+{{ if .Date }}<meta property="article:published_time" content="{{ time .Date }}" />{{ end }}
+
+{{ if ne site.Params.seo.jsonLD "disable" }}
+  <!-- JSON-LD -->
+  {{ if .IsHome -}}
+    <script type="application/ld+json">
+    { 
+      "@context": "http://schema.org", 
+      "@type": "WebSite", 
+      "url": {{ site.BaseURL }}, {{/*
+      When in a script tag, Hugo automatically adds quotes around all Hugo tags, eg, {{ }}. However, if quotes are added manually (like "{{ .Permalink }}"), Hugo adds back-slashes in neighborhood of forward slashes. safeHTML tag doesn't work either as of v0.57.2 see: https://discourse.gohugo.io/t/x26rsquo-bad-escape-sequence-in-string-for-json-ld 
+      
+      url: Specifies the URL of the site being searched. Set to the canonical homepage of your site.
+      */}}
+      "name": {{ site.Title }},
+      "author": {
+        "@type": "Person",
+        "name": {{ site.Params.meta.author }}
+      },
+      {{ if site.Params.brand.logo }}
+      "logo": {{ site.Params.brand.logo }},
+      {{ end }}
+      "description": {{ site.Params.meta.description }},
+      {{ if site.Params.social.profiles }}
+      "sameAs" : [
+        {{ range $name, $url := site.Params.social.profiles }}
+          {{ $url }} {{- if ne $range_counter $socialProfiles_len }}, {{ $range_counter = add $range_counter 1 }} {{ end }}
+        {{ end -}}
+        {{/*
+        since we don't want to show "," when it is the last iteration, we take following approach:
+        1. define a variable $range_counter, assign it value 1 just before range,
+        2. create another variable $elem_len (accessible after the line of definition) which stores length of element we are iterating over,
+        3. compare $range_counter with $elem_len to know whether its last iteration, while simultaneously incrementing $counter by one for each iteration
+        */}}
+      ]
+      {{ end }}
+    }
+    </script>
+  {{- end }}
+  {{ if .IsPage -}}
+    <script type="application/ld+json">
+      {{ if eq .Section "post" -}}
+        { 
+          "@context": "http://schema.org", 
+          "@type": "BlogPosting",
+          "headline": {{ .Title }},
+          {{ if .Params.categories }}
+          "genre": {{ if reflect.IsSlice .Params.categories }}{{ delimit .Params.categories ", " }}{{ else }}{{ .Params.categories }}{{ end }},
+          {{ end }}
+          "url": {{ site.BaseURL }},
+          {{ if .Date}}
+          "datePublished": {{ time .Date }},
+          {{ end }}
+          {{ if .Lastmod }}
+          "dateModified": {{ .Lastmod }},
+          {{ end }}
+          "description": {{ .Description | safeJS }},
+          {{ if site.Params.brand.logo }}
+          "logo": {{ site.Params.brand.logo }},
+          {{ end }}
+          {{ if .Params.image -}}
+          "image": {{ .Params.image }},
+          {{ end -}}
+          {{ if .Params.author }}
+          "author": {
+              "@type": "Person",
+              "name": {{ .Params.author }}
+          },
+          {{ end }}
+          "publisher": {
+            "@type": "Organization",
+            "name": {{ site.Params.meta.author }},
+            "logo": {
+              "@type": "ImageObject",
+              "url": {{ site.Params.brand.logo | safeURL }}
+            }
+          },
+          {{ if site.Params.social.profiles }}
+          "sameAs" : [
+            {{ $range_counter = 1 }}
+            {{ range $name, $url := site.Params.social.profiles }}
+              {{ $url }} {{- if ne $range_counter $socialProfiles_len }}, {{ $range_counter = add $range_counter 1 }} {{ end }}
+            {{ end -}}
+          ]
+          {{ end }}
+        }
+      {{ else -}}
+        { 
+          "@context": "http://schema.org", 
+          "@type": "WebSite", 
+          "url": {{ site.BaseURL }}, 
+          "name": {{ .Title }},
+          "author": {
+            "@type": "Person",
+            "name": {{ site.Params.meta.author }}
+          },
+          {{ if site.Params.brand.logo }}
+          "logo": {{ site.Params.brand.logo }},
+          {{ end }}
+          {{ if .Params.image -}}
+          "image": {{ .Params.image }},
+          {{ end -}}
+          "description": {{ .Description | default site.Params.meta.description }},
+          {{ if site.Params.social.profiles }}
+          "sameAs" : [
+            {{ $range_counter = 1 }}
+            {{ range $name, $url := site.Params.social.profiles }}
+              {{ $url }} {{- if ne $range_counter $socialProfiles_len }}, {{ $range_counter = add $range_counter 1 }} {{ end }}
+            {{ end -}}
+          ]
+          {{ end }}
+        }
+      {{ end -}}
+    </script>
+  {{ end }}
+{{ end }}
