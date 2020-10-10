@@ -11,7 +11,7 @@
       {{ if and (eq site.Params.cookieConsent.switch "on") (eq site.Params.cookieConsent.type "opt-in") }}
       <script>
       // Disable tracking by default
-      window[{{ printf "%s%s" "ga-disable-" site.GoogleAnalytics }}] = true;
+      window['{{ printf "%s%s" "ga-disable-" site.GoogleAnalytics }}'] = true;
       </script>
       {{ end }}
       
@@ -35,12 +35,12 @@
   {{- end }}
   
   <!-- Minified Aggregated CSS -->
-  {{- $css := resources.Get "sass/main.scss" | resources.ExecuteAsTemplate "/assets/css/main.scss" . | toCSS | minify | fingerprint }}
+  {{- $css := resources.Get "sass/main.scss" | resources.ExecuteAsTemplate "/assets/css/main.scss" . | toCSS }}
   <!-- Run PostCSS on $css, only if on Production Environment, since its builds take considerably more time -->
-  {{ if eq hugo.Environment "production" -}}
+  {{ if and (eq hugo.Environment "production") (eq site.Params.seo.speedMode "enable") -}}
     {{- $css = $css | postCSS | fingerprint | resources.PostProcess }}
   {{- else }}
-    {{- $css = $css | fingerprint }}
+    {{- $css = $css | minify | fingerprint }}
   {{- end }}
   
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">

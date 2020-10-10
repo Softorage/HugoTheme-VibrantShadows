@@ -14,8 +14,8 @@ An insanely customizable, extremely lightweight and ridiculously fast 'Blog Them
 * [Prerequisites](#prerequisites)
 * [Getting up and running](#getting-up-and-running)
   * [Setting up new Hugo website](#setting-up-new-hugo-website)
-    * [1. As a Hugo Module (recommended)](#as-a-hugo-module-recommended)
-    * [2. As Git Submodule](#as-git-submodule)
+    * [1. As a Hugo Module (recommended)](#1-as-a-hugo-module-recommended)
+    * [2. As Git Submodule](#2-as-git-submodule)
   * [Using boilerplate provided](#using-boilerplate-provided)
 * [Configuration](#configuration)
   * [Global Parameters](#global-parameters)
@@ -38,6 +38,9 @@ An insanely customizable, extremely lightweight and ridiculously fast 'Blog Them
 * Syntax Highlighting
 * Social-Media Share buttons on post
 * Cookie Consent: "Opt-in", "Opt-out" and "None"
+* Custom fonts for different elements
+* SEO optimization and customization
+* Ability to customize positions of various elements
 <!--* Dark Mode (with UI controls for user preference setting) -->
 <!--* Native Image Lazy Loading -->
 
@@ -87,7 +90,7 @@ hugo server
 
 And, we're done!
 
-After setting up the theme, copy the `postcss.config.js` file to the rrot of your Hugo Website directory. We also recommend creating a `package.json` file in your Hugo Website directory.
+If you have extended version of Hugo installed, after setting up the theme, copy the `postcss.config.js` file to the root of your Hugo Website directory. We also recommend creating a `package.json` file in your Hugo Website directory.
 
 ### Using boilerplate provided
 
@@ -398,7 +401,7 @@ Let's see them one by one.
         It's color-1 in the hero gradient. It is used throughout the theme.
     5.  **Color-2** *(Type: String | Accepts value: HEX/RGBA | Optional | Default: "#6d19fc")*
         
-        It's color-1 in the hero gradient. It is used throughout the theme.
+        It's color-2 in the hero gradient. It is used throughout the theme.
     6.  **Borders** *(Type: String | Accepts value: rounded/square | Optional | Default: "rounded")*
         
         Here, specify what kind of borders do you like for elements, like buttons.
@@ -541,6 +544,9 @@ Let's see them one by one.
     4.  **JSON-LD** *(Type: String | Accepts value: enable/disable | Optional | Default: "enable")*
         
         Improves ability of search engines to better index and understand the website/blog. Helps in SEO optimization.
+    5.  **Speed Mode** *(Type: String | Accepts value: enable/disable | Highly Recommended | Default: "disable")*
+        
+        Enabling "Speed Mode" would make the website/blog extremely fast and lightweight, providing a snappy experience to website/blog visitors. "Speed Mode" utilises *PostCSS* via *Hugo's Asset Pipeline*. Note that, "Speed Mode" works in *production environment* only. Since many Hugo users do not have Hugo's extended version, this option is disabled by default.
     
     Example:
     ```yaml
@@ -553,6 +559,7 @@ Let's see them one by one.
         openGraph: "enable"
         appID: "170405085280305" # it is just for illustration purpose
       jsonLD: "enable"
+      speedMode: "enable"
     ```
 10. **Cookie Consent** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
     
