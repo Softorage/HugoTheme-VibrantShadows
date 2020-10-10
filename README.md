@@ -6,7 +6,7 @@ An insanely customizable, extremely lightweight and ridiculously fast 'Blog Them
 
 | Desktop | Mobile |
 |---| --- |
-| ![Vibrant Shadows Theme desktop preview](/images/screenshot.png) | ![Vibrant Shadows Theme mobile preview](/images/screenshot-mobile.png) |
+| ![Vibrant Shadows Theme desktop preview](https://raw.githubusercontent.com/Softorage/HugoTheme-VibrantShadows/master/images/screenshot.png) | ![Vibrant Shadows Theme mobile preview](https://raw.githubusercontent.com/Softorage/HugoTheme-VibrantShadows/master/images/screenshot-mobile.png) |
 
 ## Table of Contents
 

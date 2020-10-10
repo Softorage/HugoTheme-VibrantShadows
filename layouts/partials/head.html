@@ -54,8 +54,9 @@
   {{- end -}}
   
   {{ if site.Params.faviconTags }}
-    {{ site.Params.faviconTags | safeHTML }}
-  {{ end }}
+    {{- $faviconTags := site.Params.faviconTags | resources.FromString "/favicon-temp.html" | resources.ExecuteAsTemplate "/favicon-temp.html" . | minify }}
+    {{- $faviconTags.Content | safeHTML }}
+  {{- end }}
   
   <!-- Address bar color -->
   <!-- Chrome, Firefox OS and Opera -->
