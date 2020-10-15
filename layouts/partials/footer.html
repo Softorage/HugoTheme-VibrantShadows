@@ -49,11 +49,11 @@
 
   {{ if site.Params.meta.footerMessage -}}
     <div class="py-2 lead">
-      {{ site.Params.meta.footerMessage }}
+      {{ site.Params.meta.footerMessage | safeHTML }}
     </div>
   {{- end }}
 
   <div class="py-2 copyright">
-    <small>Copyright &#169; {{ now.Format "2006" }} {{ default site.Title site.Params.meta.author }} {{- if site.Params.meta.contentLicense }} <b>&#183;</b> Content license: {{ site.Params.meta.contentLicense }} {{- end }} {{- if ne site.Params.meta.attribution "disable" }} <b>&#183;</b> Powered by <a class="font-weight-bold text-reset text-decoration-none" href="https://gohugo.io">Hugo</a> <b>&#183;</b> Theme <a class="font-weight-bold text-reset text-decoration-none" href="">Shadows</a> by <span class="softorage"><a class="font-weight-bold text-reset" href="https://softorage.com">Softorage</a></span>{{ end }}</small>
+    <small>Copyright &#169; {{ now.Format "2006" }} {{ default site.Title site.Params.meta.author }} {{- if site.Params.meta.contentLicense }} <b>&#183;</b> Content license: {{ site.Params.meta.contentLicense }} {{- end }} {{- if ne site.Params.meta.attribution "disable" }} <b>&#183;</b> Powered by <a class="font-weight-bold text-reset text-decoration-none" href="https://gohugo.io">Hugo</a> <b>&#183;</b> Theme <a class="font-weight-bold text-reset text-decoration-none" href="https://github.com/Softorage/HugoTheme-VibrantShadows">Vibrant Shadows</a> by <span class="softorage"><a class="font-weight-bold text-reset" href="https://softorage.com">Softorage</a></span>{{ end }}</small>
   </div>
 </footer>

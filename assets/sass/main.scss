@@ -67,10 +67,12 @@ font-family: '{{ default "Lato" site.Params.font.postMeta.family }}', sans-serif
 }
 
 .softorage {
-background: linear-gradient(36deg,#fc466b,#3f5efb);
-background-clip: text;
-color: transparent;
-font-family: Roboto, sans-serif;
+background: linear-gradient(36deg,#fc466b,#3f5efb) !important;
+background-clip: text !important;
+color: transparent !important;
+font-family: Roboto, sans-serif !important;
+-webkit-background-clip: text !important;
+-webkit-text-fill-color: transparent !important;
 }
 // especially, search bar
 @media (min-width: 650px) {
@@ -170,13 +172,13 @@ td {
 
 
 .hero-gradient {
-background: $clr1 !important;
-background: linear-gradient(36deg, $clr1 0%, $clr2 80%) !important;
+background: $clr1;
+background: linear-gradient(36deg, $clr1 0%, $clr2 80%);
 }
 
 .hero-gradient-light {
-background: $clr1-light !important;
-background: linear-gradient(36deg, $clr1-light 0%, $clr2-light 80%) !important; 
+background: $clr1-light;
+background: linear-gradient(36deg, $clr1-light 0%, $clr2-light 80%); 
 }
 
 
