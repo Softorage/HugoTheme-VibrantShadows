@@ -1,5 +1,3 @@
-# this configuration file shows all the configuration options supported by 'Shadows' theme by Softorage, with explaining comments. All the options are set to default values.
-
 baseURL: "https://example.com/" # url address of the website | required
 title: "Vibrant Shadows Theme" # title of the site; usually same as brand name | required
 copyright: "Copyright &#169; 2020 Softorage. All rights reserved." # should match 'brand -> name', and 'contentLicense' under params below; used in default rss template: https://gohugo.io/templates/rss/#configure-rss | optional
@@ -48,7 +46,8 @@ params:
     attribution: "enable" # attribute Hugo team for awesome software and Softorage for great theme | default: "enable"
   brand:
     name: "Vibrant Shadows" # brand name (Samy's blog), usually just one word that is name of the brand | required | no default
-    logo: "" # path (preferably relative path) to brand's good resolution logo | required | no default
+    logo_500px: "/assets/favicon/android-chrome-512x512.png" # path (preferably relative path) to brand's good resolution logo | required | no default
+    logo_32px: "/assets/favicon/favicon-32x32.png" # will be shown on navbar as is
     color: "#7d1fa5" # color to be shown for brand name on navbar on scroll | required | no default
     navbar: ["logo", "name"] # accepts array of values: "logo", "name" | this configuration shows brand 'log' & brand 'name' on navbar | optional | default: ["logo", "name"]
   theme: # optional

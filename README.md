@@ -369,13 +369,16 @@ Let's see them one by one.
     1.  **Name** *(Type: String | Accepts value: Text | Required | No default)*
         
         It's the Brand's Name, usually just one/two word that is name of the brand.
-    2.  **Logo** *(Type: String | Accepts value: URL | Required | No default)*
+    2.  **Logo - 500px** *(Type: String | Accepts value: URL | Required | No default)*
         
-        It's path (preferably relative path) to brand's logo.
-    3.  **Color** *(Type: String | Accepts value: HEX/RGBA | Required | No default)*
+        It's path (preferably relative path) to brand's logo with resolution 500px.
+    3.  **Logo - 32px**  *(Type: String | Accepts value: URL | Required | No default)*
+        
+        It's path (preferably relative path) to brand's logo with resolution 32px. It will be shown on navbar as is.
+    4.  **Color** *(Type: String | Accepts value: HEX/RGBA | Required | No default)*
         
         It's the color to be shown on scroll for brand name on navbar.
-    4.  **Navbar Config** *(Type: Array | Accepts value: "logo", "name" | Optional | Default: ["logo", "name"])*
+    5.  **Navbar Config** *(Type: Array | Accepts value: "logo", "name" | Optional | Default: ["logo", "name"])*
         
         It determines whether brand's logo and/or name should be visible on navbar.
     
@@ -383,7 +386,8 @@ Let's see them one by one.
     ```yaml
     brand:
       name: "ExampleBlog"
-      logo: "/assets/logo.png"
+      logo_500px: "/assets/favicon/android-chrome-512x512.png"
+      logo_32px: "/assets/favicon/favicon-32x32.png"
       color: "#7d1fa5"
       navbar: ["logo", "name"]
     ```

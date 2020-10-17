@@ -44,8 +44,8 @@
   {{ if or site.Params.seo.twitter.handle .Params.author_twitter -}}
     <meta name="twitter:creator" content="{{ if .Params.author_twitter }}@{{ .Params.author_twitter }}{{ else }}@{{ site.Params.seo.twitter.handle }}{{ end }}" /> <!-- @author_handle -->
   {{- end }}
-  {{ if or site.Params.brand.logo .Params.image -}}
-    <meta name="twitter:image" content="{{ if not .IsHome }}{{ .Params.image }}{{ else }}{{ site.Params.brand.logo }}{{ end }}" />
+  {{ if or site.Params.brand.logo_500px .Params.image -}}
+    <meta name="twitter:image" content="{{ if not .IsHome }}{{ .Params.image }}{{ else }}{{ site.Params.brand.logo_500px }}{{ end }}" />
   {{- end }} <!-- min 120px x 120px -->
 {{ end }}
 
@@ -62,8 +62,8 @@
   {{ if site.Params.facebook.appID }}
   <meta property="fb:app_id" content="{{ site.Params.facebook.appID }}" />
   {{ end }}
-  {{ if or site.Params.brand.logo .Params.image -}}
-    <meta property="og:image" content="{{ if not .IsHome }}{{ .Params.image }}{{ else }}{{ site.Params.brand.logo }}{{ end }}" />
+  {{ if or site.Params.brand.logo_500px .Params.image -}}
+    <meta property="og:image" content="{{ if not .IsHome }}{{ .Params.image }}{{ else }}{{ site.Params.brand.logo_500px }}{{ end }}" />
   {{- end }} <!-- reso 200px x 200px to 1200px x 1200px -->
 {{ end }}
 
@@ -95,8 +95,8 @@
         "@type": "Person",
         "name": {{ site.Params.meta.author }}
       },
-      {{ if site.Params.brand.logo }}
-      "logo": {{ site.Params.brand.logo }},
+      {{ if site.Params.brand.logo_500px }}
+      "logo": {{ site.Params.brand.logo_500px }},
       {{ end }}
       "description": {{ site.Params.meta.description }},
       {{ if site.Params.social.profiles }}
@@ -133,8 +133,8 @@
           "dateModified": {{ .Lastmod }},
           {{ end }}
           "description": {{ .Description | safeJS }},
-          {{ if site.Params.brand.logo }}
-          "logo": {{ site.Params.brand.logo }},
+          {{ if site.Params.brand.logo_500px }}
+          "logo": {{ site.Params.brand.logo_500px }},
           {{ end }}
           {{ if .Params.image -}}
           "image": {{ .Params.image }},
@@ -150,7 +150,7 @@
             "name": {{ site.Params.meta.author }},
             "logo": {
               "@type": "ImageObject",
-              "url": {{ site.Params.brand.logo | safeURL }}
+              "url": {{ site.Params.brand.logo_500px | safeURL }}
             }
           },
           {{ if site.Params.social.profiles }}
@@ -172,8 +172,8 @@
             "@type": "Person",
             "name": {{ site.Params.meta.author }}
           },
-          {{ if site.Params.brand.logo }}
-          "logo": {{ site.Params.brand.logo }},
+          {{ if site.Params.brand.logo_500px }}
+          "logo": {{ site.Params.brand.logo_500px }},
           {{ end }}
           {{ if .Params.image -}}
           "image": {{ .Params.image }},
