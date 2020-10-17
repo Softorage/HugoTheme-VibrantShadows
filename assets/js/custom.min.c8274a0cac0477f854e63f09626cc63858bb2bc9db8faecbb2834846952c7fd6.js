@@ -1,0 +1,1 @@
+$(function(){$(window).scroll(function(){if($(this).scrollTop()>30){$(".navbar").addClass("shadow bg-nav").attr("style","background: rgba(255,255,255,0.9);");$(".navbar .brand").addClass("brand-color");}else{$(".navbar").removeClass("shadow bg-nav").removeAttr("style");$(".navbar .brand").removeClass("brand-color");}});});
