@@ -36,7 +36,9 @@ color: $antinav !important;
 font-family: '{{ default "Lato" site.Params.font.brand.family }}', sans-serif !important;
 }
 
+// since .brand-color class is used only custom JS
 {{ if site.Params.brand.color }}
+/* purgecss ignore */
 .brand-color {
 color: {{ site.Params.brand.color }} !important;
 }
