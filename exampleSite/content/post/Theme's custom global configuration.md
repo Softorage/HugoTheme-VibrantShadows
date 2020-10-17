@@ -1,5 +1,5 @@
 ---
-title: "Configuration options in the theme"
+title: "Custom configuration options in the theme"
 author: "Sanmay Joshi"
 description: "Get to know all the awesome configurations Vibrant Shadows Hugo theme has to offer."
 tags: ["configuration", "customize", "settings"]
@@ -9,134 +9,11 @@ Here, we will mainly see settings that are unique to this theme. If something is
 
 <!--more-->
 
-## Global Parameters
+**Global Parameters (site-level):**
 
 These options set global values that some pages or all pages in the site use by default.
 
-### Hugo's built-in parameters
-
-1.  **BaseURL** *(Type: String | Accepts value: URL | Required | No default)*
-    
-    baseURL is the URL of the website or blog.
-    
-    Example:
-    ```yaml
-    baseurl: "https://example.com/"
-    ```
-2.  **Title** *(Type: String | Accepts value: Text | Required | No default)*
-    
-    It is the title of the website or blog. Title is usually same as brand name.
-    
-    Example:
-    ```yaml
-    title: "ExampleBlog"
-    ```
-3.  **Author** *(Type: String | Accepts value: Text | Required | No default)*
-    
-    We won't be using `site.Authors` till this parameter is finalised. See [here](https://github.com/gohugoio/hugo/issues/3088).
-    <!--It stores website-wide author(s).
-    
-    Example:
-    ```yaml
-    author: "The Great Authors"
-    ```
-    #name: https://gohugo.io/templates/rss/#configure-rss
-    #email: "" # author's email; used in default rss template: https://gohugo.io/templates/rss/#configure-rss | optional-->
-4.  **Copyright** *(Type: String | Accepts value: Text | Optional | No default)*
-    
-    It is the copyright text. Due consideration should be given to 'brandName or title' and 'contentLicense' specified in configuration file. Note that it isn't used in footer, but only [in defualt RSS template](https://gohugo.io/templates/rss/#configure-rss).
-    
-    Example:
-    ```yaml
-    copyright: "Copyright &#169; 2020 ExampleBlog. All rights reserved."
-    ```
-5.  **Language Code** *(Type: String | Accepts value: Text | Recommended | No default)*
-    
-    It stores the language code for the website or blog.
-    
-    Example:
-    ```yaml
-    languageCode: "en-us"
-    ```
-6.  **Theme** *(Type: String | Accepts value: Text | Required | No default)*
-    
-    This is the name of the theme you are using.
-    
-    Example:
-    ```yaml
-    theme: "HugoTheme-VibrantShadows"
-    ```
-7.  **Google Analytics** *(Type: String | Accepts value: Alphanumeric | Optional | No default)*
-    
-    It is your Google Analytics ID, if any. Respecting your preference from 'privacy', and 'params -> user_experience' configuration, if you set this value, Google Analytics code will be included. Google Analytics included only when serving the website on 'production' environment (i.e. website built with `hugo` command and not `hugo serve`)
-    
-    Example:
-    ```yaml
-    googleAnalytics: "UA-123456789-0"
-    ```
-8.  **Disqus Shortname** *(Type: String | Accepts value: Alphanumeric | Optional | No default)*
-    
-    It is your Disqus Shortname, if any. Respecting your preference from 'privacy', if you set this value, Disqus comments code will be included at the end of the blog posts. Disqus comments are shown only when serving the website on 'production' environment (i.e. website built with `hugo` command and not `hugo serve`)
-    
-    Example:
-    ```yaml
-    disqusShortname: "yourdiscussshortname"
-    ```
-9.  **Taxonomies** *(Type: Map/Dict/Object | Accepts value: - | Optional | Default: Tags & Categories)*
-    
-    This feature allows to define custom taxonomies for post/page management.
-    
-    Example:
-    ```yaml
-    taxonomies:
-      tag: "tags" # when defining custom taxonomies, we need to redefine even the default taxonomies if we wish to keep them, hence we have redefined 'tags'. see here: 
-      category: "categories" # redefined 'categories'
-      series: "series" # defined a custom taxonomy, 'series'
-    ```
-10. **Menus** *(Type: Map/Dict/Object | Accepts value: - | Optional | No default)*
-    
-    These are the menus that are used by users to navigate the website/blog. An example would be 'main' menu, which usually resides on navbar.
-    
-    Example:
-    ```yaml
-    menu:
-      main:
-        - identifier: "about" # different for all menu entries, useful especially when menu name coincides
-          name: "About" # shown on website/blog
-          url: "/about/" # user is taken to this url when user clicks on menu item
-          weight: 10 # used to sort menu items by weight
-        - identifier: "sub-about"
-          name: "Sub About"
-          url: "/sub-about/"
-          parent: "about"
-          weight: 1
-    ```
-11. **Build Stats** *(Type: Map/Dict/Object | Accepts value: - | Required)*
-    
-    With this, Hugo notes some stats about website, which are then used by CSS processors.
-    
-    Example:
-    ```yaml
-    build:
-      writeStats: true
-    ```
-12. **Privacy** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
-    
-    This feature allows to maintain optimal privacy settings for the website/blog. You can see full list of privacy settings [here](https://gohugo.io/about/hugo-and-gdpr/#all-privacy-settings), and their explanation [here](https://gohugo.io/about/hugo-and-gdpr/#the-privacy-settings-explained).
-    
-    Example:
-    ```yaml
-    privacy:
-      disqus:
-        disable: "false" # | default: false
-      googleAnalytics:
-        anonymizeIP: "true" # 'true' makes it so the users' IP addresses are anonymized within Google Analytics | default: false
-        disable: "false" # | default: false
-        respectDoNotTrack: "false" # 'true' makes the GA templates respect the “Do Not Track” HTTP header | default: false
-        useSessionStorage: "false" # 'true' disables the use of Cookies and use Session Storage to Store the GA Client ID | default: false
-    ```
-
-### Vibrant Shadow's custom parameters
+## Vibrant Shadow's custom parameters
 
 All these properties come under Hugo's built-in property, `params`.
 
@@ -247,8 +124,8 @@ Let's see them one by one.
         Example:
         ```yaml
         contentLicense: "All rights reserved." # Another example: 'CC-BY-SA-3.0'
-      ```
-    6. **Title Separator** *(Type: String | Accepts value: Text | Optional | Default: " | ")*
+        ```
+    6.  **Title Separator** *(Type: String | Accepts value: Text | Optional | Default: " | ")*
         
         It is used in website/blog title, to separate (say) page title from website/blog title.
         
@@ -256,7 +133,7 @@ Let's see them one by one.
         ```yaml
         titleSeparator: " | "
         ```
-    7. **Attribution** *(Type: String | Accepts value: enable/disable | Optional | Default: "enable")*
+    7.  **Attribution** *(Type: String | Accepts value: enable/disable | Optional | Default: "enable")*
         
         Allows to attribute Hugo team for awesome software and Softorage for great theme.
         
@@ -305,7 +182,7 @@ Let's see them one by one.
         It's color-1 in the hero gradient. It is used throughout the theme.
     5.  **Color-2** *(Type: String | Accepts value: HEX/RGBA | Optional | Default: "#6d19fc")*
         
-        It's color-1 in the hero gradient. It is used throughout the theme.
+        It's color-2 in the hero gradient. It is used throughout the theme.
     6.  **Borders** *(Type: String | Accepts value: rounded/square | Optional | Default: "rounded")*
         
         Here, specify what kind of borders do you like for elements, like buttons.
@@ -448,6 +325,9 @@ Let's see them one by one.
     4.  **JSON-LD** *(Type: String | Accepts value: enable/disable | Optional | Default: "enable")*
         
         Improves ability of search engines to better index and understand the website/blog. Helps in SEO optimization.
+    5.  **Speed Mode** *(Type: String | Accepts value: enable/disable | Highly Recommended | Default: "disable")*
+        
+        Enabling "Speed Mode" would make the website/blog extremely fast and lightweight, providing a snappy experience to website/blog visitors. "Speed Mode" utilises *PostCSS* via *Hugo's Asset Pipeline*. Note that, "Speed Mode" works in *production environment* only. Since many Hugo users do not have Hugo's extended version, this option is disabled by default.
     
     Example:
     ```yaml
@@ -460,6 +340,7 @@ Let's see them one by one.
         openGraph: "enable"
         appID: "170405085280305" # it is just for illustration purpose
       jsonLD: "enable"
+      speedMode: "enable"
     ```
 10. **Cookie Consent** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
     
@@ -550,106 +431,4 @@ Let's see them one by one.
     
     ```yaml
     mainSections: ["post"]
-    ```
-
-## Page Parameters
-
-'Page paremeters' relate to the particular content file in whose front-matter they are defined. These options can be set from a page [front-matter](https://gohugo.io/content-management/front-matter#readout) or via [archetypes](https://gohugo.io/content-management/archetypes/#readout) (i.e. when you create a new content file via `hugo new` command).
-
-1.  **Title** *(Type: String | Accepts value: Text | Required)*
-    
-    It is the title of the current page/post you are writing.
-    
-    Example:
-    ```yaml
-    title: "A post that takes you into space"
-    ```
-2.  **Description** *(Type: String | Accepts value: Text | Required)*
-    
-    It is the description of the current page/post. Recommended character length: 50 to 160
-    
-    Example:
-    ```yaml
-    description: "A short yet descriptive text that relates to this post."
-    ```
-3.  **Date** *(Type: String | Accepts value: Date | Required)*
-    
-    It is the date on which current page/post is published.
-    
-    Example:
-    ```yaml
-    date: "2021-04-26" # YYYY-MM-DD
-    ```
-4.  **Last Modified** *(Type: String | Accepts value: Date | Required)*
-    
-    It is the date on which current post was last modified.
-    
-    Example:
-    ```yaml
-    lastmod: "2021-04-29"
-    ```
-5.  **Tags/Categories/Custom-Taxonomy** *(Type: Array/String | Accepts value: Text | Recommended)*
-    
-    You can manage and organise you posts based on tags, categories or any other custom taxonomy.
-    
-    Example:
-    ```yaml
-    tags: ["great post", "awesome"] # multiple elements
-    categories: "category" # single element
-    ```
-6.  **Image** *(Type: String | Accepts value: Path to Image | Recommended)*
-    
-    You can specify path to an image dedicated to current post. This image is used to optimize the display of content when shared on social media.
-    
-    Example:
-    ```yaml
-    image: "/images/post-1.png"
-    ```
-7.  **Author** *(Type: String | Accepts value: Text | Recommended)*
-    
-    It is the name of the author of the current post.
-    
-    Example:
-    ```yaml
-    author: "Great Author"
-    ```
-8.  **Author Twitter Handle** *(Type: String | Accepts value: Text | Recommended)*
-    
-    It is the Twitter handle of the author of the current post, without '@'.
-    
-    Example:
-    ```yaml
-    author_twitter: "Gr8Authr" # this is just an example
-    ```
-9.  **Draft** *(Type: Boolean | Accepts value: true/false | Optional)*
-    
-    If it is set to `true`, the content will not be rendered unless the `--buildDrafts` flag is passed to the `hugo` command.
-    
-    Example:
-    ```yaml
-    draft: true
-    ```
-10. **Table of Contents** *(Type: boolean/String | Accepts value: true/false | Optional)*
-    
-    If set to `false`, *Table of Content* for current post will not be rendered.
-    
-    Example:
-    ```yaml
-    toc: false
-    ```
-11. **Aliases** *(Type: Array | Accepts value: Relative URL | Optional)*
-    
-    It stores other URLs (in relative form) - usually older URLs for current post - which you would like to redirect to current post.
-    
-    Example:
-    ```yaml
-    aliases: ["/posts/my-original-url/", "/2010/01/01/even-earlier-url.html"]
-    ```
-12. **URL** *(Type: String | Accepts value: Relative URL | Optional)*
-    
-    If you want to specify a custom URL for this post other than the one automatically generated by hugo based on content directory structure, you can specify it in this parameter.
-    
-    Example:
-    ```yaml
-    url: "/custom/url/"
     ```

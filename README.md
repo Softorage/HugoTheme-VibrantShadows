@@ -24,7 +24,7 @@ An insanely customizable, extremely lightweight and ridiculously fast 'Blog Them
     * [Hugo's built-in parameters](#hugos-built-in-parameters)
     * [Vibrant Shadow's custom parameters](#vibrant-shadows-custom-parameters)
   * [Page Parameters](#page-parameters)
-  * [Example `config.yaml`](#example-config.yaml)
+  * [Example `config.yaml`](#example-configyaml)
 * [Built with](#built-with)
 * [Contributing](#contributing)
 * [License](#license)
@@ -64,7 +64,7 @@ hugo new site yourSiteName # generate a new Hugo site if you don't already have 
 cd yourSiteName # move in to the Hugo website's directory
 ```
 
-#### 1. As a Hugo Module (recommended)
+#### 1. As a Hugo theme (recommended)
 
 1. Download the repo on your machine
 2. Extract the zip file and rename the folder from `HugoTheme-VibrantShadows-master` to `HugoTheme-VibrantShadows`.
@@ -718,7 +718,7 @@ Let's see them one by one.
     ```
 8.  **Author Twitter Handle** *(Type: String | Accepts value: Text | Recommended)*
     
-    It is the Twitter handle of the author of the current post, without '@'.
+    It is the Twitter handle of the author of the current post, without '@'. This option is theme specific.
     
     Example:
     ```yaml

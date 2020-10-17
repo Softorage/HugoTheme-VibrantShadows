@@ -8,7 +8,6 @@ date: "2020-09-30"
 We share some additional information about this theme, that may be relevant.
 
 <!--more-->
-
 ## Built with
 
 * Hugo
@@ -17,9 +16,11 @@ We share some additional information about this theme, that may be relevant.
 
 ## Contributing
 
+Anyone contributing, benefits equally from others' contributions.
+
 If you have a tip, feedback or issues, please [open an issue here](https://github.com/Softorage/HugoTheme-VibrantShadows/issues).If you think 'Vibrant Shadows' theme could benefit from some features, or there is something that needs to be fixed, please open an issue at least 2-3 days prior to [opening a PR](https://github.com/Softorage/HugoTheme-VibrantShadows/pulls). If you think there is something that needs to be fixed and which isn't of much significance (say a typo), you may open a PR directly.
 
-Anyone contributing, benefits equally from others' contributions.
+If you like our work & find it useful, consider to star on GitHub. We are on [Facebook](https://www.facebook.com/Softorage/), [Twitter](https://twitter.com/Softorage) and [Instagram](https://www.instagram.com/softorage/), you can follow us there too! It really motivates us!
 
 ## License
 
