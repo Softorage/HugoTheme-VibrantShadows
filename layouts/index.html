@@ -19,9 +19,13 @@ We donno how to have access to a specific page's taxonomies yet. Having that wou
 {{ end }}
 */}}
 
-<div class="jumbotron jumbotron-fluid text-center d-flex flex-column mb-0 text-nav hero-gradient">
+<div class="jumbotron jumbotron-fluid text-center d-flex flex-column mb-0 text-light hero-gradient"
+{{- if site.Params.backgImage.landingPage }}
+ style="background: url('{{ site.Params.backgImage.landingPage | safeURL }}') 50% 95% / cover no-repeat fixed; box-shadow: inset 2000px 0 0 0 rgba(0, 0, 0, 0.65);"
+{{- end -}}
+>
   <div style="height:3.5rem;"></div>
-  <div class="container-fluid py-5">
+  <div class="container-fluid{{ if site.Params.backgImage.landingPage }} py-5{{ end }}">
     {{ if site.Params.meta.tagline }}
       <h1 class="d-inline-block">{{ site.Params.meta.tagline }}</h1>
     {{ end }}
@@ -30,8 +34,8 @@ We donno how to have access to a specific page's taxonomies yet. Having that wou
     {{ end }}
   </div>
 </div>
-<div class="bg-mat container-fluid py-3" style="background-color:#f9f9f9;">
-  <div class="container bg-antinav-light py-3" >
+<div class="container-fluid bg-mat py-3">
+  <div class="container-fluid bg-mat py-3" >
     <!-- ranges through each of the content files associated with a particular term and renders the summary.html content view -->
     {{ range (where site.RegularPages "Type" "in" site.Params.mainSections).ByDate.Reverse }}
       <div class="card mb-3">

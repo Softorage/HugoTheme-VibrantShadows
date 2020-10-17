@@ -2,7 +2,7 @@
 
 An insanely customizable, extremely lightweight and ridiculously fast 'Blog Theme' for Hugo, with mobile support and a lot more.<!--built-in PWA support, contact page and a lot more.-->
 
-<small>If you like our work & find it useful, consider to star on GitHub. We are on [Facebook](https://www.facebook.com/Softorage/), [Twitter](https://twitter.com/Softorage) and [Instagram](https://www.instagram.com/softorage/), you can follow us there too! It really motivates us!</small>
+<small>If you like our work & find it useful, please consider to star on GitHub. We are on [Facebook](https://www.facebook.com/Softorage/), [Twitter](https://twitter.com/Softorage) and [Instagram](https://www.instagram.com/softorage/), you can follow us there too! It really motivates us!</small>
 
 ## Preview
 
@@ -423,7 +423,22 @@ Let's see them one by one.
       clr2: "#6d19fc"
       borders: "rounded"
     ```
-5.  **Position** *(Type: Map/Dict/Object | Accepts value: - | Optional with caevets)*
+5.  **Background Image** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
+    
+    1. **Landing Page** *(Type: String | Accepts value: URL | Optional | No default)*
+        
+        It is path to background image for hero section on landing page. If specified, background image will be applied.
+    2. **Post** *(Type: String | Accepts value: enable/disable | Optional | Default: "enable")*
+        
+        If enabled, image set in front-matter will be shown as background image for hero section of the post.
+        
+    Example:
+    ```yaml
+    backgImage:
+      landingPage: "/neven-krcmarek-V4EOZj7g1gw-unsplash.jpg"
+      post: "enable"
+    ```
+6.  **Position** *(Type: Map/Dict/Object | Accepts value: - | Optional with caevets)*
     
     It lets you customize *what* elements should be displayed and *where*. It contains:
     1.  **Social** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
@@ -467,7 +482,7 @@ Let's see them one by one.
           summary: "top"
           content: "bottom"
     ```
-6.  **Fonts** *(Type: Map/Dict/Object | Accepts value: - | Optional )*
+7.  **Fonts** *(Type: Map/Dict/Object | Accepts value: - | Optional )*
     
     It lets you customize the fonts for various types of text elements, and in general too.
     
@@ -497,7 +512,7 @@ Let's see them one by one.
         family: "Lato" # must match to a css font-family | default: "Lato"
         #cdnLink: "" # a link tag for font other than Lato and Roboto | recommended
     ```
-7. **Favicon Tags** *(Type: String | Accepts value: Text | Optional | No default)*
+8. **Favicon Tags** *(Type: String | Accepts value: Text | Optional | No default)*
     
     It stores HTML tags for your favicon (see example below). We recommend you to ensure that you have `"purpose": "maskable"` set for one icon in your `site.webmanifest` file (helps for PWA). We recommend `https://realfavicongenerator.net` since it's easy to use and free. By the way, we are not affiliated with them. We just like their product!
     
@@ -516,7 +531,7 @@ Let's see them one by one.
       <meta name="msapplication-TileColor" content="#fff6f8">
       <meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
     ```
-8. **Custom Verification** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
+9. **Custom Verification** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
     
     It lets you verify your website on multiple reputed services.
     
@@ -524,7 +539,7 @@ Let's see them one by one.
     ```yaml
     myWOT: "ba8579f668r8w3g62503" # verification key here is dummy
     ```
-9. **SEO** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
+10. **SEO** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
     
     It lets you customize SEO properties of the website/blog, to help you shine :grinning: It contains:
     1.  **Switch** *(Type: String | Accepts value: on/off | Optional | Default: "on")*
@@ -568,7 +583,7 @@ Let's see them one by one.
       jsonLD: "enable"
       speedMode: "enable"
     ```
-10. **Cookie Consent** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
+11. **Cookie Consent** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
     
     It allows you to present a 'Cookie Consent' dialog to your users, to help them decide their privacy settings, when they browse your website. It contains:
     1.  **Switch** *(Type: String | Accepts value: on/off | Optional | Default: "off")*
@@ -637,7 +652,7 @@ Let's see them one by one.
         deny: "Decline"
         policy: "Cookie Consent"
     ```
-11. **User Experience** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
+12. **User Experience** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
     
     It contains settings that let's you customize your user's website/blog experience.
     1.  **Google Analytics Loading** *(Type: String | Accepts value: sync/async | Optional | Default: "sync")*
@@ -649,7 +664,7 @@ Let's see them one by one.
     userExperience:
       googleAnalyticsLoading: "sync"
     ```
-12. **Main Sections** *(Type: Array | Accepts value: Section names | Highly Recommended)*
+13. **Main Sections** *(Type: Array | Accepts value: Section names | Highly Recommended)*
     
     This is Hugo's native feature that let's you specify which sections are to be treated as *Main Sections*. A very general and common example of *Main Section* is `post` or `posts` section (hence they are often called Blog Directories). If nothing is specified, the section with the highest number of content files is treated as a *Main Section*. For more info, see the [Hugo docs](https://gohugo.io/functions/where/#mainsections).
     
@@ -851,7 +866,8 @@ params:
     attribution: "enable" # attribute Hugo team for awesome software and Softorage for great theme | default: "enable"
   brand:
     name: "ExampleBlog" # brand name (Samy's blog), usually just one word that is name of the brand | required | no default
-    logo: "" # path (preferably relative path) to brand's good resolution logo | required | no default
+    logo_500px: "/assets/favicon/android-chrome-512x512.png" # path (preferably relative path) to brand's good resolution logo | required | no default
+    logo_32px: "/assets/favicon/favicon-32x32.png" # will be shown on navbar as is | required | no default
     color: "#7d1fa5" # color to be shown for brand name on navbar on scroll | required | no default
     navbar: ["logo", "name"] # accepts array of values: "logo", "name" | this configuration shows brand 'log' & brand 'name' on navbar | optional | default: ["logo", "name"]
   theme: # optional
@@ -861,6 +877,9 @@ params:
     clr1: "#7d1fa5" # color-1 of gradient | optional | default: "#7d1fa5"
     clr2: "#6d19fc" # color-2 of gradient | optional | default: "#6d19fc"
     borders: "rounded" # accepts value: rounded/square | what kind of borders do you like for elements, like buttons | default: "rounded"
+  backgImage:
+    landingPage: "/neven-krcmarek-V4EOZj7g1gw-unsplash.jpg" # path to background image for hero section on landing page. if specified, background image will be applied.
+    post: "enable" # accepts value: enable/disable | if enabled, image set in front-matter will be shown as background image for hero section of the post | default: "enable"
   position: # optional
     social:
       profiles: "footer" # accepts value: navbar/footer | may use 'navbar' if number of items in main menu and social profiles are minimal, otherwise 'footer' is recommended | default: "footer"
@@ -966,7 +985,7 @@ Anyone contributing, benefits equally from others' contributions.
 
 If you have a tip, feedback or issues, please [open an issue here](https://github.com/Softorage/HugoTheme-VibrantShadows/issues).If you think 'Vibrant Shadows' theme could benefit from some features, or there is something that needs to be fixed, please open an issue at least 2-3 days prior to [opening a PR](https://github.com/Softorage/HugoTheme-VibrantShadows/pulls). If you think there is something that needs to be fixed and which isn't of much significance (say a typo), you may open a PR directly.
 
-If you like our work & find it useful, consider to star on GitHub. We are on [Facebook](https://www.facebook.com/Softorage/), [Twitter](https://twitter.com/Softorage) and [Instagram](https://www.instagram.com/softorage/), you can follow us there too! It really motivates us!
+If you like our work & find it useful, please consider to star on GitHub. We are on [Facebook](https://www.facebook.com/Softorage/), [Twitter](https://twitter.com/Softorage) and [Instagram](https://www.instagram.com/softorage/), you can follow us there too! It really motivates us!
 
 ## License
 
