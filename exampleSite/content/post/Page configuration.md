@@ -3,7 +3,7 @@ title: "Page configuration options in the theme"
 author: "Sanmay Joshi"
 description: "Get to know all the page-level configuration relevant to Vibrant Shadows Hugo theme."
 tags: ["configuration", "customize", "settings"]
-date: "2020-10-04"
+date: "2020-10-03"
 ---
 'Page paremeters' relate to the particular content file in whose front-matter they are defined.
 

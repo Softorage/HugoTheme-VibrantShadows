@@ -27,14 +27,11 @@ build:
 params:
   social: 
     profiles: # social platforms you are present on. see supported ones here | highly recommended
-      facebook: "#"
-      twitter: "#"
-      github: "#"
-      gitlab: "#"
-      steam: "#"
-      instagram: "#"
-      youtube: "#"
-      pinterest: "#"
+      facebook: "https://www.facebook.com/Softorage"
+      twitter: "https://twitter.com/Softorage"
+      github: "https://github.com/Softorage"
+      gitlab: "https://gitlab.com/Softorage/"
+      instagram: "https://www.instagram.com/softorage/"
     share: ["facebook", "twitter", "linkedin", "telegram", "whatsapp", "reddit", "email"] # accepts array of values: "facebook", "twitter", "linkedin", "whatsapp", "reddit", "email". just type the name of those you want you articles to be able to be shared on
   meta:
     author: "Softorage" # website-wide author | required
