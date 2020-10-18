@@ -7,20 +7,29 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright &amp;#169; 2020 Softorage. All rights reserved.</copyright>
-    <lastBuildDate>Wed, 30 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://vibrantshadows.softorage.com/tags/configuration/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://vibrantshadows.softorage.com/tags/configuration/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Configuration options in the theme</title>
-      <link>https://vibrantshadows.softorage.com/post/example-config.yaml/</link>
-      <pubDate>Wed, 30 Sep 2020 00:00:00 +0000</pubDate>
+      <title>Example config.yaml</title>
+      <link>https://vibrantshadows.softorage.com/post/example-config-yaml/</link>
+      <pubDate>Mon, 05 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://vibrantshadows.softorage.com/post/example-config.yaml/</guid>
+      <guid>https://vibrantshadows.softorage.com/post/example-config-yaml/</guid>
       <description>&lt;p&gt;An example configuration file (config.yaml), which shows all the configuration options supported by &amp;lsquo;Vibrant Shadows&amp;rsquo; theme by Softorage, with explaining comments.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Page configuration options in the theme</title>
+      <link>https://vibrantshadows.softorage.com/post/page-configuration/</link>
+      <pubDate>Sun, 04 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://vibrantshadows.softorage.com/post/page-configuration/</guid>
+      <description>&lt;p&gt;&amp;lsquo;Page paremeters&amp;rsquo; relate to the particular content file in whose front-matter they are defined.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Custom configuration options in the theme</title>
       <link>https://vibrantshadows.softorage.com/post/themes-custom-global-configuration/</link>
-      <pubDate>Wed, 30 Sep 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 03 Oct 2020 00:00:00 +0000</pubDate>
       
       <guid>https://vibrantshadows.softorage.com/post/themes-custom-global-configuration/</guid>
       <description>&lt;p&gt;Here, we will mainly see settings that are unique to this theme. If something is not covered here (or elsewhere in this file), there&amp;rsquo;s a good chance it is covered in &lt;a href=&#34;https://gohugo.io/getting-started/configuration/#configuration-file&#34;&gt;this Hugo docs page&lt;/a&gt;.&lt;/p&gt;</description>
@@ -29,19 +38,10 @@
     <item>
       <title>Hugo&#39;s built-in global configurations</title>
       <link>https://vibrantshadows.softorage.com/post/hugos-built-in-global-configuration/</link>
-      <pubDate>Wed, 30 Sep 2020 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 02 Oct 2020 00:00:00 +0000</pubDate>
       
       <guid>https://vibrantshadows.softorage.com/post/hugos-built-in-global-configuration/</guid>
       <description>&lt;p&gt;Options that Hugo has built-in and are relevant to this theme. If something is not covered here (or elsewhere in this file), there&amp;rsquo;s a good chance it is covered in &lt;a href=&#34;https://gohugo.io/getting-started/configuration/#configuration-file&#34;&gt;this Hugo docs page&lt;/a&gt;.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Page configuration options in the theme</title>
-      <link>https://vibrantshadows.softorage.com/post/page-configuration/</link>
-      <pubDate>Wed, 30 Sep 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://vibrantshadows.softorage.com/post/page-configuration/</guid>
-      <description>&lt;p&gt;&amp;lsquo;Page paremeters&amp;rsquo; relate to the particular content file in whose front-matter they are defined.&lt;/p&gt;</description>
     </item>
     
   </channel>
