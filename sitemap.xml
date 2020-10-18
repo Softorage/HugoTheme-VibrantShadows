@@ -3,17 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://vibrantshadows.softorage.com/post/additional-info/</loc>
+    <loc>https://vibrantshadows.softorage.com/tags/get-started/</loc>
     <lastmod>2020-10-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://vibrantshadows.softorage.com/tags/learn-more/</loc>
+    <loc>https://vibrantshadows.softorage.com/post/getting-started/</loc>
     <lastmod>2020-10-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://vibrantshadows.softorage.com/tags/license/</loc>
+    <loc>https://vibrantshadows.softorage.com/tags/guide/</loc>
     <lastmod>2020-10-06T00:00:00+00:00</lastmod>
   </url>
   
@@ -43,7 +43,7 @@
   </url>
   
   <url>
-    <loc>https://vibrantshadows.softorage.com/post/example-config-yaml/</loc>
+    <loc>https://vibrantshadows.softorage.com/post/hugos-built-in-global-configuration/</loc>
     <lastmod>2020-10-05T00:00:00+00:00</lastmod>
   </url>
   
@@ -53,32 +53,32 @@
   </url>
   
   <url>
-    <loc>https://vibrantshadows.softorage.com/post/page-configuration/</loc>
-    <lastmod>2020-10-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://vibrantshadows.softorage.com/post/themes-custom-global-configuration/</loc>
     <lastmod>2020-10-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://vibrantshadows.softorage.com/post/hugos-built-in-global-configuration/</loc>
+    <loc>https://vibrantshadows.softorage.com/post/page-configuration/</loc>
+    <lastmod>2020-10-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://vibrantshadows.softorage.com/post/example-config-yaml/</loc>
     <lastmod>2020-10-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://vibrantshadows.softorage.com/tags/get-started/</loc>
+    <loc>https://vibrantshadows.softorage.com/post/additional-info/</loc>
     <lastmod>2020-10-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://vibrantshadows.softorage.com/post/getting-started/</loc>
+    <loc>https://vibrantshadows.softorage.com/tags/learn-more/</loc>
     <lastmod>2020-10-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://vibrantshadows.softorage.com/tags/guide/</loc>
+    <loc>https://vibrantshadows.softorage.com/tags/license/</loc>
     <lastmod>2020-10-01T00:00:00+00:00</lastmod>
   </url>
   
