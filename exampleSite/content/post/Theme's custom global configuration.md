@@ -3,7 +3,7 @@ title: "Custom configuration options in the theme"
 author: "Sanmay Joshi"
 description: "Get to know all the awesome configurations Vibrant Shadows Hugo theme has to offer."
 tags: ["configuration", "customize", "settings"]
-date: "2020-09-30"
+date: "2020-10-03"
 ---
 Here, we will mainly see settings that are unique to this theme. If something is not covered here (or elsewhere in this file), there's a good chance it is covered in [this Hugo docs page](https://gohugo.io/getting-started/configuration/#configuration-file).
 

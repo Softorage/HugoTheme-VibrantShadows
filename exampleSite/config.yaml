@@ -39,7 +39,7 @@ params:
   meta:
     author: "Softorage" # website-wide author | required
     footerMessage: "Vibrant Shadows by Softorage" # text shown in footer above footer links | optional
-    tagline: "Make it the way you like!" # shown in website title on homepage and also used in seo | required
+    tagline: "Personalize to your heart's content!" # shown in website title on homepage and also used in seo | required
     description: "An insanely customizable, extremely lightweight and ridiculously fast 'Blog Theme' for Hugo." # should include brand name | character length: 50 to 160 characters
     contentLicense: "CC-BY-SA-3.0" # cc-by-3.0, etc or 'All right reserved.' should also be same as the one in copyright above
     titleSeparator: " | " # used in website/blog title, to separate (say) page title from website/blog title | default: " | "

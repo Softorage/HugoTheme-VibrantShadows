@@ -3,7 +3,7 @@ title: "Additional information about the theme"
 author: "Sanmay Joshi"
 description: "Additional info about the theme, like 'Built with', 'Contributing', and 'License'."
 tags: ["learn more", "license"]
-date: "2020-09-30"
+date: "2020-10-06"
 ---
 We share some additional information about this theme, that may be relevant.
 

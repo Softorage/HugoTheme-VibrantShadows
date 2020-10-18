@@ -3,7 +3,7 @@ title: "Hugo's built-in global configurations"
 author: "Sanmay Joshi"
 description: "Get to know the Hugo's built-in configurations relevant to Vibrant Shadows Hugo theme."
 tags: ["configuration", "customize", "settings"]
-date: "2020-09-30"
+date: "2020-10-02"
 ---
 Options that Hugo has built-in and are relevant to this theme. If something is not covered here (or elsewhere in this file), there's a good chance it is covered in [this Hugo docs page](https://gohugo.io/getting-started/configuration/#configuration-file).
 

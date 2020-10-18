@@ -1,9 +1,9 @@
 ---
-title: "Configuration options in the theme"
+title: "Example config.yaml"
 author: "Sanmay Joshi"
 description: "An example config.yaml file relevant to Vibrant Shadows Hugo theme."
 tags: ["configuration", "customize", "settings"]
-date: "2020-09-30"
+date: "2020-10-05"
 ---
 An example configuration file (config.yaml), which shows all the configuration options supported by 'Vibrant Shadows' theme by Softorage, with explaining comments.
 

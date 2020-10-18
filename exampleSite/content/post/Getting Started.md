@@ -3,7 +3,7 @@ title: "Getting started with Vibrant Shadows"
 author: "Sanmay Joshi"
 description: "Read the full post to easily get started with Vibrant Shadows Hugo theme."
 tags: ["get started", "guide"]
-date: "2020-09-30"
+date: "2020-10-01"
 ---
 It's very easy to get started with Vibrant Shadows. How? Read on.
 
