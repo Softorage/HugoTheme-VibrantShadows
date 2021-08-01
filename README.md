@@ -792,6 +792,10 @@ theme: "HugoTheme-VibrantShadows"
 # googleAnalytics: "UA-123456789-0" # Respecting your preference from 'privacy', and 'params' -> 'user_experience' below, if you set this value, Google Analytics code will be included. Google Analytics included only when serving the website on 'production' environment (i.e. website built with `hugo` command and not `hugo serve`)
 # disqusShortname: "yourdiscussshortname" # Respecting your preference from 'privacy', if you set this value, Disqus comments code will be included at the end of the blog posts. Disqus comments are shown only when serving the website on 'production' environment (i.e. website built with `hugo` command and not `hugo serve`)
 
+# prevent build failures when using Hugo's Instagram shortcode due to deprecated Instagram API.
+# See https://github.com/gohugoio/hugo/issues/7228#issuecomment-714490456
+ignoreErrors: ["error-remote-getjson", "error-missing-instagram-accesstoken"]
+
 # taxonomies as per Hugo's taxonomy feature
 taxonomies:
   tag: "tags"
@@ -870,7 +874,7 @@ params:
     name: "ExampleBlog" # brand name (Samy's blog), usually just one word that is name of the brand | required | no default
     logo_500px: "/assets/favicon/android-chrome-512x512.png" # path (preferably relative path) to brand's good resolution logo | required | no default
     logo_32px: "/assets/favicon/favicon-32x32.png" # will be shown on navbar as is | required | no default
-    color: "#7d1fa5" # color to be shown for brand name on navbar on scroll | required | no default
+    color: "#7d1fa5" # color to be shown for brand name on navbar on scroll | required | default: "#7d1fa5"
     navbar: ["logo", "name"] # accepts array of values: "logo", "name" | this configuration shows brand 'log' & brand 'name' on navbar | optional | default: ["logo", "name"]
   theme: # optional
     nav: "#ffffff" # navbar's background color | optional | default: "#ffffff"
