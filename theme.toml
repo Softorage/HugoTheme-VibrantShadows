@@ -6,9 +6,9 @@ license = "MIT"
 licenselink = "https://github.com/Softorage/HugoTheme-VibrantShadows/blob/master/LICENSE"
 description = "An insanely customizable, extremely lightweight and ridiculously fast 'Blog Theme' for Hugo, with mobile support and a lot more."
 homepage = "https://github.com/Softorage/HugoTheme-VibrantShadows/"
+demosite = "https://vibrantshadows.softorage.com/"
 tags = ["blog", "website", "professional", "responsive", "google analytics", "bootstrap", "customizable", "disqus", "font awesome", "seo", "clean"]
 features = ["lightweight", "fast", "elegant", "customizable", "clean", "seo optimized", "cookie consent"]
-min_version = "0.75.1"
 
 [author]
   name = "Softorage"
