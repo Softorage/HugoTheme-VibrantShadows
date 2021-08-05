@@ -2,8 +2,6 @@
 
 An insanely customizable, extremely lightweight and ridiculously fast 'Blog Theme' for Hugo, with mobile support and a lot more.<!--built-in PWA support, contact page and a lot more.-->
 
-Check out the optimized demo [here](https://vibrantshadows.softorage.com).
-
 <small>If you like our work & find it useful, please consider to star on GitHub. We are on [Facebook](https://www.facebook.com/Softorage/), [Twitter](https://twitter.com/Softorage) and [Instagram](https://www.instagram.com/softorage/), you can follow us there too! It really motivates us!</small>
 
 ## Preview
