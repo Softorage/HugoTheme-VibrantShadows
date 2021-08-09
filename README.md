@@ -70,7 +70,7 @@ cd yourSiteName # move in to the Hugo website's directory
 
 1. Download the repo on your machine
 2. Extract the zip file and rename the folder from `HugoTheme-VibrantShadows-master` to `HugoTheme-VibrantShadows`.
-3. Copy this folder and paste it into you Hugo Website directory.
+3. Copy this folder and paste it into themes folder in your Hugo Website directory.
 4. Simply add the repo to your theme option in `config.yaml`:
     
     ```yaml
