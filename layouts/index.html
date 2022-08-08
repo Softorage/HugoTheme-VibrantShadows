@@ -94,7 +94,7 @@ We donno how to have access to a specific page's taxonomies yet. Having that wou
             {{ if and (site.Params.position.postMeta.tags.summary) (eq site.Params.position.postMeta.tags.summary "top") }}
               <div class="pb-1 mt-1">
               {{- range .Params.tags -}}
-                <a href="/tags/{{ . | urlize }}"><span class="badge badge-pill bg-clr2 text-nav mr-2 mb-1 py-2">{{ . | humanize | upper }}</span></a>
+                <a href="/tags/{{ . | urlize }}/"><span class="badge badge-pill bg-clr2 text-nav mr-2 mb-1 py-2">{{ . | humanize | upper }}</span></a>
               {{- end -}}
               </div>
             {{ end }}
@@ -143,7 +143,7 @@ We donno how to have access to a specific page's taxonomies yet. Having that wou
             {{ if and (site.Params.position.postMeta.tags.summary) (eq site.Params.position.postMeta.tags.summary "bottom") }}
               <div class="pb-1 mt-1">
               {{- range .Params.tags -}}
-                <a href="/tags/{{ . | urlize }}"><span class="badge badge-pill bg-clr2 text-nav mr-2 py-2">{{ . | humanize | upper }}</span></a>
+                <a href="/tags/{{ . | urlize }}/"><span class="badge badge-pill bg-clr2 text-nav mr-2 py-2">{{ . | humanize | upper }}</span></a>
               {{- end -}}
               </div>
             {{ end }}
