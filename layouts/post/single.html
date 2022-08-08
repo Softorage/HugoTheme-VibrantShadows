@@ -110,7 +110,7 @@
           <div class="pt-2 pb-3">
           <span class="">Tags:</span>&nbsp;&nbsp;&nbsp;
           {{- range .Params.tags -}}
-            <a href="/tags/{{ . | urlize }}"><span class="badge badge-pill bg-clr2 text-nav mr-2 py-2">{{ . | humanize | upper }}</span></a>
+            <a href="/tags/{{ . | urlize }}/"><span class="badge badge-pill bg-clr2 text-nav mr-2 py-2">{{ . | humanize | upper }}</span></a>
           {{- end -}}
           </div>
         {{ end }}
