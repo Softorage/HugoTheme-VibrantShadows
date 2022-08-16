@@ -167,11 +167,15 @@ These options set global values that some pages or all pages in the site use by 
     ```
 7.  **Google Analytics** *(Type: String | Accepts value: Alphanumeric | Optional | No default)*
     
-    It is your Google Analytics ID, if any. Respecting your preference from 'privacy', and 'params -> user_experience' configuration, if you set this value, Google Analytics code will be included. Google Analytics included only when serving the website on 'production' environment (i.e. website built with `hugo` command and not `hugo serve`)
+    It is your Google Analytics ID, if any. Respecting your preference from 'privacy', and 'params -> user_experience' configuration, if you set this value, Google Analytics code will be included. Google Analytics included only when serving the website on 'production' environment (i.e. website built with `hugo` command and not `hugo serve`). If you wish to not use Google Analytics, do not set this variable; also set `disabled` to `true` in privacy configuration for Google Analytics.
     
-    Example:
+    Example-1:
     ```yaml
-    googleAnalytics: "UA-123456789-0"
+    googleAnalytics: "UA-123456789-0" # the now deprecated Google Universal Analytics tag ID. Supported by Google till July 1, 2023.
+    ```
+    Example-2:
+    ```yaml
+    googleAnalytics: "G-123456789-0" # the Google Analytics tag 4 ID. Works only from Hugo v0.82.0 onwards.
     ```
 8.  **Disqus Shortname** *(Type: String | Accepts value: Alphanumeric | Optional | No default)*
     
@@ -655,14 +659,24 @@ Let's see them one by one.
 12. **User Experience** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
     
     It contains settings that let's you customize your user's website/blog experience.
-    1.  **Google Analytics Loading** *(Type: String | Accepts value: sync/async | Optional | Default: "sync")*
+    1.  **Google Analytics** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
+      
+      Customize your Google Analytics
+      1. **script** *(Type: Integer | Accepts value: Number | Optional | Default: 0)*
+        Accepts the following values:  
+        0: Default script by Google via Hugo's internal template. Works well with Cookie Consent solution, since it respects `window['ga-disable-GA_MEASUREMENT_ID'] = true;` to disable Google Analytics measurement. [See this](https://developers.google.com/analytics/devguides/collection/gtagjs/user-opt-out). Has a higher chance of being blocked by AdBlockers. Only sync version of internal template works with gtag4;  
+        1: minimal-analytics by James Hill. May or may not work well with Cookie Consent solution. -- https://github.com/jahilldev/minimal-analytics/tree/main/packages/ga4 ;  
+        2: minimal-analytics-4 by Dariusz Więckiewicz. May or may not work well with Cookie Consent solution. Make sure you set Data Stream data retention to 14 months from default 2 and link your GA4 web data stream with Google Search Console -- https://gist.github.com/idarek/9ade69ac2a2ef00d98ab950426af5791 ;  
+        [Refer this for a good implementation discussion](https://discourse.gohugo.io/t/add-minimal-analytics-google-analytics-v4-to-hugo/39016)
+      2. **loading** *(Type: String | Accepts value: Text | Optional | Default: "sync")*
+        It helps you customize whether Google Analytics JavaScript file loads 'Synchronously' or 'Asynchronously'. Avialable only if `script` is set to "0". Latest Google Analytics Tag 4 only works with `sync`.
         
-        It helps you customize whether Google Analytics JavaScript file loads 'Synchronously' or 'Asynchronously'.
-    
     Example:
     ```yaml
     userExperience:
-      googleAnalyticsLoading: "sync"
+      googleAnalytics:
+        script: 0
+        loading: "sync"
     ```
 13. **Main Sections** *(Type: Array | Accepts value: Section names | Highly Recommended)*
     
@@ -787,7 +801,7 @@ title: "ExampleBlog" # title of the site; usually same as brand name | required
 copyright: "Copyright &#169; 2020 ExampleBlog. All rights reserved." # should match 'brand -> name', and 'contentLicense' under params below; used in default rss template: https://gohugo.io/templates/rss/#configure-rss | optional
 languageCode: "en-us" # recommended | no default
 theme: "HugoTheme-VibrantShadows"
-# googleAnalytics: "UA-123456789-0" # Respecting your preference from 'privacy', and 'params' -> 'user_experience' below, if you set this value, Google Analytics code will be included. Google Analytics included only when serving the website on 'production' environment (i.e. website built with `hugo` command and not `hugo serve`)
+# googleAnalytics: "G-123456789-0" # Respecting your preference from 'privacy', and 'params' -> 'user_experience' below, if you set this value, Google Analytics code will be included. Google Analytics included only when serving the website on 'production' environment (i.e. website built with `hugo` command and not `hugo serve`)
 # disqusShortname: "yourdiscussshortname" # Respecting your preference from 'privacy', if you set this value, Disqus comments code will be included at the end of the blog posts. Disqus comments are shown only when serving the website on 'production' environment (i.e. website built with `hugo` command and not `hugo serve`)
 
 # prevent build failures when using Hugo's Instagram shortcode due to deprecated Instagram API.
@@ -971,7 +985,9 @@ params:
       deny: "Decline" # text on the button that denies cookies | default: "Decline"
       policy: "Cookie Consent" # text that appears on the button, when user's country requires revokable cookie consent | default: "Cookie Consent"
   userExperience:
-    googleAnalyticsLoading: "sync" # accepts value: sync/async | determines whether Google Analytics JavaScript file loads 'Synchronously' or 'Asynchronously' | optional | default: "sync"
+    googleAnalytics:
+      script: 0 # accepts value: 0/1/2 | 0: Default script by Google via Hugo's internal template; 1: minimal-analytics by James Hill; 2: minimal-analytics-4 by Dariusz Więckiewicz | optional | default: 0
+      loading: "sync" # accepts value: sync/async | determines whether Google Analytics JavaScript file loads 'Synchronously' or 'Asynchronously' | optional | default: "sync"
   mainSections: ["post"] # required, https://gohugo.io/functions/where/#mainsections
   #customVerification:
     #myWOT: "ba8579f668r8w3g62503" # content for meta tag to verify your website on 'Web Of Trust'
