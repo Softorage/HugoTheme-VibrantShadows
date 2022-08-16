@@ -1,4 +1,13 @@
 <head>
+  <!-- Basic head tags -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>
+  {{- .Title | default site.Title }} {{- default " | " site.Params.meta.titleSeparator -}} {{ if not .IsHome }}{{ site.Title }}{{ else }}{{ site.Params.meta.tagline }}{{ end -}}
+  </title>
+  
+  <!-- Googe Analytics, Cookie Consent should work only on production website -->
   {{ if eq hugo.Environment "production" -}}
     {{ if site.GoogleAnalytics }}
       <!-- Google Analytics shall work only on production website -->
