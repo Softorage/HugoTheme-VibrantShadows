@@ -41,7 +41,15 @@ We donno how to have access to a specific page's taxonomies yet. Having that wou
       <div class="card mb-3">
         <div class="card-body">
           <h2>
-            {{ if .Params.image }}<img src="{{ .Params.image }}" height="320"{{ if .Params.image.alt }} alt="{{ .Params.image.alt }}"{{ end }}></img>{{ end }}
+            {{ if .Params.image.src }}<img src="{{ .Params.image.src }}" height="
+            {{- if .Params.image.thumbnailSize }}
+              {{- .Params.image.thumbnailSize -}}
+            {{- else if site.Params.postImages.thumbnailSize }}
+              {{- site.Params.postImages.thumbnailSize -}}
+            {{- else -}}
+              6.25rem
+            {{- end -}}
+            "{{ if .Params.image.alt }} alt="{{ .Params.image.alt }}"{{ end }}></img>{{ end }}
             <a class="text-reset" href="{{ .Permalink }}"><span class="card-title text-reset"> {{ .Title }}</span></a>
           </h2>
           <div class="card-text">

@@ -1,7 +1,7 @@
 {{ define "main" }}
-<div class="container-fluid bg-clr1 text-light text-center {{- if and (ne site.Params.backgImage.post "disable") (.Params.image) }} py-5{{ else }} pb-3 pt-4{{ end }} position-relative shadow"
-{{- if and (ne site.Params.backgImage.post "disable") (.Params.image) }}
- style="background: url('{{ .Params.image | safeURL }}') 50% 50% / cover no-repeat fixed; box-shadow: inset 2000px 0 0 0 rgba(0, 0, 0, 0.65);"
+<div class="container-fluid bg-clr1 text-light text-center {{- if and (ne site.Params.backgImage.post "disable") (.Params.image.src) }} py-5{{ else }} pb-3 pt-4{{ end }} position-relative shadow"
+{{- if and (ne site.Params.backgImage.post "disable") (.Params.image.src) }}
+ style="background: url('{{ .Params.image.src | safeURL }}') 50% 50% / cover no-repeat fixed; box-shadow: inset 2000px 0 0 0 rgba(0, 0, 0, 0.65);"
 {{- end -}}
 >
   <div style="height:3.5rem;"></div>

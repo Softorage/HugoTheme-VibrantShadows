@@ -659,17 +659,27 @@ Let's see them one by one.
 12. **User Experience** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
     
     It contains settings that let's you customize your user's website/blog experience.
-    1.  **Google Analytics** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
+    1. **Google Analytics** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
       
       Customize your Google Analytics
-      1. **script** *(Type: Integer | Accepts value: Number | Optional | Default: 0)*
+      1. **Script** *(Type: Integer | Accepts value: Number | Optional | Default: 0)*
+        
         Accepts the following values:  
         0: Default script by Google via Hugo's internal template. Works well with Cookie Consent solution, since it respects `window['ga-disable-GA_MEASUREMENT_ID'] = true;` to disable Google Analytics measurement. [See this](https://developers.google.com/analytics/devguides/collection/gtagjs/user-opt-out). Has a higher chance of being blocked by AdBlockers. Only sync version of internal template works with gtag4;  
         1: minimal-analytics by James Hill. May or may not work well with Cookie Consent solution. -- https://github.com/jahilldev/minimal-analytics/tree/main/packages/ga4 ;  
         2: minimal-analytics-4 by Dariusz Więckiewicz. May or may not work well with Cookie Consent solution. Make sure you set Data Stream data retention to 14 months from default 2 and link your GA4 web data stream with Google Search Console -- https://gist.github.com/idarek/9ade69ac2a2ef00d98ab950426af5791 ;  
         [Refer this for a good implementation discussion](https://discourse.gohugo.io/t/add-minimal-analytics-google-analytics-v4-to-hugo/39016)
-      2. **loading** *(Type: String | Accepts value: Text | Optional | Default: "sync")*
+      2. **Loading Method** *(Type: String | Accepts value: Text | Optional | Default: "sync")*
+        
         It helps you customize whether Google Analytics JavaScript file loads 'Synchronously' or 'Asynchronously'. Avialable only if `script` is set to "0". Latest Google Analytics Tag 4 only works with `sync`.
+    2. **Post Images** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
+      
+      Customize behaviour for your posts' images
+      1. **Thumbnail Size** *(Type: Array | Accepts value: [Integer, String] | Optional | Default: [6.25, "rem"])*
+        
+        Integer: Size of post images when they appear as thumbnails in lists, for example, on landing page.  
+        String: Unit of size. For example, "em", "rem", "px".  
+        Gets overridden by `thumbnailSize` specified in a page's front-matter.
         
     Example:
     ```yaml
@@ -677,6 +687,8 @@ Let's see them one by one.
       googleAnalytics:
         script: 0
         loading: "sync"
+      postImages:
+        thumbnailSize: [6.25, "rem"]
     ```
 13. **Main Sections** *(Type: Array | Accepts value: Section names | Highly Recommended)*
     
@@ -733,13 +745,27 @@ Let's see them one by one.
     tags: ["great post", "awesome"] # multiple elements
     categories: "category" # single element
     ```
-6.  **Image** *(Type: String | Accepts value: Path to Image | Recommended)*
+6.  **Image** *(Type: Map/Dict/Object | Accepts value: - | Recommended)*
     
-    You can specify path to an image dedicated to current post. This image is used to optimize the display of content when shared on social media.
+    Specify an image for a post/page
+    1. **Source** *(Type: String | Accepts value: Path to Image | Required)*
+      
+      You can specify path to an image dedicated to current post. This image is used to optimize the display of content when shared on social media.
+    2. **Alternative Text** *(Type: String | Accepts value: Text | Recommended)*
+      
+      This text is shown when for some reason an image is unable to load. It also helps in SEO and is especially helpful for screen readers.
+    3. **Thumbnail Size** *(Type: Array | Accepts value: [Integer, String] | Optional | Default: [6.25, "rem"])*
+      
+      Integer: Size of post image when it appears as thumbnail in lists, for example, on landing page.  
+      String: Unit of size. For example, "em", "rem", "px".  
+      Overrides the setting set (if any) in `userExperience` -> `postImages` -> `thumbnailSize` in `config.yaml` file present at root of your webiste.
     
     Example:
     ```yaml
-    image: "/images/post-1.png"
+    image:
+      src: "/images/post-1.png"
+      alt: "Alternative text"
+      thumbnailSize: [6.25, "rem"]
     ```
 7.  **Author** *(Type: String | Accepts value: Text | Recommended)*
     
@@ -887,7 +913,7 @@ params:
     logo_500px: "/assets/favicon/android-chrome-512x512.png" # path (preferably relative path) to brand's good resolution logo | required | no default
     logo_32px: "/assets/favicon/favicon-32x32.png" # will be shown on navbar as is | required | no default
     color: "#7d1fa5" # color to be shown for brand name on navbar on scroll | required | default: "#7d1fa5"
-    navbar: ["logo", "name"] # accepts array of values: "logo", "name" | this configuration shows brand 'log' & brand 'name' on navbar | optional | default: ["logo", "name"]
+    navbar: ["logo", "name"] # accepts array of values: "logo", "name" | this configuration shows brand 'logo' & brand 'name' on navbar | optional | default: ["logo", "name"]
   theme: # optional
     nav: "#ffffff" # navbar's background color | optional | default: "#ffffff"
     antinav: "#000000" # a color in good contrast to nav | optional | default: "#000000"
@@ -985,9 +1011,11 @@ params:
       deny: "Decline" # text on the button that denies cookies | default: "Decline"
       policy: "Cookie Consent" # text that appears on the button, when user's country requires revokable cookie consent | default: "Cookie Consent"
   userExperience:
-    googleAnalytics:
+    googleAnalytics: # customize your Google Analytics
       script: 0 # accepts value: 0/1/2 | 0: Default script by Google via Hugo's internal template; 1: minimal-analytics by James Hill; 2: minimal-analytics-4 by Dariusz Więckiewicz | optional | default: 0
       loading: "sync" # accepts value: sync/async | determines whether Google Analytics JavaScript file loads 'Synchronously' or 'Asynchronously' | optional | default: "sync"
+    postImages: # customize behaviour for your posts' images
+        thumbnailSize: [6.25, "rem"] # accepts value: [integer, string] | integer: size of post images when they appear as thumbnails; string: unit of size | default: [6.25, "rem"]
   mainSections: ["post"] # required, https://gohugo.io/functions/where/#mainsections
   #customVerification:
     #myWOT: "ba8579f668r8w3g62503" # content for meta tag to verify your website on 'Web Of Trust'
@@ -1033,3 +1061,4 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
 License can be viewed [here](https://github.com/Softorage/HugoTheme-VibrantShadows/blob/master/LICENSE).
+

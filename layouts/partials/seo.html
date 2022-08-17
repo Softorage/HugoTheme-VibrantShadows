@@ -38,8 +38,8 @@
   {{ if or site.Params.seo.twitter.handle .Params.author_twitter -}}
     <meta name="twitter:creator" content="{{ if .Params.author_twitter }}@{{ .Params.author_twitter }}{{ else }}@{{ site.Params.seo.twitter.handle }}{{ end }}" /> <!-- @author_handle -->
   {{- end }}
-  {{ if or site.Params.brand.logo_500px .Params.image -}}
-    <meta name="twitter:image" content="{{ if not .IsHome }}{{ .Params.image }}{{ else }}{{ site.Params.brand.logo_500px }}{{ end }}" />
+  {{ if or site.Params.brand.logo_500px .Params.image.src -}}
+    <meta name="twitter:image" content="{{ if not .IsHome }}{{ .Params.image.src }}{{ else }}{{ site.Params.brand.logo_500px }}{{ end }}" />
   {{- end }} <!-- min 120px x 120px -->
 {{ end }}
 
@@ -56,8 +56,8 @@
   {{ if site.Params.facebook.appID }}
   <meta property="fb:app_id" content="{{ site.Params.facebook.appID }}" />
   {{ end }}
-  {{ if or site.Params.brand.logo_500px .Params.image -}}
-    <meta property="og:image" content="{{ if not .IsHome }}{{ .Params.image }}{{ else }}{{ site.Params.brand.logo_500px }}{{ end }}" />
+  {{ if or site.Params.brand.logo_500px .Params.image.src -}}
+    <meta property="og:image" content="{{ if not .IsHome }}{{ .Params.image.src }}{{ else }}{{ site.Params.brand.logo_500px }}{{ end }}" />
   {{- end }} <!-- reso 200px x 200px to 1200px x 1200px -->
 {{ end }}
 
@@ -130,8 +130,8 @@
           {{ if site.Params.brand.logo_500px }}
           "logo": {{ site.Params.brand.logo_500px }},
           {{ end }}
-          {{ if .Params.image -}}
-          "image": {{ .Params.image }},
+          {{ if .Params.image.src -}}
+          "image": {{ .Params.image.src }},
           {{ end -}}
           {{ if .Params.author }}
           "author": {
@@ -169,8 +169,8 @@
           {{ if site.Params.brand.logo_500px }}
           "logo": {{ site.Params.brand.logo_500px }},
           {{ end }}
-          {{ if .Params.image -}}
-          "image": {{ .Params.image }},
+          {{ if .Params.image.src -}}
+          "image": {{ .Params.image.src }},
           {{ end -}}
           "description": {{ .Description | default site.Params.meta.description }},
           {{ if site.Params.social.profiles }}
