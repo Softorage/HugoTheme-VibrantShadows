@@ -5,7 +5,10 @@ date: "" # publish date of the current page/post YYYY-MM-DD
 lastmod: "" # date when the page/post was last modified
 tags: "" # tags for current post
 categories: "" # categories for current post
-image: "" # image for current post
+image: # image for current post
+  src: "" # path to an image dedicated to current post
+  alt: "" # this text is shown when for some reason an image is unable to load
+  thumbnailSize: [6.25, "rem"] # size of post image when it appears as thumbnail, unit of size
 author: "" # author of current post
 author_twitter: "" # current post's author's twitter handle, without '@'
 #draft: true # if true, the content will not be rendered unless the `--buildDrafts` flag is passed to the `hugo` command
