@@ -1,7 +1,7 @@
 {{ define "main" }}
-<div class="container-fluid bg-clr1 text-light text-center {{- if and (ne site.Params.backgImage.post "disable") (.Params.image.src) }} py-5{{ else }} pb-3 pt-4{{ end }} position-relative shadow"
+<div class="container-fluid  text-light text-center {{- if and (ne site.Params.backgImage.post "disable") (.Params.image.src) }} py-5{{ else }} bg-clr1 pb-3 pt-4 shadow{{ end }} position-relative"
 {{- if and (ne site.Params.backgImage.post "disable") (.Params.image.src) }}
- style="background: url('{{ .Params.image.src | safeURL }}') 50% 50% / cover no-repeat fixed; box-shadow: inset 2000px 0 0 0 rgba(0, 0, 0, 0.65);"
+ style="background: url('{{ .Params.image.src | safeURL }}') 50% 95% / cover no-repeat fixed; box-shadow: inset 2000px 0 0 0 rgba(0, 0, 0, 0.65);"
 {{- end -}}
 >
   <div style="height:3.5rem;"></div>
@@ -35,7 +35,7 @@
       <div class="py-1">
         <div class="row">
           {{- if and site.Params.position.postMeta $postMetaTop }}
-          <div class="col-md-7 small text-muted post-meta my-1">
+          <div class="col-md-7 small text-muted post-meta my-auto">
             
             {{- $wordCount := "" }}
             {{- $readingTime := "" }}
@@ -71,9 +71,9 @@
           {{ end }}
           
           {{ if and site.Params.social.share (eq site.Params.position.social.share "top") }}
-          <div class="col-md-auto ml-3 my-1">
+          <div class="col-md-auto ml-3 my-auto">
             <div class="row">
-              <div class="col-auto p-0">
+              <div class="col-auto p-0 my-auto">
               Share on:&nbsp;&nbsp;
               </div>
               <div class="col p-0">

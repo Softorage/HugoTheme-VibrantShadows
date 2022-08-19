@@ -659,27 +659,27 @@ Let's see them one by one.
 12. **User Experience** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
     
     It contains settings that let's you customize your user's website/blog experience.
-    1. **Google Analytics** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
+    1.  **Google Analytics** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
       
-      Customize your Google Analytics
-      1. **Script** *(Type: Integer | Accepts value: Number | Optional | Default: 0)*
+       Customize your Google Analytics
+       1.  **Script** *(Type: Integer | Accepts value: Number | Optional | Default: 0)*
         
-        Accepts the following values:  
-        0: Default script by Google via Hugo's internal template. Works well with Cookie Consent solution, since it respects `window['ga-disable-GA_MEASUREMENT_ID'] = true;` to disable Google Analytics measurement. [See this](https://developers.google.com/analytics/devguides/collection/gtagjs/user-opt-out). Has a higher chance of being blocked by AdBlockers. Only sync version of internal template works with gtag4;  
-        1: minimal-analytics by James Hill. May or may not work well with Cookie Consent solution. -- https://github.com/jahilldev/minimal-analytics/tree/main/packages/ga4 ;  
-        2: minimal-analytics-4 by Dariusz Więckiewicz. May or may not work well with Cookie Consent solution. Make sure you set Data Stream data retention to 14 months from default 2 and link your GA4 web data stream with Google Search Console -- https://gist.github.com/idarek/9ade69ac2a2ef00d98ab950426af5791 ;  
-        [Refer this for a good implementation discussion](https://discourse.gohugo.io/t/add-minimal-analytics-google-analytics-v4-to-hugo/39016)
-      2. **Loading Method** *(Type: String | Accepts value: Text | Optional | Default: "sync")*
+           Accepts the following values:  
+           0: Default script by Google via Hugo's internal template. Works well with Cookie Consent solution, since it respects `window['ga-disable-GA_MEASUREMENT_ID'] = true;` to disable Google Analytics measurement. [See this](https://developers.google.com/analytics/devguides/collection/gtagjs/user-opt-out). Has a higher chance of being blocked by AdBlockers. Only sync version of internal template works with gtag4;  
+           1: minimal-analytics by James Hill. May or may not work well with Cookie Consent solution. -- https://github.com/jahilldev/minimal-analytics/tree/main/packages/ga4 ;  
+           2: minimal-analytics-4 by Dariusz Więckiewicz. May or may not work well with Cookie Consent solution. Make sure you set Data Stream data retention to 14 months from default 2 and link your GA4 web data stream with Google Search Console -- https://gist.github.com/idarek/9ade69ac2a2ef00d98ab950426af5791 ;  
+           [Refer this for a good implementation discussion](https://discourse.gohugo.io/t/add-minimal-analytics-google-analytics-v4-to-hugo/39016)
+       2.  **Loading Method** *(Type: String | Accepts value: Text | Optional | Default: "sync")*
         
-        It helps you customize whether Google Analytics JavaScript file loads 'Synchronously' or 'Asynchronously'. Avialable only if `script` is set to "0". Latest Google Analytics Tag 4 only works with `sync`.
-    2. **Post Images** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
+           It helps you customize whether Google Analytics JavaScript file loads 'Synchronously' or 'Asynchronously'. Avialable only if `script` is set to "0". Latest Google Analytics Tag 4 only works with `sync`.
+    2.  **Post Images** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
       
-      Customize behaviour for your posts' images
-      1. **Thumbnail Size** *(Type: Array | Accepts value: [Integer, String] | Optional | Default: [6.25, "rem"])*
+        Customize behaviour for your posts' images
+        1.  **Thumbnail Size** *(Type: Array | Accepts value: String | Optional | Default: "200px")*
         
-        Integer: Size of post images when they appear as thumbnails in lists, for example, on landing page.  
-        String: Unit of size. For example, "em", "rem", "px".  
-        Gets overridden by `thumbnailSize` specified in a page's front-matter.
+            Integer: Size of post images when they appear as thumbnails in lists, for example, on landing page.  
+            String: Unit of size. For example, "em", "rem", "px".  
+            Gets overridden by `thumbnailSize` specified in a page's front-matter.  
         
     Example:
     ```yaml
@@ -688,7 +688,7 @@ Let's see them one by one.
         script: 0
         loading: "sync"
       postImages:
-        thumbnailSize: [6.25, "rem"]
+        thumbnailSize: "200px"
     ```
 13. **Main Sections** *(Type: Array | Accepts value: Section names | Highly Recommended)*
     
@@ -748,24 +748,35 @@ Let's see them one by one.
 6.  **Image** *(Type: Map/Dict/Object | Accepts value: - | Recommended)*
     
     Specify an image for a post/page
-    1. **Source** *(Type: String | Accepts value: Path to Image | Required)*
+    1.  **Source** *(Type: String | Accepts value: Path to Image | Required)*
       
-      You can specify path to an image dedicated to current post. This image is used to optimize the display of content when shared on social media.
-    2. **Alternative Text** *(Type: String | Accepts value: Text | Recommended)*
+        You can specify path (relative to root) to an image dedicated to current post. This image is used to optimize the display of content when shared on social media.
+        
+        Example:
+        ```
+        The right way:
+        1. "/my-awesome-image.jpg"
+        2. "/images/my-awesome-image.jpg"
+        
+        The wrong way:
+        1. "my-awesome-image.jpg"
+        2. "images/my-awesome-image.jpg"
+        ```
+    2.  **Alternative Text** *(Type: String | Accepts value: Text | Recommended)*
       
-      This text is shown when for some reason an image is unable to load. It also helps in SEO and is especially helpful for screen readers.
-    3. **Thumbnail Size** *(Type: Array | Accepts value: [Integer, String] | Optional | Default: [6.25, "rem"])*
+        This text is shown when for some reason an image is unable to load. It also helps in SEO and is especially helpful for screen readers.
+    3.  **Thumbnail Size** *(Type: Array | Accepts value: String | Optional | Default: "200px")*
       
-      Integer: Size of post image when it appears as thumbnail in lists, for example, on landing page.  
-      String: Unit of size. For example, "em", "rem", "px".  
-      Overrides the setting set (if any) in `userExperience` -> `postImages` -> `thumbnailSize` in `config.yaml` file present at root of your webiste.
+        Integer: Size of post image when it appears as thumbnail in lists, for example, on landing page.  
+        String: Unit of size. For example, "em", "rem", "px".  
+        Overrides the setting set (if any) in `userExperience` -> `postImages` -> `thumbnailSize` in `config.yaml` file present at root of your webiste.
     
     Example:
     ```yaml
     image:
       src: "/images/post-1.png"
       alt: "Alternative text"
-      thumbnailSize: [6.25, "rem"]
+      thumbnailSize: "200px"
     ```
 7.  **Author** *(Type: String | Accepts value: Text | Recommended)*
     
@@ -1015,7 +1026,7 @@ params:
       script: 0 # accepts value: 0/1/2 | 0: Default script by Google via Hugo's internal template; 1: minimal-analytics by James Hill; 2: minimal-analytics-4 by Dariusz Więckiewicz | optional | default: 0
       loading: "sync" # accepts value: sync/async | determines whether Google Analytics JavaScript file loads 'Synchronously' or 'Asynchronously' | optional | default: "sync"
     postImages: # customize behaviour for your posts' images
-        thumbnailSize: [6.25, "rem"] # accepts value: [integer, string] | integer: size of post images when they appear as thumbnails; string: unit of size | default: [6.25, "rem"]
+        thumbnailSize: "200px" # accepts value: string | integer: size of post images when they appear as thumbnails; string: unit of size | default: "200px"
   mainSections: ["post"] # required, https://gohugo.io/functions/where/#mainsections
   #customVerification:
     #myWOT: "ba8579f668r8w3g62503" # content for meta tag to verify your website on 'Web Of Trust'

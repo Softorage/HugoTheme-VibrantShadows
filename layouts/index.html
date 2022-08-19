@@ -40,128 +40,141 @@ We donno how to have access to a specific page's taxonomies yet. Having that wou
     {{ range (where site.RegularPages "Type" "in" site.Params.mainSections).ByDate.Reverse }}
       <div class="card mb-3">
         <div class="card-body">
-          <h2>
-            {{ if .Params.image.src }}<img src="{{ .Params.image.src }}" height="
-            {{- if .Params.image.thumbnailSize }}
-              {{- .Params.image.thumbnailSize -}}
-            {{- else if site.Params.postImages.thumbnailSize }}
-              {{- site.Params.postImages.thumbnailSize -}}
-            {{- else -}}
-              6.25rem
-            {{- end -}}
-            "{{ if .Params.image.alt }} alt="{{ .Params.image.alt }}"{{ end }}></img>{{ end }}
-            <a class="text-reset" href="{{ .Permalink }}"><span class="card-title text-reset"> {{ .Title }}</span></a>
-          </h2>
-          <div class="card-text">
-            {{- $postMetaTop := false }}
-            {{- $postMetaBottom := false }}
-            {{- range site.Params.position.postMeta }}
-              {{- if eq .summary "top" }}
-                {{- $postMetaTop = true }}
-              {{- else if eq .summary "bottom" }}
-                {{- $postMetaBottom = true }}
-              {{- end }}
-            {{- end }}
+          
+          <div class="row">
+          
+            <div class="col-md-auto my-auto">
+              {{ if .Params.image.src }}<img src="{{ .Params.image.src }}" height="
+                {{- if .Params.image.thumbnailSize }}
+                  {{- .Params.image.thumbnailSize -}}
+                {{- else if site.Params.postImages.thumbnailSize }}
+                  {{- site.Params.postImages.thumbnailSize -}}
+                {{- else -}}
+                  200px
+                {{- end -}}
+                "{{ if .Params.image.alt }} alt="{{ .Params.image.alt }}"{{ end }}></img>{{ end }}
+            </div>
             
-            {{- if and site.Params.position.postMeta $postMetaTop }}
-            <div class="font-weight-bold small post-meta">
-            
-              {{- $wordCount := "" }}
-              {{- $readingTime := "" }}
-              {{- $author := "" }}
-              {{- $lastUpdated := "" }}
-              
-              {{- if and site.Params.position.postMeta.wordCount.summary (eq site.Params.position.postMeta.wordCount.summary "top") }}
-                {{- $wordCount = print (.WordCount) " words" }}
-              {{- end }}
-              {{- if and site.Params.position.postMeta.readingTime.summary (eq site.Params.position.postMeta.readingTime.summary "top") }}
-                {{- $readingTime = print (lang.NumFmt 0 (div .WordCount 130)) " min read" -}}
-              {{- end }}
-              {{- if and site.Params.position.postMeta.author.summary (eq site.Params.position.postMeta.author.summary "top") }}
-                {{- $author = print "By " (default site.Params.meta.author .Params.author) }}
-              {{- end }}
-              {{- if .Lastmod }}
-                {{- if and site.Params.position.postMeta.lastUpdated.summary (eq site.Params.position.postMeta.lastUpdated.summary "top") }}
-                  {{- $lastUpdated = print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") }}</span>
+            <div class="col-md-auto my-auto">
+              <h2>
+                <a class="text-reset" href="{{ .Permalink }}"><span class="card-title text-reset"> {{ .Title }}</span></a>
+              </h2>
+              <div class="card-text">
+                {{- $postMetaTop := false }}
+                {{- $postMetaBottom := false }}
+                {{- range site.Params.position.postMeta }}
+                  {{- if eq .summary "top" }}
+                    {{- $postMetaTop = true }}
+                  {{- else if eq .summary "bottom" }}
+                    {{- $postMetaBottom = true }}
+                  {{- end }}
                 {{- end }}
-              {{- end }}
-              
-              {{- $postMetaPre := slice $author $wordCount $readingTime $lastUpdated }}
-              {{ $postMeta := slice }}
-              {{ range $postMetaPre }}
-                {{ if . }}
-                  {{ $postMeta = $postMeta | append . }}
+                
+                {{- if and site.Params.position.postMeta $postMetaTop }}
+                <div class="font-weight-bold small post-meta">
+                
+                  {{- $wordCount := "" }}
+                  {{- $readingTime := "" }}
+                  {{- $author := "" }}
+                  {{- $lastUpdated := "" }}
+                  
+                  {{- if and site.Params.position.postMeta.wordCount.summary (eq site.Params.position.postMeta.wordCount.summary "top") }}
+                    {{- $wordCount = print (.WordCount) " words" }}
+                  {{- end }}
+                  {{- if and site.Params.position.postMeta.readingTime.summary (eq site.Params.position.postMeta.readingTime.summary "top") }}
+                    {{- $readingTime = print (lang.NumFmt 0 (div .WordCount 130)) " min read" -}}
+                  {{- end }}
+                  {{- if and site.Params.position.postMeta.author.summary (eq site.Params.position.postMeta.author.summary "top") }}
+                    {{- $author = print "By " (default site.Params.meta.author .Params.author) }}
+                  {{- end }}
+                  {{- if .Lastmod }}
+                    {{- if and site.Params.position.postMeta.lastUpdated.summary (eq site.Params.position.postMeta.lastUpdated.summary "top") }}
+                      {{- $lastUpdated = print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") }}</span>
+                    {{- end }}
+                  {{- end }}
+                  
+                  {{- $postMetaPre := slice $author $wordCount $readingTime $lastUpdated }}
+                  {{ $postMeta := slice }}
+                  {{ range $postMetaPre }}
+                    {{ if . }}
+                      {{ $postMeta = $postMeta | append . }}
+                    {{ end }}
+                  {{ end }}
+                  
+                  {{- delimit $postMeta " &#183; " -}}
+                  
+                </div>
                 {{ end }}
+                
+                {{ if and (site.Params.position.postMeta.tags.summary) (eq site.Params.position.postMeta.tags.summary "top") }}
+                  <div class="pb-1 mt-1">
+                  {{- range .Params.tags -}}
+                    <a href="/tags/{{ . | urlize }}/"><span class="badge badge-pill bg-clr2 text-nav mr-2 mb-1 py-2">#{{ . | humanize | upper }}</span></a>
+                  {{- end -}}
+                  </div>
+                {{ end }}
+                
+              </div>
+          
+            
+              <p>{{ .Summary }}</p>
+              
+              {{ if or (and site.Params.position.postMeta $postMetaBottom) (and (site.Params.position.postMeta.tags.summary) (eq site.Params.position.postMeta.tags.summary "bottom")) }}
+                <div class="mb-3">
+                  {{- if and site.Params.position.postMeta $postMetaBottom }}
+                    <div class="font-weight-bold small post-meta">
+                    
+                      {{- $wordCount := "" }}
+                      {{- $readingTime := "" }}
+                      {{- $author := "" }}
+                      {{- $lastUpdated := "" }}
+                      
+                      {{- if and site.Params.position.postMeta.wordCount.summary (eq site.Params.position.postMeta.wordCount.summary "bottom") }}
+                        {{- $wordCount = print (.WordCount) " words" }}
+                      {{- end }}
+                      {{- if and site.Params.position.postMeta.readingTime.summary (eq site.Params.position.postMeta.readingTime.summary "bottom") }}
+                        {{- $readingTime = print (lang.NumFmt 0 (div .WordCount 130)) " min read" -}}
+                      {{- end }}
+                      {{- if and site.Params.position.postMeta.author.summary (eq site.Params.position.postMeta.author.summary "bottom") }}
+                        {{- $author = print "By " (default site.Params.meta.author .Params.author) }}
+                      {{- end }}
+                      {{- if .Lastmod }}
+                        {{- if and site.Params.position.postMeta.lastUpdated.summary (eq site.Params.position.postMeta.lastUpdated.summary "bottom") }}
+                          {{- $lastUpdated = print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") }}</span>
+                        {{- end }}
+                      {{- end }}
+                      
+                      {{- $postMetaPre := slice $author $wordCount $readingTime $lastUpdated }}
+                      {{ $postMeta := slice }}
+                      {{ range $postMetaPre }}
+                        {{ if . }}
+                          {{ $postMeta = $postMeta | append . }}
+                        {{ end }}
+                      {{ end }}
+                      
+                      {{- delimit $postMeta " &#183; " -}}
+                      
+                    </div>
+                  {{ end }}
+                  
+                  {{ if and (site.Params.position.postMeta.tags.summary) (eq site.Params.position.postMeta.tags.summary "bottom") }}
+                    <div class="pb-1 mt-1">
+                    {{- range .Params.tags -}}
+                      <a href="/tags/{{ . | urlize }}/"><span class="badge badge-pill bg-clr2 text-nav mr-2 py-2">#{{ . | humanize | upper }}</span></a>
+                    {{- end -}}
+                    </div>
+                  {{ end }}
+                  
+                </div>
               {{ end }}
               
-              {{- delimit $postMeta " &#183; " -}}
-              
+              <a class="font-weight-bold text-reset text-decoration-none" href="{{ .Permalink }}"><nobr>Read more →</nobr></a>
             </div>
-            {{ end }}
-            
-            {{ if and (site.Params.position.postMeta.tags.summary) (eq site.Params.position.postMeta.tags.summary "top") }}
-              <div class="pb-1 mt-1">
-              {{- range .Params.tags -}}
-                <a href="/tags/{{ . | urlize }}/"><span class="badge badge-pill bg-clr2 text-nav mr-2 mb-1 py-2">#{{ . | humanize | upper }}</span></a>
-              {{- end -}}
-              </div>
-            {{ end }}
-            
-            <p>{{ .Summary }}</p>
-            
-            {{ if or (and site.Params.position.postMeta $postMetaBottom) (and (site.Params.position.postMeta.tags.summary) (eq site.Params.position.postMeta.tags.summary "bottom")) }}
-            
-            <div class="mb-3">
-            {{- if and site.Params.position.postMeta $postMetaBottom }}
-            <div class="font-weight-bold small post-meta">
-            
-              {{- $wordCount := "" }}
-              {{- $readingTime := "" }}
-              {{- $author := "" }}
-              {{- $lastUpdated := "" }}
-              
-              {{- if and site.Params.position.postMeta.wordCount.summary (eq site.Params.position.postMeta.wordCount.summary "bottom") }}
-                {{- $wordCount = print (.WordCount) " words" }}
-              {{- end }}
-              {{- if and site.Params.position.postMeta.readingTime.summary (eq site.Params.position.postMeta.readingTime.summary "bottom") }}
-                {{- $readingTime = print (lang.NumFmt 0 (div .WordCount 130)) " min read" -}}
-              {{- end }}
-              {{- if and site.Params.position.postMeta.author.summary (eq site.Params.position.postMeta.author.summary "bottom") }}
-                {{- $author = print "By " (default site.Params.meta.author .Params.author) }}
-              {{- end }}
-              {{- if .Lastmod }}
-                {{- if and site.Params.position.postMeta.lastUpdated.summary (eq site.Params.position.postMeta.lastUpdated.summary "bottom") }}
-                  {{- $lastUpdated = print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") }}</span>
-                {{- end }}
-              {{- end }}
-              
-              {{- $postMetaPre := slice $author $wordCount $readingTime $lastUpdated }}
-              {{ $postMeta := slice }}
-              {{ range $postMetaPre }}
-                {{ if . }}
-                  {{ $postMeta = $postMeta | append . }}
-                {{ end }}
-              {{ end }}
-              
-              {{- delimit $postMeta " &#183; " -}}
-              
-            </div>
-            {{ end }}
-            
-            {{ if and (site.Params.position.postMeta.tags.summary) (eq site.Params.position.postMeta.tags.summary "bottom") }}
-              <div class="pb-1 mt-1">
-              {{- range .Params.tags -}}
-                <a href="/tags/{{ . | urlize }}/"><span class="badge badge-pill bg-clr2 text-nav mr-2 py-2">#{{ . | humanize | upper }}</span></a>
-              {{- end -}}
-              </div>
-            {{ end }}
-            
-            </div>
-            {{ end }}
-            
-            <a class="font-weight-bold text-reset text-decoration-none" href="{{ .Permalink }}"><nobr>Read more →</nobr></a>
+        
           </div>
+            
         </div>
+        
       </div>
     {{ end }}
   </div>
