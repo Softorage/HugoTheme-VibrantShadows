@@ -55,23 +55,24 @@ We donno how to have access to a specific page's taxonomies yet. Having that wou
                 "{{ if .Params.image.alt }} alt="{{ .Params.image.alt }}"{{ end }}></img>{{ end }}
             </div>
             
-            <div class="col-md-auto my-auto">
+            <div class="col my-auto">
               <h2>
                 <a class="text-reset" href="{{ .Permalink }}"><span class="card-title text-reset"> {{ .Title }}</span></a>
               </h2>
-              <div class="card-text">
-                {{- $postMetaTop := false }}
-                {{- $postMetaBottom := false }}
-                {{- range site.Params.position.postMeta }}
-                  {{- if eq .summary "top" }}
-                    {{- $postMetaTop = true }}
-                  {{- else if eq .summary "bottom" }}
-                    {{- $postMetaBottom = true }}
-                  {{- end }}
+              
+              {{- $postMetaTop := false }}
+              {{- $postMetaBottom := false }}
+              {{- range site.Params.position.postMeta }}
+                {{- if eq .summary "top" }}
+                  {{- $postMetaTop = true }}
+                {{- else if eq .summary "bottom" }}
+                  {{- $postMetaBottom = true }}
                 {{- end }}
-                
-                {{- if and site.Params.position.postMeta $postMetaTop }}
-                <div class="font-weight-bold small post-meta">
+              {{- end }}
+              
+              
+              {{- if and site.Params.position.postMeta $postMetaTop }}
+                <div class="card-subtitle font-weight-bold small post-meta">
                 
                   {{- $wordCount := "" }}
                   {{- $readingTime := "" }}
@@ -104,25 +105,24 @@ We donno how to have access to a specific page's taxonomies yet. Having that wou
                   {{- delimit $postMeta " &#183; " -}}
                   
                 </div>
-                {{ end }}
+              {{ end }}
                 
-                {{ if and (site.Params.position.postMeta.tags.summary) (eq site.Params.position.postMeta.tags.summary "top") }}
-                  <div class="pb-1 mt-1">
-                  {{- range .Params.tags -}}
-                    <a href="/tags/{{ . | urlize }}/"><span class="badge badge-pill bg-clr2 text-nav mr-2 mb-1 py-2">#{{ . | humanize | upper }}</span></a>
-                  {{- end -}}
-                  </div>
-                {{ end }}
                 
-              </div>
-          
-            
-              <p>{{ .Summary }}</p>
+              {{ if and (site.Params.position.postMeta.tags.summary) (eq site.Params.position.postMeta.tags.summary "top") }}
+                <div class="pb-1 mt-1">
+                {{- range .Params.tags -}}
+                  <a href="/tags/{{ . | urlize }}/"><span class="badge badge-pill bg-clr2 text-nav mr-2 mb-1 py-2">#{{ . | humanize | upper }}</span></a>
+                {{- end -}}
+                </div>
+              {{ end }}
+               
+              <!-- {{/* using Hugo's' {{ .Summary }} comes with its own <p> tag, so wrapping it in a <p> tag is discouraged */}} -->
+              <div class="card-text">{{ .Summary }}</div>
               
               {{ if or (and site.Params.position.postMeta $postMetaBottom) (and (site.Params.position.postMeta.tags.summary) (eq site.Params.position.postMeta.tags.summary "bottom")) }}
                 <div class="mb-3">
                   {{- if and site.Params.position.postMeta $postMetaBottom }}
-                    <div class="font-weight-bold small post-meta">
+                    <div class="card-subtitle font-weight-bold small post-meta">
                     
                       {{- $wordCount := "" }}
                       {{- $readingTime := "" }}
