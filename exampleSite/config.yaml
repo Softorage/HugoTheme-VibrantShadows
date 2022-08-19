@@ -3,7 +3,7 @@ title: "Vibrant Shadows Theme" # title of the site; usually same as brand name |
 copyright: "Copyright &#169; 2020 Softorage. All rights reserved." # should match 'brand -> name', and 'contentLicense' under params below; used in default rss template: https://gohugo.io/templates/rss/#configure-rss | optional
 languageCode: "en-us" # recommended | no default
 theme: "HugoTheme-VibrantShadows"
-# googleAnalytics: "UA-123456789-0" # Respecting your preference from 'privacy', and 'params' -> 'user_experience' below, if you set this value, Google Analytics code will be included. Google Analytics included only when serving the website on 'production' environment (i.e. website built with `hugo` command and not `hugo serve`)
+# googleAnalytics: "G-123456789-0" # Respecting your preference from 'privacy', and 'params' -> 'user_experience' below, if you set this value, Google Analytics code will be included. Google Analytics included only when serving the website on 'production' environment (i.e. website built with `hugo` command and not `hugo serve`)
 # disqusShortname: "yourdiscussshortname" # Respecting your preference from 'privacy', if you set this value, Disqus comments code will be included at the end of the blog posts. Disqus comments are shown only when serving the website on 'production' environment (i.e. website built with `hugo` command and not `hugo serve`)
 
 taxonomies:
@@ -61,20 +61,20 @@ params:
     navbarMenu: "right" # accepts value: right/left | decides the position of main menu on navbar | default: "right"
     postMeta: # 
       readingTime:
-        summary: "top" # values: top/bottom, no default
-        content: "top" # accepts array of values: "summary", "content" | determines 1. where should 'reading time for a post' appear: wherever summary of post is shown eg, homepage; on the post itself. 2. how should it appaer: at top or at bottom. this configuration shows "reading time" when 'summary' is shown & in 'blog post' | optional | no default
+        summary: "top" # values: top/bottom | optional | no default
+        content: "top" # values: top/bottom | optional | no default
       #wordCount:
-        #summary: "top" # values: top/bottom, no default
-        #content: "top" # accepts array of values: "summary", "content" | this configuration shows "word count" when 'summary' is shown & in 'blog post' | optional | no default
+        #summary: "top" # values: top/bottom | optional | no default
+        #content: "top" # values: top/bottom | optional | no default
       author:
-        summary: "top" # values: top/bottom, no default
-        content: "top" # accepts array of values: "summary", "content" | this configuration shows "author" when 'summary' is shown & in 'blog post' | optional | no default
+        summary: "top" # values: top/bottom | optional | no default
+        content: "top" # values: top/bottom | optional | no default
       lastUpdated:
-        summary: "top" # values: top/bottom, no default
-        content: "top" # accepts array of values: "summary", "content" | this configuration shows "last updated date" when 'summary' is shown & in 'blog post' | optional | no default
+        summary: "top" # values: top/bottom | optional | no default
+        content: "top" # values: top/bottom | optional | no default
       tags:
-        summary: "top" # values: top/bottom, no default
-        content: "bottom" # accepts array of values: "summary", "content" | this configuration shows "tags" when 'summary' is shown & in 'blog post' | optional | no default
+        summary: "top" # values: top/bottom | optional | no default
+        content: "bottom" # values: top/bottom | optional | no default
   font:
     general:
       family: "Lato" # must match to a css font-family | default: "Lato"
@@ -141,7 +141,12 @@ params:
       deny: "Decline" # text on the button that denies cookies | default: "Decline"
       policy: "Cookie Consent" # text that appears on the button, when user's country requires revokable cookie consent | default: "Cookie Consent"
   userExperience:
-    googleAnalyticsLoading: "sync" # accepts value: sync/async | determines whether Google Analytics JavaScript file loads 'Synchronously' or 'Asynchronously' | optional | default: "sync"
+    googleAnalytics: # customize your Google Analytics
+      script: 0 # accepts value: 0/1/2 | 0: Default script by Google via Hugo's internal template; 1: minimal-analytics by James Hill; 2: minimal-analytics-4 by Dariusz Więckiewicz | optional | default: 0
+      loading: "sync" # accepts value: sync/async | determines whether Google Analytics JavaScript file loads 'Synchronously' or 'Asynchronously' | optional | default: "sync"
+    postImages: # customize behaviour for your posts' images
+        thumbnailSize: "200px" # accepts value: string | integer: size of post images when they appear as thumbnails; string: unit of size | default: "200px"
+        thumbnailBorders: "rounded" # accepts value: square, rounded, circle, pill | choose the border radius of posts' images when they appear as thumbnails | optional | default: "rounded"
   mainSections: ["post"] # required, https://gohugo.io/functions/where/#mainsections
   #customVerification:
     #myWOT: "ba8579f668r8w3g62503" # content for meta tag to verify your website on 'Web Of Trust'

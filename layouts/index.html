@@ -36,6 +36,8 @@ We donno how to have access to a specific page's taxonomies yet. Having that wou
 </div>
 <div class="container-fluid bg-mat py-3">
   <div class="container-fluid bg-mat py-3" >
+    <!-- Need to define any variable outside the range loop. -->
+    {{- $thumbnailBorders := "" }}
     <!-- ranges through each of the content files associated with a particular term and renders the summary.html content view -->
     {{ range (where site.RegularPages "Type" "in" site.Params.mainSections).ByDate.Reverse }}
       <div class="card mb-3">
@@ -44,7 +46,29 @@ We donno how to have access to a specific page's taxonomies yet. Having that wou
           <div class="row">
           
             <div class="col-md-auto my-auto">
-              {{ if .Params.image.src }}<img src="{{ .Params.image.src }}" height="
+              {{ if .Params.image.src -}}
+                <img class="
+                
+                {{- if .Params.image.thumbnailBorders }}
+                  {{- $thumbnailBorders = .Params.image.thumbnailBorders }}
+                {{- else if site.Params.userExperience.postImages.thumbnailBorders }}
+                  {{- $thumbnailBorders = site.Params.userExperience.postImages.thumbnailBorders }}
+                {{- else }}
+                  {{- $thumbnailBorders = "rounded-lg" }}
+                {{- end }}
+                
+                {{- if eq $thumbnailBorders "square" -}}
+                  rounded-0
+                {{- else if eq $thumbnailBorders "circle" -}}
+                 rounded-circle
+                {{- else if eq $thumbnailBorders "pill" -}}
+                 rounded-pill
+                {{- else -}}
+                  rounded-lg
+                {{- end -}}
+                
+                " src="{{ .Params.image.src }}" height="
+                
                 {{- if .Params.image.thumbnailSize }}
                   {{- .Params.image.thumbnailSize -}}
                 {{- else if site.Params.postImages.thumbnailSize }}
@@ -52,10 +76,12 @@ We donno how to have access to a specific page's taxonomies yet. Having that wou
                 {{- else -}}
                   200px
                 {{- end -}}
-                "{{ if .Params.image.alt }} alt="{{ .Params.image.alt }}"{{ end }}></img>{{ end }}
+                
+                "{{ if .Params.image.alt }} alt="{{ .Params.image.alt }}"{{ end }}></img>
+              {{- end }}
             </div>
             
-            <div class="col my-auto">
+            <div class="col my-auto py-2">
               <h2>
                 <a class="text-reset" href="{{ .Permalink }}"><span class="card-title text-reset"> {{ .Title }}</span></a>
               </h2>

@@ -19,6 +19,8 @@ An insanely customizable, extremely lightweight and ridiculously fast 'Blog Them
     * [1. As a Hugo Module (recommended)](#1-as-a-hugo-module-recommended)
     * [2. As Git Submodule](#2-as-git-submodule)
   * [Using boilerplate provided](#using-boilerplate-provided)
+  * [Installing the node dependencies](#installing-the-node-dependencies)
+  * [Get started](#get-started)
 * [Configuration](#configuration)
   * [Global Parameters](#global-parameters)
     * [Hugo's built-in parameters](#hugos-built-in-parameters)
@@ -68,7 +70,7 @@ cd yourSiteName # move in to the Hugo website's directory
 
 1. Download the repo on your machine
 2. Extract the zip file and rename the folder from `HugoTheme-VibrantShadows-master` to `HugoTheme-VibrantShadows`.
-3. Copy this folder and paste it into themes folder in your Hugo Website directory.
+3. Copy this folder and paste it into `themes` folder in your Hugo Website directory. If there isn't a `themes` folder, create one.
 4. Simply add the repo to your theme option in `config.yaml`:
     
     ```yaml
@@ -97,10 +99,28 @@ If you have extended version of Hugo installed, copy the `postcss.config.js` fil
 
 ### Using boilerplate provided
 
-1. Copy exampleSite folder provided, and move into this folder (open this folder).
+If this is the first time you are setting up Hugo:
+
+1. Copy the contents of `exampleSite` folder provided, and paste into your Hugo Website directory.
 2. Then run `hugo server` in terminal.
 
-And, we're done!
+### Installing the node dependencies
+
+```bash
+# Install nodejs and npm. Change the following command as per you distribution/OS.
+sudo apt install nodejs npm 
+
+# Go to your Hugo Website directory, then open terminal and type:
+npm install -g postcss postcss-cli autoprefixer cssnano @fullhuman/postcss-purgecss
+```
+
+### Get started
+
+And, we're done! Now you can write your posts in Markdown format (.md file extension). You just need to keep these posts in `/content` directory. The directory structure that you make in the `content` directory also gets reflected as your blog's (or you website's) structure. For example, say you have post named `my-awesome-post.md` in `content/post/category-one`. Then the post will be available on the internet at `your-web-address.com/post/category-one/my-awesome-post`.
+
+To create a new post, simply do [`hugo new`](https://gohugo.io/commands/hugo_new/) and Hugo will generate a new post for you using archetype. A post needs to have *front-matter* and *content*. *Front-matter* contains all the [Page Level parameters](#page-parameters), while *content* is your actual post.
+
+To test how your blog looks, run `hugo serve`, and log on to the url given at the terminal (or command prompt) after you run `hugo serve`. The url is usually something like `localhost:1227`. To generate production ready website, simply run `hugo build`. Your website will be created in a directory named `public`. You can then copy and paste the contents of the `public` directory on the webserver, and the server should do the rest. You can also setup Hugo to build website automatically from the code and publish to the internet using GitLab, Netlify, etc. though it may require some technical knowledge.
 
 Once set, jump over to the `config.yaml` file and start [configuring](#configuration) your site.
 
@@ -682,7 +702,11 @@ Let's see them one by one.
         
             Integer: Size of post images when they appear as thumbnails in lists, for example, on landing page.  
             String: Unit of size. For example, "em", "rem", "px".  
-            Gets overridden by `thumbnailSize` specified in a page's front-matter.  
+            Gets overridden by `thumbnailSize` specified in a page's front-matter.
+        2.  **Thumbnail Borders** *(Type: String | Accepts value: square, rounded, circle, pill | Optional | Default: "rounded")*
+            
+            Choose the border radius of posts' images when they appear as thumbnails.  
+            Gets overridden by `thumbnailBorders` specified in a page's front-matter.
         
     Example:
     ```yaml
@@ -692,6 +716,7 @@ Let's see them one by one.
         loading: "sync"
       postImages:
         thumbnailSize: "200px"
+        thumbnailBorders: "rounded"
     ```
 13. **Main Sections** *(Type: Array | Accepts value: Section names | Highly Recommended)*
     
@@ -773,6 +798,10 @@ Let's see them one by one.
         Integer: Size of post image when it appears as thumbnail in lists, for example, on landing page.  
         String: Unit of size. For example, "em", "rem", "px".  
         Overrides the setting set (if any) in `userExperience` -> `postImages` -> `thumbnailSize` in `config.yaml` file present at root of your webiste.
+    4.  **Thumbnail Borders** *(Type: String | Accepts value: square, rounded, circle, pill | Optional | Default: "rounded")*
+            
+        Choose the border radius of posts' images when they appear as thumbnails.  
+        Overrides the setting set (if any) in `userExperience` -> `postImages` -> `thumbnailBorders` in `config.yaml` file present at root of your webiste.
     
     Example:
     ```yaml
@@ -780,6 +809,7 @@ Let's see them one by one.
       src: "/images/post-1.png"
       alt: "Alternative text"
       thumbnailSize: "200px"
+      thumbnailBorders: "rounded"
     ```
 7.  **Author** *(Type: String | Accepts value: Text | Recommended)*
     
@@ -1030,6 +1060,7 @@ params:
       loading: "sync" # accepts value: sync/async | determines whether Google Analytics JavaScript file loads 'Synchronously' or 'Asynchronously' | optional | default: "sync"
     postImages: # customize behaviour for your posts' images
         thumbnailSize: "200px" # accepts value: string | integer: size of post images when they appear as thumbnails; string: unit of size | default: "200px"
+        thumbnailBorders: "rounded" # accepts value: square, rounded, circle, pill | choose the border radius of posts' images when they appear as thumbnails | optional | default: "rounded"
   mainSections: ["post"] # required, https://gohugo.io/functions/where/#mainsections
   #customVerification:
     #myWOT: "ba8579f668r8w3g62503" # content for meta tag to verify your website on 'Web Of Trust'
