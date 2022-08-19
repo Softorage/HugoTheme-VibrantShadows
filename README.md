@@ -668,9 +668,9 @@ Let's see them one by one.
        1.  **Script** *(Type: Integer | Accepts value: Number | Optional | Default: 0)*
         
            Accepts the following values:  
-           0: Default script by Google via Hugo's internal template. Works well with Cookie Consent solution, since it respects `window['ga-disable-GA_MEASUREMENT_ID'] = true;` to disable Google Analytics measurement. [See this](https://developers.google.com/analytics/devguides/collection/gtagjs/user-opt-out). Has a higher chance of being blocked by AdBlockers. Only sync version of internal template works with gtag4;  
-           1: minimal-analytics by James Hill. May or may not work well with Cookie Consent solution. -- https://github.com/jahilldev/minimal-analytics/tree/main/packages/ga4 ;  
-           2: minimal-analytics-4 by Dariusz Więckiewicz. May or may not work well with Cookie Consent solution. Make sure you set Data Stream data retention to 14 months from default 2 and link your GA4 web data stream with Google Search Console -- https://gist.github.com/idarek/9ade69ac2a2ef00d98ab950426af5791 ;  
+           **0**: Default script by Google via Hugo's internal template. Works well with Cookie Consent solution, since it respects `window['ga-disable-GA_MEASUREMENT_ID'] = true;` to disable Google Analytics measurement. [See this](https://developers.google.com/analytics/devguides/collection/gtagjs/user-opt-out). Has a higher chance of being blocked by AdBlockers. Only sync version of internal template works with gtag4;  
+           **1**: [minimal-analytics by James Hill](https://github.com/jahilldev/minimal-analytics/tree/main/packages/ga4). May or may not work well with Cookie Consent solution.  
+           **2**: [minimal-analytics-4 by Dariusz Więckiewicz](https://gist.github.com/idarek/9ade69ac2a2ef00d98ab950426af5791). May or may not work well with Cookie Consent solution. Make sure you set Data Stream data retention to 14 months from default 2 and link your GA4 web data stream with Google Search Console.  
            [Refer this for a good implementation discussion](https://discourse.gohugo.io/t/add-minimal-analytics-google-analytics-v4-to-hugo/39016)
        2.  **Loading Method** *(Type: String | Accepts value: Text | Optional | Default: "sync")*
         
@@ -753,7 +753,7 @@ Let's see them one by one.
     Specify an image for a post/page
     1.  **Source** *(Type: String | Accepts value: Path to Image | Required)*
       
-        You can specify path (relative to root) to an image dedicated to current post. This image is used to optimize the display of content when shared on social media.
+        You can specify path (relative to root) to an image dedicated to current post. This image is also used to optimize the display of content when shared on social media.
         
         Example:
         ```
