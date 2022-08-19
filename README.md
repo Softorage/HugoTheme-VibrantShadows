@@ -457,10 +457,13 @@ Let's see them one by one.
         It lets you customize the position of main menu on navbar.
     3.  **Post's Meta** *(Type: Map/Dict/Object | Accepts value: - | Optional | No default)*
         
-        It lets you customize *which* elements from post's meta should be displayed, *where* and *how*. It contains:
-        **readingTime** - **wordCount** - **author** - **lastUpdated** - **tags**
+        It lets you customize *which* elements from post's meta should be displayed, *where* and *how*.
+        
+        It contains:  
+        **readingTime** - **wordCount** - **author** - **lastUpdated** - **tags**  
         *(Type: Map/Dict/Object | Accepts value: - | Optional | No default)*
-        It lets you customize where - summary/content - you want to show a post's 'reading time', 'words count', 'author', 'last updated on', 'tags'  and how - top/bottom.
+        
+        It lets you customize where (summary/content) you want to show a post's 'reading time', 'words count', 'author', 'last updated on', 'tags'  and how (top/bottom).
     
     Example:
     ```yaml
@@ -940,22 +943,22 @@ params:
       profiles: "footer" # accepts value: navbar/footer | may use 'navbar' if number of items in main menu and social profiles are minimal, otherwise 'footer' is recommended | default: "footer"
       share: "bottom" # top/bottom | no default
     navbarMenu: "right" # accepts value: right/left | decides the position of main menu on navbar | default: "right"
-    postMeta: # 
+    postMeta: # it lets you customize *which('reading time', 'words count', 'author', 'last updated on', 'tags')* elements from post's meta should be displayed, *where(summary/content)* and *how(top/bottom)*
       readingTime:
-        summary: "top" # values: top/bottom, no default
-        content: "top" # accepts array of values: "summary", "content" | determines 1. where should 'reading time for a post' appear: wherever summary of post is shown eg, homepage; on the post itself. 2. how should it appaer: at top or at bottom. this configuration shows "reading time" when 'summary' is shown & in 'blog post' | optional | no default
+        summary: "top" # values: top/bottom | optional | no default
+        content: "top" # values: top/bottom | optional | no default
       wordCount:
-        summary: "top" # values: top/bottom, no default
-        content: "top" # accepts array of values: "summary", "content" | this configuration shows "word count" when 'summary' is shown & in 'blog post' | optional | no default
+        summary: "top" # values: top/bottom | optional | no default
+        content: "top" # values: top/bottom | optional | no default
       author:
-        summary: "top" # values: top/bottom, no default
-        content: "top" # accepts array of values: "summary", "content" | this configuration shows "author" when 'summary' is shown & in 'blog post' | optional | no default
+        summary: "top" # values: top/bottom | optional | no default
+        content: "top" # values: top/bottom | optional | no default
       lastUpdated:
-        summary: "top" # values: top/bottom, no default
-        content: "top" # accepts array of values: "summary", "content" | this configuration shows "last updated date" when 'summary' is shown & in 'blog post' | optional | no default
+        summary: "top" # values: top/bottom | optional | no default
+        content: "top" # values: top/bottom | optional | no default
       tags:
-        summary: "top" # values: top/bottom, no default
-        content: "bottom" # accepts array of values: "summary", "content" | this configuration shows "tags" when 'summary' is shown & in 'blog post' | optional | no default
+        summary: "top" # values: top/bottom | optional | no default
+        content: "bottom" # values: top/bottom | optional | no default
   font:
     general:
       family: "Lato" # must match to a css font-family | default: "Lato"
