@@ -16,7 +16,7 @@ An insanely customizable, extremely lightweight and ridiculously fast 'Blog Them
 * [Prerequisites](#prerequisites)
 * [Getting up and running](#getting-up-and-running)
   * [Setting up new Hugo website](#setting-up-new-hugo-website)
-    * [1. As a Hugo Module (recommended)](#1-as-a-hugo-module-recommended)
+    * [1. As a Hugo theme (recommended)](#1-as-a-hugo-theme-recommended)
     * [2. As Git Submodule](#2-as-git-submodule)
   * [Using boilerplate provided](#using-boilerplate-provided)
   * [Installing the node dependencies](#installing-the-node-dependencies)
@@ -484,6 +484,23 @@ Let's see them one by one.
         *(Type: Map/Dict/Object | Accepts value: - | Optional | No default)*
         
         It lets you customize where (summary/content) you want to show a post's 'reading time', 'words count', 'author', 'last updated on', 'tags'  and how (top/bottom).
+        
+        ```yaml
+        # For example,
+        position:
+          postMeta:
+            tags:
+              summary: "top"
+              content: "bottom"
+        
+        # above code lets you show tags of your posts:
+          1.  at the time when its 'summary' is being shown (for example, in the posts' list on landing page), at the top of the 'summary'.
+          2.  at the time when its 'content' is being shown (for example, when a user visits the post itself), at the bottom of the 'content'.
+        
+        # not including (say) 'readingTime' (or 'wordCount' or 'author' or 'lastUpdated' or'tags'), would simply omit 'readingTime' from appearing in 'summary' and 'content'.
+        # not includng  only (say) 'summary' (or 'content') for (say) 'readingTime', would simply omit 'readingTime' from appearing in 'summary' (or 'content').
+        
+        ```
     
     Example:
     ```yaml
@@ -975,20 +992,20 @@ params:
     navbarMenu: "right" # accepts value: right/left | decides the position of main menu on navbar | default: "right"
     postMeta: # it lets you customize *which('reading time', 'words count', 'author', 'last updated on', 'tags')* elements from post's meta should be displayed, *where(summary/content)* and *how(top/bottom)*
       readingTime:
-        summary: "top" # values: top/bottom | optional | no default
-        content: "top" # values: top/bottom | optional | no default
+        summary: "top" # values: top/bottom | simply omit if don't want to show | optional | no default
+        content: "top" # values: top/bottom | simply omit if don't want to show | optional | no default
       wordCount:
-        summary: "top" # values: top/bottom | optional | no default
-        content: "top" # values: top/bottom | optional | no default
+        summary: "top" # values: top/bottom | simply omit if don't want to show | optional | no default
+        content: "top" # values: top/bottom | simply omit if don't want to show | optional | no default
       author:
-        summary: "top" # values: top/bottom | optional | no default
-        content: "top" # values: top/bottom | optional | no default
+        summary: "top" # values: top/bottom | simply omit if don't want to show | optional | no default
+        content: "top" # values: top/bottom | simply omit if don't want to show | optional | no default
       lastUpdated:
-        summary: "top" # values: top/bottom | optional | no default
-        content: "top" # values: top/bottom | optional | no default
+        summary: "top" # values: top/bottom | simply omit if don't want to show | optional | no default
+        content: "top" # values: top/bottom | simply omit if don't want to show | optional | no default
       tags:
-        summary: "top" # values: top/bottom | optional | no default
-        content: "bottom" # values: top/bottom | optional | no default
+        summary: "top" # values: top/bottom | simply omit if don't want to show | optional | no default
+        content: "bottom" # values: top/bottom | simply omit if don't want to show | optional | no default
   font:
     general:
       family: "Lato" # must match to a css font-family | default: "Lato"
