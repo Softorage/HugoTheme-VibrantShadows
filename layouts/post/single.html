@@ -70,7 +70,7 @@
           </div>
           {{ end }}
           
-          {{ if and site.Params.social.share (eq site.Params.position.social.share "top") }}
+          {{ if and site.Params.social.share (ne site.Params.position.social.share "bottom") }}
           <div class="col-md-auto ml-3 my-auto">
             <div class="row">
               <div class="col-auto p-0 my-auto">
@@ -122,101 +122,101 @@
       </div>
       
       {{ if or (and site.Params.social.share (eq site.Params.position.social.share "bottom")) (and site.Params.position.postMeta $postMetaBottom) (and (site.Params.position.postMeta.tags.content) (eq site.Params.position.postMeta.tags.content "bottom")) }}
-      <div class="pt-4 mt-2 border-top">
-        <div class="row">
-          {{- if and site.Params.position.postMeta $postMetaBottom }}
-          <div class="col-md-7 small text-muted post-meta my-1">
-          
-            {{- $wordCount := "" }}
-            {{- $readingTime := "" }}
-            {{- $author := "" }}
-            {{- $lastUpdated := "" }}
+        <div class="pt-4 mt-2 border-top">
+          <div class="row">
+            {{- if and site.Params.position.postMeta $postMetaBottom }}
+            <div class="col-md-7 small text-muted post-meta my-1">
             
-            {{- if and site.Params.position.postMeta.wordCount.content (eq site.Params.position.postMeta.wordCount.content "bottom") }}
-              {{- $wordCount = print (.WordCount) " words" }}
-            {{- end }}
-            {{- if and site.Params.position.postMeta.readingTime.content (eq site.Params.position.postMeta.readingTime.content "bottom") }}
-              {{- $readingTime = print (lang.NumFmt 0 (div .WordCount 130)) " min read" -}}
-            {{- end }}
-            {{- if and site.Params.position.postMeta.author.content (eq site.Params.position.postMeta.author.content "bottom") }}
-              {{- $author = print "By " (default site.Params.meta.author .Params.author) }}
-            {{- end }}
-            {{- if .Lastmod }}
-              {{- if and site.Params.position.postMeta.lastUpdated.content (eq site.Params.position.postMeta.lastUpdated.content "bottom") }}
-                {{- $lastUpdated = print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") }}</span>
+              {{- $wordCount := "" }}
+              {{- $readingTime := "" }}
+              {{- $author := "" }}
+              {{- $lastUpdated := "" }}
+              
+              {{- if and site.Params.position.postMeta.wordCount.content (eq site.Params.position.postMeta.wordCount.content "bottom") }}
+                {{- $wordCount = print (.WordCount) " words" }}
               {{- end }}
-            {{- end }}
-            
-            {{- $postMetaPre := slice $author $wordCount $readingTime $lastUpdated }}
-            {{ $postMeta := slice }}
-            {{ range $postMetaPre }}
-              {{ if . }}
-                {{ $postMeta = $postMeta | append . }}
+              {{- if and site.Params.position.postMeta.readingTime.content (eq site.Params.position.postMeta.readingTime.content "bottom") }}
+                {{- $readingTime = print (lang.NumFmt 0 (div .WordCount 130)) " min read" -}}
+              {{- end }}
+              {{- if and site.Params.position.postMeta.author.content (eq site.Params.position.postMeta.author.content "bottom") }}
+                {{- $author = print "By " (default site.Params.meta.author .Params.author) }}
+              {{- end }}
+              {{- if .Lastmod }}
+                {{- if and site.Params.position.postMeta.lastUpdated.content (eq site.Params.position.postMeta.lastUpdated.content "bottom") }}
+                  {{- $lastUpdated = print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") }}</span>
+                {{- end }}
+              {{- end }}
+              
+              {{- $postMetaPre := slice $author $wordCount $readingTime $lastUpdated }}
+              {{ $postMeta := slice }}
+              {{ range $postMetaPre }}
+                {{ if . }}
+                  {{ $postMeta = $postMeta | append . }}
+                {{ end }}
               {{ end }}
+              
+              {{- delimit $postMeta " &#183; " -}}
+            
+            </div>
             {{ end }}
             
-            {{- delimit $postMeta " &#183; " -}}
-          
-          </div>
-          {{ end }}
-          
-          {{ if and site.Params.social.share (eq site.Params.position.social.share "bottom") }}
-          <div class="col-md-auto ml-3 my-1">
-            <div class="row">
-              <div class="col-auto p-0">
-              Share on:&nbsp;&nbsp;
-              </div>
-              <div class="col p-0">
-                <span class="lead">
-                  {{ if in site.Params.social.share "facebook" }}
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}&quote={{ .Title }}" rel="noreferrer nofollow" target="_blank" title="Share on Facebook" aria-label="Share on Facebook"><span class="fab fa-facebook"></span></a>&nbsp;&nbsp;
-                  {{ end }}
-                  {{ if in site.Params.social.share "twitter" }}
-                    <a href="https://twitter.com/intent/tweet?source={{ .Permalink }}&text={{ .Title }}:%0A{{ .Permalink }}" rel="noreferrer nofollow" target="_blank" title="Share on Twitter" aria-label="Share on Twitter"><span class="fab fa-twitter"></span></a>&nbsp;&nbsp;
-                  {{ end }}
-                  {{ if in site.Params.social.share "linkedin" }}
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ .Permalink }}&title={{ .Title }}&summary={{ .Params.description }}&source={{ site.Title }}" rel="noreferrer nofollow" target="_blank" title="Share on LinkedIn" aria-label="Share on LinkedIn"><span class="fab fa-linkedin"></span></a>&nbsp;&nbsp;
-                  {{ end }}
-                  {{ if in site.Params.social.share "telegram" }}
-                    <a href="https://t.me/share/url?url={{ .Permalink }}&text={{ .Title }}" rel="noreferrer nofollow" target="_blank" title="Share on Telegram" aria-label="Share on Telegram"><span class="fab fa-telegram"></span></a>&nbsp;&nbsp;
-                  {{ end }}
-                  {{ if in site.Params.social.share "whatsapp" }}
-                    <a href="whatsapp://send?text={{ .Permalink }}%0A%0A{{ .Title }}" data-text="{{ .Title }}" data-href="{{ .Permalink }}" rel="noreferrer nofollow" target="_blank" title="Share on Whatsapp" aria-label="Share on Whatsapp"><span class="fab fa-whatsapp"></span></a>&nbsp;&nbsp;
-                  {{ end }}
-                  {{ if in site.Params.social.share "reddit" }}
-                    <a href="https://reddit.com/submit?url={{ .Permalink }}&title={{ .Title }}" rel="noreferrer nofollow" target="_blank" title="Share on Reddit" aria-label="Share on Reddit"><span class="fab fa-reddit"></span></a>&nbsp;&nbsp;
-                  {{ end }}
-                  {{ if in site.Params.social.share "email" }}
-                    <a href="mailto:?subject={{ .Title }}&body={{ .Params.description }}%0A%0A{{ .Permalink }}" target="_blank" title="Share via email" aria-label="Share via email"><span class="fas fa-envelope"></span></a>
-                  {{ end }}
-                </span>
+            {{ if and site.Params.social.share (eq site.Params.position.social.share "bottom") }}
+            <div class="col-md-auto ml-3 my-1">
+              <div class="row">
+                <div class="col-auto p-0">
+                Share on:&nbsp;&nbsp;
+                </div>
+                <div class="col p-0">
+                  <span class="lead">
+                    {{ if in site.Params.social.share "facebook" }}
+                      <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}&quote={{ .Title }}" rel="noreferrer nofollow" target="_blank" title="Share on Facebook" aria-label="Share on Facebook"><span class="fab fa-facebook"></span></a>&nbsp;&nbsp;
+                    {{ end }}
+                    {{ if in site.Params.social.share "twitter" }}
+                      <a href="https://twitter.com/intent/tweet?source={{ .Permalink }}&text={{ .Title }}:%0A{{ .Permalink }}" rel="noreferrer nofollow" target="_blank" title="Share on Twitter" aria-label="Share on Twitter"><span class="fab fa-twitter"></span></a>&nbsp;&nbsp;
+                    {{ end }}
+                    {{ if in site.Params.social.share "linkedin" }}
+                      <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ .Permalink }}&title={{ .Title }}&summary={{ .Params.description }}&source={{ site.Title }}" rel="noreferrer nofollow" target="_blank" title="Share on LinkedIn" aria-label="Share on LinkedIn"><span class="fab fa-linkedin"></span></a>&nbsp;&nbsp;
+                    {{ end }}
+                    {{ if in site.Params.social.share "telegram" }}
+                      <a href="https://t.me/share/url?url={{ .Permalink }}&text={{ .Title }}" rel="noreferrer nofollow" target="_blank" title="Share on Telegram" aria-label="Share on Telegram"><span class="fab fa-telegram"></span></a>&nbsp;&nbsp;
+                    {{ end }}
+                    {{ if in site.Params.social.share "whatsapp" }}
+                      <a href="whatsapp://send?text={{ .Permalink }}%0A%0A{{ .Title }}" data-text="{{ .Title }}" data-href="{{ .Permalink }}" rel="noreferrer nofollow" target="_blank" title="Share on Whatsapp" aria-label="Share on Whatsapp"><span class="fab fa-whatsapp"></span></a>&nbsp;&nbsp;
+                    {{ end }}
+                    {{ if in site.Params.social.share "reddit" }}
+                      <a href="https://reddit.com/submit?url={{ .Permalink }}&title={{ .Title }}" rel="noreferrer nofollow" target="_blank" title="Share on Reddit" aria-label="Share on Reddit"><span class="fab fa-reddit"></span></a>&nbsp;&nbsp;
+                    {{ end }}
+                    {{ if in site.Params.social.share "email" }}
+                      <a href="mailto:?subject={{ .Title }}&body={{ .Params.description }}%0A%0A{{ .Permalink }}" target="_blank" title="Share via email" aria-label="Share via email"><span class="fas fa-envelope"></span></a>
+                    {{ end }}
+                  </span>
+                </div>
               </div>
             </div>
+            {{ end }}
           </div>
+        
+          {{ if and (site.Params.position.postMeta.tags.content) (ne site.Params.position.postMeta.tags.content "top") }}
+            <div class="mt-3">
+              {{- range .Params.tags -}}
+                <a href="/tags/{{ . | urlize }}/"><span class="badge badge-pill bg-clr2 text-nav mr-2 py-2">#{{ . | humanize | upper }}</span></a>
+              {{- end -}}
+            </div>
           {{ end }}
+        
         </div>
-      
-        {{ if and (site.Params.position.postMeta.tags.content) (eq site.Params.position.postMeta.tags.content "bottom") }}
-          <div class="mt-3">
-            {{- range .Params.tags -}}
-              <a href="/tags/{{ . | urlize }}/"><span class="badge badge-pill bg-clr2 text-nav mr-2 py-2">#{{ . | humanize | upper }}</span></a>
-            {{- end -}}
-          </div>
-        {{ end }}
-      
-      </div>
       {{ end }}
     </div>
   </div>
   
   {{ if site.DisqusShortname }}
-  <div class="my-5">
-  {{ if eq hugo.Environment "production" -}}
-    {{ template "_internal/disqus.html" . }}
-  {{ else }}
-    <p class="lead text-center">This is where Disqus comments would appear on production website.</p>
-  {{ end }}
-  </div>
+    <div class="my-5">
+      {{ if eq hugo.Environment "production" -}}
+        {{ template "_internal/disqus.html" . }}
+      {{ else }}
+        <p class="lead text-center">This is where Disqus comments would appear on production website.</p>
+      {{ end }}
+    </div>
   {{ end }}
   
 </div>

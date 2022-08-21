@@ -251,12 +251,12 @@ These options set global values that some pages or all pages in the site use by 
     ```yaml
     privacy:
       disqus:
-        disable: "false" # | default: false
+        disable: false # | default: false
       googleAnalytics:
-        anonymizeIP: "true" # 'true' makes it so the users' IP addresses are anonymized within Google Analytics | default: false
-        disable: "false" # | default: false
-        respectDoNotTrack: "false" # 'true' makes the GA templates respect the “Do Not Track” HTTP header | default: false
-        useSessionStorage: "false" # 'true' disables the use of Cookies and use Session Storage to Store the GA Client ID | default: false
+        anonymizeIP: true # 'true' makes it so the users' IP addresses are anonymized within Google Analytics | default: false
+        disable: false # | default: false
+        respectDoNotTrack: false # 'true' makes the GA templates respect the “Do Not Track” HTTP header | default: false
+        useSessionStorage: false # 'true' disables the use of Cookies and use Session Storage to Store the GA Client ID | default: false
     ```
 
 #### Vibrant Shadow's custom parameters
@@ -469,7 +469,7 @@ Let's see them one by one.
         1.  **Profiles** *(Type: String | Accepts value: footer/navbar | Optional | Default: "footer")*
             
             It lets you customize where you want your social profiles to appear. You may use 'navbar' if number of items in main menu and social profiles are minimal, otherwise 'footer' is recommended.
-        2.  **Share** *(Type: String | Accepts value: top/bottom | Optional | No default)*
+        2.  **Share** *(Type: String | Accepts value: top/bottom | Optional | Default: "top")*
             
             It lets you customize where you want your social sharing buttons to appear on a blog post.
     2.  **Menu on Navbar** *(Type: String | Accepts value: right/left | Optional | Default: "right")*
@@ -501,6 +501,9 @@ Let's see them one by one.
         # not includng  only (say) 'summary' (or 'content') for (say) 'readingTime', would simply omit 'readingTime' from appearing in 'summary' (or 'content').
         
         ```
+    4.  **Thumbnail** *(Type: String | Accepts value: right/left | Optional | Default: "left")*
+    
+        Position of a post's image, when it appears as a thumbnail in a list (say) on landing page. Regardless of "right" or "left", it looks the same on mobile-view.
     
     Example:
     ```yaml
@@ -524,7 +527,8 @@ Let's see them one by one.
           content: "top"
         tags:
           summary: "top"
-          content: "bottom"
+          content: "bottom" # default: "bottom"
+      thumbnail: "left"
     ```
 7.  **Fonts** *(Type: Map/Dict/Object | Accepts value: - | Optional )*
     
@@ -715,15 +719,19 @@ Let's see them one by one.
     2.  **Post Images** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
       
         Customize behaviour for your posts' images
-        1.  **Thumbnail Size** *(Type: Array | Accepts value: String | Optional | Default: "200px")*
+        1.  **Thumbnail** *(Type: Map/Dict/Object | Accepts value: String | Optional | Default: "200px")*
         
-            Integer: Size of post images when they appear as thumbnails in lists, for example, on landing page.  
-            String: Unit of size. For example, "em", "rem", "px".  
-            Gets overridden by `thumbnailSize` specified in a page's front-matter.
-        2.  **Thumbnail Borders** *(Type: String | Accepts value: square, rounded, circle, pill | Optional | Default: "rounded")*
+            Customizations in relation to how thumbnails of *Post Images* appear.
+            1.  **Size** *(Type: String | Accepts value: String | Optional | Default: "200px")*
+                
+                Integer: Size of post images when they appear as thumbnails in lists, for example, on landing page.  
+                String: Unit of size. For example, "em", "rem", "px".  
+                Gets overridden by `thumbnail' -> 'size` specified in a page's front-matter.
             
-            Choose the border radius of posts' images when they appear as thumbnails.  
-            Gets overridden by `thumbnailBorders` specified in a page's front-matter.
+            2.  **Borders** *(Type: String | Accepts value: square, rounded, circle, pill | Optional | Default: "rounded")*
+            
+                Choose the border radius of posts' images when they appear as thumbnails.  
+                Gets overridden by `thumbnail' -> 'borders` specified in a page's front-matter.
         
     Example:
     ```yaml
@@ -732,8 +740,9 @@ Let's see them one by one.
         script: 0
         loading: "sync"
       postImages:
-        thumbnailSize: "200px"
-        thumbnailBorders: "rounded"
+        thumbnail:
+          size: "200px"
+          borders: "rounded"
     ```
 13. **Main Sections** *(Type: Array | Accepts value: Section names | Highly Recommended)*
     
@@ -810,23 +819,27 @@ Let's see them one by one.
     2.  **Alternative Text** *(Type: String | Accepts value: Text | Recommended)*
       
         This text is shown when for some reason an image is unable to load. It also helps in SEO and is especially helpful for screen readers.
-    3.  **Thumbnail Size** *(Type: Array | Accepts value: String | Optional | Default: "200px")*
+    3.  **Thumbnail** *(Type: Map/Dict/Object | Accepts value: - | Optional )*
+    
+        Customizations in relation to how thumbnails of *Post Images* appear.
+        1.  **Size** *(Type: String | Accepts value: String | Optional | Default: "200px")*
       
-        Integer: Size of post image when it appears as thumbnail in lists, for example, on landing page.  
-        String: Unit of size. For example, "em", "rem", "px".  
-        Overrides the setting set (if any) in `userExperience` -> `postImages` -> `thumbnailSize` in `config.yaml` file present at root of your webiste.
-    4.  **Thumbnail Borders** *(Type: String | Accepts value: square, rounded, circle, pill | Optional | Default: "rounded")*
+            Integer: Size of post image when it appears as thumbnail in lists, for example, on landing page.  
+            String: Unit of size. For example, "em", "rem", "px".  
+            Overrides the setting set (if any) in `userExperience` -> `postImages` -> `thumbnail' -> 'size` in `config.yaml` file present at root of your webiste.
+        2.  **Borders** *(Type: String | Accepts value: square, rounded, circle, pill | Optional | Default: "rounded")*
             
-        Choose the border radius of posts' images when they appear as thumbnails.  
-        Overrides the setting set (if any) in `userExperience` -> `postImages` -> `thumbnailBorders` in `config.yaml` file present at root of your webiste.
+            Choose the border radius of post's image when they appear as thumbnails.  
+            Overrides the setting set (if any) in `userExperience` -> `postImages` -> `thumbnail' -> 'borders` in `config.yaml` file present at root of your webiste.
     
     Example:
     ```yaml
     image:
       src: "/images/post-1.png"
       alt: "Alternative text"
-      thumbnailSize: "200px"
-      thumbnailBorders: "rounded"
+      thumbnail:
+        size: "200px"
+        borders: "rounded"
     ```
 7.  **Author** *(Type: String | Accepts value: Text | Recommended)*
     
@@ -922,12 +935,27 @@ build:
 # Explanations to all privacy settings: https://gohugo.io/about/hugo-and-gdpr/#the-privacy-settings-explained
 privacy:
   disqus:
-    disable: "false"
+    disable: false
   googleAnalytics:
-    anonymizeIP: "true" # 'true' makes it so the users' IP addresses are anonymized within Google Analytics
-    disable: "false"
-    respectDoNotTrack: "false" # 'true' makes the GA templates respect the “Do Not Track” HTTP header
-    useSessionStorage: "false" # 'true' disables the use of Cookies and use Session Storage to Store the GA Client ID
+    anonymizeIP: true # 'true' makes it so the users' IP addresses are anonymized within Google Analytics
+    disable: false
+    respectDoNotTrack: false # 'true' makes the GA templates respect the “Do Not Track” HTTP header
+    useSessionStorage: false # 'true' disables the use of Cookies and use Session Storage to Store the GA Client ID
+
+# 
+enableRobotsTXT: true # optional, allows to create a robots.txt file, which helps in SEO
+# sitemap, and RSS are generated automatically
+enableGitInfo: true # optional, allows us to use '.GitInfo' object. '.GitInfo' object allows us to leverage info from git for use in Hugo
+
+# Only if 'enableGitInfo' is set to 'true'
+frontmatter:
+  date: ["date", "publishDate", "lastmod", ":git"] # adding ':git' at the end (of default format) makes the atom/rss feed to fetch dates from git, once enableGitInfo is set to true in 'config' file
+
+# Allow HTML in markdown to be rendered
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
 
 # Here starts our customization
 params:
@@ -1005,7 +1033,8 @@ params:
         content: "top" # values: top/bottom | simply omit if don't want to show | optional | no default
       tags:
         summary: "top" # values: top/bottom | simply omit if don't want to show | optional | no default
-        content: "bottom" # values: top/bottom | simply omit if don't want to show | optional | no default
+        content: "bottom" # values: top/bottom | simply omit if don't want to show | optional | default: "bottom"
+    thumbnail: "left" # accepts value: right/left | position of a post's image, when it appears as a thumbnail in a list (say) on landing page. regardless of "right" or "left", it looks the same on mobile-view. | optional | default: "left"
   font:
     general:
       family: "Lato" # must match to a css font-family | default: "Lato"
@@ -1076,8 +1105,9 @@ params:
       script: 0 # accepts value: 0/1/2 | 0: Default script by Google via Hugo's internal template; 1: minimal-analytics by James Hill; 2: minimal-analytics-4 by Dariusz Więckiewicz | optional | default: 0
       loading: "sync" # accepts value: sync/async | determines whether Google Analytics JavaScript file loads 'Synchronously' or 'Asynchronously' | optional | default: "sync"
     postImages: # customize behaviour for your posts' images
-        thumbnailSize: "200px" # accepts value: string | integer: size of post images when they appear as thumbnails; string: unit of size | default: "200px"
-        thumbnailBorders: "rounded" # accepts value: square, rounded, circle, pill | choose the border radius of posts' images when they appear as thumbnails | optional | default: "rounded"
+        thumbnail:
+          size: "200px" # accepts value: string | integer: size of post images when they appear as thumbnails; string: unit of size | default: "200px"
+          borders: "rounded" # accepts value: square, rounded, circle, pill | choose the border radius of posts' images when they appear as thumbnails | optional | default: "rounded"
   mainSections: ["post"] # required, https://gohugo.io/functions/where/#mainsections
   #customVerification:
     #myWOT: "ba8579f668r8w3g62503" # content for meta tag to verify your website on 'Web Of Trust'

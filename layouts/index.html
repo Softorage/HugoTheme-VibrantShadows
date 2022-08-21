@@ -1,22 +1,22 @@
 {{ define "main" }}
 
 {{/* This code prints all taxonomies (including custom ones specified by the user) along with terms in each taxonomy.
-We donno how to have access to a specific page's taxonomies yet. Having that would allow to display via a single.html layout, a post's taxonomies including custom ones.
+We don't know how to have access to a specific page's taxonomies yet. Having that would allow to display via a single.html layout, a post's taxonomies including custom ones.
 
-{{ $taxonomy_list := slice }}
-{{- range $key, $value := site.Taxonomies -}}
-  {{ $taxonomy_list = append $key }}
+{{- $taxonomy_list := slice }}
+{{- range $key, $value := site.Taxonomies }}
+  {{- $taxonomy_list = append $key }}
 {{- end -}}
 
-{{ if $taxonomy_list }}
-  {{ range $taxonomy_list }}
+{{- if $taxonomy_list }}
+  {{- range $taxonomy_list }}
     {{- range $key, $value := (index site.Taxonomies .) -}}
       <div class="">
         $key: {{ delimit $value ", " }}
       </div>
-    {{- end -}}
-  {{ end }}
-{{ end }}
+    {{- end }}
+  {{- end }}
+{{- end -}}
 */}}
 
 <div class="jumbotron jumbotron-fluid text-center d-flex flex-column mb-0 text-light hero-gradient"
@@ -37,22 +37,42 @@ We donno how to have access to a specific page's taxonomies yet. Having that wou
 <div class="container-fluid bg-mat py-3">
   <div class="container-fluid bg-mat py-3" >
     <!-- Need to define any variable outside the range loop. -->
+    {{- $thumbnailSize := "" }}
+    {{- if site.Params.postImages.thumbnail.size }}
+     {{- $thumbnailSize := site.Params.postImages.thumbnail.size }}
+    {{- end }}
     {{- $thumbnailBorders := "" }}
+    {{- if site.Params.userExperience.postImages.thumbnail.borders }}
+      {{- $thumbnailBorders = site.Params.userExperience.postImages.thumbnail.borders }}
+    {{- end }}
+    
     <!-- ranges through each of the content files associated with a particular term and renders the summary.html content view -->
     {{ range (where site.RegularPages "Type" "in" site.Params.mainSections).ByDate.Reverse }}
       <div class="card mb-3">
         <div class="card-body">
           
-          <div class="row">
+          <div class="row {{- if eq site.Params.position.thumbnail "right" }} flex-md-row-reverse{{- end -}}">
           
             <div class="col-md-auto my-auto">
               {{ if .Params.image.src -}}
                 <img class="
                 
-                {{- if .Params.image.thumbnailBorders }}
-                  {{- $thumbnailBorders = .Params.image.thumbnailBorders }}
-                {{- else if site.Params.userExperience.postImages.thumbnailBorders }}
-                  {{- $thumbnailBorders = site.Params.userExperience.postImages.thumbnailBorders }}
+                {{- if .Params.image.thumbnail.borders }}
+                  {{- $thumbnailBorders = .Params.image.thumbnail.borders }}
+                {{- else if $thumbnailBorders }}
+                  {{/*
+                    If site.Params.userExperience.postImages.thumbnail.borders is specified, we wish to use that value.
+                    Go Templates treat the following values as false:
+
+                      false (boolean)
+                      0 (integer)
+                      any zero-length array, slice, map, or string
+                    
+                    As per the if conditional just after declaring $thumbnailBorders, if site.Params.userExperience.postImages.thumbnail.borders is specified, then $thumbnailBorders is not false.
+                    In which case, we don't want the if conditional to continue.
+                    
+                    Also, rather than using site.Params.userExperience.postImages.thumbnail.borders in every range iteration, using it once outside the range loop to give $thumbnailBorders its value, and then using that variable in the range loop, helps reduce build times. 
+                   */}}
                 {{- else }}
                   {{- $thumbnailBorders = "rounded-lg" }}
                 {{- end }}
@@ -69,17 +89,18 @@ We donno how to have access to a specific page's taxonomies yet. Having that wou
                 
                 " src="{{ .Params.image.src }}" height="
                 
-                {{- if .Params.image.thumbnailSize }}
-                  {{- .Params.image.thumbnailSize -}}
-                {{- else if site.Params.postImages.thumbnailSize }}
-                  {{- site.Params.postImages.thumbnailSize -}}
+                {{- if .Params.image.thumbnail.size }}
+                  {{- .Params.image.thumbnail.size -}}
+                {{- else if $thumbnailSize }}
+                  {{- $thumbnailSize -}}
                 {{- else -}}
                   200px
                 {{- end -}}
                 
                 "{{ if .Params.image.alt }} alt="{{ .Params.image.alt }}"{{ end }}></img>
               {{- end }}
-            </div>
+            </div> <!-- image col-md -->
+            
             
             <div class="col my-auto py-2">
               <h2>
@@ -196,8 +217,8 @@ We donno how to have access to a specific page's taxonomies yet. Having that wou
               
               <a class="font-weight-bold text-reset text-decoration-none" href="{{ .Permalink }}"><nobr>Read more →</nobr></a>
             </div>
-        
-          </div>
+            
+          </div> <!-- row -->
             
         </div>
         
@@ -205,4 +226,6 @@ We donno how to have access to a specific page's taxonomies yet. Having that wou
     {{ end }}
   </div>
 </div>
+
 {{ end }}
+
