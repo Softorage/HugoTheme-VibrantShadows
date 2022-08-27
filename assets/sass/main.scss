@@ -170,6 +170,8 @@ td {
 @extend .align-middle;
 }
 
+// 
+{{ if ne site.Params.theme.gradientDirection.background "rtl" -}}
 
 .hero-gradient {
 background: $clr1;
@@ -181,6 +183,19 @@ background: $clr1-light;
 background: linear-gradient(36deg, $clr1-light 0%, $clr2-light 80%); 
 }
 
+{{- else -}}
+
+.hero-gradient {
+background: $clr2;
+background: linear-gradient(36deg, $clr2 0%, $clr1 80%);
+}
+
+.hero-gradient-light {
+background: $clr2-light;
+background: linear-gradient(36deg, $clr2-light 0%, $clr1-light 80%); 
+}
+
+{{- end }}
 
 .bg-clr1 {
 background: mix($clr1, $clr2, 95%) !important;
@@ -219,7 +234,7 @@ background: $mat !important;
 }
 
 .text-gradient {
-background: linear-gradient(36deg, $clr1 0%, $clr1 80%) !important;
+background: linear-gradient(36deg, {{ if ne site.Params.theme.gradientDirection.text "rtl" -}} $clr1 0%, $clr2 80% {{ else }} $clr2 0%, $clr1 80% {{ end }}) !important;
 background-clip: text !important;
 color: transparent !important;
 }
@@ -257,7 +272,7 @@ color: $antinav-light !important;
 }
 
 .btn-grad {
-background-image: linear-gradient(90deg,  $clr1 0%, $clr2 100%);
+background-image: linear-gradient(90deg, {{ if ne site.Params.theme.gradientDirection.button "rtl" -}} $clr1 0%, $clr2 100% {{- else -}} $clr2 0%, $clr1 100% {{- end }});
 }
 
 //

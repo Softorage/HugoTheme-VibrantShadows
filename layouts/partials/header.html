@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light fixed-top flex-column">
     <div class="container-fluid">
       
-      <a class="navbar-brand{{ if ne site.Params.theme.borders "square" }} rounded{{ end }} px-3" href="{{ site.BaseURL }}"><span class="text-nav"><span class="brand">
+      <a class="navbar-brand{{ if ne site.Params.theme.borders "square" }} rounded{{ end }} px-3" href="{{ site.BaseURL }}"><span class="text-light"><span class="brand">
       {{- $navbar_brand_style := site.Params.brand.navbar | default (slice "logo" "name") }}
       {{- if and (in $navbar_brand_style "logo") (site.Params.brand.logo_32px) -}}
         <img src="{{ site.Params.brand.logo_32px }}" alt="{{ site.Params.brand.name }} logo" height="32"></img>

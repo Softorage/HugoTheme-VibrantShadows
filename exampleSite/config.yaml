@@ -48,12 +48,16 @@ params:
     color: "#7d1fa5" # color to be shown for brand name on navbar on scroll | required | no default
     navbar: ["logo", "name"] # accepts array of values: "logo", "name" | this configuration shows brand 'log' & brand 'name' on navbar | optional | default: ["logo", "name"]
   theme: # optional
-    nav: "#ffffff" # navbar's background color | optional | default: "#ffffff"
-    antinav: "#000000" # a color in good contrast to nav | optional | default: "#000000"
-    mat: "#f9f9f9" # background color forcards (not of cards) | optional | default: "#f9f9f9"
+    nav: "#212121" # navbar's background color | optional | default: "#ffffff"
+    antinav: "#cccccc" # a color in good contrast to nav | optional | default: "#000000"
+    mat: "#121212" # background color forcards (not of cards) | optional | default: "#f9f9f9"
     clr1: "#7d1fa5" # color-1 of gradient | optional | default: "#7d1fa5"
     clr2: "#6d19fc" # color-2 of gradient | optional | default: "#6d19fc"
     borders: "rounded" # accepts value: rounded/square | what kind of borders do you like for elements, like buttons | default: "rounded"
+    gradientDirection:
+      background: "ltr" # accepts value: ltr/rtl | ltr: left to right; rtl: right to left | optional | default: "ltr"
+      text: "ltr" # accepts value: ltr/rtl | ltr: left to right; rtl: right to left | optional | default: "ltr"
+      button: "ltr" # accepts value: ltr/rtl | ltr: left to right; rtl: right to left | optional | default: "ltr"
   position: # optional
     social:
       profiles: "footer" # accepts value: navbar/footer | may use 'navbar' if number of items in main menu and social profiles are minimal, otherwise 'footer' is recommended | default: "footer"
@@ -145,8 +149,9 @@ params:
       script: 0 # accepts value: 0/1/2 | 0: Default script by Google via Hugo's internal template; 1: minimal-analytics by James Hill; 2: minimal-analytics-4 by Dariusz Więckiewicz | optional | default: 0
       loading: "sync" # accepts value: sync/async | determines whether Google Analytics JavaScript file loads 'Synchronously' or 'Asynchronously' | optional | default: "sync"
     postImages: # customize behaviour for your posts' images
-        thumbnailSize: "200px" # accepts value: string | integer: size of post images when they appear as thumbnails; string: unit of size | default: "200px"
-        thumbnailBorders: "rounded" # accepts value: square, rounded, circle, pill | choose the border radius of posts' images when they appear as thumbnails | optional | default: "rounded"
+      thumbnail:
+        size: "200px" # accepts value: string | integer: size of post images when they appear as thumbnails; string: unit of size | default: "200px"
+        borders: "rounded" # accepts value: square, rounded, circle, pill | choose the border radius of posts' images when they appear as thumbnails | optional | default: "rounded"
   mainSections: ["post"] # required, https://gohugo.io/functions/where/#mainsections
   #customVerification:
     #myWOT: "ba8579f668r8w3g62503" # content for meta tag to verify your website on 'Web Of Trust'

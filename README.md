@@ -107,6 +107,9 @@ If this is the first time you are setting up Hugo:
 ### Installing the node dependencies
 
 ```bash
+# Node.js is required only if you wish to enable "Speed Mode"
+# "Speed Mode" requires Hugo Extended Version and Node.js
+
 # Install nodejs and npm. Change the following command as per you distribution/OS.
 sudo apt install nodejs npm 
 
@@ -120,7 +123,7 @@ And, we're done! Now you can write your posts in Markdown format (.md file exten
 
 To create a new post, simply do [`hugo new`](https://gohugo.io/commands/hugo_new/) and Hugo will generate a new post for you using archetype. A post needs to have *front-matter* and *content*. *Front-matter* contains all the [Page Level parameters](#page-parameters), while *content* is your actual post.
 
-To test how your blog looks, run `hugo serve`, and log on to the url given at the terminal (or command prompt) after you run `hugo serve`. The url is usually something like `localhost:1227`. To generate production ready website, simply run `hugo build`. Your website will be created in a directory named `public`. You can then copy and paste the contents of the `public` directory on the webserver, and the server should do the rest. You can also setup Hugo to build website automatically from the code and publish to the internet using GitLab, Netlify, etc. though it may require some technical knowledge.
+To test how your blog looks, run `hugo serve`, and log on to the URL given at the terminal (or command prompt) after you run `hugo serve`. The URL is usually something like `localhost:1227`. To generate production ready website, simply run `hugo build`. Your website will be created in a directory named `public`. You can then copy and paste the contents of the `public` directory on the webserver, and the server should do the rest. You can also setup Hugo to build website automatically from the code and publish to the internet using GitLab, Netlify, etc. though it may require some technical knowledge.
 
 Once set, jump over to the `config.yaml` file and start [configuring](#configuration) your site.
 
@@ -152,7 +155,7 @@ These options set global values that some pages or all pages in the site use by 
     ```
 3.  **Author** *(Type: String | Accepts value: Text | Required | No default)*
     
-    We won't be using `site.Authors` till this parameter is finalised. See [here](https://github.com/gohugoio/hugo/issues/3088).
+    We won't be using `site.Authors` till this parameter is finalized. See [here](https://github.com/gohugoio/hugo/issues/3088).
     <!--It stores website-wide author(s).
     
     Example:
@@ -163,7 +166,7 @@ These options set global values that some pages or all pages in the site use by 
     #email: "" # author's email; used in default rss template: https://gohugo.io/templates/rss/#configure-rss | optional-->
 4.  **Copyright** *(Type: String | Accepts value: Text | Optional | No default)*
     
-    It is the copyright text. Due consideration should be given to 'brandName or title' and 'contentLicense' specified in configuration file. Note that it isn't used in footer, but only [in defualt RSS template](https://gohugo.io/templates/rss/#configure-rss).
+    It is the copyright text. Due consideration should be given to 'brandName or title' and 'contentLicense' specified in configuration file. Note that it isn't used in footer, but only [in default RSS template](https://gohugo.io/templates/rss/#configure-rss).
     
     Example:
     ```yaml
@@ -333,7 +336,7 @@ Let's see them one by one.
 2.  **Meta** *(Type: Map/Dict/Object | Accepts value: - | Required/Optional)*
     1.  **Author** *(Type: String | Accepts value: Text | Required | No default)*
         
-        It stores website-wide author(s). We won't be using `site.Authors` till it is finalised. See [here](https://github.com/gohugoio/hugo/issues/3088).
+        It stores website-wide author(s). We won't be using `site.Authors` till it is finalized. See [here](https://github.com/gohugoio/hugo/issues/3088).
     
         Example:
         ```yaml
@@ -420,22 +423,29 @@ Let's see them one by one.
     You can specify custom color pallet to form look for the website/blog of your own liking. It contains:
     1.  **Nav** *(Type: String | Accepts value: HEX/RGBA | Optional | Default: "#ffffff")*
         
-        It's navbar's background color.
+        It's navbar's background color. Recommended to be a little lighter than `Mat` below.
     2.  **Antinav** *(Type: String | Accepts value: HEX/RGBA | Optional | Default: "#000000")*
         
         It's a color in good contrast to `nav`.
     3.  **Mat** *(Type: String | Accepts value: HEX/RGBA | Optional | Default: "#f9f9f9")*
         
-        It's background color for cards (not of cards). It applies to the background on which cards are placed.
+        It's background color for cards (not of cards). It applies to the background on which cards are placed. Cards have `Nav` as their background color. So, `Mat` should preferably be darker than `Nav` above.
     4.  **Color-1** *(Type: String | Accepts value: HEX/RGBA | Optional | Default: "#7d1fa5")*
         
         It's color-1 in the hero gradient. It is used throughout the theme.
     5.  **Color-2** *(Type: String | Accepts value: HEX/RGBA | Optional | Default: "#6d19fc")*
         
-        It's color-2 in the hero gradient. It is used throughout the theme.
+        It's color-2 in the hero gradient. It is used throughout the theme. Recommended to be in contrast with nav.
     6.  **Borders** *(Type: String | Accepts value: rounded/square | Optional | Default: "rounded")*
         
         Here, specify what kind of borders do you like for elements, like buttons.
+    7.  **Gradient Direction** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
+        
+        1.  **Background** *(Type: String | Accepts value: ltr/rtl | Optional | Default: "ltr")*
+        2.  **Text Color** *(Type: String | Accepts value: ltr/rtl | Optional | Default: "ltr")*
+        3.  **Button Background** *(Type: String | Accepts value: ltr/rtl | Optional | Default: "ltr")*
+            
+             **ltr**: left to right | **rtl**: right to left
     
     Example:
     ```yaml
@@ -446,6 +456,10 @@ Let's see them one by one.
       clr1: "#7d1fa5"
       clr2: "#6d19fc"
       borders: "rounded"
+      gradientDirection:
+        background: "ltr"
+        text: "ltr"
+        button: "ltr"
     ```
 5.  **Background Image** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
     
@@ -462,7 +476,7 @@ Let's see them one by one.
       landingPage: "/neven-krcmarek-V4EOZj7g1gw-unsplash.jpg"
       post: "enable"
     ```
-6.  **Position** *(Type: Map/Dict/Object | Accepts value: - | Optional with caevets)*
+6.  **Position** *(Type: Map/Dict/Object | Accepts value: - | Optional with caveats)*
     
     It lets you customize *what* elements should be displayed and *where*. It contains:
     1.  **Social** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
@@ -498,7 +512,7 @@ Let's see them one by one.
           2.  at the time when its 'content' is being shown (for example, when a user visits the post itself), at the bottom of the 'content'.
         
         # not including (say) 'readingTime' (or 'wordCount' or 'author' or 'lastUpdated' or'tags'), would simply omit 'readingTime' from appearing in 'summary' and 'content'.
-        # not includng  only (say) 'summary' (or 'content') for (say) 'readingTime', would simply omit 'readingTime' from appearing in 'summary' (or 'content').
+        # not including only (say) 'summary' (or 'content') for (say) 'readingTime', would simply omit 'readingTime' from appearing in 'summary' (or 'content').
         
         ```
     4.  **Thumbnail** *(Type: String | Accepts value: right/left | Optional | Default: "left")*
@@ -616,7 +630,7 @@ Let's see them one by one.
         Improves ability of search engines to better index and understand the website/blog. Helps in SEO optimization.
     5.  **Speed Mode** *(Type: String | Accepts value: enable/disable | Highly Recommended | Default: "disable")*
         
-        Enabling "Speed Mode" would make the website/blog extremely fast and lightweight, providing a snappy experience to website/blog visitors. "Speed Mode" utilises *PostCSS* via *Hugo's Asset Pipeline*. Note that, "Speed Mode" works in *production environment* only. Since many Hugo users do not have Hugo's extended version, this option is disabled by default.
+        Enabling "Speed Mode" would make the website/blog extremely fast and lightweight, providing a snappy experience to website/blog visitors. "Speed Mode" utilizes *PostCSS* via *Hugo's Asset Pipeline*. Note that, "Speed Mode" works in *production environment* only. Disabling "Speed Mode" removes dependency on Hugo Extended version and Node.js modules. Since many Hugo users do not have Hugo's extended version, this option is disabled by default.
     
     Example:
     ```yaml
@@ -639,10 +653,10 @@ Let's see them one by one.
         It lets you choose whether you want to show a Cookie Consent dialog to your users.
     2.  **Type** *(Type: String | Accepts value: opt-in/opt-out/none | Required | No default)*
         
-        In 'opt-in', website doesn't employ cookies to user's computer unless user gives cosent to opt in. In 'opt-out', cookies are employed on user's computer and the user is given the choice to opt out of cookies. In 'none', cookies are employed on the user's computer and user is not given a choice in that regard. We recommend to refrain from using none, unless you have **zero** customers from EU or similar countries with privacy protecting laws.
+        In 'opt-in', website doesn't employ cookies to user's computer unless user gives consent to opt in. In 'opt-out', cookies are employed on user's computer and the user is given the choice to opt out of cookies. In 'none', cookies are employed on the user's computer and user is not given a choice in that regard. We recommend to refrain from using none, unless you have **zero** customers from EU or similar countries with privacy protecting laws.
     3.  **Revokable** *(Type: Boolean | Accepts value: true/false | Optional | Default: true)*
         
-        When set to `true`, a button to revoke cookie consent appears when the user hover in bottom area of the screen, regardless whether user's country requires revertable cookie consent.
+        When set to `true`, a button to revoke cookie consent appears when the user hover in bottom area of the screen, regardless whether user's country requires revertible cookie consent.
     4.  **Colors** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
         
         It lets you customize the colors for Cookie Consent dialog. It contains:
@@ -666,7 +680,7 @@ Let's see them one by one.
             This text appears after the `message` and is hyperlinked to `linkURL`.
         4.  **Link URL** *(Type: String | Accepts value: Text | Required | No default)*
             
-            It's the url of location where user should be directed when they click "Learn more".
+            It's the URL of location where user should be directed when they click "Learn more".
         5.  **Allow** *(Type: String | Accepts value: Text | Optional |Default: "Allow")*
             
             It is the text on the button that allows cookies.
@@ -675,7 +689,7 @@ Let's see them one by one.
             It is the text on the button that denies cookies.
         7.  **Policy** *(Type: String | Accepts value: Text | Optional | Default: "Cookie Consent")*
             
-            It is the text that appears on the button, when user's country requires revokable cookie consent.
+            It is the text that appears on the button, when user's country requires revocable cookie consent.
             
     Example:
     ```yaml
@@ -715,10 +729,10 @@ Let's see them one by one.
            [Refer this for a good implementation discussion](https://discourse.gohugo.io/t/add-minimal-analytics-google-analytics-v4-to-hugo/39016)
        2.  **Loading Method** *(Type: String | Accepts value: Text | Optional | Default: "sync")*
         
-           It helps you customize whether Google Analytics JavaScript file loads 'Synchronously' or 'Asynchronously'. Avialable only if `script` is set to "0". Latest Google Analytics Tag 4 only works with `sync`.
+           It helps you customize whether Google Analytics JavaScript file loads 'Synchronously' or 'Asynchronously'. Available only if `script` is set to "0". Latest Google Analytics Tag 4 only works with `sync`.
     2.  **Post Images** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
       
-        Customize behaviour for your posts' images
+        Customize behavior for your posts' images
         1.  **Thumbnail** *(Type: Map/Dict/Object | Accepts value: String | Optional | Default: "200px")*
         
             Customizations in relation to how thumbnails of *Post Images* appear.
@@ -756,7 +770,7 @@ Let's see them one by one.
 
 ### Page Parameters
 
-'Page paremeters' relate to the particular content file in whose front-matter they are defined. These options can be set from a page [front-matter](https://gohugo.io/content-management/front-matter#readout) or via [archetypes](https://gohugo.io/content-management/archetypes/#readout) (i.e. when you create a new content file via `hugo new` command).
+'Page parameters' relate to the particular content file in whose front-matter they are defined. These options can be set from a page [front-matter](https://gohugo.io/content-management/front-matter#readout) or via [archetypes](https://gohugo.io/content-management/archetypes/#readout) (i.e. when you create a new content file via `hugo new` command).
 
 1.  **Title** *(Type: String | Accepts value: Text | Required)*
     
@@ -792,7 +806,7 @@ Let's see them one by one.
     ```
 5.  **Tags/Categories/Custom-Taxonomy** *(Type: Array/String | Accepts value: Text | Recommended)*
     
-    You can manage and organise you posts based on tags, categories or any other custom taxonomy.
+    You can manage and organize you posts based on tags, categories or any other custom taxonomy.
     
     Example:
     ```yaml
@@ -826,11 +840,11 @@ Let's see them one by one.
       
             Integer: Size of post image when it appears as thumbnail in lists, for example, on landing page.  
             String: Unit of size. For example, "em", "rem", "px".  
-            Overrides the setting set (if any) in `userExperience` -> `postImages` -> `thumbnail' -> 'size` in `config.yaml` file present at root of your webiste.
+            Overrides the setting set (if any) in `userExperience` -> `postImages` -> `thumbnail' -> 'size` in `config.yaml` file present at root of your website.
         2.  **Borders** *(Type: String | Accepts value: square, rounded, circle, pill | Optional | Default: "rounded")*
             
             Choose the border radius of post's image when they appear as thumbnails.  
-            Overrides the setting set (if any) in `userExperience` -> `postImages` -> `thumbnail' -> 'borders` in `config.yaml` file present at root of your webiste.
+            Overrides the setting set (if any) in `userExperience` -> `postImages` -> `thumbnail' -> 'borders` in `config.yaml` file present at root of your website.
     
     Example:
     ```yaml
@@ -1001,15 +1015,19 @@ params:
     name: "ExampleBlog" # brand name (Samy's blog), usually just one word that is name of the brand | required | no default
     logo_500px: "/assets/favicon/android-chrome-512x512.png" # path (preferably relative path) to brand's good resolution logo | required | no default
     logo_32px: "/assets/favicon/favicon-32x32.png" # will be shown on navbar as is | required | no default
-    color: "#7d1fa5" # color to be shown for brand name on navbar on scroll | required | default: "#7d1fa5"
+    color: "#6d19fc" # color to be shown for brand name on navbar on scroll, make sure it's in contrast with nav | required | default: "#7d1fa5"
     navbar: ["logo", "name"] # accepts array of values: "logo", "name" | this configuration shows brand 'logo' & brand 'name' on navbar | optional | default: ["logo", "name"]
   theme: # optional
     nav: "#ffffff" # navbar's background color | optional | default: "#ffffff"
     antinav: "#000000" # a color in good contrast to nav | optional | default: "#000000"
     mat: "#f9f9f9" # background color forcards (not of cards) | optional | default: "#f9f9f9"
     clr1: "#7d1fa5" # color-1 of gradient | optional | default: "#7d1fa5"
-    clr2: "#6d19fc" # color-2 of gradient | optional | default: "#6d19fc"
+    clr2: "#6d19fc" # color-2 of gradient, recommended to be in contrast with nav | optional | default: "#6d19fc"
     borders: "rounded" # accepts value: rounded/square | what kind of borders do you like for elements, like buttons | default: "rounded"
+    gradientDirection:
+      background: "ltr" # accepts value: ltr/rtl | ltr: left to right; rtl: right to left | optional | default: "ltr"
+      text: "ltr" # accepts value: ltr/rtl | ltr: left to right; rtl: right to left | optional | default: "ltr"
+      button: "ltr" # accepts value: ltr/rtl | ltr: left to right; rtl: right to left | optional | default: "ltr"
   backgImage:
     landingPage: "/neven-krcmarek-V4EOZj7g1gw-unsplash.jpg" # path to background image for hero section on landing page. if specified, background image will be applied.
     post: "enable" # accepts value: enable/disable | if enabled, image set in front-matter will be shown as background image for hero section of the post | default: "enable"
@@ -1105,9 +1123,9 @@ params:
       script: 0 # accepts value: 0/1/2 | 0: Default script by Google via Hugo's internal template; 1: minimal-analytics by James Hill; 2: minimal-analytics-4 by Dariusz Więckiewicz | optional | default: 0
       loading: "sync" # accepts value: sync/async | determines whether Google Analytics JavaScript file loads 'Synchronously' or 'Asynchronously' | optional | default: "sync"
     postImages: # customize behaviour for your posts' images
-        thumbnail:
-          size: "200px" # accepts value: string | integer: size of post images when they appear as thumbnails; string: unit of size | default: "200px"
-          borders: "rounded" # accepts value: square, rounded, circle, pill | choose the border radius of posts' images when they appear as thumbnails | optional | default: "rounded"
+      thumbnail:
+        size: "200px" # accepts value: string | integer: size of post images when they appear as thumbnails; string: unit of size | default: "200px"
+        borders: "rounded" # accepts value: square, rounded, circle, pill | choose the border radius of posts' images when they appear as thumbnails | optional | default: "rounded"
   mainSections: ["post"] # required, https://gohugo.io/functions/where/#mainsections
   #customVerification:
     #myWOT: "ba8579f668r8w3g62503" # content for meta tag to verify your website on 'Web Of Trust'

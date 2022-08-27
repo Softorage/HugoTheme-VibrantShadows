@@ -8,8 +8,9 @@ categories: "" # categories for current post
 image: # image for current post
   src: "" # path to an image dedicated to current post
   alt: "" # this text is shown when for some reason an image is unable to load
-  thumbnailSize: ["200px"] # size of post image when it appears as thumbnail
-  thumbnailBorders: "rounded" # accepts value: square, rounded, circle, pill | choose the border radius of posts' images when they appear as thumbnails | optional | default: "rounded"
+  thumbnail:
+    size: "200px" # size of post image when it appears as thumbnail
+    borders: "rounded" # accepts value: square, rounded, circle, pill | choose the border radius of posts' images when they appear as thumbnails | optional | default: "rounded"
 author: "" # author of current post
 author_twitter: "" # current post's author's twitter handle, without '@'
 #draft: true # if true, the content will not be rendered unless the `--buildDrafts` flag is passed to the `hugo` command
