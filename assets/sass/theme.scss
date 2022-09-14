@@ -1,0 +1,380 @@
+/*
+if site.Params.theme.toggle.preventFOIT is set false, then in /assets/js/custom.js
+if site.Params.theme.toggle.preventFOIT is set true, then in head.html partial
+*/
+
+// Dark mode implementation
+{{ $theme := dict }}
+
+.dark {
+  {{ if site.Params.theme.dark }}
+    // Theme specific colors
+    {{ $theme = site.Params.theme.dark }}
+  {{ end }}
+
+  $clr1-dark: {{ $theme.clr1 | default "#7d1fa5" }};
+  $clr2-dark: {{ $theme.clr2 | default "#6d19fc" }};
+  $nav-dark: {{ $theme.nav | default "#212121" }}; //background
+  $antinav-dark: {{ $theme.antinav | default "#cccccc" }}; // text
+  $mat-dark: {{ $theme.mat | default "#121212" }};
+
+  // To convert the SASS variable to a CSS custom property, you put curly brackets around it, and a hash in front.
+  // https://dev.to/nicm42/combining-sass-variables-with-css-custom-properties-5hj7
+  --clr1: #{$clr1-dark};
+  --clr2: #{$clr2-dark};
+  --nav: #{$nav-dark}; //background
+  --antinav: #{$antinav-dark}; // text
+  --mat: #{$mat-dark};
+  --clr1-soft: mix(#{$clr1-dark}, #{$nav-dark}, 5%);
+  --clr2-soft: mix(#{$clr2-dark}, #{$nav-dark}, 5%);
+  --nav-soft: mix(#{$nav-dark}, #{$antinav-dark}, 5%); // text
+  --antinav-soft: mix(#{$antinav-dark}, #{$nav-dark}, 2%); // background
+  
+  // GitHub, Medium, Wikipedia can not be recognized with its brand color on a darker background
+  --github: #cccccc;
+  --medium: #ffffff;
+  --wikipedia: #ffffff;
+  
+  // We have not used media query: prefers-color-scheme in css, but in JavaScript. This reduces a lot of code. See file theme.js
+}
+
+// Reset the $theme variable to be used again
+{{ $theme = dict }}
+
+.light {
+  {{ if site.Params.theme.light }}
+    // Theme specific colors
+    {{ $theme = site.Params.theme.light }}
+  {{ end }}
+
+  $clr1-light: {{ $theme.clr1 | default "#7d1fa5" }};
+  $clr2-light: {{ $theme.clr2 | default "#6d19fc" }};
+  $nav-light: {{ $theme.nav | default "#ffffff" }}; //background
+  $antinav-light: {{ $theme.antinav | default "#000000" }}; // text
+  $mat-light: {{ $theme.mat | default "#f9f9f9" }};
+
+  // https://dev.to/nicm42/combining-sass-variables-with-css-custom-properties-5hj7
+  --clr1: #{$clr1-light};
+  --clr2: #{$clr2-light};
+  --nav: #{$nav-light}; //background
+  --antinav: #{$antinav-light}; // text
+  --mat: #{$mat-light};
+  --clr1-soft: mix(#{$clr1-light}, #{$nav-light}, 5%);
+  --clr2-soft: mix(#{$clr2-light}, #{$nav-light}, 5%);
+  --nav-soft: mix(#{$nav-light}, #{$antinav-light}, 5%); // text
+  --antinav-soft: mix(#{$antinav-light}, #{$nav-light}, 2%); // background
+  
+  --github: #333333;
+  --medium: #000000;
+  --wikipedia: #000000;
+}
+
+/* 
+// footer brandicons shoud appear on light backg in case of dark theme only
+.dark footer .social-presence a span.fab {
+@extend .bg-light, .p-1, .rounded;
+}
+// since we have not imported bootstrap, we can''t use .bg-light
+*/
+
+// Everything hereonwards uses the above specified CSS variables, so that if we change the class of the body tag to 'dark' or 'light', all the elements below also change their colors as per above defined values
+// specifying this at top, so that, it is overridden when need be
+body {
+background: var(--nav) !important;
+color: var(--antinav) !important;
+}
+
+// since .brand-color class is used only in custom JS
+/* purgecss ignore */
+.brand-color {
+color: {{ default "#7d1fa5" site.Params.brand.color }} !important;
+}
+
+// *
+.card {
+background: var(--nav);
+color: var(--antinav);
+}
+
+// Styling popover to make it a little cozy
+
+.popover .popover-header {
+background-color: var(--nav);
+color: var(--antinav);
+}
+
+.popover .popover-body {
+background-color: var(--nav);
+color: var(--antinav);
+}
+
+// 
+{{ if ne site.Params.theme.gradientDirection.background "rtl" -}}
+
+.hero-gradient {
+background: var(--clr1);
+background: linear-gradient(36deg, var(--clr1) 0%, var(--clr2) 80%);
+}
+
+.hero-gradient-light {
+background: var(--clr1-soft);
+background: linear-gradient(36deg, var(--clr1-soft) 0%, var(--clr2-soft) 80%); 
+}
+
+{{- else -}}
+
+.hero-gradient {
+background: var(--clr2);
+background: linear-gradient(36deg, var(--clr2) 0%, var(--clr1) 80%);
+}
+
+.hero-gradient-light {
+background: var(--clr2-soft);
+background: linear-gradient(36deg, var(--clr2-soft) 0%, var(--clr1-soft) 80%); 
+}
+
+{{- end }}
+
+.bg-clr1 {
+background: var(--clr1) !important;
+}
+
+.bg-clr2 {
+background: var(--clr2) !important;
+}
+
+.bg-clr1-light {
+background: var(--clr1-soft) !important;
+}
+
+.bg-clr2-light {
+background: var(--clr2-soft) !important;
+}
+
+.bg-nav {
+background: var(--nav) !important;
+}
+
+.bg-antinav {
+background: var(--antinav) !important;
+}
+
+.bg-nav-light {
+background: var(--nav-soft) !important;
+}
+
+.bg-antinav-light {
+background: var(--antinav-soft) !important;
+}
+
+.bg-mat {
+background: var(--mat) !important;
+}
+
+.text-gradient {
+background: linear-gradient(36deg, {{ if ne site.Params.theme.gradientDirection.text "rtl" -}} var(--clr1) 0%, var(--clr2) 80% {{ else }} var(--clr2) 0%, var(--clr1) 80% {{ end }}) !important;
+background-clip: text !important;
+color: transparent !important;
+}
+
+.text-clr1 {
+color: var(--clr1) !important;
+}
+
+.text-clr2 {
+color: var(--clr2) !important;
+}
+
+.text-clr1-light {
+color: var(--clr1-soft) !important;
+}
+
+.text-clr2-light {
+color: var(--clr2-soft) !important;
+}
+
+.text-nav {
+color: var(--nav) !important;
+}
+
+.text-nav-light {
+color: var(--nav-soft) !important;
+}
+
+.text-antinav {
+color: var(--antinav) !important;
+}
+
+.text-antinav-light {
+color: var(--antinav-soft) !important;
+}
+
+.btn-grad {
+background-image: linear-gradient(90deg, {{ if ne site.Params.theme.gradientDirection.button "rtl" -}} var(--clr1) 0%, var(--clr2) 100% {{- else -}} var(--clr2) 0%, var(--clr1) 100% {{- end }});
+}
+
+//
+.theme-toogle-checkbox {
+	opacity: 0;
+	position: absolute;
+}
+
+.theme-toggle-label {
+background-color: var(--mat);
+border-radius: 50px;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 5px;
+position: relative;
+height: 26px;
+width: 50px;
+transform: scale(1.2);
+}
+
+.theme-toggle-label .ball {
+background-color: var(--antinav);
+border-radius: 50%;
+position: absolute;
+top: 3px;
+left: 3px;
+height: 20px;
+width: 20px;
+transform: translateX(0px);
+transition: transform 0.2s linear;
+}
+
+.theme-toogle-checkbox:checked + .theme-toggle-label .ball {
+transform: translateX(24px);
+}
+
+
+// * general icons to be shown in black, even when they are used in anchored tags
+.fa-comments {
+color: var(--nav);
+}
+
+.fa-rss {
+color: #f26522;
+}
+
+.fa-moon {
+color: #f1c40f;
+}
+
+.fa-sun {
+color: #f39c12;
+}
+
+// * brands
+.fa-gitlab {
+color: #fca326;
+}
+
+.fa-github {
+color: var(--github);
+}
+
+.fa-steam {
+color: #00adee;
+}
+
+.fa-twitter {
+color: #1da1f2;
+}
+
+.fa-facebook {
+color: #1877f2;
+}
+
+.fa-instagram {
+color: #e1306c;
+}
+
+.fa-youtube {
+color: #ff0000;
+}
+
+.fa-pinterest {
+color: #bd081c;
+}
+
+.fa-google-plus {
+color: #dd4b39;
+}
+
+.fa-linkedin {
+color: #0077b5;
+}
+
+.fa-reddit {
+color: #ff4500;
+}
+
+.fa-flickr {
+color: #0063dc;
+}
+
+.fa-deviantart {
+color: #05cc47;
+}
+
+.fa-vk {
+color: #45668e;
+}
+
+.fa-mastodon {
+color: #2A8FDD;
+}
+
+.fa-bandcamp {
+color: #629aa9;
+}
+
+.fa-tumblr {
+color: #35465c;
+}
+
+.fa-medium {
+color: var(--medium);
+}
+
+.fa-wikipedia-w {
+color: var(--wikipedia);
+}
+
+.fa-telegram {
+color: #0088cc;
+}
+
+.fa-whatsapp {
+color: #25d366;
+}
+
+.fa-apple {
+color: #666666;
+}
+
+.fa-android {
+color: #a4c639;
+}
+
+.fa-linux {
+color: #000000;
+}
+
+.fa-windows {
+color: #0078d7;
+}
+
+// OSANO Cookie Consent Theming
+.cc-window {
+color: var(--antinav);
+background-color: var(--mat);
+}
+.cc-btn.cc-allow {
+color: var(--nav);
+background-color: var(--clr2);
+border-color: transparent;
+}

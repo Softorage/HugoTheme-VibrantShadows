@@ -1,8 +1,33 @@
 <!DOCTYPE html>
 <html{{ if site.LanguageCode }} lang="{{ site.LanguageCode }}"{{ end }}>
   {{- partial "head.html" . -}}
-  <body>
+ 
+  {{/*<!-- Set Dark as default theme
+  If
+  1. both the themes have `default` to `true` or `false` or not set,  or
+  2. only Dark theme has `default` set to `true`
+  then Dark theme is taken as default
+
+  Note:
+  `not` is an undocumented function that basically reverses the value
+  Example: # prints hello
+  {{ if not false }}
+    hello
+  {{ end }}
+   -->*/}}
+  {{ $cssTheme := "dark" }}
+  {{ if site.Params.theme.light.default }}
+    {{- $cssTheme = "light" }}
+  {{ end }}
+  <body class="{{ $cssTheme }}">
     {{- partial "header.html" . -}}
+    <!-- since theme.js requires the theme-toggle class, theme.js has to be after the header (theme-togle is in header)-->
+    {{ if and (not site.Params.theme.toggle.allowFOIT) (site.Params.theme.toggle.switch) }}
+      <script>
+      {{ partialCached "reusables/theme.js" . | safeJS }}
+      </script>
+    {{ end }}
+    
     <div id="content">
     {{- block "main" . }}{{- end }}
     </div>
@@ -16,11 +41,14 @@
     {{- $js_jquery := resources.Get "js/jquery.slim.js" }}
     {{- $js_popperjs := resources.Get "js/popper.min.js" }}
     {{- $js := slice $js_jquery $js_popperjs $js_twbs | resources.Concat "/assets/js/main.js" | minify | fingerprint }}
-    
     <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
     
-    {{- $js_custom := resources.Get "js/custom.js" | resources.ExecuteAsTemplate "/assets/js/custom.js" . | minify | fingerprint }}
+    {{- $js_custom := resources.Get "js/custom.js" | resources.ExecuteAsTemplate "js/custom.js" . }}
+    {{ if (eq hugo.Environment "production") -}}
+      {{- $js_custom = $js_custom | minify | fingerprint }}
+    {{- end }}
     <script src="{{ $js_custom.RelPermalink }}" integrity="{{ $js_custom.Data.Integrity }}" crossorigin="anonymous"></script>
+    
     <!-- Request Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto|Lato&display=swap" rel="stylesheet">
     

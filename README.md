@@ -123,7 +123,7 @@ And, we're done! Now you can write your posts in Markdown format (.md file exten
 
 To create a new post, simply do [`hugo new`](https://gohugo.io/commands/hugo_new/) and Hugo will generate a new post for you using archetype. A post needs to have *front-matter* and *content*. *Front-matter* contains all the [Page Level parameters](#page-parameters), while *content* is your actual post.
 
-To test how your blog looks, run `hugo serve`, and log on to the URL given at the terminal (or command prompt) after you run `hugo serve`. The URL is usually something like `localhost:1227`. To generate production ready website, simply run `hugo build`. Your website will be created in a directory named `public`. You can then copy and paste the contents of the `public` directory on the webserver, and the server should do the rest. You can also setup Hugo to build website automatically from the code and publish to the internet using GitLab, Netlify, etc. though it may require some technical knowledge.
+To test how your blog looks, run `hugo serve`, and log on to the URL given at the terminal (or command prompt) after you run `hugo serve`. The URL is usually something like `localhost:1227`. To generate production ready website, simply run `hugo build`. Your website will be created in a directory named `public`. You can then copy and paste the contents of the `public` directory on the webserver, and the server should do the rest. You can also setup Hugo to build website automatically from the code and publish to the internet using GitLab, Netlify, etc. though it may require some technical knowledge. If you want to test how your production ready website renders, run`hugo serve -e production`.
 
 Once set, jump over to the `config.yaml` file and start [configuring](#configuration) your site.
 
@@ -260,6 +260,45 @@ These options set global values that some pages or all pages in the site use by 
         disable: false # | default: false
         respectDoNotTrack: false # 'true' makes the GA templates respect the “Do Not Track” HTTP header | default: false
         useSessionStorage: false # 'true' disables the use of Cookies and use Session Storage to Store the GA Client ID | default: false
+    ```
+13. **ROBOTS.TXT** *(Type: Boolean | Accepts value: true/false | Optional | No default)*
+    
+    Allows to create a robots.txt file, which helps in SEO.
+    
+    Example:
+    ```yaml
+    enableRobotsTXT: true
+    ```
+14. **Git Info** *(Type: Boolean | Accepts value: true/false | Optional | No default)*
+    
+    Allows us to use `.GitInfo` object. `.GitInfo` object allows us to leverage information from git for use in Hugo. If `enableGitInfo` is set to true, it is recommended to add `:git` at the end of default frontmatter configuration. Adding `:git` at the end (of default format) makes the atom/rss feed to fetch dates from git, once enableGitInfo is set to true in 'config' file.
+    
+    Example:
+    ```yaml
+    enableGitInfo: true
+    # Only if 'enableGitInfo' is set to 'true'
+    frontmatter:
+      date: ["date", "publishDate", "lastmod", ":git"] # adding ':git' at the end (of default format) makes the atom/rss feed to fetch dates from git, once enableGitInfo is set to true in 'config' file
+    ```
+15. **Emoji** *(Type: Boolean | Accepts value: true/false | Optional | No default)*
+    
+    Allows to use emojis in content files. See the [Emoji cheat sheet](https://www.webfx.com/tools/emoji-cheat-sheet/) for available emoticons.
+    
+    Example:
+    ```yaml
+    enableEmoji: true
+    ```
+16. **HTML in markdown** *(Type: Map/Dict/Object | Accepts value: - | Optional | No default)*
+    
+    Allows to use HTML in content files.
+    
+    Example:
+    ```yaml
+    # Allow HTML in markdown to be rendered
+    markup:
+      goldmark:
+        renderer:
+          unsafe: true
     ```
 
 #### Vibrant Shadow's custom parameters
@@ -420,47 +459,95 @@ Let's see them one by one.
     ```
 4.  **Theme** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
     
-    You can specify custom color pallet to form look for the website/blog of your own liking. It contains:
-    1.  **Nav** *(Type: String | Accepts value: HEX/RGBA | Optional | Default: "#ffffff")*
+    You can specify custom color pallet to form look for the website/blog of your own liking. You can customize both **Light** as well as **Dark** theme, as below:
+    1.  **Light/Dark** *(Type: Map/Dict/Object | Accepts value: - | Recommended)*
         
-        It's navbar's background color. Recommended to be a little lighter than `Mat` below.
-    2.  **Antinav** *(Type: String | Accepts value: HEX/RGBA | Optional | Default: "#000000")*
-        
-        It's a color in good contrast to `nav`.
-    3.  **Mat** *(Type: String | Accepts value: HEX/RGBA | Optional | Default: "#f9f9f9")*
-        
-        It's background color for cards (not of cards). It applies to the background on which cards are placed. Cards have `Nav` as their background color. So, `Mat` should preferably be darker than `Nav` above.
-    4.  **Color-1** *(Type: String | Accepts value: HEX/RGBA | Optional | Default: "#7d1fa5")*
-        
-        It's color-1 in the hero gradient. It is used throughout the theme.
-    5.  **Color-2** *(Type: String | Accepts value: HEX/RGBA | Optional | Default: "#6d19fc")*
-        
-        It's color-2 in the hero gradient. It is used throughout the theme. Recommended to be in contrast with nav.
-    6.  **Borders** *(Type: String | Accepts value: rounded/square | Optional | Default: "rounded")*
-        
-        Here, specify what kind of borders do you like for elements, like buttons.
-    7.  **Gradient Direction** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
-        
-        1.  **Background** *(Type: String | Accepts value: ltr/rtl | Optional | Default: "ltr")*
-        2.  **Text Color** *(Type: String | Accepts value: ltr/rtl | Optional | Default: "ltr")*
-        3.  **Button Background** *(Type: String | Accepts value: ltr/rtl | Optional | Default: "ltr")*
+        0.  **Default** *(Type: Boolean | Accepts value: true/false | Optional | Default: true for dark)*
             
-             **ltr**: left to right | **rtl**: right to left
+            That theme out of the **Light** or **Dark** will be the default theme, for which this option is set to true, and will be loaded when user visits the website/blog. If set to true or false or not set, for both the **Light** and **Dark** themes, **Dark** theme will be set as default.
+        1.  **Nav** *(Type: String | Accepts value: HEX/RGBA | Optional | Default: "#ffffff")*
+            
+            It's navbar's background color. Recommended to be a little lighter than `Mat` below.
+        2.  **Antinav** *(Type: String | Accepts value: HEX/RGBA | Optional | Default: "#000000")*
+            
+            It's a color in good contrast to `nav`.
+        3.  **Mat** *(Type: String | Accepts value: HEX/RGBA | Optional | Default: "#f9f9f9")*
+            
+            It's background color for cards (not of cards). It applies to the background on which cards are placed. Cards have `Nav` as their background color. So, `Mat` should preferably be darker than `Nav` above.
+        4.  **Color-1** *(Type: String | Accepts value: HEX/RGBA | Optional | Default: "#7d1fa5")*
+            
+            It's color-1 in the hero gradient. It is used throughout the theme.
+        5.  **Color-2** *(Type: String | Accepts value: HEX/RGBA | Optional | Default: "#6d19fc")*
+            
+            It's color-2 in the hero gradient. It is used throughout the theme. Recommended to be in contrast with nav.
+        6.  **Gradient Direction** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
+            
+            1.  **Background** *(Type: String | Accepts value: ltr/rtl | Optional | Default: "ltr")*
+            2.  **Text Color** *(Type: String | Accepts value: ltr/rtl | Optional | Default: "ltr")*
+            3.  **Button Background** *(Type: String | Accepts value: ltr/rtl | Optional | Default: "ltr")*
+                
+                 **ltr**: left to right | **rtl**: right to left
     
+    2.  **Toggle** *(Type: Map/Dict/Object | Accepts value: - | Recommended)*
+        
+        1.  **Switch** *(Type: Boolean | Accepts value: true/false | Required | Default: false)*
+            
+            `true`, if you want to have a theme toogle on the navbar. Otherwise, `false`.
+        2.  **Flash Of Incorrect Theme** *(Type: Boolean | Accepts value: true/false | Required | Default: false)*
+            
+            Flash of incorrect theme means flash of the theme other than that set by the user. It generally happens when user of the blog has a theme set in localStorage which is different from the theme that the blog (by default) loads with, and when the default theme loads before the JavaScript (that applies corect theme) is loaded and executed. Setting `allowFOIT` to `false`, simply loads the JavaScript before whole of the document is loaded. This may translate to slightly lesser performance for the blog, but superior user experience.
+        3.  **Caption** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
+            
+            1.  **Light** *(Type: Array | Accepts value: ["icon" or "text"], ["fa-light/fa-sun/utf-light/utf-sun/utf-sun-face" or "Any text"] | Optional | Default: ["icon", "fa-sun"])*
+                
+                What caption does the user see on the toggle when switched to Light theme. Be careful with using "text", since it may overflow the toggle.
+            2.  **Dark** *(Type: Array | Accepts value: ["icon" or "text"], ["fa-dark/fa-moon/utf-dark/utf-moon/utf-moon-face-left/utf-moon-face-right/utf-full-moon" or "Any text"] | Optional | Default: ["icon", "fa-moon"])*
+                
+                What caption does the user see on the toggle when switched to Dark theme. Be careful with using "text", since it may overflow the toggle.
     Example:
     ```yaml
     theme:
-      nav: "#ffffff"
-      antinav: "#000000"
-      mat: "#f9f9f9"
-      clr1: "#7d1fa5"
-      clr2: "#6d19fc"
-      borders: "rounded"
-      gradientDirection:
-        background: "ltr"
-        text: "ltr"
-        button: "ltr"
+      light:
+        nav: "#ffffff"
+        antinav: "#000000"
+        mat: "#f9f9f9"
+        clr1: "#7d1fa5"
+        clr2: "#6d19fc"
+        gradientDirection:
+          background: "ltr"
+          text: "ltr"
+          button: "ltr"
+      dark: # default
+        default: true
+        nav: "#212121"
+        antinav: "#cccccc"
+        mat: "#121212"
+        clr1: "#7d1fa5"
+        clr2: "#6d19fc"
+        gradientDirection:
+          background: "ltr"
+          text: "ltr"
+          button: "ltr"
+      toggle:
+        switch: true
+        allowFOIT: false
+        caption:
+          light: ["icon", "fa-sun"]
+          dark: ["icon", "fa-moon"]
+      
     ```
+3.  **Borders** *(Type: String | Accepts value: square/rounded/circle/pill | Optional | Default: "rounded")*
+    
+    Here, specify what kind of borders do you like for elements, like buttons, cards.
+    
+    Example:
+    ```yaml
+    borders:
+      buttons: "rounded"
+      cards: "rounded"
+      # preformatted-text: "" not adding border customization to pre tag for now
+    ```
+    
 5.  **Background Image** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
     
     1. **Landing Page** *(Type: String | Accepts value: URL | Optional | No default)*
@@ -515,9 +602,6 @@ Let's see them one by one.
         # not including only (say) 'summary' (or 'content') for (say) 'readingTime', would simply omit 'readingTime' from appearing in 'summary' (or 'content').
         
         ```
-    4.  **Thumbnail** *(Type: String | Accepts value: right/left | Optional | Default: "left")*
-    
-        Position of a post's image, when it appears as a thumbnail in a list (say) on landing page. Regardless of "right" or "left", it looks the same on mobile-view.
     
     Example:
     ```yaml
@@ -542,7 +626,6 @@ Let's see them one by one.
         tags:
           summary: "top"
           content: "bottom" # default: "bottom"
-      thumbnail: "left"
     ```
 7.  **Fonts** *(Type: Map/Dict/Object | Accepts value: - | Optional )*
     
@@ -657,16 +740,7 @@ Let's see them one by one.
     3.  **Revokable** *(Type: Boolean | Accepts value: true/false | Optional | Default: true)*
         
         When set to `true`, a button to revoke cookie consent appears when the user hover in bottom area of the screen, regardless whether user's country requires revertible cookie consent.
-    4.  **Colors** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
-        
-        It lets you customize the colors for Cookie Consent dialog. It contains:
-        1.  **Banner** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
-            
-            It lets you customize colors of banner for Cookie Consent. It contains: **background** and **text**.
-        2.  **Button** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
-            
-            It lets you customize colors of button for Cookie Consent. It contains: **background** and **text**.
-    5.  **Content** *(Type: Map/Dict/Object | Accepts value: - | Required)*
+    4.  **Content** *(Type: Map/Dict/Object | Accepts value: - | Required)*
         
         It lets you customize the content you wish to show on Cookie Consent dialog. It contains:
         1.  **Message** *(Type: String | Accepts value: Text | Required | No default)*
@@ -689,7 +763,8 @@ Let's see them one by one.
             It is the text on the button that denies cookies.
         7.  **Policy** *(Type: String | Accepts value: Text | Optional | Default: "Cookie Consent")*
             
-            It is the text that appears on the button, when user's country requires revocable cookie consent.
+            It is the text that appears on the button, when user's country requires revocable cookie consent.  
+            Some recommended values: 🍪, 🔒, 🔓, 🔏
             
     Example:
     ```yaml
@@ -697,13 +772,6 @@ Let's see them one by one.
       switch: "on"
       type: "opt-in"
       revokable: true
-      colors:
-        banner:
-          background: "#ffffff"
-          text: "#000000"
-        button:
-          background: "#6d19fc"
-          text: "#ffffff"
       content: # change the links below to appropriate url addresses
         message: |
           By continuing to use this website, you agree to our <a href='/legal/privacy-policy/'>Privacy Policy</a>, <a href='/legal/cookie-policy/'>Cookie Policy</a> and our <a href='/legal/terms-and-conditions/'>Terms and Conditions</a> for your use of this website.
@@ -741,11 +809,13 @@ Let's see them one by one.
                 Integer: Size of post images when they appear as thumbnails in lists, for example, on landing page.  
                 String: Unit of size. For example, "em", "rem", "px".  
                 Gets overridden by `thumbnail' -> 'size` specified in a page's front-matter.
-            
-            2.  **Borders** *(Type: String | Accepts value: square, rounded, circle, pill | Optional | Default: "rounded")*
+            2.  **Borders** *(Type: String | Accepts value: rounded/square/pill/circle | Optional | Default: "rounded")*
             
                 Choose the border radius of posts' images when they appear as thumbnails.  
                 Gets overridden by `thumbnail' -> 'borders` specified in a page's front-matter.
+            3.  **Position** *(Type: String | Accepts value: right/left/none | Optional | Default: "left")*
+    
+                Position of a post's image, when it appears as a thumbnail in a list (say) on landing page. Regardless of "right" or "left", it looks the same on mobile-view.
         
     Example:
     ```yaml
@@ -757,6 +827,7 @@ Let's see them one by one.
         thumbnail:
           size: "200px"
           borders: "rounded"
+          position: "left"
     ```
 13. **Main Sections** *(Type: Array | Accepts value: Section names | Highly Recommended)*
     
@@ -841,10 +912,14 @@ Let's see them one by one.
             Integer: Size of post image when it appears as thumbnail in lists, for example, on landing page.  
             String: Unit of size. For example, "em", "rem", "px".  
             Overrides the setting set (if any) in `userExperience` -> `postImages` -> `thumbnail' -> 'size` in `config.yaml` file present at root of your website.
-        2.  **Borders** *(Type: String | Accepts value: square, rounded, circle, pill | Optional | Default: "rounded")*
+        2.  **Borders** *(Type: String | Accepts value: rounded/square/pill/circle | Optional | Default: "rounded")*
             
             Choose the border radius of post's image when they appear as thumbnails.  
             Overrides the setting set (if any) in `userExperience` -> `postImages` -> `thumbnail' -> 'borders` in `config.yaml` file present at root of your website.
+        3.  **Position** *(Type: String | Accepts value: right/left/none | Optional | Default: "left")*
+    
+            Position of a post's image, when it appears as a thumbnail in a list (say) on landing page. Regardless of "right" or "left", it looks the same on mobile-view.
+            Overrides `site.Params.userExperience.postImages.thumbnail.position`.
     
     Example:
     ```yaml
@@ -854,6 +929,7 @@ Let's see them one by one.
       thumbnail:
         size: "200px"
         borders: "rounded"
+        position: "left"
     ```
 7.  **Author** *(Type: String | Accepts value: Text | Recommended)*
     
@@ -959,11 +1035,13 @@ privacy:
 # 
 enableRobotsTXT: true # optional, allows to create a robots.txt file, which helps in SEO
 # sitemap, and RSS are generated automatically
-enableGitInfo: true # optional, allows us to use '.GitInfo' object. '.GitInfo' object allows us to leverage info from git for use in Hugo
 
+enableGitInfo: true # optional, allows us to use '.GitInfo' object. '.GitInfo' object allows us to leverage info from git for use in Hugo
 # Only if 'enableGitInfo' is set to 'true'
 frontmatter:
   date: ["date", "publishDate", "lastmod", ":git"] # adding ':git' at the end (of default format) makes the atom/rss feed to fetch dates from git, once enableGitInfo is set to true in 'config' file
+
+enableEmoji: true # optional, allows to use emojis in content files
 
 # Allow HTML in markdown to be rendered
 markup:
@@ -1018,16 +1096,38 @@ params:
     color: "#6d19fc" # color to be shown for brand name on navbar on scroll, make sure it's in contrast with nav | required | default: "#7d1fa5"
     navbar: ["logo", "name"] # accepts array of values: "logo", "name" | this configuration shows brand 'logo' & brand 'name' on navbar | optional | default: ["logo", "name"]
   theme: # optional
-    nav: "#ffffff" # navbar's background color | optional | default: "#ffffff"
-    antinav: "#000000" # a color in good contrast to nav | optional | default: "#000000"
-    mat: "#f9f9f9" # background color forcards (not of cards) | optional | default: "#f9f9f9"
-    clr1: "#7d1fa5" # color-1 of gradient | optional | default: "#7d1fa5"
-    clr2: "#6d19fc" # color-2 of gradient, recommended to be in contrast with nav | optional | default: "#6d19fc"
-    borders: "rounded" # accepts value: rounded/square | what kind of borders do you like for elements, like buttons | default: "rounded"
-    gradientDirection:
-      background: "ltr" # accepts value: ltr/rtl | ltr: left to right; rtl: right to left | optional | default: "ltr"
-      text: "ltr" # accepts value: ltr/rtl | ltr: left to right; rtl: right to left | optional | default: "ltr"
-      button: "ltr" # accepts value: ltr/rtl | ltr: left to right; rtl: right to left | optional | default: "ltr"
+    light:
+      nav: "#ffffff" # navbar's background color | optional | default: "#ffffff"
+      antinav: "#000000" # a color in good contrast to nav | optional | default: "#000000"
+      mat: "#f9f9f9" # background color forcards (not of cards) | optional | default: "#f9f9f9"
+      clr1: "#7d1fa5" # color-1 of gradient | optional | default: "#7d1fa5"
+      clr2: "#6d19fc" # color-2 of gradient, recommended to be in contrast with nav | optional | default: "#6d19fc"
+      #borders: "rounded" # accepts value: rounded/square | what kind of borders do you like for elements, like buttons | default: "rounded"
+      gradientDirection:
+        background: "ltr" # accepts value: ltr/rtl | ltr: left to right; rtl: right to left | optional | default: "ltr"
+        text: "ltr" # accepts value: ltr/rtl | ltr: left to right; rtl: right to left | optional | default: "ltr"
+        button: "ltr" # accepts value: ltr/rtl | ltr: left to right; rtl: right to left | optional | default: "ltr"
+    dark: # default
+      default: true
+      nav: "#212121"
+      antinav: "#cccccc"
+      mat: "#121212"
+      clr1: "#7d1fa5"
+      clr2: "#6d19fc"
+      gradientDirection:
+        background: "ltr"
+        text: "ltr"
+        button: "ltr"
+    toggle:
+      switch: true
+      allowFOIT: false
+      caption:
+        light: ["icon", "fa-sun"]
+        dark: ["icon", "fa-moon"]
+  borders: # accepts value: rounded/square/pill/circle | specify what kind of borders do you like for elements, like buttons, cards | default: "rounded"
+    buttons: "rounded"
+    cards: "rounded"
+    # preformatted-text: "" not adding border customization to pre tag for now
   backgImage:
     landingPage: "/neven-krcmarek-V4EOZj7g1gw-unsplash.jpg" # path to background image for hero section on landing page. if specified, background image will be applied.
     post: "enable" # accepts value: enable/disable | if enabled, image set in front-matter will be shown as background image for hero section of the post | default: "enable"
@@ -1052,7 +1152,6 @@ params:
       tags:
         summary: "top" # values: top/bottom | simply omit if don't want to show | optional | no default
         content: "bottom" # values: top/bottom | simply omit if don't want to show | optional | default: "bottom"
-    thumbnail: "left" # accepts value: right/left | position of a post's image, when it appears as a thumbnail in a list (say) on landing page. regardless of "right" or "left", it looks the same on mobile-view. | optional | default: "left"
   font:
     general:
       family: "Lato" # must match to a css font-family | default: "Lato"
@@ -1102,13 +1201,6 @@ params:
     switch: "off" # accepts: on/off | decide whether you want to show a cookie consent dialog to your users | default: "off"
     type: "opt-in" # accepts: opt-in/opt-out/none | In opt-in, website doesn't employ cookies to user's computer unless user gives cosent to opt in. In opt-out, cookies are employed on user's computer and the user is given the choice to opt out of cookies. In none, cookies are employed on the user's computer and user is not given a choice in that regard. Refrain from using none, unless you have zero customers from EU or similar countries with privacy protecting laws. | no default
     revokable: true # a button to revoke cookie consent appears when user hover in bottom area of the screen, regardless whether user's country requires revertable cookie consent | default: true
-    colors:
-      banner:
-        background: "#ffffff" # HEX | default: theme.nav
-        text: "#000000" # HEX | default: theme.antinav
-      button:
-        background: "#6d19fc" # HEX | default: theme.clr2
-        text: "#ffffff" # HEX | default: theme.nav
     content: # change the links below to appropriate url addresses
       message: | # no default
         By continuing to use this website, you agree to our <a href='/legal/privacy-policy/'>Privacy Policy</a>, <a href='/legal/cookie-policy/'>Cookie Policy</a> and our <a href='/legal/terms-and-conditions/'>Terms and Conditions</a> for your use of this website.
@@ -1125,7 +1217,8 @@ params:
     postImages: # customize behaviour for your posts' images
       thumbnail:
         size: "200px" # accepts value: string | integer: size of post images when they appear as thumbnails; string: unit of size | default: "200px"
-        borders: "rounded" # accepts value: square, rounded, circle, pill | choose the border radius of posts' images when they appear as thumbnails | optional | default: "rounded"
+        borders: "rounded" # accepts value: rounded/square/pill/circle | choose the border radius of posts' images when they appear as thumbnails | optional | default: "rounded"
+        position: "left" # accepts value: right/left/none | position of a post's image, when it appears as a thumbnail in a list (say) on landing page. regardless of "right" or "left", it looks the same on mobile-view. | optional | default: "left"
   mainSections: ["post"] # required, https://gohugo.io/functions/where/#mainsections
   #customVerification:
     #myWOT: "ba8579f668r8w3g62503" # content for meta tag to verify your website on 'Web Of Trust'

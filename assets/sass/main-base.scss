@@ -1,16 +1,3 @@
-// Theme specific colors
-{{ $theme := site.Params.theme }}
-
-$clr1: {{ $theme.clr1 | default "#7d1fa5" }};
-$clr2: {{ $theme.clr2 | default "#6d19fc" }};
-$nav: {{ $theme.nav | default "#ffffff" }}; //background
-$antinav: {{ $theme.antinav | default "#000000" }}; // text
-$mat: {{ $theme.mat | default "#f9f9f9" }};
-$clr1-light: mix($clr1, $nav, 5%);
-$clr2-light: mix($clr2, $nav, 5%);
-$nav-light: mix($nav, $antinav, 5%); // text
-$antinav-light: mix($antinav, $nav, 2%); // background
-
 // Import partials from sass dir
 @import
   "bootstrap/bootstrap",
@@ -28,18 +15,10 @@ scroll-behavior: smooth;
 // specifying this at top, so that, it is overridden when need be
 body {
 font-family: '{{ default "Lato" site.Params.font.general.family }}', sans-serif !important;
-background: $nav !important;
-color: $antinav !important;
 }
 
 .brand {
 font-family: '{{ default "Lato" site.Params.font.brand.family }}', sans-serif !important;
-}
-
-// since .brand-color class is used only custom JS
-/* purgecss ignore */
-.brand-color {
-color: {{ default "#7d1fa5" site.Params.brand.color }} !important;
 }
 
 {{ with site.Params.font.heading.list }}
@@ -87,11 +66,21 @@ font-family: Roboto, sans-serif !important;
   }
 }
 
+{{ $thumbnailBorders := site.Params.borders }}
+
 pre {
 @extend .p-3;
-{{ if ne site.Params.theme.borders "square" }}
-@extend .rounded;
-{{ end }}
+{{/* not adding border customization to pre tag for now
+{{ if eq $thumbnailBorders "square" }}
+@extend .rounded-0;
+{{- else if eq $thumbnailBorders "circle" -}}
+@extend .rounded-circle;
+{{- else if eq $thumbnailBorders "pill" -}}
+@extend .rounded-pill;
+{{- else -}}
+@extend .rounded-lg;
+{{- end -}}
+*/}}
 }
 
 // Enable animation for navbar and font awesome
@@ -108,9 +97,15 @@ box-shadow: inset 0 2px 3px 1px #ddd;
 .btn {
 @extend .shadow-sm;
 cursor: pointer;
-{{ if eq site.Params.theme.borders "square" }}
+{{ if eq $thumbnailBorders.buttons "square" }}
 @extend .rounded-0;
-{{ end }}
+{{- else if eq $thumbnailBorders.buttons "circle" -}}
+@extend .rounded-circle;
+{{- else if eq $thumbnailBorders.buttons "pill" -}}
+@extend .rounded-pill;
+{{- else -}}
+@extend .rounded-lg;
+{{- end -}}
 }
 
 input[type="search"]:hover, input[type="search"]:focus {
@@ -125,11 +120,15 @@ transition: all 0.3s ease 0s;
 // *
 .card {
 @extend .shadow-sm, .border-0, .p-3;
-background: $nav;
-color: $antinav;
-{{ if eq site.Params.theme.borders "square" }}
+{{ if eq $thumbnailBorders.cards "square" }}
 @extend .rounded-0;
-{{ end }}
+{{- else if eq $thumbnailBorders.cards "circle" -}}
+@extend .rounded-circle;
+{{- else if eq $thumbnailBorders.cards "pill" -}}
+@extend .rounded-pill;
+{{- else -}}
+@extend .rounded-lg;
+{{- end -}}
 }
 
 // Styling popover to make it a little cozy
@@ -139,16 +138,12 @@ border: 0;
 }
 
 .popover .popover-header {
-background-color: $nav;
-color: $antinav;
 font-size: 1.1rem;
 text-align: center;
 font-family: 'Lato', sans-serif;
 }
 
 .popover .popover-body {
-background-color: $nav;
-color: $antinav;
 padding: 1.25rem;
 font-family: 'Lato', sans-serif;
 }
@@ -170,225 +165,11 @@ td {
 @extend .align-middle;
 }
 
-// 
-{{ if ne site.Params.theme.gradientDirection.background "rtl" -}}
-
-.hero-gradient {
-background: $clr1;
-background: linear-gradient(36deg, $clr1 0%, $clr2 80%);
-}
-
-.hero-gradient-light {
-background: $clr1-light;
-background: linear-gradient(36deg, $clr1-light 0%, $clr2-light 80%); 
-}
-
-{{- else -}}
-
-.hero-gradient {
-background: $clr2;
-background: linear-gradient(36deg, $clr2 0%, $clr1 80%);
-}
-
-.hero-gradient-light {
-background: $clr2-light;
-background: linear-gradient(36deg, $clr2-light 0%, $clr1-light 80%); 
-}
-
-{{- end }}
-
-.bg-clr1 {
-background: mix($clr1, $clr2, 95%) !important;
-}
-
-.bg-clr2 {
-background: mix($clr1, $clr2, 5%) !important;
-}
-
-.bg-clr1-light {
-background: $clr1-light !important;
-}
-
-.bg-clr2-light {
-background: $clr2-light !important;
-}
-
-.bg-nav {
-background: $nav !important;
-}
-
-.bg-antinav {
-background: $antinav !important;
-}
-
-.bg-nav-light {
-background: $nav-light !important;
-}
-
-.bg-antinav-light {
-background: $antinav-light !important;
-}
-
-.bg-mat {
-background: $mat !important;
-}
-
-.text-gradient {
-background: linear-gradient(36deg, {{ if ne site.Params.theme.gradientDirection.text "rtl" -}} $clr1 0%, $clr2 80% {{ else }} $clr2 0%, $clr1 80% {{ end }}) !important;
-background-clip: text !important;
-color: transparent !important;
-}
-
-.text-clr1 {
-color: $clr1 !important;
-}
-
-.text-clr2 {
-color: $clr2 !important;
-}
-
-.text-clr1-light {
-color: $clr1-light !important;
-}
-
-.text-clr2-light {
-color: $clr2-light !important;
-}
-
-.text-nav {
-color: $nav !important;
-}
-
-.text-nav-light {
-color: $nav-light !important;
-}
-
-.text-antinav {
-color: $antinav !important;
-}
-
-.text-antinav-light {
-color: $antinav-light !important;
-}
-
-.btn-grad {
-background-image: linear-gradient(90deg, {{ if ne site.Params.theme.gradientDirection.button "rtl" -}} $clr1 0%, $clr2 100% {{- else -}} $clr2 0%, $clr1 100% {{- end }});
-}
-
 //
 button.close{
 outline: none;
 }
 
-// * general icons to be shown in black, even when they are used in anchored tags
-.fa-comments {
-color: #000000;
-}
-
-.fa-rss {
-color: #f26522;
-}
-
-// * brands
-.fa-gitlab {
-color: #fca326;
-}
-
-.fa-github {
-color: #333333;
-}
-
-.fa-steam {
-color: #00adee;
-}
-
-.fa-twitter {
-color: #1da1f2;
-}
-
-.fa-facebook {
-color: #3b5998;
-}
-
-.fa-instagram {
-color: #e1306c;
-}
-
-.fa-youtube {
-color: #ff0000;
-}
-
-.fa-pinterest {
-color: #bd081c;
-}
-
-.fa-google-plus {
-color: #dd4b39;
-}
-
-.fa-linkedin {
-color: #0077b5;
-}
-
-.fa-reddit {
-color: #ff4500;
-}
-
-.fa-flickr {
-color: #0063dc;
-}
-
-.fa-deviantart {
-color: #05cc47;
-}
-
-.fa-vk {
-color: #45668e;
-}
-
-.fa-mastodon {
-color: #2A8FDD;
-}
-
-.fa-bandcamp {
-color: #629aa9;
-}
-
-.fa-tumblr {
-color: #35465c;
-}
-
-.fa-medium {
-color: #000000;
-}
-
-.fa-wikipedia-w {
-color: #000000;
-}
-
-.fa-telegram {
-color: #0088cc;
-}
-
-.fa-whatsapp {
-color: #25d366;
-}
-
-.fa-apple {
-color: #666666;
-}
-
-.fa-android {
-color: #a4c639;
-}
-
-.fa-linux {
-color: #000000;
-}
-
-.fa-windows {
-color: #0078d7;
-}
 
 {{ if eq site.Params.cookieConsent.switch "on" }}
 /* purgecss start ignore */

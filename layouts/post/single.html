@@ -9,18 +9,28 @@
   <p class="description">{{ .Description }}</p>
 </div>
 <div class="container-fluid bg-nav p-4">
+  
+  <!-- show no TOC if empty -->
+  {{ $TOC := false }}
+  <!-- https://discourse.gohugo.io/t/check-for-empty-tableofcontents/29737 -->
+  {{ if and (or (ne .Params.toc false) (ne .Params.toc "false")) (and (ne .TableOfContents "<nav id=\"TableOfContents\"></nav>") (ne .TableOfContents "")) }}
+    {{ $TOC = true }}
+  {{ end }}
+  
+  {{ if $TOC }}
   <div class="row">
     <div class="col-md-3">
-      {{ if or (ne .Params.toc false) (ne .Params.toc "false") }}
       <div class="bg-mat p-4 rounded" style="overflow-x: auto;">
         <div class="h4 mb-3">
         Contents
         </div>
         {{ .TableOfContents }}
       </div>
-      {{ end }}
     </div>
+ 
     <div class="col-md-9">
+  {{ end }}
+    
       {{- $postMetaTop := false }}
       {{- $postMetaBottom := false }}
       {{- range site.Params.position.postMeta }}
@@ -35,7 +45,7 @@
       <div class="py-1">
         <div class="row">
           {{- if and site.Params.position.postMeta $postMetaTop }}
-          <div class="col-md-7 small text-muted post-meta my-auto">
+          <div class="col-md-auto small text-muted post-meta my-auto">
             
             {{- $wordCount := "" }}
             {{- $readingTime := "" }}
@@ -71,7 +81,7 @@
           {{ end }}
           
           {{ if and site.Params.social.share (ne site.Params.position.social.share "bottom") }}
-          <div class="col-md-auto ml-3 my-auto">
+          <div class="col-md-auto ml-auto my-auto mr-2">
             <div class="row">
               <div class="col-auto p-0 my-auto">
               Share on:&nbsp;&nbsp;
@@ -206,8 +216,11 @@
         
         </div>
       {{ end }}
-    </div>
-  </div>
+    
+  {{ if $TOC }}  
+    </div><!-- col-md-9 -->
+  </div><!-- row -->
+  {{ end }}
   
   {{ if site.DisqusShortname }}
     <div class="my-5">

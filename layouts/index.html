@@ -2,6 +2,7 @@
 
 {{/* This code prints all taxonomies (including custom ones specified by the user) along with terms in each taxonomy.
 We don't know how to have access to a specific page's taxonomies yet. Having that would allow to display via a single.html layout, a post's taxonomies including custom ones.
+Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#display-a-single-piece-of-contents-taxonomies
 
 {{- $taxonomy_list := slice }}
 {{- range $key, $value := site.Taxonomies }}
@@ -12,20 +13,25 @@ We don't know how to have access to a specific page's taxonomies yet. Having tha
   {{- range $taxonomy_list }}
     {{- range $key, $value := (index site.Taxonomies .) -}}
       <div class="">
-        $key: {{ delimit $value ", " }}
+        {{ $key }}: {{ delimit $value ", " }}
       </div>
     {{- end }}
   {{- end }}
 {{- end -}}
 */}}
 
+{{ $homeBackgroundImage := "" }}
+{{- with site.Params.backgImage.landingPage }}
+  {{ $homeBackgroundImage = . }}
+{{ end }}
+
 <div class="jumbotron jumbotron-fluid text-center d-flex flex-column mb-0 text-light hero-gradient"
-{{- if site.Params.backgImage.landingPage }}
- style="background: url('{{ site.Params.backgImage.landingPage | safeURL }}') 50% 95% / cover no-repeat fixed; box-shadow: inset 2000px 0 0 0 rgba(0, 0, 0, 0.65);"
+{{- if $homeBackgroundImage }}
+ style="background: url('{{ $homeBackgroundImage | safeURL }}') 50% 95% / cover no-repeat fixed; box-shadow: inset 2000px 0 0 0 rgba(0, 0, 0, 0.65);"
 {{- end -}}
 >
   <div style="height:3.5rem;"></div>
-  <div class="container-fluid{{ if site.Params.backgImage.landingPage }} py-5{{ end }}">
+  <div class="container-fluid{{ if $homeBackgroundImage }} py-5{{ end }}">
     {{ if site.Params.meta.tagline }}
       <h1 class="d-inline-block">{{ site.Params.meta.tagline }}</h1>
     {{ end }}
@@ -51,7 +57,8 @@ We don't know how to have access to a specific page's taxonomies yet. Having tha
       <div class="card mb-3">
         <div class="card-body">
           
-          <div class="row {{- if eq site.Params.position.thumbnail "right" }} flex-md-row-reverse{{- end -}}">
+          {{- if or (ne site.Params.userExperience.postImages.thumbnail.position "none") (ne .Params.image.thumbnail.position "none") -}}
+          <div class="row {{- if or (eq site.Params.userExperience.postImages.thumbnail.position "right") (eq .Params.image.thumbnail.position "right") }} flex-md-row-reverse{{- end -}}">
           
             <div class="col-md-auto my-auto">
               {{ if .Params.image.src -}}
@@ -61,7 +68,8 @@ We don't know how to have access to a specific page's taxonomies yet. Having tha
                   {{- $thumbnailBorders = .Params.image.thumbnail.borders }}
                 {{- else if $thumbnailBorders }}
                   {{/*
-                    If site.Params.userExperience.postImages.thumbnail.borders is specified, we wish to use that value.
+                    If site.Params.userExperience.postImages.thumbnail.borders is specified, $thumbnailBorders gets its value. We wish to use that value.
+                    If it isn't specified, then if site.Params.borders is specified, $thumbnailBorders gets the value of site.Params.borders.
                     Go Templates treat the following values as false:
 
                       false (boolean)
@@ -103,6 +111,7 @@ We don't know how to have access to a specific page's taxonomies yet. Having tha
             
             
             <div class="col my-auto py-2">
+          {{ end }}
               <h2>
                 <a class="text-reset" href="{{ .Permalink }}"><span class="card-title text-reset"> {{ .Title }}</span></a>
               </h2>
@@ -216,10 +225,12 @@ We don't know how to have access to a specific page's taxonomies yet. Having tha
               {{ end }}
               
               <a class="font-weight-bold text-reset text-decoration-none" href="{{ .Permalink }}"><nobr>Read more →</nobr></a>
+            
+            {{ if ne site.Params.userExperience.postImages.thumbnail.position "none" }}
             </div>
             
           </div> <!-- row -->
-            
+            {{ end }}
         </div>
         
       </div>

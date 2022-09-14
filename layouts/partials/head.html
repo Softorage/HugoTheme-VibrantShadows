@@ -7,75 +7,23 @@
   {{- .Title | default site.Title }} {{- default " | " site.Params.meta.titleSeparator -}} {{ if not .IsHome }}{{ site.Title }}{{ else }}{{ site.Params.meta.tagline }}{{ end -}}
   </title>
   
-  <!-- Googe Analytics, Cookie Consent should work only on production website -->
-  {{ if eq hugo.Environment "production" -}}
-    {{ if site.GoogleAnalytics }}
-      <!-- Google Analytics shall work only on production website -->
-      {{ if and (eq site.Params.cookieConsent.switch "on") (eq site.Params.cookieConsent.type "opt-in") }}
-        <script>
-        // Disable tracking by default
-        window['{{ printf "%s%s" "ga-disable-" site.GoogleAnalytics }}'] = true;
-        </script>
-      {{ else if eq site.Params.userExperience.googleAnalytics.script 1 }}
-        <!-- we will be running this if cookie consent type isn't set to opt-in and if gAnalytics script minimal-analytics by James Hill is selected. see: https://github.com/jahilldev/minimal-analytics/tree/main/packages/ga4#onload -->
-        <script>
-        window.minimalAnalytics = {
-          trackingId: '{{ site.GoogleAnalytics }}',
-          autoTrack: true, // <-- initialize tracking
-        };
-        </script>
-      {{ end }}
-      
-      {{ if or (ne site.Params.userExperience.googleAnalytics.script 1) (ne site.Params.userExperience.googleAnalytics.script 2) }}
-        {{ if hasPrefix site.GoogleAnalytics "UA-" }}
-          <!-- prefetch -->
-          <link rel="dns-prefetch" href="https://www.google-analytics.com/">
-          <link rel="preconnect" href="https://www.google-analytics.com/" crossorigin>
-          {{ if ne site.Params.userExperience.googleAnalytics.loading "async" }}
-            {{ template "_internal/google_analytics.html" . }}
-          {{ else }}
-            {{ template "_internal/google_analytics_async.html" . }}
-          {{ end }}
-        {{ else if hasPrefix site.GoogleAnalytics "G-" }}
-          <!-- prefetch -->
-          <link rel="dns-prefetch" href="https://www.googletagmanager.com/">
-          <link rel="preconnect" href="https://www.googletagmanager.com/" crossorigin>
-          {{ template "_internal/google_analytics.html" . }}
-        {{ else }}
-          <script> alert("Check if you have provided correct Google Analytics ID.");</script>
-        {{ end }}
-      {{ else if eq site.Params.userExperience.googleAnalytics.script 1 }}
-        {{- $script := resources.GetRemote "https://cdn.jsdelivr.net/npm/@minimal-analytics/ga4/dist/index.js" }}
-        <script src="{{ $script.RelPermalink }}" async></script>
-      {{ else if eq site.Params.userExperience.googleAnalytics.script 2 }}
-        <script>
-        enScroll=!1;const lStor=localStorage,sStor=sessionStorage,doc=document,docEl=document.documentElement,docBody=document.body,docLoc=document.location,w=window,s=screen,nav=navigator||{};function a(){const k="{{ site.GoogleAnalytics }}",t=()=>Math.floor(Math.random()*1e9)+1,n=()=>Math.floor(Date.now()/1e3),y=()=>(sStor._p||(sStor._p=t()),sStor._p),v=()=>t()+"."+n(),p=()=>(lStor.cid_v4||(lStor.cid_v4=v()),lStor.cid_v4),m=lStor.getItem("cid_v4"),u=()=>m?void 0:enScroll==!0?void 0:"1",l=()=>(sStor.sid||(sStor.sid=n()),sStor.sid),d=()=>{if(!sStor._ss)return sStor._ss="1",sStor._ss;if(sStor.getItem("_ss")=="1")return void 0},r="1",h=()=>{if(sStor.sct)if(enScroll==!0)return sStor.sct;else x=+sStor.getItem("sct")+ +r,sStor.sct=x;else sStor.sct=r;return sStor.sct},e=docLoc.search,f=new URLSearchParams(e),a=["q","s","search","query","keyword"],g=a.some(t=>e.includes("&"+t+"=")||e.includes("?"+t+"=")),i=()=>g==!0?"view_search_results":enScroll==!0?"scroll":"page_view",b=()=>enScroll==!0?"90":void 0,j=()=>{if(i()=="view_search_results"){for(let e of f)if(a.includes(e[0]))return e[1]}else return void 0},o=encodeURIComponent,_=e=>{let t=[];for(let n in e)e.hasOwnProperty(n)&&e[n]!==void 0&&t.push(o(n)+"="+o(e[n]));return t.join("&")},O=!1,C="https://www.google-analytics.com/g/collect",E=_({v:"2",tid:k,_p:y(),sr:(s.width*w.devicePixelRatio+"x"+s.height*w.devicePixelRatio).toString(),ul:(nav.language||void 0).toLowerCase(),cid:p(),_fv:u(),_s:"1",dl:docLoc.origin+docLoc.pathname+e,dt:doc.title||void 0,dr:doc.referrer||void 0,sid:l(),sct:h(),seg:"1",en:i(),"epn.percent_scrolled":b(),"ep.search_term":j(),_ss:d(),_dbg:O?1:void 0}),c=C+"?"+E;if(nav.sendBeacon)nav.sendBeacon(c);else{let e=new XMLHttpRequest;e.open("POST",c,!0)}}a();function sPr(){return(docEl.scrollTop||docBody.scrollTop)/((docEl.scrollHeight||docBody.scrollHeight)-docEl.clientHeight)*100}doc.addEventListener("scroll",sEv,{passive:!0});function sEv(){const e=sPr();if(e<90)return;enScroll=!0,a(),doc.removeEventListener("scroll",sEv,{passive:!0})}
-        </script>
-      {{ end }}
-    {{ end }}
-    {{ if ne site.Params.seo.switch "off" }}
-      <!-- SEO tag -->
-      {{- partial "seo.html" . -}}
-    {{ end }}
-    <!-- Hugo's Tag shall work only on production website -->
-    {{ hugo.Generator }}
-  {{- else }}
-    {{ if ne site.Params.seo.switch "off" }}
-      <!-- SEO tag -->
-      {{- partial "seo.html" . -}}
-    {{ end }}
-  {{- end }}
+  <!-- Base CSS, which contains: bootstrap, font-awesome, custom CSS -->
+  {{ $cssBase := resources.Get "sass/main-base.scss" | resources.ExecuteAsTemplate "/assets/css/main-base.scss" . | toCSS }}
+  <!-- Theme CSS -->
+  {{ $cssTheme := resources.Get "sass/theme.scss" | resources.ExecuteAsTemplate "/assets/css/theme.scss" . | toCSS  }}
+  <!-- Aggregated CSS -->
+  {{- $css := slice $cssBase $cssTheme | resources.Concat "/assets/css/main.css" }}
   
-  <!-- Minified Aggregated CSS -->
-  {{- $css := resources.Get "sass/main.scss" | resources.ExecuteAsTemplate "/assets/css/main.scss" . | toCSS }}
   <!-- Run PostCSS on $css, only if on Production Environment, since its builds take considerably more time -->
   {{ if and (eq hugo.Environment "production") (eq site.Params.seo.speedMode "enable") -}}
-    {{- $css = $css | postCSS | fingerprint | resources.PostProcess }}
+    {{- $css = $css | postCSS | resources.PostProcess | fingerprint }}
   {{- else }}
     {{- $css = $css | minify | fingerprint }}
   {{- end }}
   
-  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
+  <!-- Note: Changing integrity attribute of CSS link tag dynamicaly, gives error with respect to subresource integrity. -->
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity | safeHTMLAttr }}" crossorigin="anonymous">
+
   <!-- Prefetch and Preconnect Google Fonts API -->
   <link rel="dns-prefetch" href="//fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
@@ -102,4 +50,65 @@
   <!-- WOT Verification -->
   <meta name="wot-verification" content="{{ site.Params.customVerification.myWOT }}" />
   {{ end }}
+  
+  <!-- Googe Analytics, Cookie Consent should work only on production website -->
+  {{ if eq hugo.Environment "production" -}}
+    {{ if site.GoogleAnalytics }}
+      <!-- Google Analytics shall work only on production website -->
+      {{ if and (eq site.Params.cookieConsent.switch "on") (eq site.Params.cookieConsent.type "opt-in") }}
+        <script>
+        // Disable tracking by default
+        window['{{ printf "%s%s" "ga-disable-" site.GoogleAnalytics }}'] = true;
+        </script>
+      {{ else if eq site.Params.userExperience.googleAnalytics.script 1 }}
+        <!-- we will be running this if cookie consent type isn't set to opt-in and if gAnalytics script minimal-analytics by James Hill is selected. see: https://github.com/jahilldev/minimal-analytics/tree/main/packages/ga4#onload -->
+        <script>
+        window.minimalAnalytics = {
+          trackingId: '{{ site.GoogleAnalytics }}',
+          autoTrack: true, // <-- initialize tracking
+        };
+        </script>
+      {{ end }}
+      
+      {{ if or (ne site.Params.userExperience.googleAnalytics.script 1) (ne site.Params.userExperience.googleAnalytics.script 2) }}
+        {{ if hasPrefix site.GoogleAnalytics "UA-" }}
+          <!-- prefetch -->
+          <link rel="dns-prefetch" href="https://www.google-analytics.com/">
+          <link rel="preconnect" href="https://www.google-analytics.com/" crossorigin>
+          {{ warnf "You are using Universal Analytics tag of Google Analytics, which is set to be deprecated." }}
+          {{ if ne site.Params.userExperience.googleAnalytics.loading "async" }}
+            {{ template "_internal/google_analytics.html" . }}
+          {{ else }}
+            {{ template "_internal/google_analytics_async.html" . }}
+          {{ end }}
+        {{ else if hasPrefix site.GoogleAnalytics "G-" }}
+          <!-- prefetch -->
+          <link rel="dns-prefetch" href="https://www.googletagmanager.com/">
+          <link rel="preconnect" href="https://www.googletagmanager.com/" crossorigin>
+          {{ template "_internal/google_analytics.html" . }}
+        {{ else }}
+          {{ warnf "Check if you have provided correct Google Analytics ID in config file." }}
+        {{ end }}
+      {{ else if eq site.Params.userExperience.googleAnalytics.script 1 }}
+        {{- $script := resources.GetRemote "https://cdn.jsdelivr.net/npm/@minimal-analytics/ga4/dist/index.js" }}
+        <script src="{{ $script.RelPermalink }}" async></script>
+      {{ else if eq site.Params.userExperience.googleAnalytics.script 2 }}
+        <script>
+        enScroll=!1;const lStor=localStorage,sStor=sessionStorage,doc=document,docEl=document.documentElement,docBody=document.body,docLoc=document.location,w=window,s=screen,nav=navigator||{};function a(){const k="{{ site.GoogleAnalytics }}",t=()=>Math.floor(Math.random()*1e9)+1,n=()=>Math.floor(Date.now()/1e3),y=()=>(sStor._p||(sStor._p=t()),sStor._p),v=()=>t()+"."+n(),p=()=>(lStor.cid_v4||(lStor.cid_v4=v()),lStor.cid_v4),m=lStor.getItem("cid_v4"),u=()=>m?void 0:enScroll==!0?void 0:"1",l=()=>(sStor.sid||(sStor.sid=n()),sStor.sid),d=()=>{if(!sStor._ss)return sStor._ss="1",sStor._ss;if(sStor.getItem("_ss")=="1")return void 0},r="1",h=()=>{if(sStor.sct)if(enScroll==!0)return sStor.sct;else x=+sStor.getItem("sct")+ +r,sStor.sct=x;else sStor.sct=r;return sStor.sct},e=docLoc.search,f=new URLSearchParams(e),a=["q","s","search","query","keyword"],g=a.some(t=>e.includes("&"+t+"=")||e.includes("?"+t+"=")),i=()=>g==!0?"view_search_results":enScroll==!0?"scroll":"page_view",b=()=>enScroll==!0?"90":void 0,j=()=>{if(i()=="view_search_results"){for(let e of f)if(a.includes(e[0]))return e[1]}else return void 0},o=encodeURIComponent,_=e=>{let t=[];for(let n in e)e.hasOwnProperty(n)&&e[n]!==void 0&&t.push(o(n)+"="+o(e[n]));return t.join("&")},O=!1,C="https://www.google-analytics.com/g/collect",E=_({v:"2",tid:k,_p:y(),sr:(s.width*w.devicePixelRatio+"x"+s.height*w.devicePixelRatio).toString(),ul:(nav.language||void 0).toLowerCase(),cid:p(),_fv:u(),_s:"1",dl:docLoc.origin+docLoc.pathname+e,dt:doc.title||void 0,dr:doc.referrer||void 0,sid:l(),sct:h(),seg:"1",en:i(),"epn.percent_scrolled":b(),"ep.search_term":j(),_ss:d(),_dbg:O?1:void 0}),c=C+"?"+E;if(nav.sendBeacon)nav.sendBeacon(c);else{let e=new XMLHttpRequest;e.open("POST",c,!0)}}a();function sPr(){return(docEl.scrollTop||docBody.scrollTop)/((docEl.scrollHeight||docBody.scrollHeight)-docEl.clientHeight)*100}doc.addEventListener("scroll",sEv,{passive:!0});function sEv(){const e=sPr();if(e<90)return;enScroll=!0,a(),doc.removeEventListener("scroll",sEv,{passive:!0})}
+        </script>
+      {{ end }}
+    {{ end }}
+    {{ if ne site.Params.seo.switch "off" }}
+      <!-- SEO tag -->
+      {{- partial "seo.html" . -}}
+    {{ end }}
+    <!-- Hugo's Tag shall work only on production website -->
+    {{ hugo.Generator }}
+  {{- else }}
+    {{ if ne site.Params.seo.switch "off" }}
+      <!-- SEO tag -->
+      {{- partial "seo.html" . -}}
+    {{ end }}
+  {{- end }}
 </head>
+

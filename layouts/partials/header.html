@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light fixed-top flex-column">
     <div class="container-fluid">
       
-      <a class="navbar-brand{{ if ne site.Params.theme.borders "square" }} rounded{{ end }} px-3" href="{{ site.BaseURL }}"><span class="text-light"><span class="brand">
+      <a class="navbar-brand px-3" href="{{ site.BaseURL }}"><span class="text-light"><span class="brand">
       {{- $navbar_brand_style := site.Params.brand.navbar | default (slice "logo" "name") }}
       {{- if and (in $navbar_brand_style "logo") (site.Params.brand.logo_32px) -}}
         <img src="{{ site.Params.brand.logo_32px }}" alt="{{ site.Params.brand.name }} logo" height="32"></img>
@@ -11,17 +11,33 @@
       {{- end -}}
       </span></span></a>
       
-      {{ if or site.Menus.main (and site.Params.social.profiles (eq site.Params.position.social.profiles "navbar")) }}
+      {{ $mainMenu := false }}
+      {{ $socialProfilesOnNavbar := false }}
+      {{ $themeToggle := false }}
+      
+      {{ if site.Menus.main }}
+        {{ $mainMenu = true }}
+      {{ end }}
+      {{ if and site.Params.social.profiles (eq site.Params.position.social.profiles "navbar") }}
+        {{ $socialProfilesOnNavbar = true }}
+      {{ end }}
+      {{ if site.Params.theme.toggle.switch }}
+       {{ $themeToggle = true }}
+      {{ end }}
+      
+      
+      {{ if or $mainMenu $socialProfilesOnNavbar $themeToggle }}
         <a class="navbar-toggler border-0 bg-nav p-2" role="button" href="#" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="text-clr2">&#9776;</span>
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          {{ if $mainMenu }}
           <ul class="navbar-nav
-            {{- if or (and site.Params.social.profiles (eq site.Params.position.social.profiles "navbar")) (eq site.Params.position.navbarMenu "left") }} mr-md-auto
+            {{- if or ($socialProfilesOnNavbar) (eq site.Params.position.navbarMenu "left") }} mr-md-auto
             {{- else }} ml-md-auto
             {{- end }}">
             {{ $currentPage := . }} <!-- since we are in a partial $ sign isn't global context. -->
-            {{ range site.Menus.main.ByWeight }}
+            {{ range $mainMenu.ByWeight }}
               {{ if .HasChildren }}
                 <li class="nav-item dropdown mx-1 my-2{{ if $currentPage.HasMenuCurrent "main" . }} active{{ end }}">
                   <a class="nav-link dropdown-toggle btn bg-nav text-clr1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ if .Pre }}{{ .Pre }} {{ end }}<span>{{ .Name }}</span></a>
@@ -40,9 +56,21 @@
               {{ end }}
             {{ end }}
           </ul>
-          {{ if site.Params.social.profiles }}
-            {{ if eq site.Params.position.social.profiles "navbar" }}
-              <div class="navbar-navalign-items-center ml-md-auto my-2 bg-nav{{ if ne site.Params.theme.borders "square" }} rounded{{ end }} p-1 pr-2">
+          {{ end }}
+          {{ if $socialProfilesOnNavbar }}
+              
+              <div class="ml-md-auto mr-2 my-auto p-1 pr-2 bg-nav
+              {{- $thumbnailBorders := site.Params.borders.buttons }}
+              {{- if eq $thumbnailBorders "square" }}
+              rounded-0
+              {{ else if eq $thumbnailBorders "circle" }}
+              rounded-circle
+              {{ else if eq $thumbnailBorders "pill" }}
+              rounded-pill
+              {{ else }}
+              rounded-lg
+              {{ end }}
+              ">
                 {{ range $key, $url := site.Params.social.profiles }}
                   {{ if eq $key "facebook"}}
                     <a class="ml-1" href="{{ $url }}"><span class="fab fa-facebook" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
@@ -85,10 +113,64 @@
                   {{ end }}
                 {{ end }}
               </div>
-            {{ end }}
+          {{ end }}
+          
+          {{ if $themeToggle }}
+          <!-- Inspired from: https://www.codeply.com/p/UsTEwDkzNp -->
+          <div class="{{ if or $socialProfilesOnNavbar $mainMenu -}} ml-3 {{- else -}} ml-auto {{- end }}">
+            <input type="checkbox" class="theme-toogle-checkbox" id="theme_toggle" />
+            <label class="theme-toggle-label theme-toggle my-auto" for="theme_toggle">
+              {{ if site.Params.theme.toggle.caption.dark }}
+                {{ if eq (index site.Params.theme.toggle.caption.dark 0) "icon" }}
+                  {{ if eq (index site.Params.theme.toggle.caption.dark 1) "fa-dark" }}
+                  <span class="fas fa-adjust"></span>
+                  {{ else if eq (index site.Params.theme.toggle.caption.dark 1) "fa-moon" }}
+                  <span class="fas fa-moon"></span>
+                  {{ else if eq (index site.Params.theme.toggle.caption.dark 1) "utf-dark" }}
+                  <span>🕶️</span>
+                  {{ else if eq (index site.Params.theme.toggle.caption.dark 1) "utf-moon" }}
+                  <span>🌙</span>
+                  {{ else if eq (index site.Params.theme.toggle.caption.dark 1) "utf-moon-face-left" }}
+                  <span>🌛</span>
+                  {{ else if eq (index site.Params.theme.toggle.caption.dark 1) "utf-moon-face-right" }}
+                  <span>🌜</span>
+                  {{ else if eq (index site.Params.theme.toggle.caption.dark 1) "utf-full-moon" }}
+                  <span>🌕</span>
+                  {{ end }}
+                {{ else }}
+                  {{ index site.Params.theme.toggle.caption.dark 1 }}
+                {{ end }}
+              {{ else }}
+              <span class="fas fa-moon"></span>
+              {{ end }}
+                
+              {{ if site.Params.theme.toggle.caption.light }}
+                {{ if eq (index site.Params.theme.toggle.caption.light 0) "icon" }}
+                  {{ if eq (index site.Params.theme.toggle.caption.light 1) "fa-light" }}
+                  <span class="fas fa-lightbulb"></span>
+                  {{ else if eq (index site.Params.theme.toggle.caption.light 1) "fa-sun" }}
+                  <span class="fas fa-sun"></span>
+                  {{ else if eq (index site.Params.theme.toggle.caption.light 1) "utf-light" }}
+                  <span>💡</span>
+                  {{ else if eq (index site.Params.theme.toggle.caption.light 1) "utf-sun" }}
+                  <span>☀️</span>
+                  {{ else if eq (index site.Params.theme.toggle.caption.light 1) "utf-sun-face" }}
+                  <span>🌞</span>
+                  {{ end }}
+                {{ else }}
+                  {{ index site.Params.theme.toggle.caption.light 1 }}
+                {{ end }}
+              {{ else }}
+              <span class="fas fa-sun"></span>
+              {{ end }}
+              
+              <div class="ball"></div>
+            </label>
+          </div>
           {{ end }}
         </div>
       {{ end }}
+      
     </div>
     
   </nav>
