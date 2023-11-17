@@ -369,7 +369,7 @@ color: #0078d7;
 }
 
 // OSANO Cookie Consent Theming
-.cc-window {
+.cc-window, .cc-revoke {
 color: var(--antinav);
 background-color: var(--mat);
 }
@@ -378,3 +378,4 @@ color: var(--nav);
 background-color: var(--clr2);
 border-color: transparent;
 }
+

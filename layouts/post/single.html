@@ -33,18 +33,23 @@
     
       {{- $postMetaTop := false }}
       {{- $postMetaBottom := false }}
-      {{- range site.Params.position.postMeta }}
-        {{- if eq .content "top" }}
-          {{- $postMetaTop = true }}
-        {{- else if eq .content "bottom" }}
-          {{- $postMetaBottom = true }}
+      {{ $globalPostMetaPosition := "" }}
+      {{ with site.Params.position.postMeta }}
+        {{ $globalPostMetaPosition = . }}
+        {{- range site.Params.position.postMeta }}
+          {{- if eq .content "top" }}
+            {{- $postMetaTop = true }}
+          {{- else if eq .content "bottom" }}
+            {{- $postMetaBottom = true }}
+          {{- end }}
         {{- end }}
-      {{- end }}
+      {{ end }}
+      
         
-      {{ if or (and site.Params.social.share (eq site.Params.position.social.share "top")) (and site.Params.position.postMeta $postMetaTop) (and (site.Params.position.postMeta.tags.content) (eq site.Params.position.postMeta.tags.content "top")) }}
+      {{ if or (and site.Params.social.share (eq site.Params.position.social.share "top")) ($postMetaTop) (eq site.Params.position.postMeta.tags.content "top") }}
       <div class="py-1">
         <div class="row">
-          {{- if and site.Params.position.postMeta $postMetaTop }}
+          {{- if $postMetaTop }}
           <div class="col-md-auto small text-muted post-meta my-auto">
             
             {{- $wordCount := "" }}
@@ -52,17 +57,17 @@
             {{- $author := "" }}
             {{- $lastUpdated := "" }}
             
-            {{- if and site.Params.position.postMeta.wordCount.content (eq site.Params.position.postMeta.wordCount.content "top") }}
+            {{- if eq site.Params.position.postMeta.wordCount.content "top" }}
               {{- $wordCount = print (.WordCount) " words" }}
             {{- end }}
-            {{- if and site.Params.position.postMeta.readingTime.content (eq site.Params.position.postMeta.readingTime.content "top") }}
+            {{- if eq site.Params.position.postMeta.readingTime.content "top" }}
               {{- $readingTime = print (lang.NumFmt 0 (div .WordCount 130)) " min read" -}}
             {{- end }}
-            {{- if and site.Params.position.postMeta.author.content (eq site.Params.position.postMeta.author.content "top") }}
+            {{- if eq site.Params.position.postMeta.author.content "top" }}
               {{- $author = print "By " (default site.Params.meta.author .Params.author) }}
             {{- end }}
             {{- if .Lastmod }}
-              {{- if and site.Params.position.postMeta.lastUpdated.content (eq site.Params.position.postMeta.lastUpdated.content "top") }}
+              {{- if eq site.Params.position.postMeta.lastUpdated.content "top" }}
                 {{- $lastUpdated = print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") }}</span>
               {{- end }}
             {{- end }}
@@ -116,7 +121,7 @@
           {{ end }}
         </div>
         
-        {{ if and (site.Params.position.postMeta.tags.content) (eq site.Params.position.postMeta.tags.content "top") }}
+        {{ if eq site.Params.position.postMeta.tags.content "top" }}
           <div class="pt-2 pb-3">
           {{- range .Params.tags -}}
             <a href="/tags/{{ . | urlize }}/"><span class="badge badge-pill bg-clr2 text-nav mr-2 py-2">#{{ . | humanize | upper }}</span></a>
@@ -131,10 +136,10 @@
       {{ .Content }}
       </div>
       
-      {{ if or (and site.Params.social.share (eq site.Params.position.social.share "bottom")) (and site.Params.position.postMeta $postMetaBottom) (and (site.Params.position.postMeta.tags.content) (eq site.Params.position.postMeta.tags.content "bottom")) }}
+      {{ if or (eq site.Params.position.social.share "bottom") ($postMetaBottom) (eq site.Params.position.postMeta.tags.content "bottom") }}
         <div class="pt-4 mt-2 border-top">
           <div class="row">
-            {{- if and site.Params.position.postMeta $postMetaBottom }}
+            {{- if $postMetaBottom }}
             <div class="col-md-7 small text-muted post-meta my-1">
             
               {{- $wordCount := "" }}
@@ -142,17 +147,17 @@
               {{- $author := "" }}
               {{- $lastUpdated := "" }}
               
-              {{- if and site.Params.position.postMeta.wordCount.content (eq site.Params.position.postMeta.wordCount.content "bottom") }}
+              {{- if eq site.Params.position.postMeta.wordCount.content "bottom" }}
                 {{- $wordCount = print (.WordCount) " words" }}
               {{- end }}
-              {{- if and site.Params.position.postMeta.readingTime.content (eq site.Params.position.postMeta.readingTime.content "bottom") }}
+              {{- if eq site.Params.position.postMeta.readingTime.content "bottom" }}
                 {{- $readingTime = print (lang.NumFmt 0 (div .WordCount 130)) " min read" -}}
               {{- end }}
-              {{- if and site.Params.position.postMeta.author.content (eq site.Params.position.postMeta.author.content "bottom") }}
+              {{- if eq site.Params.position.postMeta.author.content "bottom" }}
                 {{- $author = print "By " (default site.Params.meta.author .Params.author) }}
               {{- end }}
               {{- if .Lastmod }}
-                {{- if and site.Params.position.postMeta.lastUpdated.content (eq site.Params.position.postMeta.lastUpdated.content "bottom") }}
+                {{- if eq site.Params.position.postMeta.lastUpdated.content "bottom" }}
                   {{- $lastUpdated = print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") }}</span>
                 {{- end }}
               {{- end }}
@@ -206,7 +211,7 @@
             {{ end }}
           </div>
         
-          {{ if and (site.Params.position.postMeta.tags.content) (ne site.Params.position.postMeta.tags.content "top") }}
+          {{ if ne site.Params.position.postMeta.tags.content "top" }}
             <div class="mt-3">
               {{- range .Params.tags -}}
                 <a href="/tags/{{ . | urlize }}/"><span class="badge badge-pill bg-clr2 text-nav mr-2 py-2">#{{ . | humanize | upper }}</span></a>

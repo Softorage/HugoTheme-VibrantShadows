@@ -32,64 +32,82 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
 >
   <div style="height:3.5rem;"></div>
   <div class="container-fluid{{ if $homeBackgroundImage }} py-5{{ end }}">
-    {{ if site.Params.meta.tagline }}
-      <h1 class="d-inline-block">{{ site.Params.meta.tagline }}</h1>
+    {{ with site.Params.meta.tagline }}
+      <h1 class="d-inline-block">{{ . }}</h1>
     {{ end }}
-    {{ if site.Params.meta.description }}
-      <p class="lead">{{ site.Params.meta.description }}</p>
+    {{ with site.Params.meta.description }}
+      <p class="lead">{{ . }}</p>
     {{ end }}
   </div>
 </div>
 <div class="container-fluid bg-mat py-3">
   <div class="container-fluid bg-mat py-3" >
     <!-- Need to define any variable outside the range loop. -->
-    {{- $thumbnailSize := "" }}
-    {{- if site.Params.postImages.thumbnail.size }}
-     {{- $thumbnailSize := site.Params.postImages.thumbnail.size }}
+    {{- $globalThumbnailSize := "" }}
+    {{- $globalThumbnailBorders := "" }}
+    {{- $globalThumbnailPosition := "" }}
+    {{- with site.Params.postImages.thumbnail.size }}
+     {{- $globalThumbnailSize = . }}
     {{- end }}
-    {{- $thumbnailBorders := "" }}
-    {{- if site.Params.userExperience.postImages.thumbnail.borders }}
-      {{- $thumbnailBorders = site.Params.userExperience.postImages.thumbnail.borders }}
+    {{- with site.Params.userExperience.postImages.thumbnail.borders }}
+      {{- $globalThumbnailBorders = . }}
     {{- end }}
+    {{- with site.Params.userExperience.postImages.thumbnail.position }}
+      {{- $globalThumbnailPosition = . }}
+    {{- end }}
+    
+    {{- $pageThumbnailSize := "" }}
+    {{- $pageThumbnailBorders := "" }}
+    {{- $pageThumbnailPosition := "" }}
     
     <!-- ranges through each of the content files associated with a particular term and renders the summary.html content view -->
     {{ range (where site.RegularPages "Type" "in" site.Params.mainSections).ByDate.Reverse }}
       <div class="card mb-3">
         <div class="card-body">
           
-          {{- if or (ne site.Params.userExperience.postImages.thumbnail.position "none") (ne .Params.image.thumbnail.position "none") -}}
-          <div class="row {{- if or (eq site.Params.userExperience.postImages.thumbnail.position "right") (eq .Params.image.thumbnail.position "right") }} flex-md-row-reverse{{- end -}}">
+          {{ with .Params.image.thumbnail.position }}
+           {{ $pageThumbnailPosition = . }}
+          {{ end }}
+          {{ with .Params.image.thumbnail.borders }}
+           {{ $pageThumbnailBorders = . }}
+          {{ end }}
+          {{ with .Params.image.thumbnail.size }}
+           {{ $pageThumbnailSize = . }}
+          {{ end }}
+          
+          {{- if or (ne $globalThumbnailPosition "none") (ne $pageThumbnailPosition "none") -}}
+          <div class="row {{- if or (eq $globalThumbnailPosition "right") (eq $pageThumbnailPosition "right") }} flex-md-row-reverse{{- end -}}">
           
             <div class="col-md-auto my-auto">
               {{ if .Params.image.src -}}
                 <img class="
                 
-                {{- if .Params.image.thumbnail.borders }}
-                  {{- $thumbnailBorders = .Params.image.thumbnail.borders }}
-                {{- else if $thumbnailBorders }}
+                {{- if $pageThumbnailBorders }}
+                  {{- $globalThumbnailBorders = $pageThumbnailBorders }}
+                {{- else if $globalThumbnailBorders }}
                   {{/*
-                    If site.Params.userExperience.postImages.thumbnail.borders is specified, $thumbnailBorders gets its value. We wish to use that value.
-                    If it isn't specified, then if site.Params.borders is specified, $thumbnailBorders gets the value of site.Params.borders.
+                    If site.Params.userExperience.postImages.thumbnail.borders is specified, $globalThumbnailBorders gets its value. We wish to use that value.
+                    If it isn't specified, then if site.Params.borders is specified, $globalThumbnailBorders gets the value of site.Params.borders.
                     Go Templates treat the following values as false:
 
                       false (boolean)
                       0 (integer)
                       any zero-length array, slice, map, or string
                     
-                    As per the if conditional just after declaring $thumbnailBorders, if site.Params.userExperience.postImages.thumbnail.borders is specified, then $thumbnailBorders is not false.
+                    As per the if conditional just after declaring $globalThumbnailBorders, if site.Params.userExperience.postImages.thumbnail.borders is specified, then $globalThumbnailBorders is not false.
                     In which case, we don't want the if conditional to continue.
                     
-                    Also, rather than using site.Params.userExperience.postImages.thumbnail.borders in every range iteration, using it once outside the range loop to give $thumbnailBorders its value, and then using that variable in the range loop, helps reduce build times. 
+                    Also, rather than using site.Params.userExperience.postImages.thumbnail.borders in every range iteration, using it once outside the range loop to give $globalThumbnailBorders its value, and then using that variable in the range loop, helps reduce build times. 
                    */}}
                 {{- else }}
-                  {{- $thumbnailBorders = "rounded-lg" }}
+                  {{- $globalThumbnailBorders = "rounded-lg" }}
                 {{- end }}
                 
-                {{- if eq $thumbnailBorders "square" -}}
+                {{- if eq $globalThumbnailBorders "square" -}}
                   rounded-0
-                {{- else if eq $thumbnailBorders "circle" -}}
+                {{- else if eq $globalThumbnailBorders "circle" -}}
                  rounded-circle
-                {{- else if eq $thumbnailBorders "pill" -}}
+                {{- else if eq $globalThumbnailBorders "pill" -}}
                  rounded-pill
                 {{- else -}}
                   rounded-lg
@@ -97,15 +115,15 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
                 
                 " src="{{ .Params.image.src }}" height="
                 
-                {{- if .Params.image.thumbnail.size }}
-                  {{- .Params.image.thumbnail.size -}}
-                {{- else if $thumbnailSize }}
-                  {{- $thumbnailSize -}}
+                {{- if $pageThumbnailSize }}
+                  {{- $pageThumbnailSize -}}
+                {{- else if $globalThumbnailSize }}
+                  {{- $globalThumbnailSize -}}
                 {{- else -}}
                   200px
                 {{- end -}}
                 
-                "{{ if .Params.image.alt }} alt="{{ .Params.image.alt }}"{{ end }}></img>
+                "{{ with .Params.image.alt }} alt="{{ . }}"{{ end }}></img>
               {{- end }}
             </div> <!-- image col-md -->
             
@@ -118,16 +136,18 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
               
               {{- $postMetaTop := false }}
               {{- $postMetaBottom := false }}
-              {{- range site.Params.position.postMeta }}
-                {{- if eq .summary "top" }}
-                  {{- $postMetaTop = true }}
-                {{- else if eq .summary "bottom" }}
-                  {{- $postMetaBottom = true }}
+              {{ if site.Params.position.postMeta }}
+                {{- range site.Params.position.postMeta }}
+                  {{- if eq .summary "top" }}
+                    {{- $postMetaTop = true }}
+                  {{- else if eq .summary "bottom" }}
+                    {{- $postMetaBottom = true }}
+                  {{- end }}
                 {{- end }}
-              {{- end }}
+              {{ end }}
               
               
-              {{- if and site.Params.position.postMeta $postMetaTop }}
+              {{- if $postMetaTop }}
                 <div class="card-subtitle font-weight-bold small post-meta">
                 
                   {{- $wordCount := "" }}
@@ -135,17 +155,17 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
                   {{- $author := "" }}
                   {{- $lastUpdated := "" }}
                   
-                  {{- if and site.Params.position.postMeta.wordCount.summary (eq site.Params.position.postMeta.wordCount.summary "top") }}
+                  {{- if eq site.Params.position.postMeta.wordCount.summary "top" }}
                     {{- $wordCount = print (.WordCount) " words" }}
                   {{- end }}
-                  {{- if and site.Params.position.postMeta.readingTime.summary (eq site.Params.position.postMeta.readingTime.summary "top") }}
+                  {{- if eq site.Params.position.postMeta.readingTime.summary "top" }}
                     {{- $readingTime = print (lang.NumFmt 0 (div .WordCount 130)) " min read" -}}
                   {{- end }}
-                  {{- if and site.Params.position.postMeta.author.summary (eq site.Params.position.postMeta.author.summary "top") }}
+                  {{- if eq site.Params.position.postMeta.author.summary "top" }}
                     {{- $author = print "By " (default site.Params.meta.author .Params.author) }}
                   {{- end }}
                   {{- if .Lastmod }}
-                    {{- if and site.Params.position.postMeta.lastUpdated.summary (eq site.Params.position.postMeta.lastUpdated.summary "top") }}
+                    {{- if eq site.Params.position.postMeta.lastUpdated.summary "top" }}
                       {{- $lastUpdated = print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") }}</span>
                     {{- end }}
                   {{- end }}
@@ -164,7 +184,7 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
               {{ end }}
                 
                 
-              {{ if and (site.Params.position.postMeta.tags.summary) (eq site.Params.position.postMeta.tags.summary "top") }}
+              {{ if ne site.Params.position.postMeta.tags.summary "bottom" }}
                 <div class="pb-1 mt-1">
                 {{- range .Params.tags -}}
                   <a href="/tags/{{ . | urlize }}/"><span class="badge badge-pill bg-clr2 text-nav mr-2 mb-1 py-2">#{{ . | humanize | upper }}</span></a>
@@ -175,9 +195,9 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
               <!-- {{/* using Hugo's' {{ .Summary }} comes with its own <p> tag, so wrapping it in a <p> tag is discouraged */}} -->
               <div class="card-text">{{ .Summary }}</div>
               
-              {{ if or (and site.Params.position.postMeta $postMetaBottom) (and (site.Params.position.postMeta.tags.summary) (eq site.Params.position.postMeta.tags.summary "bottom")) }}
+              {{ if $postMetaBottom }}
                 <div class="mb-3">
-                  {{- if and site.Params.position.postMeta $postMetaBottom }}
+                  {{- if $postMetaBottom }}
                     <div class="card-subtitle font-weight-bold small post-meta">
                     
                       {{- $wordCount := "" }}
@@ -185,17 +205,17 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
                       {{- $author := "" }}
                       {{- $lastUpdated := "" }}
                       
-                      {{- if and site.Params.position.postMeta.wordCount.summary (eq site.Params.position.postMeta.wordCount.summary "bottom") }}
+                      {{- if eq site.Params.position.postMeta.wordCount.summary "bottom" }}
                         {{- $wordCount = print (.WordCount) " words" }}
                       {{- end }}
-                      {{- if and site.Params.position.postMeta.readingTime.summary (eq site.Params.position.postMeta.readingTime.summary "bottom") }}
+                      {{- if eq site.Params.position.postMeta.readingTime.summary "bottom" }}
                         {{- $readingTime = print (lang.NumFmt 0 (div .WordCount 130)) " min read" -}}
                       {{- end }}
-                      {{- if and site.Params.position.postMeta.author.summary (eq site.Params.position.postMeta.author.summary "bottom") }}
+                      {{- if eq site.Params.position.postMeta.author.summary "bottom" }}
                         {{- $author = print "By " (default site.Params.meta.author .Params.author) }}
                       {{- end }}
                       {{- if .Lastmod }}
-                        {{- if and site.Params.position.postMeta.lastUpdated.summary (eq site.Params.position.postMeta.lastUpdated.summary "bottom") }}
+                        {{- if eq site.Params.position.postMeta.lastUpdated.summary "bottom" }}
                           {{- $lastUpdated = print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") }}</span>
                         {{- end }}
                       {{- end }}
@@ -213,7 +233,7 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
                     </div>
                   {{ end }}
                   
-                  {{ if and (site.Params.position.postMeta.tags.summary) (eq site.Params.position.postMeta.tags.summary "bottom") }}
+                  {{ if eq site.Params.position.postMeta.tags.summary "bottom" }}
                     <div class="pb-1 mt-1">
                     {{- range .Params.tags -}}
                       <a href="/tags/{{ . | urlize }}/"><span class="badge badge-pill bg-clr2 text-nav mr-2 py-2">#{{ . | humanize | upper }}</span></a>
@@ -226,7 +246,7 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
               
               <a class="font-weight-bold text-reset text-decoration-none" href="{{ .Permalink }}"><nobr>Read more →</nobr></a>
             
-            {{ if ne site.Params.userExperience.postImages.thumbnail.position "none" }}
+            {{ if ne $globalThumbnailPosition "none" }}
             </div>
             
           </div> <!-- row -->
