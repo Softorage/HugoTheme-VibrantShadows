@@ -129,7 +129,7 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
             
             
             <div class="col my-auto py-2">
-          {{ end }}
+          
               <h2>
                 <a class="text-reset" href="{{ .Permalink }}"><span class="card-title text-reset"> {{ .Title }}</span></a>
               </h2>
@@ -166,7 +166,7 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
                   {{- end }}
                   {{- if .Lastmod }}
                     {{- if eq site.Params.position.postMeta.lastUpdated.summary "top" }}
-                      {{- $lastUpdated = print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") }}</span>
+                      {{- $lastUpdated = safeHTML (print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") "</span>") }}
                     {{- end }}
                   {{- end }}
                   
@@ -178,7 +178,7 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
                     {{ end }}
                   {{ end }}
                   
-                  {{- delimit $postMeta " &#183; " -}}
+                  {{- safeHTML (delimit $postMeta " &#183; ") -}}
                   
                 </div>
               {{ end }}
@@ -195,42 +195,42 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
               <!-- {{/* using Hugo's' {{ .Summary }} comes with its own <p> tag, so wrapping it in a <p> tag is discouraged */}} -->
               <div class="card-text">{{ .Summary }}</div>
               
-              {{ if $postMetaBottom }}
+              
                 <div class="mb-3">
-                  {{- if $postMetaBottom }}
-                    <div class="card-subtitle font-weight-bold small post-meta">
+                  {{ if $postMetaBottom }}
+                  <div class="card-subtitle font-weight-bold small post-meta mb-3">
+                  
+                    {{- $wordCount := "" }}
+                    {{- $readingTime := "" }}
+                    {{- $author := "" }}
+                    {{- $lastUpdated := "" }}
                     
-                      {{- $wordCount := "" }}
-                      {{- $readingTime := "" }}
-                      {{- $author := "" }}
-                      {{- $lastUpdated := "" }}
-                      
-                      {{- if eq site.Params.position.postMeta.wordCount.summary "bottom" }}
-                        {{- $wordCount = print (.WordCount) " words" }}
+                    {{- if eq site.Params.position.postMeta.wordCount.summary "bottom" }}
+                      {{- $wordCount = print (.WordCount) " words" }}
+                    {{- end }}
+                    {{- if eq site.Params.position.postMeta.readingTime.summary "bottom" }}
+                      {{- $readingTime = print (lang.NumFmt 0 (div .WordCount 130)) " min read" -}}
+                    {{- end }}
+                    {{- if eq site.Params.position.postMeta.author.summary "bottom" }}
+                      {{- $author = print "By " (default site.Params.meta.author .Params.author) }}
+                    {{- end }}
+                    {{- if .Lastmod }}
+                      {{- if eq site.Params.position.postMeta.lastUpdated.summary "bottom" }}
+                        {{- $lastUpdated = safeHTML (print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") "</span>") }}
                       {{- end }}
-                      {{- if eq site.Params.position.postMeta.readingTime.summary "bottom" }}
-                        {{- $readingTime = print (lang.NumFmt 0 (div .WordCount 130)) " min read" -}}
-                      {{- end }}
-                      {{- if eq site.Params.position.postMeta.author.summary "bottom" }}
-                        {{- $author = print "By " (default site.Params.meta.author .Params.author) }}
-                      {{- end }}
-                      {{- if .Lastmod }}
-                        {{- if eq site.Params.position.postMeta.lastUpdated.summary "bottom" }}
-                          {{- $lastUpdated = print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") }}</span>
-                        {{- end }}
-                      {{- end }}
-                      
-                      {{- $postMetaPre := slice $author $wordCount $readingTime $lastUpdated }}
-                      {{ $postMeta := slice }}
-                      {{ range $postMetaPre }}
-                        {{ if . }}
-                          {{ $postMeta = $postMeta | append . }}
-                        {{ end }}
+                    {{- end }}
+                    
+                    {{- $postMetaPre := slice $author $wordCount $readingTime $lastUpdated }}
+                    {{ $postMeta := slice }}
+                    {{ range $postMetaPre }}
+                      {{ if . }}
+                        {{ $postMeta = $postMeta | append . }}
                       {{ end }}
-                      
-                      {{- delimit $postMeta " &#183; " -}}
-                      
-                    </div>
+                    {{ end }}
+                    
+                    {{- safeHTML (delimit $postMeta " &#183; ") -}}
+                    
+                  </div>
                   {{ end }}
                   
                   {{ if eq site.Params.position.postMeta.tags.summary "bottom" }}
@@ -242,15 +242,16 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
                   {{ end }}
                   
                 </div>
-              {{ end }}
+              
               
               <a class="font-weight-bold text-reset text-decoration-none" href="{{ .Permalink }}"><nobr>Read more →</nobr></a>
+
+              </div>
             
-            {{ if ne $globalThumbnailPosition "none" }}
             </div>
             
           </div> <!-- row -->
-            {{ end }}
+          {{ end }}
         </div>
         
       </div>

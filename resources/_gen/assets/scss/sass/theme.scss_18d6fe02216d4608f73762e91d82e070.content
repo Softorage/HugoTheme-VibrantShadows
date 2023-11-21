@@ -1,0 +1,252 @@
+/*
+if site.Params.theme.toggle.preventFOIT is set false, then in /assets/js/custom.js
+if site.Params.theme.toggle.preventFOIT is set true, then in head.html partial
+*/
+.dark {
+  --clr1: #7d1fa5;
+  --clr2: #6d19fc;
+  --nav: #212121;
+  --antinav: #cccccc;
+  --mat: #121212;
+  --clr1-soft: mix(#7d1fa5, #212121, 5%);
+  --clr2-soft: mix(#6d19fc, #212121, 5%);
+  --nav-soft: mix(#212121, #cccccc, 5%);
+  --antinav-soft: mix(#cccccc, #212121, 2%);
+  --github: #cccccc;
+  --medium: #ffffff;
+  --wikipedia: #ffffff; }
+
+.light {
+  --clr1: #7d1fa5;
+  --clr2: #6d19fc;
+  --nav: #ffffff;
+  --antinav: #000000;
+  --mat: #f9f9f9;
+  --clr1-soft: mix(#7d1fa5, #ffffff, 5%);
+  --clr2-soft: mix(#6d19fc, #ffffff, 5%);
+  --nav-soft: mix(#ffffff, #000000, 5%);
+  --antinav-soft: mix(#000000, #ffffff, 2%);
+  --github: #333333;
+  --medium: #000000;
+  --wikipedia: #000000; }
+
+/* 
+// footer brandicons shoud appear on light backg in case of dark theme only
+.dark footer .social-presence a span.fab {
+@extend .bg-light, .p-1, .rounded;
+}
+// since we have not imported bootstrap, we can''t use .bg-light
+*/
+body {
+  background: var(--nav) !important;
+  color: var(--antinav) !important; }
+
+/* purgecss ignore */
+.brand-color {
+  color: #6d19fc !important; }
+
+.card {
+  background: var(--nav);
+  color: var(--antinav); }
+
+.popover .popover-header {
+  background-color: var(--nav);
+  color: var(--antinav); }
+
+.popover .popover-body {
+  background-color: var(--nav);
+  color: var(--antinav); }
+
+.hero-gradient {
+  background: var(--clr1);
+  background: linear-gradient(36deg, var(--clr1) 0%, var(--clr2) 80%); }
+
+.hero-gradient-light {
+  background: var(--clr1-soft);
+  background: linear-gradient(36deg, var(--clr1-soft) 0%, var(--clr2-soft) 80%); }
+
+.bg-clr1 {
+  background: var(--clr1) !important; }
+
+.bg-clr2 {
+  background: var(--clr2) !important; }
+
+.bg-clr1-light {
+  background: var(--clr1-soft) !important; }
+
+.bg-clr2-light {
+  background: var(--clr2-soft) !important; }
+
+.bg-nav {
+  background: var(--nav) !important; }
+
+.bg-antinav {
+  background: var(--antinav) !important; }
+
+.bg-nav-light {
+  background: var(--nav-soft) !important; }
+
+.bg-antinav-light {
+  background: var(--antinav-soft) !important; }
+
+.bg-mat {
+  background: var(--mat) !important; }
+
+.text-gradient {
+  background: linear-gradient(36deg, var(--clr1) 0%, var(--clr2) 80%) !important;
+  background-clip: text !important;
+  color: transparent !important; }
+
+.text-clr1 {
+  color: var(--clr1) !important; }
+
+.text-clr2 {
+  color: var(--clr2) !important; }
+
+.text-clr1-light {
+  color: var(--clr1-soft) !important; }
+
+.text-clr2-light {
+  color: var(--clr2-soft) !important; }
+
+.text-nav {
+  color: var(--nav) !important; }
+
+.text-nav-light {
+  color: var(--nav-soft) !important; }
+
+.text-antinav {
+  color: var(--antinav) !important; }
+
+.text-antinav-light {
+  color: var(--antinav-soft) !important; }
+
+.btn-grad {
+  background-image: linear-gradient(90deg, var(--clr1) 0%, var(--clr2) 100%); }
+
+.theme-toogle-checkbox {
+  opacity: 0;
+  position: absolute; }
+
+.theme-toggle-label {
+  background-color: var(--mat);
+  border-radius: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  position: relative;
+  height: 26px;
+  width: 50px;
+  transform: scale(1.2); }
+
+.theme-toggle-label .ball {
+  background-color: var(--antinav);
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  height: 20px;
+  width: 20px;
+  transform: translateX(0px);
+  transition: transform 0.2s linear; }
+
+.theme-toogle-checkbox:checked + .theme-toggle-label .ball {
+  transform: translateX(24px); }
+
+.fa-comments {
+  color: var(--nav); }
+
+.fa-rss {
+  color: #f26522; }
+
+.fa-moon {
+  color: #f1c40f; }
+
+.fa-sun {
+  color: #f39c12; }
+
+.fa-gitlab {
+  color: #fca326; }
+
+.fa-github {
+  color: var(--github); }
+
+.fa-steam {
+  color: #00adee; }
+
+.fa-twitter {
+  color: #1da1f2; }
+
+.fa-facebook {
+  color: #1877f2; }
+
+.fa-instagram {
+  color: #e1306c; }
+
+.fa-youtube {
+  color: #ff0000; }
+
+.fa-pinterest {
+  color: #bd081c; }
+
+.fa-google-plus {
+  color: #dd4b39; }
+
+.fa-linkedin {
+  color: #0077b5; }
+
+.fa-reddit {
+  color: #ff4500; }
+
+.fa-flickr {
+  color: #0063dc; }
+
+.fa-deviantart {
+  color: #05cc47; }
+
+.fa-vk {
+  color: #45668e; }
+
+.fa-mastodon {
+  color: #2A8FDD; }
+
+.fa-bandcamp {
+  color: #629aa9; }
+
+.fa-tumblr {
+  color: #35465c; }
+
+.fa-medium {
+  color: var(--medium); }
+
+.fa-wikipedia-w {
+  color: var(--wikipedia); }
+
+.fa-telegram {
+  color: #0088cc; }
+
+.fa-whatsapp {
+  color: #25d366; }
+
+.fa-apple {
+  color: #666666; }
+
+.fa-android {
+  color: #a4c639; }
+
+.fa-linux {
+  color: #000000; }
+
+.fa-windows {
+  color: #0078d7; }
+
+.cc-window, .cc-revoke {
+  color: var(--antinav);
+  background-color: var(--mat); }
+
+.cc-btn.cc-allow {
+  color: var(--nav);
+  background-color: var(--clr2);
+  border-color: transparent; }

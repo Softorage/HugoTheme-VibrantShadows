@@ -921,6 +921,8 @@ Let's see them one by one.
             Position of a post's image, when it appears as a thumbnail in a list (say) on landing page. Regardless of "right" or "left", it looks the same on mobile-view.
             Overrides `site.Params.userExperience.postImages.thumbnail.position`.
     
+    *Note that this section in front matter only allows to set image assigned to the blog post. To include an image in your post, it is recommended to use [shortcodes](#shortcodes) which offers a simple way to include images in a post along with a level of customizability.*
+
     Example:
     ```yaml
     image:
@@ -980,6 +982,67 @@ Let's see them one by one.
     url: "/custom/url/"
     ```
     
+### Shortcodes
+Shortcodes is a feature in Hugo that allows to insert text after performing prespecified complex tasks when writing posts. Let's take example of `figure` shortcode provided by Hugo. When writing a post, say you want to include an image. In this case, you can simply include the shortcode `figure` at the place in post where you want the image to be included. Example syntax of a typical post file located in content directory/folder,
+
+```
+title: "Title of Post"
+.
+.
+other frontmatter here
+.
+.
+---
+
+This is the sample post and below is the image thaat we are inserting:
+{{< figure class="max-width" src="/path/to/image/relative/to/root/" alt="Text to show when image is unable to load for some reason" >}}
+
+Rest of the post...
+```
+
+ Note that this is just an example, and `img` shortcode comes with more options. Vibrant Shadows comes with a few of its own shortcodes along with the Hugo's default shortcodes, to make life a little easier.
+
+Hugo's default Shortcodes:
+1.  **figure** (Used to include image in a post)  
+    Options:
+      1.  **class** *(Type: String | Accepts value: all bootstrap classes | Optional)*  
+          Takes all bootstrap classes as values. However, it is recommended to use only for width/height setting and margin adjustment by using the bootstrap classes.  
+          Width: mw-100, w-25, w-50, w-75, w-100,  
+          Height: mh-100, h-25, h-50, h-75, h-100.
+      2.  **src** *(Type: String | Accepts value: Relative URL | Required)*  
+          The Relative or Absolute URL to image under consideration. Make sure that Relative URL starts with `/` and is written relative to root of the website.
+      3.  **alt** *(Type: String | Accepts value: Any text | Optional)*  
+          Text to show when image is unable to load for some reason. In absence of `alternate text`, `caption` is used as a fall-back.
+      4.  **link** *(Type: String | Accepts value: Absolute URL | Optional)*  
+          URL of hyperlink for the image, if so desired.
+      5.  **target** *(Type: String | Accepts value: _blank/_self/_parent/_top | Optional)*  
+          Optional target attribute for the URL if link parameter is set. See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target
+      6.  **rel** *(Type: String | Accepts value: _blank | Optional)*  
+          Optional rel attribute for the URL if link parameter is set. See https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel for allowed values (refer `<a>` only).
+      7.  **title** *(Type: String | Accepts value: Any text | Optional)*  
+          Title to the caption of the image. Caption appear below the image.
+      8.  **caption** *(Type: String | Accepts value: Any text | Optional)*  
+          Caption text for the image. Caption appear below the image.
+      9.  **height** *(Type: Integer | Accepts value: pixels | Optional)*  
+          Height attribute of the image.
+      10. **width** *(Type: Integer | Accepts value: pixels | Optional)*  
+          Width attribute of the image.
+      11. **loading** *(Type: String | Accepts value: eager/lazy | Optional)*  
+          Loading attribute of the image.  
+          eager: Default. Loads an image immediately  
+          lazy: Defer loading of images until some conditions are met. See https://developer.mozilla.org/en-US/docs/Web/Performance/Lazy_loading#loading_attribute
+      12. **attr** *(Type: String | Accepts value: Any text | Optional)*  
+          Image attribution text. Markdown within the value of attr will be rendered.
+      13. **attrlink** *(Type: String | Accepts value: Absolute URL | Optional)*  
+          If the attribution text needs to be hyperlinked, URL of the destination.
+
+    Example usage,
+    ```
+    {{< figure class="max-width" src="/images/my-flower-pot.png" alt="My Flower Pot" link="https://examplewebsite.com/flower-pots-for-sale/" title="High Quality Flower Pot" caption="Flower Pot with highest quality Lily and Rose flowers, and black soil pot. Might prove to be the perfect gift!" attr="image by my wife" attrlink="https://examplesite.com/my-wife-photography/" >}}
+    ```
+2. See https://gohugo.io/content-management/shortcodes/#use-hugos-built-in-shortcodes for a list of all shortcodes provided by Hugo
+
+
 ### Example `config.yaml`
 
 ```yaml

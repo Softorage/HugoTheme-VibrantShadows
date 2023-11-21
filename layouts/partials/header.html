@@ -16,7 +16,7 @@
       {{ $themeToggle := false }}
       
       {{ if site.Menus.main }}
-        {{ $mainMenu = true }}
+        {{ $mainMenu = site.Menus.main }}
       {{ end }}
       {{ if and site.Params.social.profiles (eq site.Params.position.social.profiles "navbar") }}
         {{ $socialProfilesOnNavbar = true }}
@@ -31,8 +31,125 @@
           <span class="text-clr2">&#9776;</span>
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          
+          {{ if or $socialProfilesOnNavbar $themeToggle }}
+            <div class="order-md-1 my-2">
+              {{ if $socialProfilesOnNavbar }}
+                  
+                <div class="d-inline-block ml-md-auto mr-2 my-auto p-1 pr-2 bg-nav
+                {{- $thumbnailBorders := site.Params.borders.buttons }}
+                {{- if eq $thumbnailBorders "square" }}
+                rounded-0
+                {{ else if eq $thumbnailBorders "circle" }}
+                rounded-circle
+                {{ else if eq $thumbnailBorders "pill" }}
+                rounded-pill
+                {{ else }}
+                rounded-lg
+                {{ end }}
+                ">
+                  {{ range $key, $url := site.Params.social.profiles }}
+                    {{ if eq $key "facebook"}}
+                      <a class="ml-1" href="{{ $url }}"><span class="fab fa-facebook" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                    {{ else if eq $key "twitter" }}
+                      <a class="ml-1" href="{{ $url }}"><span class="fab fa-twitter" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                    {{ else if eq $key "github" }}
+                      <a class="ml-1" href="{{ $url }}"><span class="fab fa-github" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                    {{ else if eq $key "gitlab" }}
+                      <a class="ml-1" href="{{ $url }}"><span class="fab fa-gitlab" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                    {{ else if eq $key "steam" }}
+                      <a class="ml-1" href="{{ $url }}"><span class="fab fa-steam" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                    {{ else if eq $key "instagram" }}
+                      <a class="ml-1" href="{{ $url }}"><span class="fab fa-instagram" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                    {{ else if eq $key "youtube" }}
+                      <a class="ml-1" href="{{ $url }}"><span class="fab fa-youtube" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                    {{ else if eq $key "pinterest" }}
+                      <a class="ml-1" href="{{ $url }}"><span class="fab fa-pinterest" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                    {{ else if eq $key "linkedin" }}
+                      <a class="ml-1" href="{{ $url }}"><span class="fab fa-linkedin" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                    {{ else if eq $key "reddit" }}
+                      <a class="ml-1" href="{{ $url }}"><span class="fab fa-reddit" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                    {{ else if eq $key "flickr" }}
+                      <a class="ml-1" href="{{ $url }}"><span class="fab fa-flickr" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                    {{ else if eq $key "deviantart" }}
+                      <a class="ml-1" href="{{ $url }}"><span class="fab fa-deviantart" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                    {{ else if eq $key "vk" }}
+                      <a class="ml-1" href="{{ $url }}"><span class="fab fa-vk" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                    {{ else if eq $key "mastodon" }}
+                      <a class="ml-1" href="{{ $url }}"><span class="fab fa-mastodon" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                    {{ else if eq $key "bandcamp" }}
+                      <a class="ml-1" href="{{ $url }}"><span class="fab fa-bandcamp" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                    {{ else if eq $key "tumblr" }}
+                      <a class="ml-1" href="{{ $url }}"><span class="fab fa-tumblr" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                    {{ else if eq $key "medium" }}
+                      <a class="ml-1" href="{{ $url }}"><span class="fab fa-medium" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                    {{ else if eq $key "wikipedia" }}
+                      <a class="ml-1" href="{{ $url }}"><span class="fab fa-wikipedia-w" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                    {{ else if eq $key "telegram" }}
+                      <a class="ml-1" href="{{ $url }}"><span class="fab fa-telegram" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
+                    {{ end }}
+                  {{ end }}
+                </div>
+              {{ end }}
+              
+              {{ if $themeToggle }}
+                <!-- Inspired from: https://www.codeply.com/p/UsTEwDkzNp -->
+                <div class="d-inline-block {{ if or $socialProfilesOnNavbar $mainMenu -}} ml-3 {{- else -}} ml-auto {{- end }}">
+                  <input type="checkbox" class="theme-toogle-checkbox" id="theme_toggle" />
+                  <label class="theme-toggle-label theme-toggle my-auto" for="theme_toggle">
+                    {{ if site.Params.theme.toggle.caption.dark }}
+                      {{ if eq (index site.Params.theme.toggle.caption.dark 0) "icon" }}
+                        {{ if eq (index site.Params.theme.toggle.caption.dark 1) "fa-dark" }}
+                        <span class="fas fa-adjust"></span>
+                        {{ else if eq (index site.Params.theme.toggle.caption.dark 1) "fa-moon" }}
+                        <span class="fas fa-moon"></span>
+                        {{ else if eq (index site.Params.theme.toggle.caption.dark 1) "utf-dark" }}
+                        <span>🕶️</span>
+                        {{ else if eq (index site.Params.theme.toggle.caption.dark 1) "utf-moon" }}
+                        <span>🌙</span>
+                        {{ else if eq (index site.Params.theme.toggle.caption.dark 1) "utf-moon-face-left" }}
+                        <span>🌛</span>
+                        {{ else if eq (index site.Params.theme.toggle.caption.dark 1) "utf-moon-face-right" }}
+                        <span>🌜</span>
+                        {{ else if eq (index site.Params.theme.toggle.caption.dark 1) "utf-full-moon" }}
+                        <span>🌕</span>
+                        {{ end }}
+                      {{ else }}
+                        {{ index site.Params.theme.toggle.caption.dark 1 }}
+                      {{ end }}
+                    {{ else }}
+                    <span class="fas fa-moon"></span>
+                    {{ end }}
+                      
+                    {{ if site.Params.theme.toggle.caption.light }}
+                      {{ if eq (index site.Params.theme.toggle.caption.light 0) "icon" }}
+                        {{ if eq (index site.Params.theme.toggle.caption.light 1) "fa-light" }}
+                        <span class="fas fa-lightbulb"></span>
+                        {{ else if eq (index site.Params.theme.toggle.caption.light 1) "fa-sun" }}
+                        <span class="fas fa-sun"></span>
+                        {{ else if eq (index site.Params.theme.toggle.caption.light 1) "utf-light" }}
+                        <span>💡</span>
+                        {{ else if eq (index site.Params.theme.toggle.caption.light 1) "utf-sun" }}
+                        <span>☀️</span>
+                        {{ else if eq (index site.Params.theme.toggle.caption.light 1) "utf-sun-face" }}
+                        <span>🌞</span>
+                        {{ end }}
+                      {{ else }}
+                        {{ index site.Params.theme.toggle.caption.light 1 }}
+                      {{ end }}
+                    {{ else }}
+                    <span class="fas fa-sun"></span>
+                    {{ end }}
+                    
+                    <div class="ball"></div>
+                  </label>
+                </div>
+              {{ end }}
+            </div>
+          {{ end }}
+          
           {{ if $mainMenu }}
-          <ul class="navbar-nav
+          <ul class="navbar-nav order-md-0
             {{- if or ($socialProfilesOnNavbar) (eq site.Params.position.navbarMenu "left") }} mr-md-auto
             {{- else }} ml-md-auto
             {{- end }}">
@@ -57,117 +174,9 @@
             {{ end }}
           </ul>
           {{ end }}
-          {{ if $socialProfilesOnNavbar }}
-              
-              <div class="d-inline-block ml-md-auto mr-2 my-auto p-1 pr-2 bg-nav
-              {{- $thumbnailBorders := site.Params.borders.buttons }}
-              {{- if eq $thumbnailBorders "square" }}
-              rounded-0
-              {{ else if eq $thumbnailBorders "circle" }}
-              rounded-circle
-              {{ else if eq $thumbnailBorders "pill" }}
-              rounded-pill
-              {{ else }}
-              rounded-lg
-              {{ end }}
-              ">
-                {{ range $key, $url := site.Params.social.profiles }}
-                  {{ if eq $key "facebook"}}
-                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-facebook" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
-                  {{ else if eq $key "twitter" }}
-                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-twitter" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
-                  {{ else if eq $key "github" }}
-                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-github" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
-                  {{ else if eq $key "gitlab" }}
-                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-gitlab" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
-                  {{ else if eq $key "steam" }}
-                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-steam" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
-                  {{ else if eq $key "instagram" }}
-                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-instagram" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
-                  {{ else if eq $key "youtube" }}
-                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-youtube" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
-                  {{ else if eq $key "pinterest" }}
-                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-pinterest" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
-                  {{ else if eq $key "linkedin" }}
-                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-linkedin" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
-                  {{ else if eq $key "reddit" }}
-                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-reddit" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
-                  {{ else if eq $key "flickr" }}
-                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-flickr" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
-                  {{ else if eq $key "deviantart" }}
-                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-deviantart" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
-                  {{ else if eq $key "vk" }}
-                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-vk" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
-                  {{ else if eq $key "mastodon" }}
-                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-mastodon" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
-                  {{ else if eq $key "bandcamp" }}
-                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-bandcamp" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
-                  {{ else if eq $key "tumblr" }}
-                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-tumblr" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
-                  {{ else if eq $key "medium" }}
-                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-medium" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
-                  {{ else if eq $key "wikipedia" }}
-                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-wikipedia-w" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
-                  {{ else if eq $key "telegram" }}
-                    <a class="ml-1" href="{{ $url }}"><span class="fab fa-telegram" aria-label="Join us on {{ $key | humanize | title }}"></span></a>
-                  {{ end }}
-                {{ end }}
-              </div>
-          {{ end }}
+
           
-          {{ if $themeToggle }}
-          <!-- Inspired from: https://www.codeply.com/p/UsTEwDkzNp -->
-          <div class="{{ if or $socialProfilesOnNavbar $mainMenu -}} ml-3 {{- else -}} ml-auto {{- end }}">
-            <input type="checkbox" class="theme-toogle-checkbox" id="theme_toggle" />
-            <label class="theme-toggle-label theme-toggle my-auto" for="theme_toggle">
-              {{ if site.Params.theme.toggle.caption.dark }}
-                {{ if eq (index site.Params.theme.toggle.caption.dark 0) "icon" }}
-                  {{ if eq (index site.Params.theme.toggle.caption.dark 1) "fa-dark" }}
-                  <span class="fas fa-adjust"></span>
-                  {{ else if eq (index site.Params.theme.toggle.caption.dark 1) "fa-moon" }}
-                  <span class="fas fa-moon"></span>
-                  {{ else if eq (index site.Params.theme.toggle.caption.dark 1) "utf-dark" }}
-                  <span>🕶️</span>
-                  {{ else if eq (index site.Params.theme.toggle.caption.dark 1) "utf-moon" }}
-                  <span>🌙</span>
-                  {{ else if eq (index site.Params.theme.toggle.caption.dark 1) "utf-moon-face-left" }}
-                  <span>🌛</span>
-                  {{ else if eq (index site.Params.theme.toggle.caption.dark 1) "utf-moon-face-right" }}
-                  <span>🌜</span>
-                  {{ else if eq (index site.Params.theme.toggle.caption.dark 1) "utf-full-moon" }}
-                  <span>🌕</span>
-                  {{ end }}
-                {{ else }}
-                  {{ index site.Params.theme.toggle.caption.dark 1 }}
-                {{ end }}
-              {{ else }}
-              <span class="fas fa-moon"></span>
-              {{ end }}
-                
-              {{ if site.Params.theme.toggle.caption.light }}
-                {{ if eq (index site.Params.theme.toggle.caption.light 0) "icon" }}
-                  {{ if eq (index site.Params.theme.toggle.caption.light 1) "fa-light" }}
-                  <span class="fas fa-lightbulb"></span>
-                  {{ else if eq (index site.Params.theme.toggle.caption.light 1) "fa-sun" }}
-                  <span class="fas fa-sun"></span>
-                  {{ else if eq (index site.Params.theme.toggle.caption.light 1) "utf-light" }}
-                  <span>💡</span>
-                  {{ else if eq (index site.Params.theme.toggle.caption.light 1) "utf-sun" }}
-                  <span>☀️</span>
-                  {{ else if eq (index site.Params.theme.toggle.caption.light 1) "utf-sun-face" }}
-                  <span>🌞</span>
-                  {{ end }}
-                {{ else }}
-                  {{ index site.Params.theme.toggle.caption.light 1 }}
-                {{ end }}
-              {{ else }}
-              <span class="fas fa-sun"></span>
-              {{ end }}
-              
-              <div class="ball"></div>
-            </label>
-          </div>
-          {{ end }}
+          
         </div>
       {{ end }}
       
