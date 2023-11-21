@@ -995,13 +995,13 @@ other frontmatter here
 .
 ---
 
-This is the sample post and below is the image thaat we are inserting:
+This is the sample post and below is the image that we are inserting:
 {{< figure class="max-width" src="/path/to/image/relative/to/root/" alt="Text to show when image is unable to load for some reason" >}}
 
 Rest of the post...
 ```
 
- Note that this is just an example, and `img` shortcode comes with more options. Vibrant Shadows comes with a few of its own shortcodes along with the Hugo's default shortcodes, to make life a little easier.
+ Note that this is just an example, and `figure` shortcode comes with more options. Vibrant Shadows comes with a few of its own shortcodes along with the Hugo's default shortcodes, to make life a little easier.
 
 Hugo's default Shortcodes:
 1.  **figure** (Used to include image in a post)  
