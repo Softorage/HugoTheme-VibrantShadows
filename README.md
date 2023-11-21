@@ -2,13 +2,14 @@
 
 An insanely customizable, extremely lightweight and ridiculously fast 'Blog Theme' for Hugo, with mobile support and a lot more.<!--built-in PWA support, contact page and a lot more.-->
 
-<small>If you like our work & find it useful, please consider to star on GitHub. We are on [Facebook](https://www.facebook.com/Softorage/), [Twitter](https://twitter.com/Softorage) and [Instagram](https://www.instagram.com/softorage/), you can follow us there too! It really motivates us!</small>
+<small>If you like our work & find it useful, please consider to star on GitHub. We are on [Facebook](https://www.facebook.com/Softorage/), [X](https://x.com/Softorage) and [Instagram](https://www.instagram.com/softorage/), you can follow us there too! It really motivates us!</small>
 
 ## Preview
 
-| Desktop | Mobile |
-|---| --- |
-| ![Vibrant Shadows Theme desktop preview](https://raw.githubusercontent.com/Softorage/HugoTheme-VibrantShadows/master/images/screenshot.png) | ![Vibrant Shadows Theme mobile preview](https://raw.githubusercontent.com/Softorage/HugoTheme-VibrantShadows/master/images/screenshot-mobile.png) |
+| Theme\Device | Desktop | Mobile |
+| --- | --- | --- |
+| Light | ![Vibrant Shadows Light Theme desktop preview](https://raw.githubusercontent.com/Softorage/HugoTheme-VibrantShadows/master/images/Screenshot-Light-Desktop.png.png) | ![Vibrant Shadows Light Theme mobile preview](https://raw.githubusercontent.com/Softorage/HugoTheme-VibrantShadows/master/images/Screenshot-Light-Mobile.png) |
+| Dark | ![Vibrant Shadows Dark Theme desktop preview](https://raw.githubusercontent.com/Softorage/HugoTheme-VibrantShadows/master/images/Screenshot-Dark-Desktop.png.png) | ![Vibrant Shadows Dark Theme mobile preview](https://raw.githubusercontent.com/Softorage/HugoTheme-VibrantShadows/master/images/Screenshot-Dark-Mobile.png) |
 
 ## Table of Contents
 
