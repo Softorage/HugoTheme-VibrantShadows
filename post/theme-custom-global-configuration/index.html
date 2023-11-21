@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Custom configuration options in the theme | Vibrant Shadows Theme</title>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/assets/css/main.min.54a6b632759c14a922b43514c2120ff35a610ffadbb4f8143c9f23118d883def.css" integrity="sha256-VKa2MnWcFKkitDUUwhIP81phD/rbtPgUPJ8jEY2IPe8=" crossorigin="anonymous">
+
+  
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  
+  <link rel=apple-touch-icon sizes=180x180 href=https://vibrantshadows.softorage.com//assets/favicon/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=https://vibrantshadows.softorage.com//assets/favicon/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=https://vibrantshadows.softorage.com//assets/favicon/favicon-16x16.png><link rel=manifest href=https://vibrantshadows.softorage.com//assets/favicon/site.webmanifest><link rel=mask-icon href=https://vibrantshadows.softorage.com//assets/favicon/safari-pinned-tab.svg color=#7817c4><link rel=icon href=https://vibrantshadows.softorage.com//assets/favicon/favicon.ico type=image/x-icon><link rel="shortcut icon" href=https://vibrantshadows.softorage.com//assets/favicon/favicon.ico type=image/x-icon><meta name=apple-mobile-web-app-title content="Vibrant Shadows Theme"><meta name=application-name content="Vibrant Shadows Theme"><meta name=msapplication-TileColor content="#ffffff"><meta name=theme-color content="#ffffff">
+  
+  
+  
+  <meta name="theme-color" content="#fff6f8">
+  
+  <meta name="msapplication-navbutton-color" content="#fff6f8">
+  
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  
+  
+  
+  
+    
+      
+
+
+
+
+
+
+
+<meta name="title" content="Custom configuration options in the theme | Vibrant Shadows Theme" />
+<meta name="description" content="Get to know all the awesome configurations Vibrant Shadows Hugo theme has to offer."> 
+
+
+<link rel="canonical" href="https://vibrantshadows.softorage.com/post/theme-custom-global-configuration/" />
+
+
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:description" content="Get to know all the awesome configurations Vibrant Shadows Hugo theme has to offer." /> 
+  <meta name="twitter:title" content="Custom configuration options in the theme | Vibrant Shadows Theme" />
+  <meta name="twitter:url" content="https://vibrantshadows.softorage.com/post/theme-custom-global-configuration/" />
+  <meta name="twitter:site" content="@Softorage" /> 
+  <meta name="twitter:creator" content="@Softorage" /> 
+  <meta name="twitter:image" content="/ferenc-almasi-oCm8nPkE40k-unsplash.jpg" /> 
+
+
+
+  
+  <meta property="og:title" content="Custom configuration options in the theme | Vibrant Shadows Theme" />
+  <meta property="og:description" content="Get to know all the awesome configurations Vibrant Shadows Hugo theme has to offer." /> 
+  <meta property="og:site_name" content="Vibrant Shadows Theme" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://vibrantshadows.softorage.com/post/theme-custom-global-configuration/" />
+  
+  <meta property="og:image" content="/ferenc-almasi-oCm8nPkE40k-unsplash.jpg" /> 
+
+
+
+<meta property="article:published_time" content="2020-10-04 00:00:00 &#43;0000 UTC" />
+
+
+  
+  
+  <script type="application/ld+json">
+      { 
+          "@context": "http://schema.org", 
+          "@type": "BlogPosting",
+          "headline": "Custom configuration options in the theme",
+          
+          "url": "https://vibrantshadows.softorage.com/",
+          
+          "datePublished": "2020-10-04T00:00:00Z",
+          
+          
+          "dateModified": "2020-10-04T00:00:00Z",
+          
+          "description": Get to know all the awesome configurations Vibrant Shadows Hugo theme has to offer.,
+          
+          "logo": "/assets/favicon/android-chrome-512x512.png",
+          
+          "image": "/ferenc-almasi-oCm8nPkE40k-unsplash.jpg",
+          
+          "author": {
+              "@type": "Person",
+              "name": "Sanmay Joshi"
+          },
+          
+          "publisher": {
+            "@type": "Organization",
+            "name": "Softorage",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "/assets/favicon/android-chrome-512x512.png"
+            }
+          },
+          
+          "sameAs" : [
+            
+            
+              "https://www.facebook.com/Softorage",  
+            
+              "https://github.com/Softorage",  
+            
+              "https://gitlab.com/Softorage/",  
+            
+              "https://www.instagram.com/softorage/",  
+            
+              "https://twitter.com/Softorage"
+            ]
+          
+        }
+      </script>
+  
+
+
+    
+    <meta name="generator" content="Hugo 0.120.4">
+</head>
+
+
+  
+  
+  <body class="dark"><header>
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top flex-column">
+    <div class="container-fluid">
+      
+      <a class="navbar-brand px-3" href="https://vibrantshadows.softorage.com/"><span class="text-light"><span class="brand"><img src="/assets/favicon/favicon-32x32.png" alt="Vibrant Shadows logo" height="32"></img>&nbsp;&nbsp;&nbsp;Vibrant Shadows</span></span></a>
+      
+      
+      
+      
+      
+      
+        
+      
+      
+        
+      
+      
+       
+      
+      
+      
+      
+        <a class="navbar-toggler border-0 bg-nav p-2" role="button" href="#" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="text-clr2">&#9776;</span>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          
+          
+            <div class="order-md-1 my-2">
+              
+                  
+                <div class="d-inline-block ml-md-auto mr-2 my-auto p-1 pr-2 bg-nav
+                rounded-pill
+                
+                ">
+                  
+                    
+                      <a class="ml-1" href="https://www.facebook.com/Softorage"><span class="fab fa-facebook" aria-label="Join us on Facebook"></span></a>
+                    
+                  
+                    
+                      <a class="ml-1" href="https://github.com/Softorage"><span class="fab fa-github" aria-label="Join us on Github"></span></a>
+                    
+                  
+                    
+                      <a class="ml-1" href="https://gitlab.com/Softorage/"><span class="fab fa-gitlab" aria-label="Join us on Gitlab"></span></a>
+                    
+                  
+                    
+                      <a class="ml-1" href="https://www.instagram.com/softorage/"><span class="fab fa-instagram" aria-label="Join us on Instagram"></span></a>
+                    
+                  
+                    
+                      <a class="ml-1" href="https://twitter.com/Softorage"><span class="fab fa-twitter" aria-label="Join us on Twitter"></span></a>
+                    
+                  
+                </div>
+              
+              
+              
+                
+                <div class="d-inline-block ml-3">
+                  <input type="checkbox" class="theme-toogle-checkbox" id="theme_toggle" />
+                  <label class="theme-toggle-label theme-toggle my-auto" for="theme_toggle">
+                    
+                      
+                        
+                        <span class="fas fa-moon"></span>
+                        
+                      
+                    
+                      
+                    
+                      
+                        
+                        <span class="fas fa-sun"></span>
+                        
+                      
+                    
+                    
+                    <div class="ball"></div>
+                  </label>
+                </div>
+              
+            </div>
+          
+          
+          
+          <ul class="navbar-nav order-md-0 mr-md-auto">
+             
+            
+              
+                <li class="nav-item mx-1 my-2">
+                  <a class="btn bg-nav text-clr1" href="/categories/">Categories</a>
+                </li>
+              
+            
+              
+                <li class="nav-item mx-1 my-2">
+                  <a class="btn bg-nav text-clr1" href="/about/">About</a>
+                </li>
+              
+            
+          </ul>
+          
+
+          
+          
+        </div>
+      
+      
+    </div>
+    
+  </nav>
+</header>
+
+    
+      <script>
+      
+
+
+
+
+// Based on https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/
+// Select the button
+const themeToggle = document.querySelector(".theme-toggle");
+const themeToggleCheckbox = document.querySelector("#theme_toggle");
+// Check for dark mode preference at the OS level
+const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+// Get the user's theme preference from local storage, if it's available
+let currentTheme = localStorage.getItem("theme");
+
+// We don't want to toggle the class of body tag (dark or light), if the theme as per localStorage and theme as per default CSS link tag matches
+// since we are checking for system preference for dark theme in the same if conditional that checks for theme info stored in localStorage, it is likely to be effecient. As such no separate media query (prefers-color-scheme) has been specified in CSS.
+// If the user's preference in localStorage is dark and default theme isn't dark, or
+// If user has set system preference to dark and default theme is set to light and user has no preference in localStorage (if user has a preference stored in localStorage, then such preference shall override the system preference)
+if ((currentTheme == "dark" && "dark" != "dark") || (prefersDarkScheme.matches && "dark" == "light" && !currentTheme)) {
+  // This if conditional executes only if the body tag has class 'light'. so we need to toggle class 'light' to remove it and class 'dark' to add it
+  document.body.classList.toggle("light"); // remove class 'light'
+  document.body.classList.toggle("dark"); // add class 'dark'
+// Otherwise, if the user's preference in localStorage is light and default theme isn't light
+} else if (currentTheme == "light" && "dark" != "light") {
+  // This if conditional executes only if the body tag has class 'dark'. So we need to toggle class 'dark' to remove it and class 'light' to add it
+  document.body.classList.toggle("dark"); // remove class 'dark'
+  document.body.classList.toggle("light"); // add class 'light'
+}
+
+// Make the themetoggle match the current theme
+if (currentTheme == "dark") {
+  themeToggleCheckbox.checked = true;
+} else {
+  themeToggleCheckbox.checked = false;
+}
+
+// Listen for a click on the button 
+themeToggle.addEventListener("click", function() {
+  document.body.classList.toggle("light");
+  document.body.classList.toggle("dark"); 
+  // Update the currentTheme variable to save the new theme in localStorage
+  if (currentTheme == "dark") {
+    currentTheme = "light";
+  } else {
+    currentTheme = "dark";
+  }
+  // Finally, let's save the current preference to localStorage to keep using it
+  localStorage.setItem("theme", currentTheme);
+});
+
+
+
+
+      </script>
+    
+    
+    <div id="content">
+<div class="container-fluid  text-light text-center py-5 position-relative"
+ style="background: url('/ferenc-almasi-oCm8nPkE40k-unsplash.jpg') 50% 95% / cover no-repeat fixed; box-shadow: inset 2000px 0 0 0 rgba(0, 0, 0, 0.65);">
+  <div style="height:3.5rem;"></div>
+  <h1>Custom configuration options in the theme</h1>
+  <p class="description">Get to know all the awesome configurations Vibrant Shadows Hugo theme has to offer.</p>
+</div>
+<div class="container-fluid bg-nav p-4">
+  
+  
+  
+  
+  
+    
+  
+  
+  
+  <div class="row">
+    <div class="col-md-3">
+      <div class="bg-mat p-4 rounded" style="overflow-x: auto;">
+        <div class="h4 mb-3">
+        Contents
+        </div>
+        <nav id="TableOfContents">
+  <ol>
+    <li><a href="#vibrant-shadows-custom-parameters">Vibrant Shadow&rsquo;s custom parameters</a></li>
+  </ol>
+</nav>
+      </div>
+    </div>
+ 
+    <div class="col-md-9">
+  
+      
+      
+        
+      
+      
+        
+      
+      <div class="py-1">
+        <div class="row">
+          <div class="col-md-auto small text-muted post-meta my-auto"></span>
+            
+            
+              
+                
+              
+            
+              
+            
+              
+                
+              
+            
+              
+                
+              
+            By Sanmay Joshi &amp;#183; 18 min read &amp;#183; &lt;span class=&#39;&#39;&gt;Last updated: October 4, 2020</div>
+          
+          
+          
+          <div class="col-md-auto ml-auto my-auto mr-2">
+            <div class="row">
+              <div class="col-auto p-0 my-auto">
+              Share on:&nbsp;&nbsp;
+              </div>
+              <div class="col p-0">
+                <span class="lead">
+                  
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fvibrantshadows.softorage.com%2fpost%2ftheme-custom-global-configuration%2f&quote=Custom%20configuration%20options%20in%20the%20theme" rel="noreferrer nofollow" target="_blank" title="Share on Facebook" aria-label="Share on Facebook"><span class="fab fa-facebook"></span></a>&nbsp;&nbsp;
+                  
+                  
+                    <a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fvibrantshadows.softorage.com%2fpost%2ftheme-custom-global-configuration%2f&text=Custom%20configuration%20options%20in%20the%20theme:%0Ahttps%3a%2f%2fvibrantshadows.softorage.com%2fpost%2ftheme-custom-global-configuration%2f" rel="noreferrer nofollow" target="_blank" title="Share on Twitter" aria-label="Share on Twitter"><span class="fab fa-twitter"></span></a>&nbsp;&nbsp;
+                  
+                  
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fvibrantshadows.softorage.com%2fpost%2ftheme-custom-global-configuration%2f&title=Custom%20configuration%20options%20in%20the%20theme&summary=Get%20to%20know%20all%20the%20awesome%20configurations%20Vibrant%20Shadows%20Hugo%20theme%20has%20to%20offer.&source=Vibrant%20Shadows%20Theme" rel="noreferrer nofollow" target="_blank" title="Share on LinkedIn" aria-label="Share on LinkedIn"><span class="fab fa-linkedin"></span></a>&nbsp;&nbsp;
+                  
+                  
+                    <a href="https://t.me/share/url?url=https%3a%2f%2fvibrantshadows.softorage.com%2fpost%2ftheme-custom-global-configuration%2f&text=Custom%20configuration%20options%20in%20the%20theme" rel="noreferrer nofollow" target="_blank" title="Share on Telegram" aria-label="Share on Telegram"><span class="fab fa-telegram"></span></a>&nbsp;&nbsp;
+                  
+                  
+                    <a href="whatsapp://send?text=https%3a%2f%2fvibrantshadows.softorage.com%2fpost%2ftheme-custom-global-configuration%2f%0A%0ACustom%20configuration%20options%20in%20the%20theme" data-text="Custom configuration options in the theme" data-href="https://vibrantshadows.softorage.com/post/theme-custom-global-configuration/" rel="noreferrer nofollow" target="_blank" title="Share on Whatsapp" aria-label="Share on Whatsapp"><span class="fab fa-whatsapp"></span></a>&nbsp;&nbsp;
+                  
+                  
+                    <a href="https://reddit.com/submit?url=https%3a%2f%2fvibrantshadows.softorage.com%2fpost%2ftheme-custom-global-configuration%2f&title=Custom%20configuration%20options%20in%20the%20theme" rel="noreferrer nofollow" target="_blank" title="Share on Reddit" aria-label="Share on Reddit"><span class="fab fa-reddit"></span></a>&nbsp;&nbsp;
+                  
+                  
+                    <a href="mailto:?subject=Custom%20configuration%20options%20in%20the%20theme&body=Get%20to%20know%20all%20the%20awesome%20configurations%20Vibrant%20Shadows%20Hugo%20theme%20has%20to%20offer.%0A%0Ahttps%3a%2f%2fvibrantshadows.softorage.com%2fpost%2ftheme-custom-global-configuration%2f" target="_blank" title="Share via email" aria-label="Share via email"><span class="fas fa-envelope"></span></a>
+                  
+                </span>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+        
+        
+      </div>
+      
+      
+      <div class="py-3 my-2">
+      <p>Here, we will mainly see settings that are unique to this theme. This page may not be updated with latest docs. Read <a href="https://github.com/Softorage/HugoTheme-VibrantShadows/tree/master#readme">this Readme file</a> to know the latest updated configuration options.</p>
+<p><strong>Global Parameters (site-level):</strong></p>
+<p>These options set global values that some pages or all pages in the site use by default.</p>
+<h2 id="vibrant-shadows-custom-parameters">Vibrant Shadow&rsquo;s custom parameters</h2>
+<p>All these properties come under Hugo&rsquo;s built-in property, <code>params</code>.</p>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">params</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">footerMessage</span>: <span style="color:#e6db74">&#34;Awesome footer message&#34;</span>
+</span></span></code></pre></div><p>Let&rsquo;s see them one by one.</p>
+<ol>
+<li>
+<p><strong>Social</strong> <em>(Type: Map/Dict/Object | Accepts value: - | Highly Recommended | No default)</em></p>
+<p>It stores information related to your social media profiles. It contains:</p>
+<ol>
+<li>
+<p><strong>Profiles</strong> <em>(Type: Map/Dict/Object | Accepts value: - | Highly Recommended | No default)</em></p>
+<p>It stores your social media profiles. These are showcased as per your preference.</p>
+ <details><summary>Supported platforms</summary>
+ <p>
+<pre tabindex="0"><code>facebook: &#34;#&#34;
+twitter: &#34;#&#34;
+github: &#34;#&#34;
+gitlab: &#34;#&#34;
+steam: &#34;#&#34;
+instagram: &#34;#&#34;
+youtube: &#34;#&#34;
+pinterest: &#34;#&#34;
+linkedin: &#34;#&#34;
+reddit: &#34;#&#34;
+flickr: &#34;#&#34;
+deviantart: &#34;#&#34;
+vk: &#34;#&#34;
+mastodon: &#34;#&#34;
+bandcamp: &#34;#&#34;
+tumblr: &#34;#&#34;
+medium: &#34;#&#34;
+wikipedia: &#34;#&#34;
+</code></pre><p>To be supported in future:</p>
+<pre tabindex="0"><code>paypal: &#34;#&#34;
+slack: &#34;#&#34;
+twitch: &#34;#&#34;
+stackoverflow: &#34;#&#34;
+shutterstock: &#34;#&#34;
+soundcloud: &#34;#&#34;
+codepen: &#34;#&#34;
+</code></pre> </p>
+ </details>
+</li>
+<li>
+<p><strong>Share</strong> <em>(Type: Array | Accepts value: &ldquo;facebook&rdquo;, &ldquo;twitter&rdquo;, &ldquo;linkedin&rdquo;, &ldquo;whatsapp&rdquo;, &ldquo;reddit&rdquo;, &ldquo;email&rdquo; | Optional | No default)</em></p>
+<p>Specify the name of social media platforms that you want your articles to be able to be shared on. You also need to set value in <code>position</code> parameter, for share icons to be displayed.</p>
+</li>
+</ol>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">social</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">profiles</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">facebook</span>: <span style="color:#e6db74">&#34;https://facebook.com/#myprofile&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">twitter</span>: <span style="color:#e6db74">&#34;https://twitter.com/#myprofile&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">github</span>: <span style="color:#e6db74">&#34;https://github.com/#myprofile&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">gitlab</span>: <span style="color:#e6db74">&#34;https://gitlab.com/#myprofile&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">share</span>: [<span style="color:#e6db74">&#34;facebook&#34;</span>, <span style="color:#e6db74">&#34;twitter&#34;</span>, <span style="color:#e6db74">&#34;linkedin&#34;</span>, <span style="color:#e6db74">&#34;telegram&#34;</span>, <span style="color:#e6db74">&#34;whatsapp&#34;</span>, <span style="color:#e6db74">&#34;reddit&#34;</span>, <span style="color:#e6db74">&#34;email&#34;</span>]
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Meta</strong> <em>(Type: Map/Dict/Object | Accepts value: - | Required/Optional)</em></p>
+<ol>
+<li>
+<p><strong>Author</strong> <em>(Type: String | Accepts value: Text | Required | No default)</em></p>
+<p>It stores website-wide author(s). We won&rsquo;t be using <code>site.Authors</code> till it is finalised. See <a href="https://github.com/gohugoio/hugo/issues/3088">here</a>.</p>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">author</span>: <span style="color:#e6db74">&#34;The Great Authors&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Footer Message</strong> <em>(Type: String | Accepts value: Text | Optional | No default)</em></p>
+<p>It is shown in footer above footer links.</p>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">footerMessage</span>: <span style="color:#e6db74">&#34;Awesome footer message&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Tagline</strong> <em>(Type: String | Accepts value: Text | Required | No default)</em></p>
+<p>It is the tagline of the website/blog. It&rsquo;s displayed in website title, and on homepage.</p>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">tagline</span>: <span style="color:#e6db74">&#34;A blog to satisfy you needs&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Description</strong> <em>(Type: String | Accepts value: Text | Required | No default)</em></p>
+<p>It is the description of website/blog and should include website/blog title (brand name) at least once, for great SEO benefits. Recommended character length: 50 to 160.</p>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;A really great description!&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Content License</strong> <em>(Type: String | Accepts value: Text | Required | No default)</em></p>
+<p>It is the license under which website/blog&rsquo;s content is distributed. It should be same as that specified in field &lsquo;copyright&rsquo; above.</p>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">contentLicense</span>: <span style="color:#e6db74">&#34;All rights reserved.&#34;</span> <span style="color:#75715e"># Another example: &#39;CC-BY-SA-3.0&#39;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Title Separator</strong> <em>(Type: String | Accepts value: Text | Optional | Default: &quot; | &ldquo;)</em></p>
+<p>It is used in website/blog title, to separate (say) page title from website/blog title.</p>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">titleSeparator</span>: <span style="color:#e6db74">&#34; | &#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Attribution</strong> <em>(Type: String | Accepts value: enable/disable | Optional | Default: &ldquo;enable&rdquo;)</em></p>
+<p>Allows to attribute Hugo team for awesome software and Softorage for great theme.</p>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">attribution</span>: <span style="color:#e6db74">&#34;enable&#34;</span>
+</span></span></code></pre></div></li>
+</ol>
+</li>
+<li>
+<p><strong>Brand</strong> <em>(Type: Map/Dict/Object | Accepts value: - | Highly Recommended)</em></p>
+<p>It stores brand related information. It contains:</p>
+<ol>
+<li>
+<p><strong>Name</strong> <em>(Type: String | Accepts value: Text | Required | No default)</em></p>
+<p>It&rsquo;s the Brand&rsquo;s Name, usually just one/two word that is name of the brand.</p>
+</li>
+<li>
+<p><strong>Logo</strong> <em>(Type: String | Accepts value: URL | Required | No default)</em></p>
+<p>It&rsquo;s path (preferably relative path) to brand&rsquo;s logo.</p>
+</li>
+<li>
+<p><strong>Color</strong> <em>(Type: String | Accepts value: HEX/RGBA | Required | No default)</em></p>
+<p>It&rsquo;s the color to be shown on scroll for brand name on navbar.</p>
+</li>
+<li>
+<p><strong>Navbar Config</strong> <em>(Type: Array | Accepts value: &ldquo;logo&rdquo;, &ldquo;name&rdquo; | Optional | Default: [&ldquo;logo&rdquo;, &ldquo;name&rdquo;])</em></p>
+<p>It determines whether brand&rsquo;s logo and/or name should be visible on navbar.</p>
+</li>
+</ol>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">brand</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;ExampleBlog&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">logo</span>: <span style="color:#e6db74">&#34;/assets/logo.png&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">color</span>: <span style="color:#e6db74">&#34;#7d1fa5&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">navbar</span>: [<span style="color:#e6db74">&#34;logo&#34;</span>, <span style="color:#e6db74">&#34;name&#34;</span>]
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Theme</strong> <em>(Type: Map/Dict/Object | Accepts value: - | Optional)</em></p>
+<p>You can specify custom color pallet to form look for the website/blog of your own liking. It contains:</p>
+<ol>
+<li>
+<p><strong>Nav</strong> <em>(Type: String | Accepts value: HEX/RGBA | Optional | Default: &ldquo;#ffffff&rdquo;)</em></p>
+<p>It&rsquo;s navbar&rsquo;s background color.</p>
+</li>
+<li>
+<p><strong>Antinav</strong> <em>(Type: String | Accepts value: HEX/RGBA | Optional | Default: &ldquo;#000000&rdquo;)</em></p>
+<p>It&rsquo;s a color in good contrast to <code>nav</code>.</p>
+</li>
+<li>
+<p><strong>Mat</strong> <em>(Type: String | Accepts value: HEX/RGBA | Optional | Default: &ldquo;#f9f9f9&rdquo;)</em></p>
+<p>It&rsquo;s background color for cards (not of cards). It applies to the background on which cards are placed.</p>
+</li>
+<li>
+<p><strong>Color-1</strong> <em>(Type: String | Accepts value: HEX/RGBA | Optional | Default: &ldquo;#7d1fa5&rdquo;)</em></p>
+<p>It&rsquo;s color-1 in the hero gradient. It is used throughout the theme.</p>
+</li>
+<li>
+<p><strong>Color-2</strong> <em>(Type: String | Accepts value: HEX/RGBA | Optional | Default: &ldquo;#6d19fc&rdquo;)</em></p>
+<p>It&rsquo;s color-2 in the hero gradient. It is used throughout the theme.</p>
+</li>
+<li>
+<p><strong>Borders</strong> <em>(Type: String | Accepts value: rounded/square | Optional | Default: &ldquo;rounded&rdquo;)</em></p>
+<p>Here, specify what kind of borders do you like for elements, like buttons.</p>
+</li>
+</ol>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">theme</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">nav</span>: <span style="color:#e6db74">&#34;#ffffff&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">antinav</span>: <span style="color:#e6db74">&#34;#000000&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">mat</span>: <span style="color:#e6db74">&#34;#f9f9f9&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">clr1</span>: <span style="color:#e6db74">&#34;#7d1fa5&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">clr2</span>: <span style="color:#e6db74">&#34;#6d19fc&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">borders</span>: <span style="color:#e6db74">&#34;rounded&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Position</strong> <em>(Type: Map/Dict/Object | Accepts value: - | Optional with caevets)</em></p>
+<p>It lets you customize <em>what</em> elements should be displayed and <em>where</em>. It contains:</p>
+<ol>
+<li>
+<p><strong>Social</strong> <em>(Type: Map/Dict/Object | Accepts value: - | Optional)</em></p>
+<ol>
+<li>
+<p><strong>Profiles</strong> <em>(Type: String | Accepts value: footer/navbar | Optional | Default: &ldquo;footer&rdquo;)</em></p>
+<p>It lets you customize where you want your social profiles to appear. You may use &rsquo;navbar&rsquo; if number of items in main menu and social profiles are minimal, otherwise &lsquo;footer&rsquo; is recommended.</p>
+</li>
+<li>
+<p><strong>Share</strong> <em>(Type: String | Accepts value: top/bottom | Optional | No default)</em></p>
+<p>It lets you customize where you want your social sharing buttons to appear on a blog post.</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>Menu on Navbar</strong> <em>(Type: String | Accepts value: right/left | Optional | Default: &ldquo;right&rdquo;)</em></p>
+<p>It lets you customize the position of main menu on navbar.</p>
+</li>
+<li>
+<p><strong>Post&rsquo;s Meta</strong> <em>(Type: Map/Dict/Object | Accepts value: - | Optional | No default)</em></p>
+<p>It lets you customize <em>which</em> elements from post&rsquo;s meta should be displayed, <em>where</em> and <em>how</em>. It contains:
+<strong>readingTime</strong> - <strong>wordCount</strong> - <strong>author</strong> - <strong>lastUpdated</strong> - <strong>tags</strong>
+<em>(Type: Map/Dict/Object | Accepts value: - | Optional | No default)</em>
+It lets you customize where - summary/content - you want to show a post&rsquo;s &lsquo;reading time&rsquo;, &lsquo;words count&rsquo;, &lsquo;author&rsquo;, &rsquo;last updated on&rsquo;, &rsquo;tags&rsquo;  and how - top/bottom.</p>
+</li>
+</ol>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">position</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">social</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">profiles</span>: <span style="color:#e6db74">&#34;footer&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">share</span>: <span style="color:#e6db74">&#34;bottom&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">navbarMenu</span>: <span style="color:#e6db74">&#34;right&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">postMeta</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">readingTime</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">summary</span>: <span style="color:#e6db74">&#34;top&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">content</span>: <span style="color:#e6db74">&#34;top&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">wordCount</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">summary</span>: <span style="color:#e6db74">&#34;top&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">content</span>: <span style="color:#e6db74">&#34;top&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">author</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">summary</span>: <span style="color:#e6db74">&#34;top&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">content</span>: <span style="color:#e6db74">&#34;top&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">lastUpdated</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">summary</span>: <span style="color:#e6db74">&#34;top&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">content</span>: <span style="color:#e6db74">&#34;top&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">tags</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">summary</span>: <span style="color:#e6db74">&#34;top&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">content</span>: <span style="color:#e6db74">&#34;bottom&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Fonts</strong> <em>(Type: Map/Dict/Object | Accepts value: - | Optional )</em></p>
+<p>It lets you customize the fonts for various types of text elements, and in general too.</p>
+<p>Let&rsquo;s see this customization property with an example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">font</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">general</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">family</span>: <span style="color:#e6db74">&#34;Lato&#34;</span> <span style="color:#75715e"># must match to a css font-family | default: &#34;Lato&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#cdnLink: &#34;&#34; # a link tag for font other than Lato and Roboto | recommended</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">heading</span>: 
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">list</span>: [<span style="color:#e6db74">&#34;h1&#34;</span><span style="color:#f92672">] # accepts array of values</span>: <span style="color:#e6db74">&#34;h1&#34;</span>, <span style="color:#e6db74">&#34;h2&#34;</span>, <span style="color:#e6db74">&#34;h3&#34;</span>, <span style="color:#e6db74">&#34;h4&#34;</span>, <span style="color:#e6db74">&#34;h5&#34;</span>, <span style="color:#e6db74">&#34;h6&#34;</span> <span style="color:#f92672">| default</span>: [<span style="color:#e6db74">&#34;h1&#34;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">family</span>: <span style="color:#e6db74">&#34;Lato&#34;</span> <span style="color:#75715e"># must match to a css font-family | default: &#34;Lato&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#cdnLink: &#34;&#34; # a link tag for font other than Lato and Roboto | recommended</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">description</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">family</span>: <span style="color:#e6db74">&#34;Lato&#34;</span> <span style="color:#75715e"># must match to a css font-family | default: &#34;Lato&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#cdnLink: &#34;&#34; # a link tag for font other than Lato and Roboto | recommended</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">brand</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">family</span>: <span style="color:#e6db74">&#34;Lato&#34;</span> <span style="color:#75715e"># must match to a css font-family | default: &#34;Lato&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#cdnLink: &#34;&#34; # a link tag for font other than Lato and Roboto | recommended</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">footer</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">family</span>: <span style="color:#e6db74">&#34;Lato&#34;</span> <span style="color:#75715e"># must match to a css font-family | default: &#34;Lato&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#cdnLink: &#34;&#34; # a link tag for font other than Lato and Roboto | recommended</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">copyright</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">family</span>: <span style="color:#e6db74">&#34;Lato&#34;</span> <span style="color:#75715e"># must match to a css font-family | default: &#34;Lato&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#cdnLink: &#34;&#34; # a link tag for font other than Lato and Roboto | recommended</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">postMeta</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">family</span>: <span style="color:#e6db74">&#34;Lato&#34;</span> <span style="color:#75715e"># must match to a css font-family | default: &#34;Lato&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#cdnLink: &#34;&#34; # a link tag for font other than Lato and Roboto | recommended</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Favicon Tags</strong> <em>(Type: String | Accepts value: Text | Optional | No default)</em></p>
+<p>It stores HTML tags for your favicon (see example below). We recommend you to ensure that you have <code>&quot;purpose&quot;: &quot;maskable&quot;</code> set for one icon in your <code>site.webmanifest</code> file (helps for PWA). We recommend <code>https://realfavicongenerator.net</code> since it&rsquo;s easy to use and free. By the way, we are not affiliated with them. We just like their product!</p>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">faviconTags</span>: |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &lt;link rel=&#34;apple-touch-icon&#34; sizes=&#34;180x180&#34; href=&#34;/assets/favicon/apple-touch-icon.png&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &lt;link rel=&#34;icon&#34; type=&#34;image/png&#34; sizes=&#34;32x32&#34; href=&#34;/assets/favicon/favicon-32x32.png&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &lt;link rel=&#34;icon&#34; type=&#34;image/png&#34; sizes=&#34;16x16&#34; href=&#34;/assets/favicon/favicon-16x16.png&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &lt;link rel=&#34;manifest&#34; href=&#34;/assets/favicon/site.webmanifest&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &lt;link rel=&#34;mask-icon&#34; href=&#34;/assets/favicon/safari-pinned-tab.svg&#34; color=&#34;#525252&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &lt;link rel=&#34;icon&#34; href=&#34;/assets/favicon/favicon.ico&#34; type=&#34;image/x-icon&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &lt;link rel=&#34;shortcut icon&#34; href=&#34;/assets/favicon/favicon.ico&#34; type=&#34;image/x-icon&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &lt;meta name=&#34;apple-mobile-web-app-title&#34; content=&#34;ExampleBlog&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &lt;meta name=&#34;application-name&#34; content=&#34;ExampleBlog&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &lt;meta name=&#34;msapplication-TileColor&#34; content=&#34;#fff6f8&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &lt;meta name=&#34;msapplication-config&#34; content=&#34;/assets/favicon/browserconfig.xml&#34;&gt;</span>  
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Custom Verification</strong> <em>(Type: Map/Dict/Object | Accepts value: - | Optional)</em></p>
+<p>It lets you verify your website on multiple reputed services.</p>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">myWOT</span>: <span style="color:#e6db74">&#34;ba8579f668r8w3g62503&#34;</span> <span style="color:#75715e"># verification key here is dummy</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>SEO</strong> <em>(Type: Map/Dict/Object | Accepts value: - | Optional)</em></p>
+<p>It lets you customize SEO properties of the website/blog, to help you shine :grinning: It contains:</p>
+<ol>
+<li>
+<p><strong>Switch</strong> <em>(Type: String | Accepts value: on/off | Optional | Default: &ldquo;on&rdquo;)</em></p>
+<p>A switch which lets you turn on all the good SEO meta tags.</p>
+</li>
+<li>
+<p><strong>Twitter</strong> <em>(Type: Map/Dict/Object | Accepts value: - | Optional)</em></p>
+<p>Info about your Twitter account, and presentation of blog posts on Twitter when they are shared. It contains:</p>
+<ol>
+<li>
+<p><strong>Card</strong> <em>(Type: String | Accepts value: enable/disable | Optional | Default: &ldquo;enable&rdquo;)</em></p>
+<p>Optimizes the website/blog, when it is shared on Twitter.</p>
+</li>
+<li>
+<p><strong>Handle</strong> <em>(Type: String | Accepts value: Text | Optional | No default)</em></p>
+<p>It is Twitter handle of the website-wide author, without &lsquo;@&rsquo;.</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>Facebook</strong> <em>(Type: Map/Dict/Object | Accepts value: - | Optional)</em></p>
+<p>Info about your Facebook account, and presentation of blog posts on Facebook when they are shared. It contains:</p>
+<ol>
+<li>
+<p><strong>OpenGraph</strong> <em>(Type: String | Accepts value: enable/disable | Optional | Default: &ldquo;enable&rdquo;)</em></p>
+<p>Optimizes the website/blog, when it is shared on Facebook.</p>
+</li>
+<li>
+<p><strong>App ID</strong> <em>(Type: String | Accepts value: Text | Optional | No default)</em></p>
+<p>Website/blog&rsquo;s Facebook App ID (if any)</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>JSON-LD</strong> <em>(Type: String | Accepts value: enable/disable | Optional | Default: &ldquo;enable&rdquo;)</em></p>
+<p>Improves ability of search engines to better index and understand the website/blog. Helps in SEO optimization.</p>
+</li>
+<li>
+<p><strong>Speed Mode</strong> <em>(Type: String | Accepts value: enable/disable | Highly Recommended | Default: &ldquo;disable&rdquo;)</em></p>
+<p>Enabling &ldquo;Speed Mode&rdquo; would make the website/blog extremely fast and lightweight, providing a snappy experience to website/blog visitors. &ldquo;Speed Mode&rdquo; utilises <em>PostCSS</em> via <em>Hugo&rsquo;s Asset Pipeline</em>. Note that, &ldquo;Speed Mode&rdquo; works in <em>production environment</em> only. Since many Hugo users do not have Hugo&rsquo;s extended version, this option is disabled by default.</p>
+</li>
+</ol>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">seo</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">switch</span>: <span style="color:#e6db74">&#34;on&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">twitter</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">card</span>: <span style="color:#e6db74">&#34;enable&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">handle</span>: <span style="color:#e6db74">&#34;Great&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">facebook</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">openGraph</span>: <span style="color:#e6db74">&#34;enable&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">appID</span>: <span style="color:#e6db74">&#34;170405085280305&#34;</span> <span style="color:#75715e"># it is just for illustration purpose</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">jsonLD</span>: <span style="color:#e6db74">&#34;enable&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">speedMode</span>: <span style="color:#e6db74">&#34;enable&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Cookie Consent</strong> <em>(Type: Map/Dict/Object | Accepts value: - | Optional)</em></p>
+<p>It allows you to present a &lsquo;Cookie Consent&rsquo; dialog to your users, to help them decide their privacy settings, when they browse your website. It contains:</p>
+<ol>
+<li>
+<p><strong>Switch</strong> <em>(Type: String | Accepts value: on/off | Optional | Default: &ldquo;off&rdquo;)</em></p>
+<p>It lets you choose whether you want to show a Cookie Consent dialog to your users.</p>
+</li>
+<li>
+<p><strong>Type</strong> <em>(Type: String | Accepts value: opt-in/opt-out/none | Required | No default)</em></p>
+<p>In &lsquo;opt-in&rsquo;, website doesn&rsquo;t employ cookies to user&rsquo;s computer unless user gives cosent to opt in. In &lsquo;opt-out&rsquo;, cookies are employed on user&rsquo;s computer and the user is given the choice to opt out of cookies. In &rsquo;none&rsquo;, cookies are employed on the user&rsquo;s computer and user is not given a choice in that regard. We recommend to refrain from using none, unless you have <strong>zero</strong> customers from EU or similar countries with privacy protecting laws.</p>
+</li>
+<li>
+<p><strong>Revokable</strong> <em>(Type: Boolean | Accepts value: true/false | Optional | Default: true)</em></p>
+<p>When set to <code>true</code>, a button to revoke cookie consent appears when the user hover in bottom area of the screen, regardless whether user&rsquo;s country requires revertable cookie consent.</p>
+</li>
+<li>
+<p><strong>Colors</strong> <em>(Type: Map/Dict/Object | Accepts value: - | Optional)</em></p>
+<p>It lets you customize the colors for Cookie Consent dialog. It contains:</p>
+<ol>
+<li>
+<p><strong>Banner</strong> <em>(Type: Map/Dict/Object | Accepts value: - | Optional)</em></p>
+<p>It lets you customize colors of banner for Cookie Consent. It contains: <strong>background</strong> and <strong>text</strong>.</p>
+</li>
+<li>
+<p><strong>Button</strong> <em>(Type: Map/Dict/Object | Accepts value: - | Optional)</em></p>
+<p>It lets you customize colors of button for Cookie Consent. It contains: <strong>background</strong> and <strong>text</strong>.</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>Content</strong> <em>(Type: Map/Dict/Object | Accepts value: - | Required)</em></p>
+<p>It lets you customize the content you wish to show on Cookie Consent dialog. It contains:</p>
+<ol>
+<li>
+<p><strong>Message</strong> <em>(Type: String | Accepts value: Text | Required | No default)</em></p>
+<p>It lets you customize the message to be shown in Cookie Consent. You can even use <code>&lt;a&gt;</code>-anchor tags to hyperlink words.</p>
+</li>
+<li>
+<p><strong>Dismiss</strong> <em>(Type: String | Accepts value: Text | Optional | Default: &ldquo;Close&rdquo;)</em></p>
+<p>It&rsquo;s the text on the button that dismisses the popup/banner.</p>
+</li>
+<li>
+<p><strong>Link Text</strong> <em>(Type: String | Accepts value: Text | Optional | Default: &ldquo;Learn more&rdquo;)</em></p>
+<p>This text appears after the <code>message</code> and is hyperlinked to <code>linkURL</code>.</p>
+</li>
+<li>
+<p><strong>Link URL</strong> <em>(Type: String | Accepts value: Text | Required | No default)</em></p>
+<p>It&rsquo;s the url of location where user should be directed when they click &ldquo;Learn more&rdquo;.</p>
+</li>
+<li>
+<p><strong>Allow</strong> <em>(Type: String | Accepts value: Text | Optional |Default: &ldquo;Allow&rdquo;)</em></p>
+<p>It is the text on the button that allows cookies.</p>
+</li>
+<li>
+<p><strong>Deny</strong> <em>(Type: String | Accepts value: Text | Optional | Default: &ldquo;Decline&rdquo;)</em></p>
+<p>It is the text on the button that denies cookies.</p>
+</li>
+<li>
+<p><strong>Policy</strong> <em>(Type: String | Accepts value: Text | Optional | Default: &ldquo;Cookie Consent&rdquo;)</em></p>
+<p>It is the text that appears on the button, when user&rsquo;s country requires revokable cookie consent.</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">cookieConsent</span>: <span style="color:#75715e"># we use OSANO Cookie Consent solution</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">switch</span>: <span style="color:#e6db74">&#34;on&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">type</span>: <span style="color:#e6db74">&#34;opt-in&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">revokable</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">colors</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">banner</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">background</span>: <span style="color:#e6db74">&#34;#ffffff&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">text</span>: <span style="color:#e6db74">&#34;#000000&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">button</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">background</span>: <span style="color:#e6db74">&#34;#6d19fc&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">text</span>: <span style="color:#e6db74">&#34;#ffffff&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">content</span>: <span style="color:#75715e"># change the links below to appropriate url addresses</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">message</span>: |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      By continuing to use this website, you agree to our &lt;a href=&#39;/legal/privacy-policy/&#39;&gt;Privacy Policy&lt;/a&gt;, &lt;a href=&#39;/legal/cookie-policy/&#39;&gt;Cookie Policy&lt;/a&gt; and our &lt;a href=&#39;/legal/terms-and-conditions/&#39;&gt;Terms and Conditions&lt;/a&gt; for your use of this website.</span>      
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">dismiss</span>: <span style="color:#e6db74">&#34;Close&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">linkText</span>: <span style="color:#e6db74">&#34;Learn more&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">linkURL</span>: <span style="color:#e6db74">&#34;/legal/privacy-policy/&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">allow</span>: <span style="color:#e6db74">&#34;Allow&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">deny</span>: <span style="color:#e6db74">&#34;Decline&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">policy</span>: <span style="color:#e6db74">&#34;Cookie Consent&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>User Experience</strong> <em>(Type: Map/Dict/Object | Accepts value: - | Optional)</em></p>
+<p>It contains settings that let&rsquo;s you customize your user&rsquo;s website/blog experience.</p>
+<ol>
+<li>
+<p><strong>Google Analytics Loading</strong> <em>(Type: String | Accepts value: sync/async | Optional | Default: &ldquo;sync&rdquo;)</em></p>
+<p>It helps you customize whether Google Analytics JavaScript file loads &lsquo;Synchronously&rsquo; or &lsquo;Asynchronously&rsquo;.</p>
+</li>
+</ol>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">userExperience</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">googleAnalyticsLoading</span>: <span style="color:#e6db74">&#34;sync&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Main Sections</strong> <em>(Type: Array | Accepts value: Section names | Highly Recommended)</em></p>
+<p>This is Hugo&rsquo;s native feature that let&rsquo;s you specify which sections are to be treated as <em>Main Sections</em>. A very general and common example of <em>Main Section</em> is <code>post</code> or <code>posts</code> section (hence they are often called Blog Directories). If nothing is specified, the section with the highest number of content files is treated as a <em>Main Section</em>. For more info, see the <a href="https://gohugo.io/functions/where/#mainsections">Hugo docs</a>.</p>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">mainSections</span>: [<span style="color:#e6db74">&#34;post&#34;</span>]
+</span></span></code></pre></div></li>
+</ol>
+      </div>
+      
+      
+        <div class="pt-4 mt-2 border-top">
+          <div class="row">
+            <div class="col-md-7 small text-muted post-meta my-1">
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              </div>
+            
+            
+            
+          </div>
+        
+          
+            <div class="mt-3"><a href="/tags/configuration/"><span class="badge badge-pill bg-clr2 text-nav mr-2 py-2">#CONFIGURATION</span></a><a href="/tags/customize/"><span class="badge badge-pill bg-clr2 text-nav mr-2 py-2">#CUSTOMIZE</span></a><a href="/tags/settings/"><span class="badge badge-pill bg-clr2 text-nav mr-2 py-2">#SETTINGS</span></a></div>
+          
+        
+        </div>
+      
+    
+    
+    </div>
+  </div>
+  
+  
+  
+  
+</div>
+
+    </div><footer class="text-center p-2 text-muted footer">
+  
+    
+  
+
+  <div class="py-2 lead">
+      Vibrant Shadows by Softorage
+    </div>
+
+  <div class="py-2 copyright">
+    <small>Copyright &#169; 2023 Softorage <b>&#183;</b> Content license: CC-BY-SA-3.0 <b>&#183;</b> Powered by <a class="font-weight-bold text-reset text-decoration-none" href="https://gohugo.io">Hugo</a> <b>&#183;</b> Theme <a class="font-weight-bold text-reset text-decoration-none" href="https://github.com/Softorage/HugoTheme-VibrantShadows">Vibrant Shadows</a> by <span class="softorage"><a class="font-weight-bold text-reset" href="https://softorage.com">Softorage</a></span></small>
+  </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+    
+    
+    
+    <script src="/assets/js/main.min.95e2d3c18b801ee85494326af1f044e57bbd4f1b28d4ecadbdbcfa691cb7ba82.js" integrity="sha256-leLTwYuAHuhUlDJq8fBE5Xu9Txso1Oytvbz6aRy3uoI=" crossorigin="anonymous"></script>
+    
+    <script src="/js/custom.min.b4e38a0f4dadf0730135a3668e1470ce91f906ffa2d26d4cff9e3649029fac48.js" integrity="sha256-tOOKD02t8HMBNaNmjhRwzpH5Bv&#43;i0m1M/542SQKfrEg=" crossorigin="anonymous"></script>
+    
+    
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Lato&display=swap" rel="stylesheet">
+    
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+  </body>
+</html>

@@ -7,60 +7,49 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright &amp;#169; 2020 Softorage. All rights reserved.</copyright>
-    <lastBuildDate>Tue, 06 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://vibrantshadows.softorage.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://vibrantshadows.softorage.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>get started</title>
       <link>https://vibrantshadows.softorage.com/tags/get-started/</link>
       <pubDate>Tue, 06 Oct 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://vibrantshadows.softorage.com/tags/get-started/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>guide</title>
       <link>https://vibrantshadows.softorage.com/tags/guide/</link>
       <pubDate>Tue, 06 Oct 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://vibrantshadows.softorage.com/tags/guide/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>configuration</title>
       <link>https://vibrantshadows.softorage.com/tags/configuration/</link>
       <pubDate>Mon, 05 Oct 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://vibrantshadows.softorage.com/tags/configuration/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>customize</title>
       <link>https://vibrantshadows.softorage.com/tags/customize/</link>
       <pubDate>Mon, 05 Oct 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://vibrantshadows.softorage.com/tags/customize/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>settings</title>
       <link>https://vibrantshadows.softorage.com/tags/settings/</link>
       <pubDate>Mon, 05 Oct 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://vibrantshadows.softorage.com/tags/settings/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>license</title>
       <link>https://vibrantshadows.softorage.com/tags/license/</link>
       <pubDate>Thu, 01 Oct 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://vibrantshadows.softorage.com/tags/license/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

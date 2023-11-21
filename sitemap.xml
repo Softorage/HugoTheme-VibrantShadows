@@ -1,50 +1,65 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
   <url>
     <loc>https://vibrantshadows.softorage.com/tags/get-started/</loc>
-    <lastmod>2020-10-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://vibrantshadows.softorage.com/post/getting-started/</loc>
-    <lastmod>2020-10-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://vibrantshadows.softorage.com/tags/guide/</loc>
-    <lastmod>2020-10-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://vibrantshadows.softorage.com/post/</loc>
-    <lastmod>2020-10-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://vibrantshadows.softorage.com/tags/</loc>
-    <lastmod>2020-10-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://vibrantshadows.softorage.com/</loc>
-    <lastmod>2020-10-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://vibrantshadows.softorage.com/tags/configuration/</loc>
-    <lastmod>2020-10-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://vibrantshadows.softorage.com/tags/customize/</loc>
-    <lastmod>2020-10-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://vibrantshadows.softorage.com/post/hugos-built-in-global-configuration/</loc>
-    <lastmod>2020-10-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://vibrantshadows.softorage.com/tags/settings/</loc>
-    <lastmod>2020-10-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://vibrantshadows.softorage.com/post/themes-custom-global-configuration/</loc>
-    <lastmod>2020-10-04T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://vibrantshadows.softorage.com/post/page-configuration/</loc>
-    <lastmod>2020-10-03T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://vibrantshadows.softorage.com/post/example-config-yaml/</loc>
-    <lastmod>2020-10-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://vibrantshadows.softorage.com/post/additional-info/</loc>
-    <lastmod>2020-10-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://vibrantshadows.softorage.com/tags/license/</loc>
-    <lastmod>2020-10-01T00:00:00+00:00</lastmod>
   </url>
+  
+  <url>
+    <loc>https://vibrantshadows.softorage.com/post/getting-started/</loc>
+  </url>
+  
+  <url>
+    <loc>https://vibrantshadows.softorage.com/tags/guide/</loc>
+  </url>
+  
+  <url>
+    <loc>https://vibrantshadows.softorage.com/post/</loc>
+  </url>
+  
+  <url>
+    <loc>https://vibrantshadows.softorage.com/tags/</loc>
+  </url>
+  
+  <url>
+    <loc>https://vibrantshadows.softorage.com/</loc>
+  </url>
+  
+  <url>
+    <loc>https://vibrantshadows.softorage.com/tags/configuration/</loc>
+  </url>
+  
+  <url>
+    <loc>https://vibrantshadows.softorage.com/tags/customize/</loc>
+  </url>
+  
+  <url>
+    <loc>https://vibrantshadows.softorage.com/post/hugo-built-in-global-configuration/</loc>
+  </url>
+  
+  <url>
+    <loc>https://vibrantshadows.softorage.com/tags/settings/</loc>
+  </url>
+  
+  <url>
+    <loc>https://vibrantshadows.softorage.com/post/theme-custom-global-configuration/</loc>
+  </url>
+  
+  <url>
+    <loc>https://vibrantshadows.softorage.com/post/page-configuration/</loc>
+  </url>
+  
+  <url>
+    <loc>https://vibrantshadows.softorage.com/post/example-config-yaml/</loc>
+  </url>
+  
+  <url>
+    <loc>https://vibrantshadows.softorage.com/post/additional-info/</loc>
+  </url>
+  
+  <url>
+    <loc>https://vibrantshadows.softorage.com/tags/license/</loc>
+  </url>
+  
 </urlset>
