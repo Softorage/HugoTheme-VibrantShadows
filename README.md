@@ -8,8 +8,8 @@ An insanely customizable, extremely lightweight and ridiculously fast 'Blog Them
 
 | Theme\Device | Desktop | Mobile |
 | --- | --- | --- |
-| Light | ![Vibrant Shadows Light Theme desktop preview](https://raw.githubusercontent.com/Softorage/HugoTheme-VibrantShadows/master/images/Screenshot-Light-Desktop.png.png) | ![Vibrant Shadows Light Theme mobile preview](https://raw.githubusercontent.com/Softorage/HugoTheme-VibrantShadows/master/images/Screenshot-Light-Mobile.png) |
-| Dark | ![Vibrant Shadows Dark Theme desktop preview](https://raw.githubusercontent.com/Softorage/HugoTheme-VibrantShadows/master/images/Screenshot-Dark-Desktop.png.png) | ![Vibrant Shadows Dark Theme mobile preview](https://raw.githubusercontent.com/Softorage/HugoTheme-VibrantShadows/master/images/Screenshot-Dark-Mobile.png) |
+| Light | ![Vibrant Shadows Light Theme desktop preview](https://raw.githubusercontent.com/Softorage/HugoTheme-VibrantShadows/master/images/Screenshot-Light-Desktop.png) | ![Vibrant Shadows Light Theme mobile preview](https://raw.githubusercontent.com/Softorage/HugoTheme-VibrantShadows/master/images/Screenshot-Light-Mobile.png) |
+| Dark | ![Vibrant Shadows Dark Theme desktop preview](https://raw.githubusercontent.com/Softorage/HugoTheme-VibrantShadows/master/images/Screenshot-Dark-Desktop.png) | ![Vibrant Shadows Dark Theme mobile preview](https://raw.githubusercontent.com/Softorage/HugoTheme-VibrantShadows/master/images/Screenshot-Dark-Mobile.png) |
 
 ## Table of Contents
 
