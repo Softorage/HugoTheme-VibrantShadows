@@ -1,4 +1,7 @@
-{{/*<!-- Set Dark as default theme
+{{/*
+used in /assets/js/custom.js
+
+<!-- Set Dark as default theme
 If
 1. both the themes have `default` to `true` or `false` or not set,  or
 2. only Dark theme has `default` set to `true`

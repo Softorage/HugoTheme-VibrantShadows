@@ -817,6 +817,10 @@ Let's see them one by one.
             3.  **Position** *(Type: String | Accepts value: right/left/none | Optional | Default: "left")*
     
                 Position of a post's image, when it appears as a thumbnail in a list (say) on landing page. Regardless of "right" or "left", it looks the same on mobile-view.
+    3.  **Infinite Scrolling** *(Type: Boolean | Accepts value: true/false | Optional | Default: false)*
+
+        Allows to set Infinite Scrolling on the Home (Landing) Page.  
+        Note: Requires Paginate value of at least 1. Paginate can be set in `config.yaml` (default is 10).
         
     Example:
     ```yaml
@@ -829,6 +833,7 @@ Let's see them one by one.
           size: "200px"
           borders: "rounded"
           position: "left"
+      infiniteScroll: false
     ```
 13. **Main Sections** *(Type: Array | Accepts value: Section names | Highly Recommended)*
     
@@ -1068,6 +1073,10 @@ taxonomies:
   category: "categories"
   series: "series"
 
+# pagination | required for infinite scrolling. See params -> userExperience -> infiniteScroll
+paginate: 10 # number of items per page | a number of 1 or more required for infinite scrolling | default: 10
+paginatePath: "posts" # allows you to set a custom path for your pagination pages | default: "page"
+
 # menu as per Hugo's menu feature
 menu:
   main:
@@ -1283,6 +1292,7 @@ params:
         size: "200px" # accepts value: string | integer: size of post images when they appear as thumbnails; string: unit of size | default: "200px"
         borders: "rounded" # accepts value: rounded/square/pill/circle | choose the border radius of posts' images when they appear as thumbnails | optional | default: "rounded"
         position: "left" # accepts value: right/left/none | position of a post's image, when it appears as a thumbnail in a list (say) on landing page. regardless of "right" or "left", it looks the same on mobile-view. | optional | default: "left"
+    infiniteScroll: false # accepts value: true/false | setting it to true allows for infinite scrolling on home page. requires value of paginate to be 1 or more set in config.yaml (default is 10) | optional | default: false
   mainSections: ["post"] # required, https://gohugo.io/functions/where/#mainsections
   #customVerification:
     #myWOT: "ba8579f668r8w3g62503" # content for meta tag to verify your website on 'Web Of Trust'

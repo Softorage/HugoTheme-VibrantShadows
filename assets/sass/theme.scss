@@ -96,6 +96,25 @@ background: var(--nav);
 color: var(--antinav);
 }
 
+// themeing pagination
+.pagination .page-item:not(.active) .page-link {
+  background-color: var(--nav);
+  color: var(--clr2);
+  border: none;
+}
+
+.pagination .page-item:not(.active) .page-link:hover {
+  background-color: var(--nav-soft);
+  color: var(--clr2-soft);
+  border: none;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: var(--clr2);
+  color: var(--nav);
+  border: none;
+}
+
 // Styling popover to make it a little cozy
 
 .popover .popover-header {
@@ -214,7 +233,7 @@ background-image: linear-gradient(90deg, {{ if ne site.Params.theme.gradientDire
 }
 
 //
-.theme-toogle-checkbox {
+.theme-toggle-checkbox {
 	opacity: 0;
 	position: absolute;
 }
@@ -245,7 +264,7 @@ transform: translateX(0px);
 transition: transform 0.2s linear;
 }
 
-.theme-toogle-checkbox:checked + .theme-toggle-label .ball {
+.theme-toggle-checkbox:checked + .theme-toggle-label .ball {
 transform: translateX(24px);
 }
 

@@ -122,3 +122,8 @@ window.cookieconsent.initialise({
   {{ partialCached "reusables/theme.js" . | safeJS }}
 {{ end }}
 
+// infinite scroll
+{{ if site.Params.userExperience.infiniteScroll }}
+  {{ partialCached "reusables/infinite_scroll.js" . | safeJS }}
+{{ end }}
+

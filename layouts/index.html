@@ -41,7 +41,7 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
   </div>
 </div>
 <div class="container-fluid bg-mat py-3">
-  <div class="container-fluid bg-mat py-3" >
+  <div class="container-fluid bg-mat py-3 card-parent">
     <!-- Need to define any variable outside the range loop. -->
     {{- $globalThumbnailSize := "" }}
     {{- $globalThumbnailBorders := "" }}
@@ -60,8 +60,10 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
     {{- $pageThumbnailBorders := "" }}
     {{- $pageThumbnailPosition := "" }}
     
-    <!-- ranges through each of the content files associated with a particular term and renders the summary.html content view -->
-    {{ range (where site.RegularPages "Type" "in" site.Params.mainSections).ByDate.Reverse }}
+    <!-- create a custom variable to handle pagination and determine which posts are retrieved -->
+    {{ $paginator := .Paginate ((where site.RegularPages "Type" "in" site.Params.mainSections).ByDate.Reverse) }}
+    <!-- ranges via Paginator through each of the content files associated with a particular term and renders the summary.html content view -->
+    {{ range $paginator.Pages }}
       <div class="card mb-3">
         <div class="card-body">
           
@@ -78,7 +80,7 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
           {{- if or (ne $globalThumbnailPosition "none") (ne $pageThumbnailPosition "none") -}}
           <div class="row {{- if or (eq $globalThumbnailPosition "right") (eq $pageThumbnailPosition "right") }} flex-md-row-reverse{{- end -}}">
           
-            <div class="col-md-auto my-auto">
+            <div class="col-md-auto my-auto pb-2">
               {{ if .Params.image.src -}}
                 <img class="
                 
@@ -134,6 +136,7 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
                 <a class="text-reset" href="{{ .Permalink }}"><span class="card-title text-reset"> {{ .Title }}</span></a>
               </h2>
               
+              {{/* Similar code in /layouts/post/single.html ; if any changes made here, do the same there */}}
               {{- $postMetaTop := false }}
               {{- $postMetaBottom := false }}
               {{ if site.Params.position.postMeta }}
@@ -145,7 +148,6 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
                   {{- end }}
                 {{- end }}
               {{ end }}
-              
               
               {{- if $postMetaTop }}
                 <div class="card-subtitle font-weight-bold small post-meta">
@@ -194,68 +196,69 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
                
               <!-- {{/* using Hugo's' {{ .Summary }} comes with its own <p> tag, so wrapping it in a <p> tag is discouraged */}} -->
               <div class="card-text">{{ .Summary }}</div>
-              
-              
-                <div class="mb-3">
-                  {{ if $postMetaBottom }}
-                  <div class="card-subtitle font-weight-bold small post-meta mb-3">
+                            
+              <div class="mb-3">
+                {{ if $postMetaBottom }}
+                <div class="card-subtitle font-weight-bold small post-meta mb-3">
+                
+                  {{- $wordCount := "" }}
+                  {{- $readingTime := "" }}
+                  {{- $author := "" }}
+                  {{- $lastUpdated := "" }}
                   
-                    {{- $wordCount := "" }}
-                    {{- $readingTime := "" }}
-                    {{- $author := "" }}
-                    {{- $lastUpdated := "" }}
-                    
-                    {{- if eq site.Params.position.postMeta.wordCount.summary "bottom" }}
-                      {{- $wordCount = print (.WordCount) " words" }}
+                  {{- if eq site.Params.position.postMeta.wordCount.summary "bottom" }}
+                    {{- $wordCount = print (.WordCount) " words" }}
+                  {{- end }}
+                  {{- if eq site.Params.position.postMeta.readingTime.summary "bottom" }}
+                    {{- $readingTime = print (lang.NumFmt 0 (div .WordCount 130)) " min read" -}}
+                  {{- end }}
+                  {{- if eq site.Params.position.postMeta.author.summary "bottom" }}
+                    {{- $author = print "By " (default site.Params.meta.author .Params.author) }}
+                  {{- end }}
+                  {{- if .Lastmod }}
+                    {{- if eq site.Params.position.postMeta.lastUpdated.summary "bottom" }}
+                      {{- $lastUpdated = safeHTML (print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") "</span>") }}
                     {{- end }}
-                    {{- if eq site.Params.position.postMeta.readingTime.summary "bottom" }}
-                      {{- $readingTime = print (lang.NumFmt 0 (div .WordCount 130)) " min read" -}}
-                    {{- end }}
-                    {{- if eq site.Params.position.postMeta.author.summary "bottom" }}
-                      {{- $author = print "By " (default site.Params.meta.author .Params.author) }}
-                    {{- end }}
-                    {{- if .Lastmod }}
-                      {{- if eq site.Params.position.postMeta.lastUpdated.summary "bottom" }}
-                        {{- $lastUpdated = safeHTML (print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") "</span>") }}
-                      {{- end }}
-                    {{- end }}
-                    
-                    {{- $postMetaPre := slice $author $wordCount $readingTime $lastUpdated }}
-                    {{ $postMeta := slice }}
-                    {{ range $postMetaPre }}
-                      {{ if . }}
-                        {{ $postMeta = $postMeta | append . }}
-                      {{ end }}
+                  {{- end }}
+                  
+                  {{- $postMetaPre := slice $author $wordCount $readingTime $lastUpdated }}
+                  {{ $postMeta := slice }}
+                  {{ range $postMetaPre }}
+                    {{ if . }}
+                      {{ $postMeta = $postMeta | append . }}
                     {{ end }}
-                    
-                    {{- safeHTML (delimit $postMeta " &#183; ") -}}
-                    
-                  </div>
                   {{ end }}
                   
-                  {{ if eq site.Params.position.postMeta.tags.summary "bottom" }}
-                    <div class="pb-1 mt-1">
-                    {{- range .Params.tags -}}
-                      <a href="/tags/{{ . | urlize }}/"><span class="badge badge-pill bg-clr2 text-nav mr-2 py-2">#{{ . | humanize | upper }}</span></a>
-                    {{- end -}}
-                    </div>
-                  {{ end }}
+                  {{- safeHTML (delimit $postMeta " &#183; ") -}}
                   
                 </div>
-              
-              
-              <a class="font-weight-bold text-reset text-decoration-none" href="{{ .Permalink }}"><nobr>Read more →</nobr></a>
-
+                {{ end }}
+                
+                {{ if eq site.Params.position.postMeta.tags.summary "bottom" }}
+                  <div class="pb-1 mt-1">
+                  {{- range .Params.tags -}}
+                    <a href="/tags/{{ . | urlize }}/"><span class="badge badge-pill bg-clr2 text-nav mr-2 py-2">#{{ . | humanize | upper }}</span></a>
+                  {{- end -}}
+                  </div>
+                {{ end }}
+                
               </div>
-            
+              
+              <a class="font-weight-bold text-reset text-decoration-none" href="{{ .Permalink }}"><nobr>Read more →</nobr></a>            
             </div>
             
           </div> <!-- row -->
           {{ end }}
         </div>
-        
       </div>
     {{ end }}
+    
+    {{ if not site.Params.userExperience.infiniteScroll }}
+      <nav class="d-flex justify-content-center bg-mat mt-4 pt-3">
+        {{ template "_internal/pagination.html" . }}
+      </nav>
+    {{ end }}
+
   </div>
 </div>
 

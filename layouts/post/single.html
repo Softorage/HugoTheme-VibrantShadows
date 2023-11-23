@@ -30,12 +30,11 @@
  
     <div class="col-md-9">
   {{ end }}
-    
+      
+      {{/* Similar code in /layouts/index.html ; if any changes made here, do the same there */}}
       {{- $postMetaTop := false }}
       {{- $postMetaBottom := false }}
-      {{ $globalPostMetaPosition := "" }}
-      {{ with site.Params.position.postMeta }}
-        {{ $globalPostMetaPosition = . }}
+      {{ if site.Params.position.postMeta }}
         {{- range site.Params.position.postMeta }}
           {{- if eq .content "top" }}
             {{- $postMetaTop = true }}
@@ -68,7 +67,7 @@
             {{- end }}
             {{- if .Lastmod }}
               {{- if eq site.Params.position.postMeta.lastUpdated.content "top" }}
-                {{- $lastUpdated = print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") }}</span>
+                {{- $lastUpdated = safeHTML (print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") "</span>") }}
               {{- end }}
             {{- end }}
             
@@ -80,7 +79,7 @@
               {{ end }}
             {{ end }}
             
-            {{- delimit $postMeta " &#183; " -}}
+            {{- safeHTML (delimit $postMeta " &#183; ") -}}
           
           </div>
           {{ end }}
@@ -158,7 +157,7 @@
               {{- end }}
               {{- if .Lastmod }}
                 {{- if eq site.Params.position.postMeta.lastUpdated.content "bottom" }}
-                  {{- $lastUpdated = print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") }}</span>
+                  {{- $lastUpdated = safeHTML (print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") "</span>") }}
                 {{- end }}
               {{- end }}
               
@@ -170,7 +169,7 @@
                 {{ end }}
               {{ end }}
               
-              {{- delimit $postMeta " &#183; " -}}
+              {{- safeHTML (delimit $postMeta " &#183; ") -}}
             
             </div>
             {{ end }}
