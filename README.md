@@ -38,6 +38,8 @@ An insanely customizable, extremely lightweight and ridiculously fast 'Blog Them
 * Deeplinks
 * Insanely customizable (see [config](#configuration))
 * Dedicated 'Table of Contents'
+* Infinite Scrolling
+* Smart Dark/Light Mode
 * Logo alignment
 * Sane defaults
 * Mobile support with configurable menu alignment
@@ -47,7 +49,6 @@ An insanely customizable, extremely lightweight and ridiculously fast 'Blog Them
 * Custom fonts for different elements
 * SEO optimization and customization
 * Ability to customize positions of various elements
-<!--* Dark Mode (with UI controls for user preference setting) -->
 <!--* Native Image Lazy Loading -->
 
 ## Prerequisites

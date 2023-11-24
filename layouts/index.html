@@ -60,6 +60,11 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
     {{- $pageThumbnailBorders := "" }}
     {{- $pageThumbnailPosition := "" }}
     
+    {{- $wordCount := "" }}
+    {{- $readingTime := "" }}
+    {{- $author := "" }}
+    {{- $lastUpdated := "" }}
+    
     <!-- create a custom variable to handle pagination and determine which posts are retrieved -->
     {{ $paginator := .Paginate ((where site.RegularPages "Type" "in" site.Params.mainSections).ByDate.Reverse) }}
     <!-- ranges via Paginator through each of the content files associated with a particular term and renders the summary.html content view -->
@@ -152,10 +157,10 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
               {{- if $postMetaTop }}
                 <div class="card-subtitle font-weight-bold small post-meta">
                 
-                  {{- $wordCount := "" }}
-                  {{- $readingTime := "" }}
-                  {{- $author := "" }}
-                  {{- $lastUpdated := "" }}
+                  {{- $wordCount = "" }}
+                  {{- $readingTime = "" }}
+                  {{- $author = "" }}
+                  {{- $lastUpdated = "" }}
                   
                   {{- if eq site.Params.position.postMeta.wordCount.summary "top" }}
                     {{- $wordCount = print (.WordCount) " words" }}
@@ -201,10 +206,10 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
                 {{ if $postMetaBottom }}
                 <div class="card-subtitle font-weight-bold small post-meta mb-3">
                 
-                  {{- $wordCount := "" }}
-                  {{- $readingTime := "" }}
-                  {{- $author := "" }}
-                  {{- $lastUpdated := "" }}
+                  {{- $wordCount = "" }}
+                  {{- $readingTime = "" }}
+                  {{- $author = "" }}
+                  {{- $lastUpdated = "" }}
                   
                   {{- if eq site.Params.position.postMeta.wordCount.summary "bottom" }}
                     {{- $wordCount = print (.WordCount) " words" }}
