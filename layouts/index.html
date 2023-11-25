@@ -269,3 +269,12 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
 
 {{ end }}
 
+{{ define "script" }}
+{{/*
+  Ensure that there is no non-JavaScript code in script block, otherwise errore might occur
+*/}}
+{{ if site.Params.userExperience.infiniteScroll }}
+  // infinite scroll
+  {{ safeJS (partialCached "reusables/infinite_scroll.js" .) }}
+{{ end }}
+{{ end }}

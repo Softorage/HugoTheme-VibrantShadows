@@ -49,6 +49,11 @@
     {{- end }}
     <script src="{{ $js_custom.RelPermalink }}" integrity="{{ $js_custom.Data.Integrity }}" crossorigin="anonymous"></script>
     
+    <script>
+      {{- block "script" . }}
+      {{- end -}}
+    </script>
+    
     <!-- Request Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto|Lato&display=swap" rel="stylesheet">
     

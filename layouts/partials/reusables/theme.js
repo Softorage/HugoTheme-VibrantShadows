@@ -14,6 +14,7 @@ Example: # prints hello
   hello
 {{ end }}
  -->*/}}
+ 
 {{ $cssTheme := "dark" }}
 
 {{ if site.Params.theme.light.default }}

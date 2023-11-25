@@ -1,3 +1,4 @@
+// used in /layouts/index.html => script block
 // Initialize the currentPage variable
 let currentPage = 1;
 
