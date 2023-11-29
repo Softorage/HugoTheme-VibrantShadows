@@ -33,6 +33,18 @@ let currentTheme = localStorage.getItem("theme");
 // 
 let bodyClass = document.body.classList;
 
+// function definitions
+const darkTheme = function () {
+  bodyClass.remove("light"); // remove class 'light'
+  bodyClass.add("dark"); // add class 'dark'
+  themeToggleCheckbox.checked = true;
+}
+const lightTheme = function () {
+  bodyClass.remove("dark"); // remove class 'dark'
+  bodyClass.add("light"); // add class 'light'
+  themeToggleCheckbox.checked = false;
+}
+
 // User's theme preference from local storage has highest priority,
 // then system preference set by user at OS level,
 // then theme set by website administrator (you) in $cssTheme
@@ -48,17 +60,6 @@ if (currentTheme === "dark") {
   darkTheme();
 } else if ("{{ $cssTheme }}" === "light") {
   lightTheme();
-}
-// function definitions
-const darkTheme = function () {
-  bodyClass.remove("light"); // remove class 'light'
-  bodyClass.add("dark"); // add class 'dark'
-  themeToggleCheckbox.checked = true;
-}
-const lightTheme = function () {
-  bodyClass.remove("dark"); // remove class 'dark'
-  bodyClass.add("light"); // add class 'light'
-  themeToggleCheckbox.checked = false;
 }
 
 /*
