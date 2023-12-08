@@ -15,7 +15,7 @@
   {{- $css := slice $cssBase $cssTheme | resources.Concat "/assets/css/main.css" }}
   
   <!-- Run PostCSS on $css, only if on Production Environment, since its builds take considerably more time -->
-  {{ if and (eq hugo.Environment "production") (eq site.Params.seo.speedMode "enable") -}}
+  {{ if and (eq hugo.Environment "production") (eq site.Params.userExperience.speedMode "enable") -}}
     {{- $css = $css | postCSS | resources.PostProcess | fingerprint }}
   {{- else }}
     {{- $css = $css | minify | fingerprint }}

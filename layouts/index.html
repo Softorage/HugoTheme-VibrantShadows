@@ -271,10 +271,12 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
 
 {{ define "script" }}
 {{/*
-  Ensure that there is no non-JavaScript code in script block, otherwise errore might occur
+  Ensure that there is no non-JavaScript code in script block, otherwise error might occur
 */}}
 {{ if site.Params.userExperience.infiniteScroll }}
-  // infinite scroll
-  {{ safeJS (partialCached "reusables/infinite_scroll.js" .) }}
+
+{{- $js_infiniteScroll := resources.Get "js/infinite_scroll.js" | resources.ExecuteAsTemplate "js/infinite_scroll.js" . | minify }}
+{{ $js_infiniteScroll.Content | safeJS }}
+  {{/* safeJS (partialCached "reusables/infinite_scroll.js" .) */}}
 {{ end }}
 {{ end }}

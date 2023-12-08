@@ -482,15 +482,15 @@ Let's see them one by one.
         5.  **Color-2** *(Type: String | Accepts value: HEX/RGBA | Optional | Default: "#6d19fc")*
             
             It's color-2 in the hero gradient. It is used throughout the theme. Recommended to be in contrast with nav.
-        6.  **Gradient Direction** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
+    2.  **Gradient Direction** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
+        
+        1.  **Background** *(Type: String | Accepts value: ltr/rtl | Optional | Default: "ltr")*
+        2.  **Text Color** *(Type: String | Accepts value: ltr/rtl | Optional | Default: "ltr")*
+        3.  **Button Background** *(Type: String | Accepts value: ltr/rtl | Optional | Default: "ltr")*
             
-            1.  **Background** *(Type: String | Accepts value: ltr/rtl | Optional | Default: "ltr")*
-            2.  **Text Color** *(Type: String | Accepts value: ltr/rtl | Optional | Default: "ltr")*
-            3.  **Button Background** *(Type: String | Accepts value: ltr/rtl | Optional | Default: "ltr")*
-                
-                 **ltr**: left to right | **rtl**: right to left
+              **ltr**: left to right | **rtl**: right to left
     
-    2.  **Toggle** *(Type: Map/Dict/Object | Accepts value: - | Recommended)*
+    3.  **Toggle** *(Type: Map/Dict/Object | Accepts value: - | Recommended)*
         
         1.  **Switch** *(Type: Boolean | Accepts value: true/false | Required | Default: false)*
             
@@ -515,10 +515,6 @@ Let's see them one by one.
         mat: "#f9f9f9"
         clr1: "#7d1fa5"
         clr2: "#6d19fc"
-        gradientDirection:
-          background: "ltr"
-          text: "ltr"
-          button: "ltr"
       dark: # default
         default: true
         nav: "#212121"
@@ -526,10 +522,10 @@ Let's see them one by one.
         mat: "#121212"
         clr1: "#7d1fa5"
         clr2: "#6d19fc"
-        gradientDirection:
-          background: "ltr"
-          text: "ltr"
-          button: "ltr"
+      gradientDirection:
+        background: "ltr"
+        text: "ltr"
+        button: "ltr"
       toggle:
         switch: true
         allowFOIT: false
@@ -713,9 +709,6 @@ Let's see them one by one.
     4.  **JSON-LD** *(Type: String | Accepts value: enable/disable | Optional | Default: "enable")*
         
         Improves ability of search engines to better index and understand the website/blog. Helps in SEO optimization.
-    5.  **Speed Mode** *(Type: String | Accepts value: enable/disable | Highly Recommended | Default: "disable")*
-        
-        Enabling "Speed Mode" would make the website/blog extremely fast and lightweight, providing a snappy experience to website/blog visitors. "Speed Mode" utilizes *PostCSS* via *Hugo's Asset Pipeline*. Note that, "Speed Mode" works in *production environment* only. Disabling "Speed Mode" removes dependency on Hugo Extended version and Node.js modules. Since many Hugo users do not have Hugo's extended version, this option is disabled by default.
     
     Example:
     ```yaml
@@ -728,7 +721,6 @@ Let's see them one by one.
         openGraph: "enable"
         appID: "170405085280305" # it is just for illustration purpose
       jsonLD: "enable"
-      speedMode: "enable"
     ```
 11. **Cookie Consent** *(Type: Map/Dict/Object | Accepts value: - | Optional)*
     
@@ -822,6 +814,9 @@ Let's see them one by one.
 
         Allows to set Infinite Scrolling on the Home (Landing) Page.  
         Note: Requires Paginate value of at least 1. Paginate can be set in `config.yaml` (default is 10).
+    4.  **Speed Mode** *(Type: String | Accepts value: enable/disable | Highly Recommended | Default: "disable")*
+        
+        Enabling "Speed Mode" would make the website/blog extremely fast and lightweight, providing a snappy experience to website/blog visitors. "Speed Mode" utilizes *PostCSS* via *Hugo's Asset Pipeline*. Note that, "Speed Mode" works in *production environment* only. Disabling "Speed Mode" removes dependency on Hugo Extended version and Node.js modules. Since many Hugo users do not have Hugo's extended version, this option is disabled by default.
         
     Example:
     ```yaml
@@ -835,6 +830,7 @@ Let's see them one by one.
           borders: "rounded"
           position: "left"
       infiniteScroll: false
+      speedMode: "disable"
     ```
 13. **Main Sections** *(Type: Array | Accepts value: Section names | Highly Recommended)*
     
@@ -1077,6 +1073,7 @@ taxonomies:
 # pagination | required for infinite scrolling. See params -> userExperience -> infiniteScroll
 paginate: 10 # number of items per page | a number of 1 or more required for infinite scrolling | default: 10
 paginatePath: "posts" # allows you to set a custom path for your pagination pages | default: "page"
+# also specify the paginatePath in params => misc => paginatePath
 
 # menu as per Hugo's menu feature
 menu:
@@ -1177,10 +1174,6 @@ params:
       clr1: "#7d1fa5" # color-1 of gradient | optional | default: "#7d1fa5"
       clr2: "#6d19fc" # color-2 of gradient, recommended to be in contrast with nav | optional | default: "#6d19fc"
       #borders: "rounded" # accepts value: rounded/square | what kind of borders do you like for elements, like buttons | default: "rounded"
-      gradientDirection:
-        background: "ltr" # accepts value: ltr/rtl | ltr: left to right; rtl: right to left | optional | default: "ltr"
-        text: "ltr" # accepts value: ltr/rtl | ltr: left to right; rtl: right to left | optional | default: "ltr"
-        button: "ltr" # accepts value: ltr/rtl | ltr: left to right; rtl: right to left | optional | default: "ltr"
     dark: # default
       default: true
       nav: "#212121"
@@ -1188,10 +1181,10 @@ params:
       mat: "#121212"
       clr1: "#7d1fa5"
       clr2: "#6d19fc"
-      gradientDirection:
-        background: "ltr"
-        text: "ltr"
-        button: "ltr"
+    gradientDirection:
+      background: "ltr" # accepts value: ltr/rtl | ltr: left to right; rtl: right to left | optional | default: "ltr"
+      text: "ltr" # accepts value: ltr/rtl | ltr: left to right; rtl: right to left | optional | default: "ltr"
+      button: "ltr" # accepts value: ltr/rtl | ltr: left to right; rtl: right to left | optional | default: "ltr"
     toggle:
       switch: true
       allowFOIT: false
@@ -1270,7 +1263,6 @@ params:
       openGraph: "enable" # accepts value: enable/disable | good for seo | default: enable
       #appID: "" # facebook App ID
     jsonLD: "enable" # accepts value: enable/disable | good for seo | default: enable
-    speedMode: "disable" # accepts value: enable/disable | enabling "Speed Mode" would make the website/blog extremely fast and lightweight, providing a snappy experience to website/blog visitors. "Speed Mode" utilises *PostCSS* via *Hugo's Asset Pipeline*. note that, "Speed Mode" works in *production environment* only. since many Hugo users do not have Hugo's extended version, this option is disabled by default. | default: disable
   cookieConsent: # we use OSANO Cookie Consent solution
     switch: "off" # accepts: on/off | decide whether you want to show a cookie consent dialog to your users | default: "off"
     type: "opt-in" # accepts: opt-in/opt-out/none | In opt-in, website doesn't employ cookies to user's computer unless user gives cosent to opt in. In opt-out, cookies are employed on user's computer and the user is given the choice to opt out of cookies. In none, cookies are employed on the user's computer and user is not given a choice in that regard. Refrain from using none, unless you have zero customers from EU or similar countries with privacy protecting laws. | no default
@@ -1294,7 +1286,10 @@ params:
         borders: "rounded" # accepts value: rounded/square/pill/circle | choose the border radius of posts' images when they appear as thumbnails | optional | default: "rounded"
         position: "left" # accepts value: right/left/none | position of a post's image, when it appears as a thumbnail in a list (say) on landing page. regardless of "right" or "left", it looks the same on mobile-view. | optional | default: "left"
     infiniteScroll: false # accepts value: true/false | setting it to true allows for infinite scrolling on home page. requires value of paginate to be 1 or more set in config.yaml (default is 10) | optional | default: false
+    speedMode: "disable" # accepts value: enable/disable | enabling "Speed Mode" would make the website/blog extremely fast and lightweight, providing a snappy experience to website/blog visitors. "Speed Mode" utilises *PostCSS* via *Hugo's Asset Pipeline*. note that, "Speed Mode" works in *production environment* only. since many Hugo users do not have Hugo's extended version, this option is disabled by default. | default: disable
   mainSections: ["post"] # required, https://gohugo.io/functions/where/#mainsections
+  misc:
+    paginatePath: "posts"
   #customVerification:
     #myWOT: "ba8579f668r8w3g62503" # content for meta tag to verify your website on 'Web Of Trust'
 ```

@@ -1,7 +1,8 @@
 {{/*
-used in /assets/js/custom.js
+used in /assets/js/custom.js , layouts/_default/baseof.html
 
-<!-- Set Dark as default theme
+Set Dark as default theme
+
 If
 1. both the themes have `default` to `true` or `false` or not set,  or
 2. only Dark theme has `default` set to `true`
@@ -13,7 +14,10 @@ Example: # prints hello
 {{ if not false }}
   hello
 {{ end }}
- -->*/}}
+---
+Also see file assets/sass/theme.scss
+
+*/}}
 
 {{ $cssTheme := "dark" }}
 
