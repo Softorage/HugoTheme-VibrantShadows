@@ -43,10 +43,12 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
 <div class="container-fluid bg-mat py-3">
   <div class="container-fluid bg-mat py-3 card-parent">
     <!-- Need to define any variable outside the range loop. -->
+    {{- $thumbnailBorders := "" }}
+    
     {{- $globalThumbnailSize := "" }}
     {{- $globalThumbnailBorders := "" }}
     {{- $globalThumbnailPosition := "" }}
-    {{- with site.Params.postImages.thumbnail.size }}
+    {{- with site.Params.userExperience.postImages.thumbnail.size }}
      {{- $globalThumbnailSize = . }}
     {{- end }}
     {{- with site.Params.userExperience.postImages.thumbnail.borders }}
@@ -90,31 +92,21 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
                 <img class="
                 
                 {{- if $pageThumbnailBorders }}
-                  {{- $globalThumbnailBorders = $pageThumbnailBorders }}
+                  {{- $thumbnailBorders = $pageThumbnailBorders }}
                 {{- else if $globalThumbnailBorders }}
+                  {{- $thumbnailBorders = $globalThumbnailBorders }}  
                   {{/*
-                    If site.Params.userExperience.postImages.thumbnail.borders is specified, $globalThumbnailBorders gets its value. We wish to use that value.
-                    If it isn't specified, then if site.Params.borders is specified, $globalThumbnailBorders gets the value of site.Params.borders.
-                    Go Templates treat the following values as false:
-
-                      false (boolean)
-                      0 (integer)
-                      any zero-length array, slice, map, or string
-                    
-                    As per the if conditional just after declaring $globalThumbnailBorders, if site.Params.userExperience.postImages.thumbnail.borders is specified, then $globalThumbnailBorders is not false.
-                    In which case, we don't want the if conditional to continue.
-                    
-                    Also, rather than using site.Params.userExperience.postImages.thumbnail.borders in every range iteration, using it once outside the range loop to give $globalThumbnailBorders its value, and then using that variable in the range loop, helps reduce build times. 
+                  rather than using site.Params.userExperience.postImages.thumbnail.borders in every range iteration, using it once outside the range loop to give $globalThumbnailBorders its value, and then using that variable in the range loop, helps reduce build times. 
                    */}}
                 {{- else }}
-                  {{- $globalThumbnailBorders = "rounded-lg" }}
+                  {{- $thumbnailBorders = "rounded-lg" }}
                 {{- end }}
                 
-                {{- if eq $globalThumbnailBorders "square" -}}
+                {{- if eq $thumbnailBorders "square" -}}
                   rounded-0
-                {{- else if eq $globalThumbnailBorders "circle" -}}
+                {{- else if eq $thumbnailBorders "circle" -}}
                  rounded-circle
-                {{- else if eq $globalThumbnailBorders "pill" -}}
+                {{- else if eq $thumbnailBorders "pill" -}}
                  rounded-pill
                 {{- else -}}
                   rounded-lg

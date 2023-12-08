@@ -1,0 +1,218 @@
+{{ define "main" -}}
+
+<div class="container-fluid bg-nav text-clr1 text-center pb-3 pt-4 position-relative shadow-sm">
+  <div style="height:3.5rem;"></div>
+  <div class="mobile-only" style="height:2.5rem;"></div>
+  <h1># {{ .Title }}</h1>
+  <p>{{ .Description }}</p>
+</div>
+<div class="container-fluid bg-mat py-3">
+  <!-- ranges through each of the content files associated with a particular taxonomy term and renders the summary.html content view -->
+  {{ range .Pages.ByTitle }}
+    <div class="card mb-3">
+      <div class="card-body text-antinav">
+        <span class="anchor" id="{{ replace (lower .Title) " " "_" }}"></span>
+        
+        <!-- Need to define any variable outside the range loop. -->
+        {{- $thumbnailBorders := "" }}
+        
+        {{- $globalThumbnailSize := "" }}
+        {{- $globalThumbnailBorders := "" }}
+        {{- $globalThumbnailPosition := "" }}
+        {{- with site.Params.userExperience.postImages.thumbnail.size }}
+        {{- $globalThumbnailSize = . }}
+        {{- end }}
+        {{- with site.Params.userExperience.postImages.thumbnail.borders }}
+          {{- $globalThumbnailBorders = . }}
+        {{- end }}
+        {{- with site.Params.userExperience.postImages.thumbnail.position }}
+          {{- $globalThumbnailPosition = . }}
+        {{- end }}
+        
+        {{- $pageThumbnailSize := "" }}
+        {{- $pageThumbnailBorders := "" }}
+        {{- $pageThumbnailPosition := "" }}
+        
+        {{- $wordCount := "" }}
+        {{- $readingTime := "" }}
+        {{- $author := "" }}
+        {{- $lastUpdated := "" }}
+        
+        {{ with .Params.image.thumbnail.position }}
+          {{ $pageThumbnailPosition = . }}
+        {{ end }}
+        {{ with .Params.image.thumbnail.borders }}
+          {{ $pageThumbnailBorders = . }}
+        {{ end }}
+        {{ with .Params.image.thumbnail.size }}
+          {{ $pageThumbnailSize = . }}
+        {{ end }}
+        
+        {{- if or (ne $globalThumbnailPosition "none") (ne $pageThumbnailPosition "none") -}}
+        <div class="row {{- if or (eq $globalThumbnailPosition "right") (eq $pageThumbnailPosition "right") }} flex-md-row-reverse{{- end -}}">
+        
+          <div class="col-md-auto my-auto pb-2">
+            {{ if .Params.image.src -}}
+              <img class="
+              
+              {{- if $pageThumbnailBorders }}
+                {{- $thumbnailBorders = $pageThumbnailBorders }}
+              {{- else if $globalThumbnailBorders }}
+                {{- $thumbnailBorders = $globalThumbnailBorders }}  
+                {{/*
+                rather than using site.Params.userExperience.postImages.thumbnail.borders in every range iteration, using it once outside the range loop to give $globalThumbnailBorders its value, and then using that variable in the range loop, helps reduce build times. 
+                  */}}
+              {{- else }}
+                {{- $thumbnailBorders = "rounded-lg" }}
+              {{- end }}
+              
+              {{- if eq $thumbnailBorders "square" -}}
+                rounded-0
+              {{- else if eq $thumbnailBorders "circle" -}}
+                rounded-circle
+              {{- else if eq $thumbnailBorders "pill" -}}
+                rounded-pill
+              {{- else -}}
+                rounded-lg
+              {{- end -}}
+              
+              " src="{{ .Params.image.src }}" height="
+              
+              {{- if $pageThumbnailSize }}
+                {{- $pageThumbnailSize -}}
+              {{- else if $globalThumbnailSize }}
+                {{- $globalThumbnailSize -}}
+              {{- else -}}
+                200px
+              {{- end -}}
+              
+              "{{ with .Params.image.alt }} alt="{{ . }}"{{ end }}></img>
+            {{- end }}
+          </div> <!-- image col-md -->
+          
+          <div class="col my-auto py-2">
+        
+            <h2>
+              <a class="text-reset" href="{{ .Permalink }}"><span class="card-title text-reset"> {{ .Title }}</span></a>
+            </h2>
+            
+            {{/* Similar code in /layouts/post/single.html ; if any changes made here, do the same there */}}
+            {{- $postMetaTop := false }}
+            {{- $postMetaBottom := false }}
+            {{ if site.Params.position.postMeta }}
+              {{- range site.Params.position.postMeta }}
+                {{- if eq .summary "top" }}
+                  {{- $postMetaTop = true }}
+                {{- else if eq .summary "bottom" }}
+                  {{- $postMetaBottom = true }}
+                {{- end }}
+              {{- end }}
+            {{ end }}
+            
+            {{- if $postMetaTop }}
+              <div class="card-subtitle font-weight-bold small post-meta">
+              
+                {{- $wordCount = "" }}
+                {{- $readingTime = "" }}
+                {{- $author = "" }}
+                {{- $lastUpdated = "" }}
+                
+                {{- if eq site.Params.position.postMeta.wordCount.summary "top" }}
+                  {{- $wordCount = print (.WordCount) " words" }}
+                {{- end }}
+                {{- if eq site.Params.position.postMeta.readingTime.summary "top" }}
+                  {{- $readingTime = print (lang.NumFmt 0 (div .WordCount 130)) " min read" -}}
+                {{- end }}
+                {{- if eq site.Params.position.postMeta.author.summary "top" }}
+                  {{- $author = print "By " (default site.Params.meta.author .Params.author) }}
+                {{- end }}
+                {{- if .Lastmod }}
+                  {{- if eq site.Params.position.postMeta.lastUpdated.summary "top" }}
+                    {{- $lastUpdated = safeHTML (print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") "</span>") }}
+                  {{- end }}
+                {{- end }}
+                
+                {{- $postMetaPre := slice $author $wordCount $readingTime $lastUpdated }}
+                {{ $postMeta := slice }}
+                {{ range $postMetaPre }}
+                  {{ if . }}
+                    {{ $postMeta = $postMeta | append . }}
+                  {{ end }}
+                {{ end }}
+                
+                {{- safeHTML (delimit $postMeta " &#183; ") -}}
+                
+              </div>
+            {{ end }}
+              
+              
+            {{ if ne site.Params.position.postMeta.tags.summary "bottom" }}
+              <div class="pb-1 mt-1">
+              {{- range .Params.tags -}}
+                <a href="/tags/{{ . | urlize }}/"><span class="badge badge-pill bg-clr2 text-nav mr-2 mb-1 py-2">#{{ . | humanize | upper }}</span></a>
+              {{- end -}}
+              </div>
+            {{ end }}
+              
+            <!-- {{/* using Hugo's' {{ .Summary }} comes with its own <p> tag, so wrapping it in a <p> tag is discouraged */}} -->
+            <div class="card-text">{{ .Summary }}</div>
+                          
+            <div class="mb-3">
+              {{ if $postMetaBottom }}
+              <div class="card-subtitle font-weight-bold small post-meta mb-3">
+              
+                {{- $wordCount = "" }}
+                {{- $readingTime = "" }}
+                {{- $author = "" }}
+                {{- $lastUpdated = "" }}
+                
+                {{- if eq site.Params.position.postMeta.wordCount.summary "bottom" }}
+                  {{- $wordCount = print (.WordCount) " words" }}
+                {{- end }}
+                {{- if eq site.Params.position.postMeta.readingTime.summary "bottom" }}
+                  {{- $readingTime = print (lang.NumFmt 0 (div .WordCount 130)) " min read" -}}
+                {{- end }}
+                {{- if eq site.Params.position.postMeta.author.summary "bottom" }}
+                  {{- $author = print "By " (default site.Params.meta.author .Params.author) }}
+                {{- end }}
+                {{- if .Lastmod }}
+                  {{- if eq site.Params.position.postMeta.lastUpdated.summary "bottom" }}
+                    {{- $lastUpdated = safeHTML (print "<span class=''>Last updated: " (.Lastmod.Format "January 2, 2006") "</span>") }}
+                  {{- end }}
+                {{- end }}
+                
+                {{- $postMetaPre := slice $author $wordCount $readingTime $lastUpdated }}
+                {{ $postMeta := slice }}
+                {{ range $postMetaPre }}
+                  {{ if . }}
+                    {{ $postMeta = $postMeta | append . }}
+                  {{ end }}
+                {{ end }}
+                
+                {{- safeHTML (delimit $postMeta " &#183; ") -}}
+                
+              </div>
+              {{ end }}
+              
+              {{ if eq site.Params.position.postMeta.tags.summary "bottom" }}
+                <div class="pb-1 mt-1">
+                {{- range .Params.tags -}}
+                  <a href="/tags/{{ . | urlize }}/"><span class="badge badge-pill bg-clr2 text-nav mr-2 py-2">#{{ . | humanize | upper }}</span></a>
+                {{- end -}}
+                </div>
+              {{ end }}
+              
+            </div>
+            
+            <a class="font-weight-bold text-reset text-decoration-none" href="{{ .Permalink }}"><nobr>Read more →</nobr></a>            
+          </div>
+          
+        </div> <!-- row -->
+        {{ end }}
+      
+      </div>
+    </div>
+  {{ end }}
+</div>
+
+{{- end }}

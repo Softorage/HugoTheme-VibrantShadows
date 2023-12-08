@@ -5,11 +5,9 @@ function scrollFunction() {
   // Checks if window is scrolled more than 30px, adds/removes bg-white and shadow class
   if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
     navbar.classList.add("shadow","bg-nav");
-    navbar.style.background = "rgba(255,255,255,0.9)";
     navbarBrand.add("brand-color");
   } else {
     navbar.classList.remove("shadow","bg-nav");
-    navbar.style = "";
     navbarBrand.remove("brand-color");
   }
 }
