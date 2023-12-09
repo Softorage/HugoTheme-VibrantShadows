@@ -16,7 +16,7 @@
   
   
   
-  <link rel="stylesheet" href="/assets/css/main.min.54a6b632759c14a922b43514c2120ff35a610ffadbb4f8143c9f23118d883def.css" integrity="sha256-VKa2MnWcFKkitDUUwhIP81phD/rbtPgUPJ8jEY2IPe8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/assets/css/main.b37c6945c416a2df8c89fd2392f53c877ae0e4b1bf1dfc5bf877e798271c8a6c.css" integrity="sha256-s3xpRcQWot+Mif0jkvU8h3rg5LG/Hfxb+HfnmCccimw=" crossorigin="anonymous">
 
   
   <link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -201,7 +201,7 @@
               
                 
                 <div class="d-inline-block ml-3">
-                  <input type="checkbox" class="theme-toogle-checkbox" id="theme_toggle" />
+                  <input type="checkbox" class="theme-toggle-checkbox" id="theme_toggle" />
                   <label class="theme-toggle-label theme-toggle my-auto" for="theme_toggle">
                     
                       
@@ -232,7 +232,7 @@
             
               
                 <li class="nav-item mx-1 my-2">
-                  <a class="btn bg-nav text-clr1" href="/categories/">Categories</a>
+                  <a class="btn bg-nav text-clr1" href="/tags/">Tags</a>
                 </li>
               
             
@@ -262,7 +262,9 @@
 
 
 
+
 // Based on https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/
+
 // Select the button
 const themeToggle = document.querySelector(".theme-toggle");
 const themeToggleCheckbox = document.querySelector("#theme_toggle");
@@ -270,45 +272,74 @@ const themeToggleCheckbox = document.querySelector("#theme_toggle");
 const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 // Get the user's theme preference from local storage, if it's available
 let currentTheme = localStorage.getItem("theme");
+// 
+let bodyClass = document.body.classList;
+
+// function definitions
+const darkTheme = function () {
+  bodyClass.remove("light"); // remove class 'light'
+  bodyClass.add("dark"); // add class 'dark'
+  themeToggleCheckbox.checked = true;
+}
+const lightTheme = function () {
+  bodyClass.remove("dark"); // remove class 'dark'
+  bodyClass.add("light"); // add class 'light'
+  themeToggleCheckbox.checked = false;
+}
+
+// User's theme preference from local storage has highest priority,
+// then system preference set by user at OS level,
+// then theme set by website administrator (you) in $cssTheme
+
+// This is the simple version of the code that may be slightly inefficient but clear and easy to understand 
+if (currentTheme === "dark") {
+  darkTheme();
+} else if (currentTheme === "light") {
+  lightTheme();
+} else if (prefersDarkScheme.matches) {
+  darkTheme();
+} else if ("dark" === "dark") {
+  darkTheme();
+} else if ("dark" === "light") {
+  lightTheme();
+}
+
+/*
+// below code doesn't work as expected. toggle shows dark mode when light mode is set and vice versa.
 
 // We don't want to toggle the class of body tag (dark or light), if the theme as per localStorage and theme as per default CSS link tag matches
 // since we are checking for system preference for dark theme in the same if conditional that checks for theme info stored in localStorage, it is likely to be effecient. As such no separate media query (prefers-color-scheme) has been specified in CSS.
 // If the user's preference in localStorage is dark and default theme isn't dark, or
 // If user has set system preference to dark and default theme is set to light and user has no preference in localStorage (if user has a preference stored in localStorage, then such preference shall override the system preference)
-if ((currentTheme == "dark" && "dark" != "dark") || (prefersDarkScheme.matches && "dark" == "light" && !currentTheme)) {
+if ((currentTheme == "dark" && "dark" != "dark") || (!currentTheme && prefersDarkScheme.matches && "dark" == "light")) {
   // This if conditional executes only if the body tag has class 'light'. so we need to toggle class 'light' to remove it and class 'dark' to add it
-  document.body.classList.toggle("light"); // remove class 'light'
-  document.body.classList.toggle("dark"); // add class 'dark'
+  bodyClass.remove("light"); // remove class 'light'
+  bodyClass.add("dark"); // add class 'dark'
+  themeToggleCheckbox.checked = true;
 // Otherwise, if the user's preference in localStorage is light and default theme isn't light
 } else if (currentTheme == "light" && "dark" != "light") {
   // This if conditional executes only if the body tag has class 'dark'. So we need to toggle class 'dark' to remove it and class 'light' to add it
-  document.body.classList.toggle("dark"); // remove class 'dark'
-  document.body.classList.toggle("light"); // add class 'light'
-}
-
-// Make the themetoggle match the current theme
-if (currentTheme == "dark") {
-  themeToggleCheckbox.checked = true;
-} else {
+  bodyClass.remove("dark"); // remove class 'dark'
+  bodyClass.add("light"); // add class 'light'
   themeToggleCheckbox.checked = false;
 }
+*/
 
 // Listen for a click on the button 
 themeToggle.addEventListener("click", function() {
-  document.body.classList.toggle("light");
-  document.body.classList.toggle("dark"); 
+  bodyClass.toggle("light");
+  bodyClass.toggle("dark"); 
   // Update the currentTheme variable to save the new theme in localStorage
-  if (currentTheme == "dark") {
+  if (currentTheme === "dark") {
     currentTheme = "light";
+    //themeToggleCheckbox.checked = false;
   } else {
     currentTheme = "dark";
+    //themeToggleCheckbox.checked = true;
   }
-  // Finally, let's save the current preference to localStorage to keep using it
+  // Finally, let's save the current preference to localStorage to keep using it even on a different page
   localStorage.setItem("theme", currentTheme);
 });
-
-
-
 
       </script>
     
@@ -331,7 +362,7 @@ themeToggle.addEventListener("click", function() {
   
   
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
       <div class="bg-mat p-4 rounded" style="overflow-x: auto;">
         <div class="h4 mb-3">
         Contents
@@ -344,18 +375,25 @@ themeToggle.addEventListener("click", function() {
       </div>
     </div>
  
-    <div class="col-md-9">
+    <div class="col-md-8">
   
       
       
-        
       
+            
+            
+            
+            
+      
+
+      
+
       
         
       
       <div class="py-1">
         <div class="row">
-          <div class="col-md-auto small text-muted post-meta my-auto"></span>
+          <div class="col-md-auto small text-muted post-meta my-auto">
             
             
               
@@ -371,40 +409,34 @@ themeToggle.addEventListener("click", function() {
               
                 
               
-            By Sanmay Joshi &amp;#183; 5 min read &amp;#183; &lt;span class=&#39;&#39;&gt;Last updated: October 5, 2020</div>
+            By Sanmay Joshi &#183; 5 min read &#183; <span class=''>Last updated: October 5, 2020</span></div>
           
           
           
           <div class="col-md-auto ml-auto my-auto mr-2">
-            <div class="row">
-              <div class="col-auto p-0 my-auto">
-              Share on:&nbsp;&nbsp;
-              </div>
-              <div class="col p-0">
-                <span class="lead">
-                  
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fvibrantshadows.softorage.com%2fpost%2fhugo-built-in-global-configuration%2f&quote=Hugo%27s%20built-in%20global%20configurations" rel="noreferrer nofollow" target="_blank" title="Share on Facebook" aria-label="Share on Facebook"><span class="fab fa-facebook"></span></a>&nbsp;&nbsp;
-                  
-                  
-                    <a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fvibrantshadows.softorage.com%2fpost%2fhugo-built-in-global-configuration%2f&text=Hugo%27s%20built-in%20global%20configurations:%0Ahttps%3a%2f%2fvibrantshadows.softorage.com%2fpost%2fhugo-built-in-global-configuration%2f" rel="noreferrer nofollow" target="_blank" title="Share on Twitter" aria-label="Share on Twitter"><span class="fab fa-twitter"></span></a>&nbsp;&nbsp;
-                  
-                  
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fvibrantshadows.softorage.com%2fpost%2fhugo-built-in-global-configuration%2f&title=Hugo%27s%20built-in%20global%20configurations&summary=Get%20to%20know%20the%20Hugo%27s%20built-in%20configurations%20relevant%20to%20Vibrant%20Shadows%20Hugo%20theme.&source=Vibrant%20Shadows%20Theme" rel="noreferrer nofollow" target="_blank" title="Share on LinkedIn" aria-label="Share on LinkedIn"><span class="fab fa-linkedin"></span></a>&nbsp;&nbsp;
-                  
-                  
-                    <a href="https://t.me/share/url?url=https%3a%2f%2fvibrantshadows.softorage.com%2fpost%2fhugo-built-in-global-configuration%2f&text=Hugo%27s%20built-in%20global%20configurations" rel="noreferrer nofollow" target="_blank" title="Share on Telegram" aria-label="Share on Telegram"><span class="fab fa-telegram"></span></a>&nbsp;&nbsp;
-                  
-                  
-                    <a href="whatsapp://send?text=https%3a%2f%2fvibrantshadows.softorage.com%2fpost%2fhugo-built-in-global-configuration%2f%0A%0AHugo%27s%20built-in%20global%20configurations" data-text="Hugo&#39;s built-in global configurations" data-href="https://vibrantshadows.softorage.com/post/hugo-built-in-global-configuration/" rel="noreferrer nofollow" target="_blank" title="Share on Whatsapp" aria-label="Share on Whatsapp"><span class="fab fa-whatsapp"></span></a>&nbsp;&nbsp;
-                  
-                  
-                    <a href="https://reddit.com/submit?url=https%3a%2f%2fvibrantshadows.softorage.com%2fpost%2fhugo-built-in-global-configuration%2f&title=Hugo%27s%20built-in%20global%20configurations" rel="noreferrer nofollow" target="_blank" title="Share on Reddit" aria-label="Share on Reddit"><span class="fab fa-reddit"></span></a>&nbsp;&nbsp;
-                  
-                  
-                    <a href="mailto:?subject=Hugo%27s%20built-in%20global%20configurations&body=Get%20to%20know%20the%20Hugo%27s%20built-in%20configurations%20relevant%20to%20Vibrant%20Shadows%20Hugo%20theme.%0A%0Ahttps%3a%2f%2fvibrantshadows.softorage.com%2fpost%2fhugo-built-in-global-configuration%2f" target="_blank" title="Share via email" aria-label="Share via email"><span class="fas fa-envelope"></span></a>
-                  
-                </span>
-              </div>
+            Share on:&nbsp;&nbsp;
+            <div class="d-inline-block lead">
+              
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fvibrantshadows.softorage.com%2fpost%2fhugo-built-in-global-configuration%2f&quote=Hugo%27s%20built-in%20global%20configurations" rel="noreferrer nofollow" target="_blank" title="Share on Facebook" aria-label="Share on Facebook"><span class="fab fa-facebook"></span></a>&nbsp;&nbsp;
+              
+              
+                <a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fvibrantshadows.softorage.com%2fpost%2fhugo-built-in-global-configuration%2f&text=Hugo%27s%20built-in%20global%20configurations:%0Ahttps%3a%2f%2fvibrantshadows.softorage.com%2fpost%2fhugo-built-in-global-configuration%2f" rel="noreferrer nofollow" target="_blank" title="Share on Twitter" aria-label="Share on Twitter"><span class="fab fa-twitter"></span></a>&nbsp;&nbsp;
+              
+              
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fvibrantshadows.softorage.com%2fpost%2fhugo-built-in-global-configuration%2f&title=Hugo%27s%20built-in%20global%20configurations&summary=Get%20to%20know%20the%20Hugo%27s%20built-in%20configurations%20relevant%20to%20Vibrant%20Shadows%20Hugo%20theme.&source=Vibrant%20Shadows%20Theme" rel="noreferrer nofollow" target="_blank" title="Share on LinkedIn" aria-label="Share on LinkedIn"><span class="fab fa-linkedin"></span></a>&nbsp;&nbsp;
+              
+              
+                <a href="https://t.me/share/url?url=https%3a%2f%2fvibrantshadows.softorage.com%2fpost%2fhugo-built-in-global-configuration%2f&text=Hugo%27s%20built-in%20global%20configurations" rel="noreferrer nofollow" target="_blank" title="Share on Telegram" aria-label="Share on Telegram"><span class="fab fa-telegram"></span></a>&nbsp;&nbsp;
+              
+              
+                <a href="whatsapp://send?text=https%3a%2f%2fvibrantshadows.softorage.com%2fpost%2fhugo-built-in-global-configuration%2f%0A%0AHugo%27s%20built-in%20global%20configurations" data-text="Hugo&#39;s built-in global configurations" data-href="https://vibrantshadows.softorage.com/post/hugo-built-in-global-configuration/" rel="noreferrer nofollow" target="_blank" title="Share on Whatsapp" aria-label="Share on Whatsapp"><span class="fab fa-whatsapp"></span></a>&nbsp;&nbsp;
+              
+              
+                <a href="https://reddit.com/submit?url=https%3a%2f%2fvibrantshadows.softorage.com%2fpost%2fhugo-built-in-global-configuration%2f&title=Hugo%27s%20built-in%20global%20configurations" rel="noreferrer nofollow" target="_blank" title="Share on Reddit" aria-label="Share on Reddit"><span class="fab fa-reddit"></span></a>&nbsp;&nbsp;
+              
+              
+                <a href="mailto:?subject=Hugo%27s%20built-in%20global%20configurations&body=Get%20to%20know%20the%20Hugo%27s%20built-in%20configurations%20relevant%20to%20Vibrant%20Shadows%20Hugo%20theme.%0A%0Ahttps%3a%2f%2fvibrantshadows.softorage.com%2fpost%2fhugo-built-in-global-configuration%2f" target="_blank" title="Share via email" aria-label="Share via email"><span class="fas fa-envelope"></span></a>
+              
             </div>
           </div>
           
@@ -549,10 +581,10 @@ author: "The Great Authors"
         </div>
       
     
-    
+      
+      </div>
     </div>
-  </div>
-  
+    
   
   
   
@@ -576,9 +608,11 @@ author: "The Great Authors"
     
     
     
-    <script src="/assets/js/main.min.95e2d3c18b801ee85494326af1f044e57bbd4f1b28d4ecadbdbcfa691cb7ba82.js" integrity="sha256-leLTwYuAHuhUlDJq8fBE5Xu9Txso1Oytvbz6aRy3uoI=" crossorigin="anonymous"></script>
+    <script src="/assets/js/main.min.a9b296a3d813bf498f4c684ef7d3ebf7c3083273d5501ccbbf2061e47c5c368e.js" integrity="sha256-qbKWo9gTv0mPTGhO99Pr98MIMnPVUBzLvyBh5HxcNo4=" crossorigin="anonymous"></script>
     
-    <script src="/js/custom.min.b4e38a0f4dadf0730135a3668e1470ce91f906ffa2d26d4cff9e3649029fac48.js" integrity="sha256-tOOKD02t8HMBNaNmjhRwzpH5Bv&#43;i0m1M/542SQKfrEg=" crossorigin="anonymous"></script>
+    <script src="/js/custom.min.6f4264801a6fdca8a8cc7f05b1023cd0378d2322c3ba0b060e52fc649215faee.js" integrity="sha256-b0JkgBpv3KiozH8FsQI80DeNIyLDugsGDlL8ZJIV&#43;u4=" crossorigin="anonymous"></script>
+    
+    <script></script>
     
     
     <link href="https://fonts.googleapis.com/css?family=Roboto|Lato&display=swap" rel="stylesheet">
