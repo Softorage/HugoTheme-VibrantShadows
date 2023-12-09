@@ -1,5 +1,6 @@
 {{/*
-used in /assets/js/custom.js , layouts/_default/baseof.html
+if allowFOIT, theme.js is used in /assets/js/custom.js , 
+else, used in /layouts/_default/baseof.html .
 
 Set Dark as default theme
 

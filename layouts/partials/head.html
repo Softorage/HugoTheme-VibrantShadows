@@ -7,12 +7,8 @@
   {{- .Title | default site.Title }} {{- default " | " site.Params.meta.titleSeparator -}} {{ if not .IsHome }}{{ site.Title }}{{ else }}{{ site.Params.meta.tagline }}{{ end -}}
   </title>
   
-  <!-- Base CSS, which contains: bootstrap, font-awesome, custom CSS -->
-  {{ $cssBase := resources.Get "sass/main-base.scss" | resources.ExecuteAsTemplate "/assets/css/main-base.scss" . | toCSS }}
   <!-- Theme CSS -->
-  {{ $cssTheme := resources.Get "sass/theme.scss" | resources.ExecuteAsTemplate "/assets/css/theme.scss" . | toCSS  }}
-  <!-- Aggregated CSS -->
-  {{- $css := slice $cssBase $cssTheme | resources.Concat "/assets/css/main.css" }}
+  {{ $css := resources.Get "sass/theme.scss" | resources.ExecuteAsTemplate "/assets/css/theme.scss" . | toCSS  }}
   
   <!-- Run PostCSS on $css, only if on Production Environment, since its builds take considerably more time -->
   {{ if and (eq hugo.Environment "production") (eq site.Params.userExperience.speedMode "enable") -}}

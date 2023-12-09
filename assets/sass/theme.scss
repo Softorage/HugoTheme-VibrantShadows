@@ -2,9 +2,14 @@
 if site.Params.theme.toggle.preventFOIT is set false, then in /assets/js/custom.js
 if site.Params.theme.toggle.preventFOIT is set true, then in head.html partial
 */
+// Base CSS, which contains: bootstrap, font-awesome, custom CSS
+{{ $cssBase := resources.Get "sass/main-base.scss" | resources.ExecuteAsTemplate "/assets/css/main-base.scss" . | toCSS }}
+{{ $cssBase.Content | safeCSS }}
 
 // also see file layouts/partials/reusables/theme.js
 
+// since we want both light and dark class regardless of whether one is mentioned in hugo.yml or not, we use purgecss ignore
+/* purgecss start ignore */
 // Dark mode implementation
 {{ $theme := dict }}
 
@@ -70,14 +75,13 @@ if site.Params.theme.toggle.preventFOIT is set true, then in head.html partial
   --medium: #000000;
   --wikipedia: #000000;
 }
+/* purgecss end ignore */
 
-/* 
 // footer brandicons shoud appear on light backg in case of dark theme only
 .dark footer .social-presence a span.fab {
 @extend .bg-light, .p-1, .rounded;
 }
-// since we have not imported bootstrap, we can't use .bg-light
-*/
+
 // Everything hereonwards uses the above specified CSS variables, so that if we change the class of the body tag to 'dark' or 'light', all the elements below also change their colors as per above defined values
 // specifying this at top, so that, it is overridden when need be
 body {
@@ -382,6 +386,7 @@ body {
 }
 
 // OSANO Cookie Consent Theming
+/* purgecss start ignore */
 .cc-window,
 .cc-revoke {
   color: var(--antinav);
@@ -393,3 +398,4 @@ body {
   background-color: var(--clr2);
   border-color: transparent;
 }
+/* purgecss end ignore */

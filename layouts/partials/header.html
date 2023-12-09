@@ -1,13 +1,14 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-light fixed-top flex-column">
+    <div class="d-none shadow"></div><!-- this div is to make sure that .shadow class is included by purgeCSS -->
     <div class="container-fluid">
       
-      <a class="navbar-brand px-3" href="{{ site.BaseURL }}"><span class="text-light"><span class="brand">
+      <a class="navbar-brand px-3" href="{{ site.BaseURL }}"><span class="brand-color"><span class="brand align-middle">
       {{- $navbar_brand_style := site.Params.brand.navbar | default (slice "logo" "name") }}
       {{- if and (in $navbar_brand_style "logo") (site.Params.brand.logo_32px) -}}
-        <img src="{{ site.Params.brand.logo_32px }}" alt="{{ site.Params.brand.name }} logo" height="32"></img>
+        <img class="align-middle" src="{{ site.Params.brand.logo_32px }}" alt="{{ site.Params.brand.name }} logo" height="32"></img>
       {{- end }}
-      {{- if (in $navbar_brand_style "name") }}&nbsp;&nbsp;&nbsp;{{ default site.Title site.Params.brand.name }}
+      {{- if (in $navbar_brand_style "name") }}<span class="align-middle ml-3">{{ default site.Title site.Params.brand.name }}</span>
       {{- end -}}
       </span></span></a>
       
