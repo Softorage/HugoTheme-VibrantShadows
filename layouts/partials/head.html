@@ -16,7 +16,7 @@
   
   <!-- Run PostCSS on $css, only if on Production Environment, since its builds take considerably more time -->
   {{ if and (eq hugo.Environment "production") (eq site.Params.userExperience.speedMode "enable") -}}
-    {{- $css = $css | postCSS | resources.PostProcess | fingerprint }}
+    {{- $css = $css | postCSS | fingerprint | resources.PostProcess }}
   {{- else }}
     {{- $css = $css | minify | fingerprint }}
   {{- end }}
