@@ -87,7 +87,7 @@ Update: Yes, it can be done: https://gohugo.io/templates/taxonomy-templates/#dis
           {{- if or (ne $globalThumbnailPosition "none") (ne $pageThumbnailPosition "none") -}}
           <div class="row {{- if or (eq $globalThumbnailPosition "right") (eq $pageThumbnailPosition "right") }} flex-md-row-reverse{{- end -}}">
           
-            <div class="col-md-auto my-auto pb-2">
+            <div class="col-md-auto my-auto pb-2 text-center">
               {{ if .Params.image.src -}}
                 <img class="
                 

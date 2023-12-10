@@ -26,6 +26,10 @@ Also see file assets/sass/theme.scss
   {{- $cssTheme = "light" }}
 {{ end }}
 
+// Also see some dark mode material:
+// stackoverflow.com/questions/61496094/
+// chrismorgan.info/blog/dark-theme-implementation/
+
 // Based on https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/
 
 // Select the button

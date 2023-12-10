@@ -94,6 +94,7 @@
               {{ end }}
               
               {{ if $themeToggle }}
+                <!-- Food for thought: alexandersandberg.com/articles/creating-a-website-theme-switcher-with-css-only/-->
                 <!-- Inspired from: https://www.codeply.com/p/UsTEwDkzNp -->
                 <div class="d-inline-block {{ if or $socialProfilesOnNavbar $mainMenu -}} ml-3 {{- else -}} ml-auto {{- end }}">
                   <input type="checkbox" class="theme-toggle-checkbox" id="theme_toggle" />
